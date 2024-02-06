@@ -1,0 +1,28 @@
+import React, { useState, useEffect } from 'react';
+import { Audio } from 'expo-av';
+
+export const Sound = () => {
+  const [sound, setSound] = useState();
+
+  const playSound = async () => {
+    const { sound } = await Audio.Sound.createAsync(require('@AppAssets/media/bg.mp3'), { shouldPlay: true, isLooping: true });
+    setSound(sound);
+    await sound.playAsync();
+  };
+
+  const pauseSound = async () => {
+    if (sound) {
+      await sound.pauseAsync();
+    }
+  };
+
+  useEffect(() => {
+    return sound ? (() => { sound.unloadAsync(); }) : undefined;
+  }, [sound]);
+
+  return {
+    sound, 
+    playSound,
+    pauseSound,
+  };
+};

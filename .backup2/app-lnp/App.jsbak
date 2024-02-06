@@ -1,0 +1,28 @@
+import React, { useCallback } from 'react';
+import { StyleSheet, View, ToastAndroid } from 'react-native';
+import { AppRouting } from '@AppFeature/AppRouting/index.js';
+import { HomeScreen } from "@AppPage/HomeScreen.js";
+import { Page2Screen } from "@AppPage/Page2.js";
+import 'react-native-gesture-handler';
+
+export default function App(){
+
+    return (
+      <>
+      <AppRouting initialRouteName="Page2Screen" 
+            data={[{ name:"Home", component: HomeScreen },
+                  { name:"Page2Screen", component: Page2Screen }]} />
+      </>
+    );
+};
+
+const styles = StyleSheet.create({
+  content: {
+    marginTop: '5%',
+    backgroundColor: '#fff',
+    paddingTop: '5%',
+    paddingLeft:'2%',
+    paddingRight:'2%'
+  },
+});
+

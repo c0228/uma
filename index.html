@@ -1,0 +1,36 @@
+<html>
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+const elements= [{ element1: 'Free' }, { element2: 'Free' }, {element3: 'Free' }];
+
+const build = ()=>{
+ let content='';
+ const k = Object.keys( elements[index] );
+ for(let index in k){
+  content+='<button id="'+k[index]+'" onclick="javascript:change(this.id);">Free</button>';
+ }
+ return content;
+};
+
+$(document).ready(function() {
+ document.getElementById("elements").innerHTML=build();
+});
+
+let moves = [];
+const change = (id) =>{
+ console.log(id);
+// { id: ''}
+};
+</script>
+<div id="elements"></div>
+
+</body>
+</html>

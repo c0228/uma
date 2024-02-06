@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+<style>
+.digit { position: relative;width: 60px;height: 110px;background-color:#000;float:left; }
+.operation { position: relative;width: 60px;height: 110px;background-color:#000;float:left; }
+.horizontal, .vertical { background-color: #333;position: absolute;border-radius:5px; }
+.horizontal { width: 40px;height: 10px; }
+.vertical { width: 10px;height: 40px; }
+.segment { background-color:grey; }
+.segment.active { background-color:brown; }
+.segment.a { top: 0; left:10px; }
+.segment.b { top: 10px; left: 0px; }
+.segment.c { top: 10px; left: 50px; }
+.segment.d { top: 50px; left: 10px; }
+.segment.e { top: 60px; left:0px; }
+.segment.f { top: 60px; left:50px; }
+.segment.g { top: 100px; left:10px; }
+
+.segment.h { top: 50px; left:10px; }
+.segment.i { top: 36px; left:25px; }
+</style>
+
+
+<div class="digit">
+ <div class="horizontal segment a active"></div>
+ <div class="vertical segment b"></div>
+ <div class="vertical segment c active"></div>
+ <div class="horizontal segment d active"></div>
+ <div class="vertical segment e"></div>
+ <div class="vertical segment f active"></div>
+ <div class="horizontal segment g active"></div>
+</div>
+
+<div class="digit">
+  <div class="horizontal segment h"></div>
+  <div class="vertical segment i active"></div>
+</div>
+
+</body>
+</html>
+

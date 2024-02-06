@@ -1,0 +1,5 @@
+Starting project at C:\wamp64\www\projects\rnw\app-lnp
+Starting Metro Bundler
+warning: Bundler cache is empty, rebuilding (this may take a minute)
+Waiting on http://localhost:8081
+Logs for your project will appear below.

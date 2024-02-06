@@ -1,0 +1,13 @@
+{
+    "name": "e-dir-sync",
+    "version": "1.0.0",
+    "description": "Watch and sync files between source and destination folders.",
+    "scripts": {
+      "start": "node index.js <source> <destination>"
+    },
+    "dependencies": {
+      "chokidar": "^3.5.2",
+      "fs-extra": "^10.0.0"
+    }
+  }
+  
