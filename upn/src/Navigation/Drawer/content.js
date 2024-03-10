@@ -22,34 +22,15 @@ const UserSection = ({ userInfo }) => {
     </>);
 }
 
-
-/*const MenuSection = (props) => {
-
-    const items=props.menuInfo.map((item=>{
-        item.onPress=()=>props.navigation.navigate(item.label.name);
-        return item;
-    }))
-
-    console.log(items);
-
-    return (<MenuList {} />);
-}*/
- /*   <View>
-        {props?.menuInfo?.map((menu, index)=>{
-            return (<DrawerItem key={index} 
-                style={{ pading:1 }}
-                        onPress={()=>{props.navigation.navigate(menu.name)}}
-                        icon={({color, size})=><Icons name={menu.icon} 
-                                                    color={color} 
-                                                    size={size} />}
-                        label={menu.label}>
-                    </DrawerItem>);
-        })}
-
-        </View> */
-
 const SignoutSection = () => {
-    return (<MenuList fixBottom={true} items={[{
+    return (<MenuList items={[{
+        icon:{ type:"FontAwesome5", name:"user-graduate", color: "#777", size: 17 }, 
+        label:{ name: "My Profile", color: "#777", size: 13 }
+    },
+    {
+        icon:{ type:"Ionicons", name:"settings", color: "#777", size: 18 }, 
+        label:{ name: "Settings", color: "#777", size: 13 }
+    },{
         icon:{ type:"MaterialCommunityIcons", name:"exit-to-app", color: "#777", size: 18 }, 
         label:{ name: "Signout", color: "#777", size: 13 }
     }]} />);

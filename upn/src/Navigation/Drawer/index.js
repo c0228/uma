@@ -2,28 +2,19 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import DrawerContent from './content';
-import { DrawerUserProfile } from 'e-ui-react-native';
-
+import { DrawerUserProfile, Icon } from 'e-ui-react-native';
+import Home from './../../Pages/Home/index.js';
+import Syllabus from './../../Pages/Syllabus/index.js';
 
 const Drawer = createDrawerNavigator();
 
-const Home = (props)=>{
-  return (<View>
-    <TouchableOpacity onPress={()=>{ props.navigation.toggleDrawer(); }} >
-            <Text>Hello</Text>
-        </TouchableOpacity>
-        <DrawerUserProfile  image={''} displayName="Test" accountType="TestTitle" />
-    </View>);
- };
-
- const Syllabus = (props)=>{
-  return (<View>
-    <TouchableOpacity onPress={()=>{ props.navigation.toggleDrawer(); }} >
-            <Text>Hello</Text>
-        </TouchableOpacity>
-    <Text>Syllabus</Text>
-    </View>);
- };
+export const HamburgerIcon = (props)=>{
+ return (<TouchableOpacity onPress={()=>{ props.navigation.toggleDrawer(); }} >
+ <View style={{ padding:15 }}>
+   <Icon type="Feather" name="menu" color="#777" size={22} />
+ </View>
+</TouchableOpacity>);
+};
 
 const drawerInfo = { 
   user:{ displayName:"Anup Chakravarthi",
@@ -32,18 +23,20 @@ const drawerInfo = {
          // shortDesc:"Location, Locality, State, Country - 501510"
        },
   menu:[{
-    icon:{ type:"MaterialCommunityIcons", name:"exit-to-app", color: "#777", size: 18 }, 
+    icon:{ type:"FontAwesome5", name:"home", color: "#777", size: 16 }, 
     label:{ name: "Home", color: "#777", size: 13 },
     component: Home
+},
+{
+  icon:{ type:"FontAwesome5", name:"university", color: "#777", size: 18 }, 
+  label:{ name: "About UPSC and its Exams", color: "#777", size: 13 },
+  component: Syllabus
 },{
-    icon:{ type:"MaterialCommunityIcons", name:"exit-to-app", color: "#777", size: 18 }, 
-    label:{ name: "Explore Syllabus", color: "#777", size: 13 },
+    icon:{ type:"MaterialIcons", name:"travel-explore", color: "#777", size: 18 }, 
+    label:{ name: "Explore My Exam Syllabus", color: "#777", size: 13 },
     component: Syllabus
 }]
 };
- /* menu:[{ name:'Home', icon:'home-outline', label:'Basic Components', component: Home },
-        { name:'Drawer2', icon:'account-outline', label:'Image File Uploader',  component: Syllabus },
-        { name:'Drawer3', icon:'account-outline', label:'QR Code Reader', component: Home }]}; */
 
 export const DrawerNavigation =()=> {
   return (
