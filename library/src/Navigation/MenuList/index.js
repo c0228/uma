@@ -11,7 +11,7 @@ export const MenuList = (props)=>{
     return (<View style={MenuListStyle.menu}>
         {props.items?.map((item, index)=>{
             return (<View  key={index} style={{ flexDirection:'row' }}>
-                <TouchableOpacity onPress={()=>props.navigation.navigate(item?.label?.name)}>
+                <TouchableOpacity onPress={()=>props.navigation.navigate(item?.label?.id)}>
                     <View style={MenuListStyle.menuItem}>
                     <Icon type={item?.icon?.type} 
                         name={item?.icon?.name} 

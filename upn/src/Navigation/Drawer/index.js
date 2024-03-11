@@ -4,6 +4,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import DrawerContent from './content';
 import { DrawerUserProfile, Icon } from 'e-ui-react-native';
 import Home from './../../Pages/Home/index.js';
+import About from './../../Pages/About/index.js';
 import Syllabus from './../../Pages/Syllabus/index.js';
 
 const Drawer = createDrawerNavigator();
@@ -24,17 +25,16 @@ const drawerInfo = {
        },
   menu:[{
     icon:{ type:"FontAwesome5", name:"home", color: "#777", size: 16 }, 
-    label:{ name: "Home", color: "#777", size: 13 },
+    label:{id:'1',  name: "Home", color: "#777", size: 13 },
     component: Home
-},
-{
-  icon:{ type:"FontAwesome5", name:"university", color: "#777", size: 18 }, 
-  label:{ name: "About UPSC and its Exams", color: "#777", size: 13 },
-  component: Syllabus
 },{
-    icon:{ type:"MaterialIcons", name:"travel-explore", color: "#777", size: 18 }, 
-    label:{ name: "Explore My Exam Syllabus", color: "#777", size: 13 },
-    component: Syllabus
+    icon:{ type:"FontAwesome5", name:"university", color: "#777", size: 18 }, 
+    label:{ id:'2', name: "About UPSC Examination", color: "#777", size: 13 },
+    component: About
+},{
+  icon:{ type:"MaterialIcons", name:"travel-explore", color: "#777", size: 18 }, 
+  label:{ id:'3', name: "Explore My Syllabus", color: "#777", size: 13 },
+  component: Syllabus
 }]
 };
 
@@ -53,7 +53,7 @@ export const DrawerNavigation =()=> {
       }}
       >
         {drawerInfo.menu.map((drawer)=>{
-          return <Drawer.Screen key={drawer?.label?.name} name={drawer?.label?.name} component={drawer?.component} />
+          return <Drawer.Screen key={drawer?.label?.id} name={drawer?.label?.id} component={drawer?.component} />
         })}
     </Drawer.Navigator>
   );
