@@ -25,14 +25,14 @@ const UserSection = ({ userInfo }) => {
 const SignoutSection = () => {
     return (<MenuList items={[{
         icon:{ type:"FontAwesome5", name:"user-graduate", color: "#777", size: 17 }, 
-        label:{ name: "My Profile", color: "#777", size: 13 }
+        label:{ name: "My Profile", color: "#777", size: 14 }
     },
     {
         icon:{ type:"Ionicons", name:"settings", color: "#777", size: 18 }, 
-        label:{ name: "Settings", color: "#777", size: 13 }
+        label:{ name: "Settings", color: "#777", size: 14 }
     },{
         icon:{ type:"MaterialCommunityIcons", name:"exit-to-app", color: "#777", size: 18 }, 
-        label:{ name: "Signout", color: "#777", size: 13 }
+        label:{ name: "Signout", color: "#777", size: 14 }
     }]} />);
 }
 

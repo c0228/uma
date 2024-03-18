@@ -25,15 +25,15 @@ const drawerInfo = {
        },
   menu:[{
     icon:{ type:"FontAwesome5", name:"home", color: "#777", size: 16 }, 
-    label:{id:'1',  name: "Home", color: "#777", size: 13 },
+    label:{id:'1',  name: "Home", color: "#777", size: 14 },
     component: Home
 },{
     icon:{ type:"FontAwesome5", name:"university", color: "#777", size: 18 }, 
-    label:{ id:'2', name: "About UPSC Examination", color: "#777", size: 13 },
+    label:{ id:'2', name: "About UPSC Examination", color: "#777", size: 14 },
     component: About
 },{
   icon:{ type:"MaterialIcons", name:"travel-explore", color: "#777", size: 18 }, 
-  label:{ id:'3', name: "Explore My Syllabus", color: "#777", size: 13 },
+  label:{ id:'3', name: "Explore My Syllabus", color: "#777", size: 14 },
   component: Syllabus
 }]
 };
