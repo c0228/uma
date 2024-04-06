@@ -6,6 +6,7 @@ export const HelloWorld = ()=>{
 };
 
 export { Icon } from './src/Components/Icon/index.js';
+export { Order, Li } from './src/Components/Order/index.js';
 
 export { DrawerUserProfile } from './src/Navigation/DrawerUserProfile/index.js';
 export { MenuList } from './src/Navigation/MenuList/index.js';

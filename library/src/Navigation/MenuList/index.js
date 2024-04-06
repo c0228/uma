@@ -31,5 +31,5 @@ const MenuListStyle = StyleSheet.create({
  menu:{ borderTopColor:'#f4f4f4',borderTopWidth:1, borderBottomColor:'#f4f4f4',borderBottomWidth:1, paddingLeft:15, paddingBottom: 15 },
  menuItem:{ paddingTop:12, flexDirection:'row' },
  icon:{ paddingTop:1 },
- text: { paddingLeft:5, fontWeight: 'bold' }
+ text: { paddingLeft:5, fontWeight: '600', letterSpacing: 0.3 }
 });

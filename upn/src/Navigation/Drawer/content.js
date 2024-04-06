@@ -5,6 +5,9 @@ import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Avatar, Title, Drawer, Text, Caption } from 'react-native-paper';
 import DrawerStyles from './styles';
 import { DrawerUserProfile, MenuList } from 'e-ui-react-native';
+import StudyTT from './../../Pages/StudyTT/index.js';
+import MyProfile from './../../Pages/MyProfile/index.js';
+import Settings from './../../Pages/Settings/index.js';
 
 const UserSection = ({ userInfo }) => {
     return (<>
@@ -24,15 +27,21 @@ const UserSection = ({ userInfo }) => {
 
 const SignoutSection = () => {
     return (<MenuList items={[{
-        icon:{ type:"FontAwesome5", name:"user-graduate", color: "#777", size: 17 }, 
-        label:{ name: "My Profile", color: "#777", size: 14 }
+        icon:{ type:"FontAwesome5", name:"user-graduate", color: "#000", size: 17 }, 
+        label:{ name: "Study Timetable", color: "#000", size: 14 },
+        component: StudyTT
+    },{
+        icon:{ type:"FontAwesome5", name:"user-graduate", color: "#000", size: 17 }, 
+        label:{ name: "My Profile", color: "#000", size: 14 },
+        component: MyProfile
     },
     {
-        icon:{ type:"Ionicons", name:"settings", color: "#777", size: 18 }, 
-        label:{ name: "Settings", color: "#777", size: 14 }
+        icon:{ type:"Ionicons", name:"settings", color: "#000", size: 18 }, 
+        label:{ name: "Settings", color: "#000", size: 14 },
+        component: Settings
     },{
-        icon:{ type:"MaterialCommunityIcons", name:"exit-to-app", color: "#777", size: 18 }, 
-        label:{ name: "Signout", color: "#777", size: 14 }
+        icon:{ type:"MaterialCommunityIcons", name:"exit-to-app", color: "#000", size: 18 }, 
+        label:{ name: "Signout", color: "#000", size: 14 }
     }]} />);
 }
 
