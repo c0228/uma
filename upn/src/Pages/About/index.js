@@ -6,7 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Aupsc from './components/aupsc/index.js';
 import Calendar from './components/calendar/index.js';
-/*import Inspire from './components/inspire/index.js'; */
+import Inspire from './components/inspire/index.js';
 
 function HomeScreen() {
   return (
@@ -29,7 +29,7 @@ const Tab = createBottomTabNavigator();
 const TabData = [{ icon:"vihara", focusedIcon: "vihara", name: "About", component: Aupsc },
 { icon:"calendar-alt", focusedIcon: "calendar-check", name: "Calendar", component: Calendar  },
 { icon:"journal-whills", focusedIcon: "book-open", name: "Syllabus", component: HomeScreen },
-{ icon:"praying-hands", focusedIcon: "praying-hands", name: "Inspire", component: SettingsScreen }
+{ icon:"praying-hands", focusedIcon: "praying-hands", name: "Inspire", component: Inspire }
 ];
 
 const About = (props)=>{
