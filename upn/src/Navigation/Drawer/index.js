@@ -70,8 +70,8 @@ export const DrawerNavigation =()=> {
         activeBackgroundColor:'#eee'
       }}
       >
-        {drawerInfo.menu.map((drawer)=>{
-          return <Drawer.Screen key={drawer?.label?.id} name={drawer?.label?.id} component={drawer?.component} />
+        {drawerInfo.menu.map((drawer, index)=>{
+          return <Drawer.Screen key={index} name={drawer?.label?.name} component={drawer?.component} />
         })}
     </Drawer.Navigator>
   );

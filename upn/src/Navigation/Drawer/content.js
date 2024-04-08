@@ -31,7 +31,7 @@ const SignoutSection = () => {
         label:{ name: "Study Timetable", color: "#000", size: 14 },
         component: StudyTT
     },{
-        icon:{ type:"FontAwesome5", name:"user-graduate", color: "#000", size: 17 }, 
+        icon:{ type:"FontAwesome5", name:"user-check", color: "#000", size: 17 }, 
         label:{ name: "My Profile", color: "#000", size: 14 },
         component: MyProfile
     },
@@ -52,7 +52,6 @@ const DrawerContent = (props) => {
             <UserSection userInfo={props.drawerInfo.user} />
             <MenuList items={props.drawerInfo.menu} {...props}/>
         </View>
-        
     </DrawerContentScrollView>     
     <SignoutSection />
  </View>;

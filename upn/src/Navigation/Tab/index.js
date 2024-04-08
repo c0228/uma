@@ -16,8 +16,8 @@ export const TabNavigation = ({ data })=>{
       tabBarStyle: { paddingTop:8 },
       tabBarLabelStyle: { fontSize: 13 }
     })}>
-      {data?.map((d)=>{
-         return (<Tab.Screen name={d?.name} component={d?.component} />);
+      {data?.map((d, i)=>{
+         return (<Tab.Screen key={i} name={d?.name} component={d?.component} />);
       })}
       </Tab.Navigator>);
 }

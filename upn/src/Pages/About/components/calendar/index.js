@@ -217,8 +217,8 @@ const Calendar = (props) =>{
                 return (<View key={index}>
                     {exam?.title && (<Text style={[CalendarStyle.subTitle, CalendarStyle.textCenter]}>{exam?.title}</Text>)}
                     <View style={{ paddingLeft: 15, paddingRight:15 }}>
-                    {Object.entries(exam?.info).map(([key, value]) =>{
-                        return ( <View style={[CalendarStyle.row, CalendarStyle.mbot15p]}>
+                    {Object.entries(exam?.info).map(([key, value],index) =>{
+                        return ( <View key={index} style={[CalendarStyle.row, CalendarStyle.mbot15p]}>
                             <Text style={[CalendarStyle.leftCol, CalendarStyle.bold]}>{key}:</Text>
                             <Text style={CalendarStyle.rightCol}>{value}</Text>
                        </View>);

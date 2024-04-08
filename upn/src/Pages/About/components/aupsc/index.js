@@ -33,7 +33,7 @@ const Aupsc = (props)=>{
        <View>
           <Order style={AupscStyle.list}>
             {Object.keys(data?.exams).map((key, index)=>{
-              return (<Li style={AupscStyle.list}>{key}</Li>);
+              return (<Li key={index} style={AupscStyle.list}>{key}</Li>);
             })}
           </Order>
        </View>
