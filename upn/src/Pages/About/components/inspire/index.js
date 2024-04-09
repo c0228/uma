@@ -12,8 +12,8 @@ const Inspire = (props) =>{
     <ScrollView style={{ paddingLeft:15, paddingRight: 15 }}>
         <Text style={[InspireStyle.mainTitle, InspireStyle.textCenter, InspireStyle.mbot15p]}>Success Stories of UPSC Rankers</Text>
         {Stories?.data?.map((story, index)=>{
-         return (<View style={InspireStyle.rankerContainer}>
-          <View key={index} style={{  flex:1, flexDirection:'row' }}>
+         return (<View key={index} style={InspireStyle.rankerContainer}>
+          <View style={{  flex:1, flexDirection:'row' }}>
             <View style={InspireStyle.rankerImg}>
                 {story?.img && <Avatar.Image 
                     source={{uri: story?.img }} 
@@ -45,8 +45,8 @@ const Inspire = (props) =>{
         </View>
         <View style={InspireStyle.mtop15p}>
             <Text style={{ fontSize:15, fontWeight:'bold', color:'#333',marginBottom:8 }}>About the Journey:</Text>
-            {story?.story?.map((s)=>{
-                return (<Text style={{ lineHeight: 22, color:'#111' }}>{s}</Text>);
+            {story?.story?.map((s, i)=>{
+                return (<Text key={i} style={{ lineHeight: 22, color:'#111' }}>{s}</Text>);
             })}
         </View>
         </View>);

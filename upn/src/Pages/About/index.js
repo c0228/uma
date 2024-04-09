@@ -26,10 +26,10 @@ function SettingsScreen() {
 
 const Tab = createBottomTabNavigator();
 
-const TabData = [{ icon:"vihara", focusedIcon: "vihara", name: "About", component: Aupsc },
-{ icon:"calendar-alt", focusedIcon: "calendar-check", name: "Calendar", component: Calendar  },
-{ icon:"journal-whills", focusedIcon: "book-open", name: "Syllabus", component: HomeScreen },
-{ icon:"praying-hands", focusedIcon: "praying-hands", name: "Inspire", component: Inspire }
+const TabData = [{ icon:{ name:"vihara", type:"FontAwesome5" }, focusedIcon:{ name:"vihara", type:"FontAwesome5" }, name: "About", component: Aupsc },
+{ icon:{ name:"calendar-alt", type:"FontAwesome5" }, focusedIcon:{ name:"calendar-check", type:"FontAwesome5" }, name: "Calendar", component: Calendar  },
+{ icon:{ name:"journal-whills", type:"FontAwesome5" }, focusedIcon:{ name:"book-open", type:"FontAwesome5" }, name: "Syllabus", component: HomeScreen },
+{ icon:{ name:"praying-hands", type:"FontAwesome5" }, focusedIcon:{ name:"praying-hands", type:"FontAwesome5" }, name: "Inspire", component: Inspire }
 ];
 
 const About = (props)=>{
