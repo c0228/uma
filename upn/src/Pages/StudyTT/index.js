@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from 'react-native';
-import { HamburgerIcon } from './../../Navigation/Drawer/index.js';
+import { HamburgerIcon } from '@AppNavigation/Drawer/index.js';
 
 const StudyTT = (props)=>{
     return (<View>

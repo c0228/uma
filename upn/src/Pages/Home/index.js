@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text } from 'react-native';
-import { TabNavigation } from './../../Navigation/Tab/index.js';
+import { TabNavigation } from '@AppNavigation/Tab/index.js';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Discussion from './components/discussion/index.js';
 import Explore from './components/explore/index.js';

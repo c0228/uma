@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, ScrollView , StyleSheet } from 'react-native';
-import { TabNavigation } from './../../Navigation/Tab/index.js';
+import { TabNavigation } from '@AppNavigation/Tab/index.js';
 import { Order, Li } from "e-ui-react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';

@@ -5,9 +5,9 @@ import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Avatar, Title, Drawer, Text, Caption } from 'react-native-paper';
 import DrawerStyles from './styles';
 import { DrawerUserProfile, MenuList } from 'e-ui-react-native';
-import StudyTT from './../../Pages/StudyTT/index.js';
-import MyProfile from './../../Pages/MyProfile/index.js';
-import Settings from './../../Pages/Settings/index.js';
+import StudyTT from '@AppPage/StudyTT/index.js';
+import MyProfile from '@AppPage/MyProfile/index.js';
+import Settings from '@AppPage/Settings/index.js';
 
 const UserSection = ({ userInfo }) => {
     return (<>

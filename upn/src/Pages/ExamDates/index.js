@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, ScrollView , StyleSheet } from 'react-native';
-import { HamburgerIcon } from './../../Navigation/Drawer/index.js';
+import { HamburgerIcon } from '@AppNavigation/Drawer/index.js';
 
 const ExamDates = (props)=>{
     return (<View>

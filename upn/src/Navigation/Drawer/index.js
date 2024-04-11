@@ -3,11 +3,11 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import DrawerContent from './content';
 import { DrawerUserProfile, Icon } from 'e-ui-react-native';
-import Home from './../../Pages/Home/index.js';
-import About from './../../Pages/About/index.js';
-import Dashboard from './../../Pages/Dashboard/index.js';
-import ExamDates from './../../Pages/ExamDates/index.js';
-import PrevQP from './../../Pages/PrevQP/index.js';
+import Home from '@AppPage/Home/index.js';
+import About from '@AppPage/About/index.js';
+import Dashboard from '@AppPage/Dashboard/index.js';
+import ExamDates from '@AppPage/ExamDates/index.js';
+import PrevQP from '@AppPage/PrevQP/index.js';
 import Logo from "@Assets/img/logo.png";
 
 const Drawer = createDrawerNavigator();
