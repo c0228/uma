@@ -8,22 +8,23 @@ import About from './../../Pages/About/index.js';
 import Dashboard from './../../Pages/Dashboard/index.js';
 import ExamDates from './../../Pages/ExamDates/index.js';
 import PrevQP from './../../Pages/PrevQP/index.js';
+import Logo from "@Assets/img/logo.png";
 
 const Drawer = createDrawerNavigator();
 
-export const HamburgerIcon = (props)=>{
+export const HamburgerIcon = React.memo((props)=>{
  return (<TouchableOpacity onPress={()=>{ props.navigation.toggleDrawer(); }} >
  <View style={{ padding:15, flexDirection:'row' }}>
    <View>
      <Icon type="Feather" name="menu" color="#000" size={22} />
    </View>
    <View>
-    <Image style={{ width:90, height:23, marginLeft:15 }} 
-      source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcy_wwZqSNGR5WpInssvFyLxflB1v1f0atFNIfr-sq&s" }} />
+    <Image style={{ width:160, height:18, marginLeft:8, marginTop:3 }} 
+      source={Logo} />
    </View>
  </View>
 </TouchableOpacity>);
-};
+});
 
 const drawerInfo = { 
   user:{ displayName:"Anup Chakravarthi",
@@ -71,6 +72,7 @@ export const DrawerNavigation =()=> {
       }}
       >
         {drawerInfo.menu.map((drawer, index)=>{
+          console.log("labelName: ", drawer?.label?.name);
           return <Drawer.Screen key={index} name={drawer?.label?.name} component={drawer?.component} />
         })}
     </Drawer.Navigator>
