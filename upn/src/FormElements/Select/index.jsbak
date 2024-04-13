@@ -1,0 +1,160 @@
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, Modal, FlatList, Switch, StyleSheet } from 'react-native';
+import { getForm, FORM_SUBMITTED, FORM_RESET /*, FormInputValidate */ } from './../Form/index.js';
+
+export const Select = ({ name, label, placeholder, value, validation, options, onSelect, multipleSelect }) => {
+  const formContext = getForm();
+  const formName = formContext?.name;
+  const form = formContext?.form;
+
+  const initialValue = value === undefined ? [] : value;
+  const [selectValue, setSelectValue] = useState(initialValue);
+
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const FormMode = form?.[formName]?.mode;
+  const FormErrorMessage = form?.[formName]?.[name]?.errorMessage;
+
+  useEffect(() => {
+    SelectValidate();
+  }, [selectValue]);
+
+  useEffect(() => {
+    if (FormMode === FORM_RESET) {
+      setSelectValue(initialValue);
+    }
+    console.log("FormMode", FormMode);
+  }, [FormMode]);
+
+  useEffect(() => {
+    onSelect(multipleSelect ? selectedOptions : selectedOption);
+  }, [selectedOption, selectedOptions]);
+
+  const toggleOption = (option) => {
+    if (multipleSelect) {
+      const index = selectedOptions.findIndex((selected) => selected.id === option.id);
+      if (index === -1) {
+        setSelectedOptions([...selectedOptions, option]);
+      } else {
+        const newOptions = selectedOptions.filter((item) => item.id !== option.id);
+        setSelectedOptions(newOptions);
+      }
+    } else {
+      setSelectedOption(option);
+    }
+  };
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!modalVisible);
+  };
+
+  const SelectValidate = async () => {
+    // validation
+    console.log("SelectValidate ", selectValue);
+    let result = { value: selectValue };
+    if (validation !== undefined) {
+    //  result = await FormInputValidate(validation, selectValue);
+      console.log(result);
+    }
+    // form Data
+    if (formName !== undefined && form?.[formName] !== undefined) {
+      formContext?.setForm(formName, { [name]: result });
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      {label && (
+        <Text style={styles.label}>{label} :</Text>
+      )}
+      <TouchableOpacity onPress={toggleModal} style={styles.selectButton}>
+        <Text style={styles.selectButtonText}>{placeholder}</Text>
+      </TouchableOpacity>
+      <Modal transparent={true} visible={modalVisible} onRequestClose={toggleModal}>
+        <TouchableOpacity style={styles.modalContainer} activeOpacity={1} onPressOut={toggleModal}>
+          <View style={styles.modalContent}>
+            <Text style={{ marginBottom: 15, fontSize: 15}}>{placeholder}</Text>
+            <FlatList
+              data={options}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() => {
+                    toggleOption(item);
+                    SelectValidate();
+                  }}
+                  style={styles.optionContainer}
+                >
+                  {multipleSelect ? (
+                    <Switch value={(selectedOptions.findIndex((selected) => selected.id === item.id) !== -1) || (selectValue.includes(item.value))}
+                        onValueChange={() => toggleOption(item)} />
+                  ) : (
+                    <View style={[styles.radioContainer, selectedOption && selectedOption.id === item.id && styles.selectedRadio]} />
+                  )}
+                  <Text style={styles.optionText}>{item.label}</Text>
+                </TouchableOpacity>
+              )}
+              keyExtractor={(item) => item.id.toString()}
+            />
+          </View>
+        </TouchableOpacity>
+      </Modal>
+      {FormErrorMessage?.length > 0 && <Text style={styles.errorMessage}>{FormErrorMessage}</Text>}
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  label: {
+    marginBottom: 5, fontWeight:'bold', color:'#333'
+  },
+  selectButton: {
+    padding: 8,
+    borderWidth: 1,
+    borderColor:'#ccc',
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  selectButtonText: {
+    fontSize: 15,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    width: '85%',
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+  },
+  optionContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  radioContainer: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#888',
+    marginRight: 10,
+  },
+  selectedRadio: {
+    backgroundColor: '#007bff',
+  },
+  optionText: {
+    fontSize: 16,
+  },
+  errorMessage: {
+    color: 'red',
+  },
+});

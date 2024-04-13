@@ -3,7 +3,7 @@ import { View, Text, ScrollView, StyleSheet  } from 'react-native';
 import { Avatar, IconButton } from 'react-native-paper';
 import { HamburgerIcon } from '@AppNavigation/Drawer/index.js';
 import { Tooltip } from "e-ui-react-native";
-import Stories from './stories.json';
+import Stories from '@StaticData/en/inspire-stories.json';
 
 const Inspire = (props) =>{
     return (<View style={{ flex:1, backgroundColor:'#fff'  }}>

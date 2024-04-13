@@ -7,9 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@react-native-picker/picker": "^2.7.5",
     "react": "18.2.0",
     "react-native": "0.73.1",
-    "react-native-paper": "^5.12.3"
+    "react-native-paper": "^5.12.3",
+    "react-native-picker-select": "^9.1.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.9",
