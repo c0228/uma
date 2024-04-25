@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, ScrollView, StyleSheet  } from 'react-native';
-import { Avatar, IconButton } from 'react-native-paper';
+import { Avatar } from 'react-native-paper';
 import { HamburgerIcon } from '@AppNavigation/Drawer/index.js';
 import { Tooltip } from "e-ui-react-native";
 import Stories from '@StaticData/en/inspire-stories.json';
