@@ -3,29 +3,54 @@ import { View, Text, ScrollView, TouchableOpacity, StyleSheet  } from 'react-nat
 import { HamburgerIcon } from '@AppNavigation/Drawer/index.js';
 import { Tooltip } from "e-ui-react-native";
 
+/*
+colorConfig={{
+     active: { color: Colors.light },
+     default: { color: Colors.secondary }
+ }}
+*/
+
 const MenuListData = [{ id:'exam-pattern', label:'Exam Pattern', component:(<Text>Exam Pattern</Text>)},
                      { id:'syllabus', label:'Syllabus', component:(<Text>Syllabus</Text>) }];
 
-const HorizontalStaticMenu = ({ data }) =>{
- const [selectedMenu, setSelectedMenu] = useState(data[0]?.id);
- return (<>
- <View style={{ flex:1, flexDirection:'row' }}>
-    {data?.map((d,i)=>{
-        return (
-        <Text style={[((d?.id===selectedMenu)?HorizontalStaticMenuStyle.hrMenuSelected:HorizontalStaticMenuStyle.hrMenu), 
-            { width: `${100 / data.length}%` }]} 
-        onPress={()=>setSelectedMenu(d?.id)}>{d?.label}</Text>);
-    })}
-</View>
-<ScrollView style={{ paddingTop:10, paddingBottom: 15 }}>
-    {data?.filter((d)=>d?.id===selectedMenu)[0]?.component}
-</ScrollView>
-</>);
+const HorizontalStaticMenu = ({ data, activeId, colorConfig }) => {
+    const defaultActiveId = data[0]?.id;
+    const [selectedMenu, setSelectedMenu] = useState(activeId || defaultActiveId);
+
+    const activeColor = colorConfig?.active?.color || '#df0d55';
+    const defaultColor = colorConfig?.default?.color || '#000';
+
+    const handleMenuPress = (id) => { setSelectedMenu(id); };
+
+    const getMenuTextStyle = (menuId) => ({
+        width: `${100 / data.length}%`,
+        color: menuId === selectedMenu ? activeColor : defaultColor,
+        ...(menuId === selectedMenu && { borderColor: activeColor })
+    });
+
+    return (
+        <>
+            <View style={{ flex: 1, flexDirection: 'row' }}>
+                {data.map((menuItem) => (
+                    <Text
+                        key={menuItem.id}
+                        style={[HorizontalStaticMenuStyle.hrMenu, getMenuTextStyle(menuItem.id) ]}
+                        onPress={() => handleMenuPress(menuItem.id)}>
+                        {menuItem.label}
+                    </Text>
+                ))}
+            </View>
+            <ScrollView style={{ paddingTop: 10, paddingBottom: 15 }}>
+                {data.find((menuItem) => menuItem.id === selectedMenu)?.component}
+            </ScrollView>
+        </>
+    );
 };
 
+
 const HorizontalStaticMenuStyle = StyleSheet.create({ 
- hrMenuSelected: { textAlign:'center', borderBottomWidth:2, borderColor:'#df0d55', paddingBottom:10, fontWeight:'bold', color:'#df0d55', marginRight:10 },
- hrMenu:{ textAlign:'center', paddingBottom:10, fontWeight:'bold', color:'#000' }
+ hrMenuSelected: { textAlign:'center', borderBottomWidth:2, paddingBottom:10, fontWeight:'bold', marginRight:10 },
+ hrMenu:{ textAlign:'center', paddingBottom:10, fontWeight:'bold' }
 });
 
 
