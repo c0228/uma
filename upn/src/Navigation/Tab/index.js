@@ -21,7 +21,7 @@ export const TabNavigation = ({ data })=>{
    return (<Tab.Navigator screenOptions={({ route }) => ({
       headerShown: false,
       tabBarIcon: ({ focused, color, size }) => {
-        const tabData = data?.filter((d)=>d?.name===route.name)[0];
+        const tabData = data?.filter((d)=>d?.id===route.name)[0];
         const iconType = tabData?.icon?.type;
         const iconName = tabData?.icon?.name;
         const focusedIconType = tabData?.focusedIcon?.type;
@@ -63,7 +63,7 @@ export const TabNavigation = ({ data })=>{
       tabBarShowLabel: false
     })}>
       {data?.map((d, i)=>{
-         return (<Tab.Screen key={i} name={d?.name} component={d?.component} />);
+         return (<Tab.Screen key={i} name={d?.id} component={d?.component} />);
       })}
       </Tab.Navigator>);
 }

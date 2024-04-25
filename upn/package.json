@@ -16,6 +16,7 @@
     "@react-navigation/drawer": "^6.6.9",
     "@react-navigation/native": "^6.1.12",
     "@react-navigation/stack": "^6.3.23",
+    "axios": "^1.6.8",
     "e-ui-react-native": "file:.yalc/e-ui-react-native",
     "react": "18.2.0",
     "react-native": "0.73.5",

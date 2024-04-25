@@ -26,11 +26,34 @@ function SettingsScreen() {
 
 const Tab = createBottomTabNavigator();
 
-const TabData = [{ icon:{ name:"vihara", type:"FontAwesome5" }, focusedIcon:{ name:"vihara", type:"FontAwesome5" }, name: "About", component: Aupsc },
-{ icon:{ name:"calendar-alt", type:"FontAwesome5" }, focusedIcon:{ name:"calendar-check", type:"FontAwesome5" }, name: "Calendar", component: Calendar  },
-{ icon:{ name:"journal-whills", type:"FontAwesome5" }, focusedIcon:{ name:"book-open", type:"FontAwesome5" }, name: "Syllabus", component: HomeScreen },
-{ icon:{ name:"praying-hands", type:"FontAwesome5" }, focusedIcon:{ name:"praying-hands", type:"FontAwesome5" }, name: "Inspire", component: Inspire }
-];
+const TabData = [{ 
+  id:'About_Home', 
+  icon:{ name:"vihara", type:"FontAwesome5" }, 
+  focusedIcon:{ name:"vihara", type:"FontAwesome5" }, 
+  label: { name: "About" }, 
+  component: Aupsc 
+},
+{ 
+  id:'About_Calendar', 
+  icon:{ name:"calendar-alt", type:"FontAwesome5" }, 
+  focusedIcon:{ name:"calendar-check", type:"FontAwesome5" }, 
+  label: { name: "Calendar" }, 
+  component: Calendar  
+},
+{ 
+  id:'About_Syllabus', 
+  icon:{ name:"journal-whills", type:"FontAwesome5" }, 
+  focusedIcon:{ name:"book-open", type:"FontAwesome5" }, 
+  label: { name: "Syllabus" }, 
+  component: HomeScreen 
+},
+{ 
+  id:'About_Inspire', 
+  icon:{ name:"praying-hands", type:"FontAwesome5" }, 
+  focusedIcon:{ name:"praying-hands", type:"FontAwesome5" }, 
+  label: { name: "Inspire" }, 
+  component: Inspire 
+}];
 
 const About = (props)=>{
    return (<TabNavigation data={TabData} />);

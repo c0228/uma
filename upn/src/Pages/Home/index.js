@@ -26,12 +26,40 @@ function SettingsScreen() {
 
 const Tab = createBottomTabNavigator();
 
-const TabData = [{ icon:{ name:"bell-o", type:"FontAwesome" }, focusedIcon:{ name:"bell", type:"FontAwesome" }, name: "Notifications", component: Notifications },
-{ icon:{ name:"explore", type:"MaterialIcons" }, focusedIcon:{ name:"explore", type:"MaterialIcons" }, name: "Explore", component: Explore  },
-{ icon:{ name:"journal-whills", type:""}, focusedIcon:{ name:"book-open", type:"" }, name: "My Learnings", component: MyLearnings },
-{ icon:{ name:"award", type:"FontAwesome5" }, focusedIcon:{ name:"award", type:"FontAwesome5" }, name: "My Progress", component: MyProgress },
-{ icon:{ name:"comment-o", type:"FontAwesome" }, focusedIcon:{ name:"comments-o", type:"FontAwesome" }, name: "Discussion Forum", component: Discussion }
-];
+const TabData = [{ 
+  id:'Home_Notifications', 
+  icon:{ name:"bell-o", type:"FontAwesome" }, 
+  focusedIcon:{ name:"bell", type:"FontAwesome" }, 
+  label: { name: "Notifications" }, 
+  component: Notifications 
+},
+{  
+  id:'Home_Explore', 
+  icon:{ name:"explore", type:"MaterialIcons" }, 
+  focusedIcon:{ name:"explore", type:"MaterialIcons" }, 
+  label: { name: "Explore" }, 
+  component: Explore  },
+{  
+  id:'Home_MyLearnings', 
+  icon:{ name:"journal-whills", type:""}, 
+  focusedIcon:{ name:"book-open", type:"" }, 
+  label: { name: "My Learnings" }, 
+  component: MyLearnings 
+},
+{  
+  id:'Home_MyProgess', 
+  icon:{ name:"award", type:"FontAwesome5" }, 
+  focusedIcon:{ name:"award", type:"FontAwesome5" }, 
+  label: { name: "My Progress" }, 
+  component: MyProgress 
+},
+{  
+  id:'Home_DiscussionForum', 
+  icon:{ name:"comment-o", type:"FontAwesome" }, 
+  focusedIcon:{ name:"comments-o", type:"FontAwesome" }, 
+  label: { name: "Discussion Forum" }, 
+  component: Discussion 
+}];
 
 const Home = (props)=>{
    return (<TabNavigation data={TabData} />);

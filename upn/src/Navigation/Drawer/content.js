@@ -25,35 +25,15 @@ const UserSection = ({ userInfo }) => {
     </>);
 }
 
-const SignoutSection = () => {
-    return (<MenuList items={[{
-        icon:{ type:"FontAwesome5", name:"user-graduate", color: "#000", size: 17 }, 
-        label:{ name: "Study Timetable", color: "#000", size: 14 },
-        component: StudyTT
-    },{
-        icon:{ type:"FontAwesome5", name:"user-check", color: "#000", size: 17 }, 
-        label:{ name: "My Profile", color: "#000", size: 14 },
-        component: MyProfile
-    },
-    {
-        icon:{ type:"Ionicons", name:"settings", color: "#000", size: 18 }, 
-        label:{ name: "Settings", color: "#000", size: 14 },
-        component: Settings
-    },{
-        icon:{ type:"MaterialCommunityIcons", name:"exit-to-app", color: "#000", size: 18 }, 
-        label:{ name: "Signout", color: "#000", size: 14 }
-    }]} />);
-}
-
 const DrawerContent = (props) => {
  return <View style={DrawerStyles.drawerContentView}>
      <DrawerContentScrollView {...props}>
         <View style={DrawerStyles.drawerContentView}>
-            <UserSection userInfo={props.drawerInfo.user} />
-            <MenuList items={props.drawerInfo.menu} {...props}/>
+            <UserSection userInfo={props?.drawerInfo?.user} />
+            <MenuList items={props?.drawerInfo?.menu} {...props}/>
         </View>
     </DrawerContentScrollView>     
-    <SignoutSection />
+    <MenuList items={props?.bottomMenu}  {...props}/>
  </View>;
 }
 
