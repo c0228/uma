@@ -1,6 +1,8 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, Text,TouchableOpacity, StyleSheet } from "react-native";
 import { Order, Li } from "e-ui-react-native";
+import Modal from './../../../../../../Components/Modal/index.js';
+import LangDisplay from "./components/LangDisplay/index.js";
 
 const ExamPaperPlan = () => {
 
@@ -23,48 +25,6 @@ const ExamPaperPlan = () => {
 
     const MainExamination = () =>{
        
-        const LangDisplay = () =>{
-            const lngTbl = [{ language: "Assamese", script: "Assamese" },
-            { language: "Bengali", script: "Bengali" },
-            { language: "Gujarati", script: "Gujarati" },
-            { language: "Hindi", script: "Devanagari" },
-            { language: "Kannada", script: "Kannada" },
-            { language: "Kashmiri", script: "Kashmiri" },
-            { language: "Konkani", script: "Devanagari" },
-            { language: "Malayalam", script: "Malayalam" },
-            { language: "Manipuri", script: "Bengali" },
-            { language: "Marathi", script: "Devanagari" },
-            { language: "Nepali", script: "Devanagari" },
-            { language: "Odia", script: "Odia" },
-            { language: "Punjabi", script: "Gurumukhi" },
-            { language: "Sanskrit", script: "Devanagari" },
-            { language: "Sindhi", script: "Devanagari or Arabic" },
-            { language: "Tamil", script: "Tamil" },
-            { language: "Telugu", script: "Telugu" },
-            { language: "Urdu", script: "Persian" },
-            { language: "Bodo", script: "Devanagari" },
-            { language: "Dogri", script: "Devanagari" },
-            { language: "Maithilli", script: "Devanagari" },
-            { language: "Santhali", script: "Devanagari or Olchiki" }];
-
-            return (<View>
-                <Text style={ExamPaperPlanStyles.tblDesc}>
-                    For the Language medium/literature of languages, the scripts to be used by the candidates will be as under -
-                    </Text>
-                    <View style={ExamPaperPlanStyles.tblFormat}>
-                        <View style={{ width:'20%' }}><Text style={ExamPaperPlanStyles.tblSubTitle2}>##</Text></View>
-                        <View style={{ width:'40%' }}><Text style={ExamPaperPlanStyles.tblSubTitle2}>Language</Text></View>
-                        <View style={{ width:'40%' }}><Text style={ExamPaperPlanStyles.tblSubTitle2}>Script</Text></View>
-                    </View>
-                    {lngTbl?.map((lngDetails,index)=>{
-                        return (<View key={index} style={ExamPaperPlanStyles.tblFormat}>
-                            <View style={{ width:'20%' }}><Text style={ExamPaperPlanStyles.tblDesc}>{index<9?('0'+(index+1)):(index+1)}</Text></View>
-                            <View style={{ width:'40%' }}><Text style={ExamPaperPlanStyles.tblDesc}>{lngDetails?.language}</Text></View>
-                            <View style={{ width:'40%' }}><Text style={ExamPaperPlanStyles.tblDesc}>{lngDetails?.script}</Text></View>
-                        </View>);
-                    })}
-            </View>);
-        };
         return (<View>
             <Text style={ExamPaperPlanStyles.minTitle}>Mains Examination</Text>
             <Text style={ExamPaperPlanStyles.paraDesc}>The Written Examination will consist of the following papers:</Text>
@@ -77,11 +37,6 @@ const ExamPaperPlan = () => {
                         Eighth Schedule to the Constitution)
                     </Text>
                     <LangDisplay />
-                    <View style={{ flex:1, flexDirection:'row', flexWrap:'wrap',}}>
-                        <Text style={{ color:'#333', fontWeight:'bold',  marginRight:5 }}>Note:</Text>
-                        <Text style={ExamPaperPlanStyles.tblSimpleDesc}>For Santhali language, question paper will be printed in 
-                        Devanagari script; but candidates will be free to answer either in Devanagari script or in Olchiki.</Text>
-                    </View>
                 </View>
                 <View style={[ExamPaperPlanStyles.tblRightCol, { backgroundColor:'none' }]}>
                     <Text style={ExamPaperPlanStyles.tblSubTitle2}>300 Marks</Text>
