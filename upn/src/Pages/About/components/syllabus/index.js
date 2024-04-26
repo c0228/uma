@@ -26,7 +26,6 @@ const HorizontalStaticMenu = ({ data, activeId, colorConfig }) => {
     const handleMenuPress = (id) => { setSelectedMenu(id); };
 
     const getMenuTextStyle = (menuId) => ({
-        width: `${100 / data.length}%`,
         color: menuId === selectedMenu ? activeColor : defaultColor,
         ...(menuId === selectedMenu && { borderBottomWidth:2, borderColor: activeColor })
     });
@@ -35,13 +34,14 @@ const HorizontalStaticMenu = ({ data, activeId, colorConfig }) => {
         <>
             <View style={{ flex: 1, flexDirection: 'row' }}>
                 {data.map((menuItem) => (
+                    <TouchableOpacity style={{ width: `${100 / data.length}%` }} 
+                        onPress={() => handleMenuPress(menuItem.id)}>
                     <Text
                         key={menuItem.id}
-                        style={[HorizontalStaticMenuStyle.hrMenu, getMenuTextStyle(menuItem.id) ]}
-                        onPress={() => handleMenuPress(menuItem.id)}>
+                        style={[HorizontalStaticMenuStyle.hrMenu, getMenuTextStyle(menuItem.id) ]}>
                         {menuItem.label}
                     </Text>
-                ))}
+                    </TouchableOpacity>))}
             </View>
             <ScrollView style={{ paddingTop: 10, paddingBottom: 15 }}>
                 {data.find((menuItem) => menuItem.id === selectedMenu)?.component}

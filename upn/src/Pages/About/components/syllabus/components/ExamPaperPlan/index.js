@@ -3,6 +3,7 @@ import { View, Text,TouchableOpacity, StyleSheet } from "react-native";
 import { Order, Li } from "e-ui-react-native";
 import Modal from './../../../../../../Components/Modal/index.js';
 import LangDisplay from "./components/LangDisplay/index.js";
+import OptSubjects from "./components/OptSubjects/index.js";
 
 const ExamPaperPlan = () => {
 
@@ -113,6 +114,7 @@ const ExamPaperPlan = () => {
                 <View style={ExamPaperPlanStyles.tblLeftCol}>
                     <Text style={ExamPaperPlanStyles.tblSubTitle1}>Paper - VI</Text>
                     <Text style={ExamPaperPlanStyles.tblDesc}>Optional Subject - Paper 1</Text>
+                    <OptSubjects />
                 </View>
                 <View style={[ExamPaperPlanStyles.tblRightCol, { backgroundColor:'none' }]}>
                     <Text style={ExamPaperPlanStyles.tblSubTitle2}>250 Marks</Text>
@@ -122,6 +124,7 @@ const ExamPaperPlan = () => {
                 <View style={ExamPaperPlanStyles.tblLeftCol}>
                     <Text style={ExamPaperPlanStyles.tblSubTitle1}>Paper - VII</Text>
                     <Text style={ExamPaperPlanStyles.tblDesc}>Optional Subject - Paper 2</Text>
+                    <OptSubjects />
                 </View>
                 <View style={[ExamPaperPlanStyles.tblRightCol, { backgroundColor:'none' }]}>
                     <Text style={ExamPaperPlanStyles.tblSubTitle2}>250 Marks</Text>
@@ -178,4 +181,4 @@ const ExamPaperPlanStyles = StyleSheet.create({
     tblDesc: { color: '#333', lineHeight: 22 }
 });
 
-export default ExamPaperPlan;
+export default React.memo(ExamPaperPlan);
