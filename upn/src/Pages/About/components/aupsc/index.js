@@ -25,6 +25,7 @@ const data = {
 };
 
 const Aupsc = (props)=>{
+
     return (<View style={{ flex:1, backgroundColor:'#fff'  }}>
     <HamburgerIcon {...props}/>      
     <ScrollView style={{ paddingLeft:15, paddingRight: 15 }}> 
@@ -58,4 +59,4 @@ const AupscStyle = StyleSheet.create({
     list:{ paddingTop:2, color:'#333', lineHeight: 20 }
  });
 
- export default Aupsc;
+ export default React.memo(Aupsc);

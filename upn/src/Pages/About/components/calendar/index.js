@@ -247,4 +247,4 @@ const CalendarStyle = StyleSheet.create({
     subTitle: { marginBottom:15, fontSize:13, paddingTop:5, paddingBottom:5, backgroundColor:'#ffcebe', color:'#000', lineHeight: 20, textTransform:'uppercase', fontWeight:'bold' }
  });
 
-export default Calendar;
+export default React.memo(Calendar);

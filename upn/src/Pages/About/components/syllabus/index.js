@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet  } from 'react-native';
 import { HamburgerIcon } from '@AppNavigation/Drawer/index.js';
 import { Tooltip } from "e-ui-react-native";
-
+import ExamPaperPlan from './components/ExamPaperPlan/index.js';
+import ExamSyllabus from './components/ExamSyllabus/index.js';
 /*
 colorConfig={{
      active: { color: Colors.light },
@@ -10,8 +11,10 @@ colorConfig={{
  }}
 */
 
-const MenuListData = [{ id:'exam-pattern', label:'Exam Pattern', component:(<Text>Exam Pattern</Text>)},
-                     { id:'syllabus', label:'Syllabus', component:(<Text>Syllabus</Text>) }];
+const MenuListData = [{ id:'exam-paper-plan', label:'Exam Paper Plan', component: <ExamPaperPlan /> },
+                     { id:'exam-syllabus', label:'Exam Syllabus', component:(<ExamSyllabus />) }];
+
+
 
 const HorizontalStaticMenu = ({ data, activeId, colorConfig }) => {
     const defaultActiveId = data[0]?.id;
@@ -60,7 +63,7 @@ const Syllabus = (props) =>{
     <HamburgerIcon {...props}/>      
     <ScrollView style={{ paddingLeft:15, paddingRight: 15 }}>
     <Text style={[SyllabusStyle.mainTitle, SyllabusStyle.textCenter, SyllabusStyle.mbot15p]}>Civil Service Examination (CSE)</Text>
-    <HorizontalStaticMenu data={MenuListData} />
+    <HorizontalStaticMenu activeId="exam-paper-plan" data={MenuListData} />
     </ScrollView>
     </View>);
 };
@@ -71,4 +74,4 @@ const SyllabusStyle = StyleSheet.create({
  mainTitle: { fontSize:18, paddingBottom:6, fontWeight:'bold', color:'#000', lineHeight: 22 }
 });
 
-export default Syllabus;
+export default React.memo(Syllabus);

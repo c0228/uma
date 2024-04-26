@@ -1,12 +1,16 @@
-import React from "react";
-import { View, Text, ScrollView, StyleSheet } from "react-native";
+import React, { useState, useEffect, useMemo } from "react";
+import { View, Text, ScrollView, StyleSheet, ActivityIndicator, useWindowDimensions } from "react-native";
 import { HamburgerIcon } from '@AppNavigation/Drawer/index.js';
+import RenderHtml from 'react-native-render-html';
+import HtmlData from './index.html';
 
 const Discussion = (props)=>{
+ 
  return (<View style={DiscussionStyle.pageView}>
  <HamburgerIcon {...props}/>      
  <ScrollView style={DiscussionStyle.scrollView}>
  <Text>Discussion Page</Text>
+ <Text>{HtmlData}</Text>
  </ScrollView>
  </View>);
 };

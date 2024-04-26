@@ -16,7 +16,7 @@ const source = {
   };
 
 const Notifications = (props)=>{
-
+  
   const handleSelect = (option) => {
    console.log("handleSelect", option);
   };
