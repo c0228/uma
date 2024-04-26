@@ -25,7 +25,7 @@ const HorizontalStaticMenu = ({ data, activeId, colorConfig }) => {
     const getMenuTextStyle = (menuId) => ({
         width: `${100 / data.length}%`,
         color: menuId === selectedMenu ? activeColor : defaultColor,
-        ...(menuId === selectedMenu && { borderColor: activeColor })
+        ...(menuId === selectedMenu && { borderBottomWidth:2, borderColor: activeColor })
     });
 
     return (
