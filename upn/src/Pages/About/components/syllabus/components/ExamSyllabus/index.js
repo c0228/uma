@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { Accordian } from "@AppComponent/Accordian/index.js";
+import PreliminaryExam from "./components/CSE/Prelims/index.js";
 
 const ExamSyllabus = ()=>{
  const SubjectTitle=({ index, title })=>{
@@ -12,7 +13,7 @@ const ExamSyllabus = ()=>{
   </View>);
  };
  return (<View>
-  <Text>Exam Syllabus</Text>
+  <PreliminaryExam />
   <Accordian id="AccordianExample" 
         data={[{ id:"Item#01", 
                 title: (<SubjectTitle index="01" title="Agriculture" />), 
