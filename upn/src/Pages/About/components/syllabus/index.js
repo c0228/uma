@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet  } from 'react-native';
 import { HamburgerIcon } from '@AppNavigation/Drawer/index.js';
 import { Tooltip } from "e-ui-react-native";
@@ -14,8 +14,6 @@ colorConfig={{
 const MenuListData = [{ id:'exam-paper-plan', label:'Exam Paper Plan', component: <ExamPaperPlan /> },
                      { id:'exam-syllabus', label:'Exam Syllabus', component:(<ExamSyllabus />) }];
 
-
-
 const HorizontalStaticMenu = ({ data, activeId, colorConfig }) => {
     const defaultActiveId = data[0]?.id;
     const [selectedMenu, setSelectedMenu] = useState(activeId || defaultActiveId);
@@ -30,21 +28,25 @@ const HorizontalStaticMenu = ({ data, activeId, colorConfig }) => {
         ...(menuId === selectedMenu && { borderBottomWidth:2, borderColor: activeColor })
     });
 
+    const MenuItemComponent = ({ component }) => {
+        return useMemo(() => {
+            return component;
+        }, [component]);
+    };
+
     return (
         <>
             <View style={{ flexDirection: 'row', backgroundColor:'#fff' }}>
                 {data.map((menuItem) => (
                     <TouchableOpacity key={menuItem.id} style={{ width: `${100 / data.length}%` }} 
                         onPress={() => handleMenuPress(menuItem.id)}>
-                    <Text
-                        
-                        style={[HorizontalStaticMenuStyle.hrMenu, getMenuTextStyle(menuItem.id) ]}>
+                    <Text style={[HorizontalStaticMenuStyle.hrMenu, getMenuTextStyle(menuItem.id) ]}>
                         {menuItem.label}
                     </Text>
                     </TouchableOpacity>))}
             </View>
             <ScrollView style={{ paddingLeft:10,paddingRight:10, paddingBottom: 35 }}>
-                {data.find((menuItem) => menuItem.id === selectedMenu)?.component}
+              <MenuItemComponent component={data.find((menuItem) => menuItem.id === selectedMenu)?.component} />
             </ScrollView>
         </>
     );
