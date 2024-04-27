@@ -11,8 +11,9 @@ colorConfig={{
  }}
 */
 
-const MenuListData = [{ id:'exam-paper-plan', label:'Exam Paper Plan', component: <ExamPaperPlan /> },
-                     { id:'exam-syllabus', label:'Exam Syllabus', component:(<ExamSyllabus />) }];
+const MenuListData = [{ id:'paper-pattern', label:'Paper Pattern', component: <ExamPaperPlan /> },
+                     { id:'syllabus', label:'Syllabus', component:(<ExamSyllabus />) },
+                     { id:'scoring-tips', label:'Scoring Tips', component:(<Text>Scoring Tips</Text>) }];
 
 const HorizontalStaticMenu = ({ data, activeId, colorConfig }) => {
     const defaultActiveId = data[0]?.id;
@@ -64,7 +65,7 @@ const Syllabus = (props) =>{
     return (<View style={{ flex:1, backgroundColor:'#fff'  }}>
     <HamburgerIcon {...props}/>      
     <Text style={[SyllabusStyle.mainTitle, SyllabusStyle.textCenter, SyllabusStyle.mbot15p]}>Civil Service Examination (CSE)</Text>
-    <HorizontalStaticMenu activeId="exam-paper-plan" data={MenuListData} />
+    <HorizontalStaticMenu activeId="paper-pattern" data={MenuListData} />
     </View>);
 };
 
