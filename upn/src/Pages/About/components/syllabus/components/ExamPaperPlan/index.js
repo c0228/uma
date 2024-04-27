@@ -8,12 +8,14 @@ import OptSubjects from "./components/OptSubjects/index.js";
 const ExamPaperPlan = () => {
 
     const PreliminaryExam = () =>{
+        
         const data = {
             "Preliminary Examination": ["This Exam is comprised of two compulsory Papers of 200 marks each.",
                 "Both the question papers will be of the objective type (multiple choice questions) and each will be of 2 hours duration.",
                 "The General Studies Paper-II of the Civil Services (Preliminary) Examination will be a qualifying paper with minimum qualifying marks fixed at 33%.",
                 "The question papers will be set both the languages in Hindi and English."]
         };
+
         return (<View>
             <Text style={ExamPaperPlanStyles.minTitle}>Preliminary Examination</Text>
             <Order style={ExamPaperPlanStyles.mtop15p}>
@@ -26,7 +28,7 @@ const ExamPaperPlan = () => {
 
     const MainExamination = () =>{
        
-        return (<View>
+        return (<View style={{ marginBottom:15 }}>
             <Text style={ExamPaperPlanStyles.minTitle}>Mains Examination</Text>
             <Text style={ExamPaperPlanStyles.paraDesc}>The Written Examination will consist of the following papers:</Text>
             <Text style={ExamPaperPlanStyles.subTitle}>Qualifying Papers</Text>

@@ -32,18 +32,18 @@ const HorizontalStaticMenu = ({ data, activeId, colorConfig }) => {
 
     return (
         <>
-            <View style={{ flex: 1, flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'row', backgroundColor:'#fff' }}>
                 {data.map((menuItem) => (
-                    <TouchableOpacity style={{ width: `${100 / data.length}%` }} 
+                    <TouchableOpacity key={menuItem.id} style={{ width: `${100 / data.length}%` }} 
                         onPress={() => handleMenuPress(menuItem.id)}>
                     <Text
-                        key={menuItem.id}
+                        
                         style={[HorizontalStaticMenuStyle.hrMenu, getMenuTextStyle(menuItem.id) ]}>
                         {menuItem.label}
                     </Text>
                     </TouchableOpacity>))}
             </View>
-            <ScrollView style={{ paddingTop: 10, paddingBottom: 15 }}>
+            <ScrollView style={{ paddingLeft:10,paddingRight:10, paddingBottom: 35 }}>
                 {data.find((menuItem) => menuItem.id === selectedMenu)?.component}
             </ScrollView>
         </>
@@ -61,10 +61,8 @@ const HorizontalStaticMenuStyle = StyleSheet.create({
 const Syllabus = (props) =>{
     return (<View style={{ flex:1, backgroundColor:'#fff'  }}>
     <HamburgerIcon {...props}/>      
-    <ScrollView style={{ paddingLeft:15, paddingRight: 15 }}>
     <Text style={[SyllabusStyle.mainTitle, SyllabusStyle.textCenter, SyllabusStyle.mbot15p]}>Civil Service Examination (CSE)</Text>
     <HorizontalStaticMenu activeId="exam-paper-plan" data={MenuListData} />
-    </ScrollView>
     </View>);
 };
 
