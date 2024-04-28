@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { View, Text,TouchableOpacity, StyleSheet } from "react-native";
 import { Order, Li } from "e-ui-react-native";
-import Modal from './../../../../../../Components/Modal/index.js';
 import LangDisplay from "./components/LangDisplay/index.js";
 import OptSubjects from "./components/OptSubjects/index.js";
 

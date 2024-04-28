@@ -1,6 +1,7 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Order, Li } from "e-ui-react-native";
+import Modal from './../../../../../../../../../Components/Modal/index.js';
 
 const MainExam = ()=>{
  const data = {
@@ -8,14 +9,38 @@ const MainExam = ()=>{
         "title": "Indian Language",
         "marks": 250,
         "syllabus":["Comprehension of given passages", "Precis Writing", "Usage and Vocabulary", "Short Essays", 
-            "Translation from English to the Indian Language and vice-versa"]
+            "Translation from English to the Indian Language and vice-versa"],
+         "scoringTipsList":["It is advised that you should choose the language wisely. Choose the one which you have a more grip on.",
+         "Don’t compromise on your other subjects for the language as you just have to score 75 marks to get it cleared",
+         "Bring writing and speaking the language into your habit so that you don’t fall behind at the time of giving the paper"]
     },
     "Paper - B":{
         "title": "English",
         "marks": 250,
-        "syllabus":["Comprehension of given passages", "Precis Writing", "Usage and Vocabulary", "Short Essays"]
+        "syllabus":["Comprehension of given passages", "Precis Writing", "Usage and Vocabulary", "Short Essays"],
+        "scoringTipsList":["Even if you are confident about your English, you have to brush up the grammar rules.",
+            "Make sure that you practice the English paper from the previous year Paper B for UPSC.",
+            "Time your paper well so that you don’t miss out on any answer."]
     }
  }
+
+ const StringModal = (props) =>{
+   const [openModal, setOpenModal] = useState(false);
+   return (<View>
+      <TouchableOpacity onPress={()=>setOpenModal(true)}>
+          <Text style={StringModalStyles.hyperlink}>{props?.clickLabel}</Text>
+      </TouchableOpacity>
+      <Modal title={props?.modalTitle} visible={openModal}
+      onClose={(isVisible) => setOpenModal(isVisible)}>
+      {props?.children}
+      </Modal>
+      </View>);
+ };
+
+ const StringModalStyles = StyleSheet.create({ 
+   hyperlink :{ color:'red', textDecorationLine:'underline', paddingTop:5, paddingBottom:5 },
+ });
+
  return (<View style={MainExamStyles.examView}>
     <Text style={MainExamStyles.mainTitle}>Part B : Main Examination</Text>
     {Object.entries(data).map(([key, value],index) =>{
@@ -30,6 +55,11 @@ const MainExam = ()=>{
             </View>
          </View>
          <Order>{value?.syllabus?.map((v,i)=>(<Li key={i} style={MainExamStyles.examList}>{v}</Li>))}</Order>
+         {value?.scoringTipsList?.length>0 && (<StringModal clickLabel={"Scoring Tips for "+key} modalTitle={key+" Scoring Tips"}>
+         <Order style={{ paddingRight: 15 }}>
+            {value?.scoringTipsList?.map((st,i)=>(<Li key={i} style={MainExamStyles.examList}>{st}</Li>))}
+         </Order>
+         </StringModal>)}
          </View>);
     })}
  </View>);

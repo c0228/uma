@@ -11,8 +11,8 @@ const Modal = (props)=>{// { title, visible, onClose, fullScreen }
           <View style={[styles.modalContainer, { width: isFullScreen ? '100%' : '80%' }]}>
             <View style={styles.header}>
               <Text style={styles.title}>{props.title}</Text>
-              <TouchableOpacity style={{ position:'absolute', right:10, top:0 }} onPress={() => props?.onClose(false)}>
-                <Fontisto name="close" size={20} color="#ccc" />
+              <TouchableOpacity style={{ position:'absolute', right:10, top:12 }} onPress={() => props?.onClose(false)}>
+                <Fontisto name="close" size={20} color="#333" />
               </TouchableOpacity>
             </View>
             <View style={styles.content}>
@@ -36,26 +36,29 @@ const Modal = (props)=>{// { title, visible, onClose, fullScreen }
     modalContainer: {
       backgroundColor: 'white',
       borderRadius: 10,
-      paddingTop:20,
-      paddingLeft: 20,
-      paddingBottom:20,
       marginTop:'10%',
       marginBottom:'10%'
     },
     header: {
+      paddingTop:10,
+      paddingLeft: 20,
+      paddingBottom:10,
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
       marginBottom: 10,
+      borderColor:'#eee',
+      borderBottomWidth:1
     },
     title: {
       fontSize: 18,
       fontWeight: 'bold',
+      color:'#333'
     },
     content: {
       // Ensure the content area stretches
       flexDirection: 'row',
-      paddingBottom: 30
+      paddingLeft:10
       // flexWrap:'wrap'
     },
   });

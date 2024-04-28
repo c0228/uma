@@ -29,7 +29,7 @@ const LangDisplay = () =>{
 const [openModal, setOpenModal] = useState(false);
 
     return (<View>
-        <TouchableOpacity  onPress={()=>setOpenModal(true)}>
+        <TouchableOpacity onPress={()=>setOpenModal(true)}>
             <Text style={LangDisplayStyles.hyperlink}>See Indian Languages Available</Text>
         </TouchableOpacity>
         <Modal title="Indian Languages" visible={openModal}
