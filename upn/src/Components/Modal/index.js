@@ -16,9 +16,7 @@ const Modal = (props)=>{// { title, visible, onClose, fullScreen }
               </TouchableOpacity>
             </View>
             <View style={styles.content}>
-                <ScrollView style={{ paddingBottom:15 }}>
                 {props.children}
-                </ScrollView>
             </View>
           </View>
         </View>
@@ -41,7 +39,7 @@ const Modal = (props)=>{// { title, visible, onClose, fullScreen }
     },
     header: {
       paddingTop:10,
-      paddingLeft: 20,
+      paddingLeft: 16,
       paddingBottom:10,
       flexDirection: 'row',
       justifyContent: 'space-between',

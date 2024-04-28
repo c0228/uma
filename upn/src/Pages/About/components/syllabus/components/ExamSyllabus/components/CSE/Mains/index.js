@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, ScrollView, StyleSheet } from "react-native";
 import { Order, Li } from "e-ui-react-native";
-import Modal from './../../../../../../../../../Components/Modal/index.js';
+import { StringModalViewer } from '@AppComponent/StringModalViewer/index.js';
 
 const MainExam = ()=>{
  const data = {
@@ -24,23 +24,6 @@ const MainExam = ()=>{
     }
  }
 
- const StringModal = (props) =>{
-   const [openModal, setOpenModal] = useState(false);
-   return (<View>
-      <TouchableOpacity onPress={()=>setOpenModal(true)}>
-          <Text style={StringModalStyles.hyperlink}>{props?.clickLabel}</Text>
-      </TouchableOpacity>
-      <Modal title={props?.modalTitle} visible={openModal}
-      onClose={(isVisible) => setOpenModal(isVisible)}>
-      {props?.children}
-      </Modal>
-      </View>);
- };
-
- const StringModalStyles = StyleSheet.create({ 
-   hyperlink :{ color:'red', textDecorationLine:'underline', paddingTop:5, paddingBottom:5 },
- });
-
  return (<View style={MainExamStyles.examView}>
     <Text style={MainExamStyles.mainTitle}>Part B : Main Examination</Text>
     {Object.entries(data).map(([key, value],index) =>{
@@ -55,11 +38,13 @@ const MainExam = ()=>{
             </View>
          </View>
          <Order>{value?.syllabus?.map((v,i)=>(<Li key={i} style={MainExamStyles.examList}>{v}</Li>))}</Order>
-         {value?.scoringTipsList?.length>0 && (<StringModal clickLabel={"Scoring Tips for "+key} modalTitle={key+" Scoring Tips"}>
+         {value?.scoringTipsList?.length>0 && (<StringModalViewer clickLabel={"Scoring Tips for "+key} modalTitle={"Scoring Tips ("+key+")"}>
+            <ScrollView style={{ paddingBottom: 15 }}>
          <Order style={{ paddingRight: 15 }}>
             {value?.scoringTipsList?.map((st,i)=>(<Li key={i} style={MainExamStyles.examList}>{st}</Li>))}
          </Order>
-         </StringModal>)}
+         </ScrollView>
+         </StringModalViewer>)}
          </View>);
     })}
  </View>);

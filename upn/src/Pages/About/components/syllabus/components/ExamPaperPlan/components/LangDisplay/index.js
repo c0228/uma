@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { View, Text,TouchableOpacity, StyleSheet } from "react-native";
-import Modal from './../../../../../../../../Components/Modal/index.js';
+import { View, ScrollView, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { StringModalViewer } from '@AppComponent/StringModalViewer/index.js';
 
 const LangDisplay = () =>{
     const lngTbl = [{ language: "Assamese", script: "Assamese" },
@@ -26,15 +26,10 @@ const LangDisplay = () =>{
     { language: "Maithilli", script: "Devanagari" },
     { language: "Santhali", script: "Devanagari or Olchiki" }];
 
-const [openModal, setOpenModal] = useState(false);
-
     return (<View>
-        <TouchableOpacity onPress={()=>setOpenModal(true)}>
-            <Text style={LangDisplayStyles.hyperlink}>See Indian Languages Available</Text>
-        </TouchableOpacity>
-        <Modal title="Indian Languages" visible={openModal}
-        onClose={(isVisible) => setOpenModal(isVisible)}>
-        <View>
+        <StringModalViewer clickLabel="See Indian Languages Available" modalTitle="Indian Languages">
+        <ScrollView style={{ marginBottom: 70 }}>
+            <View style={{ paddingLeft:8, paddingRight:15 }}>
         <Text style={LangDisplayStyles.desc}>
             For the Language medium/literature of languages, the scripts to be used by the candidates will be as under -
             </Text>
@@ -55,13 +50,13 @@ const [openModal, setOpenModal] = useState(false);
                 <Text style={LangDisplayStyles.simpleDesc}>For Santhali language, question paper will be printed in 
                 Devanagari script; but candidates will be free to answer either in Devanagari script or in Olchiki.</Text>
             </View>
-         </View>
-         </Modal>
+            </View>
+         </ScrollView>
+         </StringModalViewer>
     </View>);
 };
 
 const LangDisplayStyles = StyleSheet.create({ 
- hyperlink :{ color:'red', textDecorationLine:'underline', paddingTop:5, paddingBottom:5 },
  desc:{ color: '#333', lineHeight: 22 },
  simpleDesc:{ lineHeight: 22 },
  tblHead:{ flexDirection:'row', marginTop: 10, flexWrap: 'wrap' },
