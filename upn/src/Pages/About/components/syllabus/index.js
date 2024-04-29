@@ -38,7 +38,7 @@ const Syllabus = (props) =>{
       { id: 'CAPF', label: 'Central Armed Police Forces (CAPF) Examination', value: 'Central Armed Police Forces (CAPF) Examination' }]}
       onSelect={handleSelect} />
     </View>
-    <View style={{ paddingTop:12 }}>
+    <View style={{ marginTop:12,  marginBottom:15, justifyContent:'center', alignItems:'center', backgroundColor:'#df0d55'  }}>
       <Text style={SyllabusStyle.mainTitle}>{selectExam}</Text>
     </View>
     <HorizontalStaticMenu activeId="paper-pattern" data={MenuListData} />
@@ -46,7 +46,8 @@ const Syllabus = (props) =>{
 };
 
 const SyllabusStyle = StyleSheet.create({ 
- mainTitle: { marginBottom:15, fontSize:14, letterSpacing:0.4, textTransform:'uppercase', paddingLeft:10, textAlign: 'center', paddingRight:10,paddingBottom:6, fontWeight:'bold', color:'#000', lineHeight: 22 }
+ mainTitle: { fontSize:14, letterSpacing:0.4, textTransform:'uppercase', paddingLeft:10, 
+ textAlign: 'center', paddingTop:8, paddingRight:10,paddingBottom:8, fontWeight:'bold', color:'#fff', lineHeight: 22 }
 });
 
 export default React.memo(Syllabus);
