@@ -34,12 +34,10 @@ const Modal = (props)=>{// { title, visible, onClose, fullScreen }
     modalContainer: {
       backgroundColor: 'white',
       borderRadius: 10,
-      marginTop:'10%',
-      marginBottom:'10%'
     },
     header: {
       paddingTop:10,
-      paddingLeft: 16,
+      paddingLeft: 12,
       paddingBottom:10,
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -56,8 +54,9 @@ const Modal = (props)=>{// { title, visible, onClose, fullScreen }
     content: {
       // Ensure the content area stretches
       flexDirection: 'row',
-      paddingLeft:10
-      // flexWrap:'wrap'
+      marginLeft:3, 
+      marginRight: 5,
+      marginBottom:5
     },
   });
 

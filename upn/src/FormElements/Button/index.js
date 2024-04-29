@@ -1,11 +1,11 @@
 import React from "react";
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 const convertToKebabCase = (str) =>{
   return str.replace(/-([a-z])/g, (match, char) => char.toUpperCase());
 };
 
-export const Button =  ({ type, label, size, onPress }) => {
+export const Button =  ({ type, label, size, onPress, style }) => {
   const fontSize = (size===undefined)?14:size;
   const typ = convertToKebabCase(type);
   const data= {
@@ -27,13 +27,13 @@ export const Button =  ({ type, label, size, onPress }) => {
     outlineLight:{ bgColor:'none', borderColor:'#f8f9fa', color:'#f8f9fa' }
   };
     return (
-      <TouchableOpacity style={[styles.buttonContainer, { backgroundColor: data?.[typ]?.bgColor, borderWidth:1, borderColor: data?.[typ]?.borderColor }]} onPress={onPress}>
+      <TouchableOpacity style={[styles.buttonContainer, { backgroundColor: data?.[typ]?.bgColor, borderWidth:1, borderColor: data?.[typ]?.borderColor }, style]} onPress={onPress}>
         <Text style={[styles.button, { fontSize: fontSize, color: data?.[typ]?.color }]}>{label}</Text>
       </TouchableOpacity>
     );
 };
 
 const styles = StyleSheet.create({
-    buttonContainer:{ alignItems: 'center', justifyContent: 'center', paddingVertical: 10, paddingHorizontal: 20, borderRadius: 5, marginTop: 10 },
-    button: { fontWeight:'bold' },
+    buttonContainer:{ alignItems: 'center', justifyContent: 'center', borderRadius:5,  },
+    button: { fontWeight:'bold', padding: 10 },
 });

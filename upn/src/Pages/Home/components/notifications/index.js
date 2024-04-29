@@ -5,7 +5,8 @@ import { useWindowDimensions } from 'react-native';
 import { Email } from '@AppFormElement/Email/index.js';
 import { Select } from '@AppFormElement/Select/index.js';
 import { Form } from '@AppFormElement/Form/index.js';
-import { Button } from './../../../../FormElements/Button/index.js';
+import { Button } from '@AppFormElement/Button/index.js';
+import { InputGroup } from '@AppFormElement/InputGroup/index.js';
 import RenderHtml from 'react-native-render-html';
 
 const source = {
@@ -43,7 +44,7 @@ const Notifications = (props)=>{
         <Select name="language" 
               label="Language" 
               placeholder="Select your Language" 
-              value={["en"]} 
+              value={[]} 
               options={[{ id: 'en', label: 'English', value: 'en' },
                         { id: 'hi', label: 'Hindi', value: 'hi' }]} 
               onSelect={handleSelect} 
