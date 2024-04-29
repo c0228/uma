@@ -7,7 +7,7 @@ const Explore = (props)=>{
  return (<View style={ExploreStyle.pageView}>
  <HamburgerIcon {...props}/>      
  <ScrollView style={ExploreStyle.scrollView}>
- <Text>Explore Page</Text>
+ {/*<Text>Explore Page</Text>*/}
  <ExamTarget />
  </ScrollView>
  </View>);
