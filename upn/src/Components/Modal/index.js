@@ -34,6 +34,8 @@ const Modal = (props)=>{// { title, visible, onClose, fullScreen }
     modalContainer: {
       backgroundColor: 'white',
       borderRadius: 10,
+      marginTop:'10%',
+      marginBottom:'10%'
     },
     header: {
       paddingTop:10,
