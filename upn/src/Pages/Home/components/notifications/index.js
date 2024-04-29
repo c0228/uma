@@ -32,6 +32,7 @@ const Notifications = (props)=>{
       contentWidth={width}
       source={source}
     />
+    
     <Form name="forgotPwdForm" btnSubmit={{
               btnType:'primary',
               label:'Send Reset Password Link',

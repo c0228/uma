@@ -66,8 +66,8 @@ export const TabNavigation = ({ data })=>{
             return (<FontAwesome5 name={focused?(focusedIconName):(iconName)} size={24} color={color} />);
         }
       },
-      tabBarActiveTintColor: 'tomato',
-      tabBarInactiveTintColor: 'gray',
+      tabBarActiveTintColor: '#df0d55',
+      tabBarInactiveTintColor: '#ccc',
       tabBarStyle: { paddingTop:8 },
       tabBarLabelStyle: { fontSize: 13 },
       tabBarShowLabel: false

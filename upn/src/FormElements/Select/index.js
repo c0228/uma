@@ -21,7 +21,7 @@ export const Select = ({ name, label, placeholder, value, validation, options, o
     if (FormMode === FORM_RESET) {
       setSelectedOptions(initialValue);
     }
-    console.log("selectedOptions", selectedOptions);
+    // console.log("selectedOptions", selectedOptions);
   }, [FormMode]);
 
   useEffect(() => {
@@ -30,25 +30,28 @@ export const Select = ({ name, label, placeholder, value, validation, options, o
   }, [selectedOptions]);
 
   const toggleOption = (option) => {
-    console.log("toggleOption[Test]", option, multipleSelect);
-  if(multipleSelect){
+    // console.log("toggleOption[Test]", option, multipleSelect);
+    if(multipleSelect){
         // Check if the object exists in the array
-const index = selectedOptions.findIndex(item => item === option.value);
-const sOptions = [...selectedOptions];
-if (index !== -1) {
-  // Object exists, so remove it from the array
-  sOptions.splice(index, 1);
-  console.log("Object removed from array", selectedOptions);
-} else {
-  // Object doesn't exist, so add it to the array
-  sOptions.push(option?.value);
-  console.log("Object added to array", selectedOptions);
-}
-setSelectedOptions(sOptions);
-  } else {
-    setSelectedOptions([option?.value]);
-    toggleModal();
-  }
+        const index = selectedOptions.findIndex(item => item === option.value);
+        const sOptions = [...selectedOptions];
+        if (index !== -1) {
+          // Object exists, so remove it from the array
+          sOptions.splice(index, 1);
+          // console.log("Object removed from array", selectedOptions);
+        } else {
+          // Object doesn't exist, so add it to the array
+          sOptions.push(option?.value);
+          // console.log("Object added to array", selectedOptions);
+        }
+        setSelectedOptions(sOptions);
+    } else {
+      const index = selectedOptions.findIndex(item => item === option.value);
+      let val = [];
+      if (index === -1) { val=[option?.value]; }
+      setSelectedOptions(val);
+      toggleModal();
+    }
 
   };
 
@@ -60,11 +63,11 @@ setSelectedOptions(sOptions);
 
   const SelectValidate = async () => {
     // validation
-    console.log("SelectValidate ", selectedOptions);
+    // console.log("SelectValidate ", selectedOptions);
     let result = { value: selectedOptions };
     if (validation !== undefined) {
       result = await FormInputValidate(validation, selectedOptions);
-      console.log(result);
+      // console.log(result);
     }
     // form Data
     if (formName !== undefined && form?.[formName] !== undefined) {
@@ -89,12 +92,12 @@ setSelectedOptions(sOptions);
       {label && <Text style={labelStyles}>{label} :</Text>}
       <TouchableOpacity onPress={toggleModal}>
         <View style={[{ flexDirection:'row' }, textInputStyles]}>
-        <Text style={{ width:'90%', lineHeight:22 }}>
+        <Text style={{ width:'80%', lineHeight:22 }}>
           {(selectedOptions?.length>0)?
               (options?.filter(option =>selectedOptions.includes(option?.value)).map((res)=>res?.label).join(', ')):
               (placeholder)}
         </Text>
-        <AntDesign name="down" size={16} color="#ccc"  style={{ width:'10%', paddingTop:3, textAlign:'right'}} />
+        <AntDesign name="down" size={16} color="#ccc"  style={{ width:'20%', paddingTop:3, textAlign:'right'}} />
         </View>
       </TouchableOpacity>
       <Modal title={placeholder} visible={modalVisible} onClose={(isVisible) => setModalVisible(isVisible)}>
