@@ -102,8 +102,7 @@ const ExamTarget = () =>{
             } else if(examList?.length === 0) {
                 setAlertMessage("Please Select an Exam");
                 setModalVisible(true);
-            }
-            
+            } 
         }} />
     </View>
     {<AlertModal title="Alert Message" visible={modalVisible} onClose={(isVisible) => setModalVisible(isVisible)}>
