@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import DrawerContent from './content';
@@ -88,6 +88,7 @@ const bottomMenu = [{
 
 
 export const DrawerNavigation =()=> {
+
   return (
     <Drawer.Navigator initialRouteName="Home" 
       drawerContent={props=><DrawerContent drawerInfo={drawerInfo} bottomMenu={bottomMenu} {...props}/>}

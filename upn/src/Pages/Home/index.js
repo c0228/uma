@@ -27,34 +27,34 @@ function SettingsScreen() {
 const Tab = createBottomTabNavigator();
 
 const TabData = [{ 
-  id:'Home_Notifications', 
+  id:'MM_Home|Home_Notifications', 
   icon:{ name:"bell-o", type:"FontAwesome" }, 
   focusedIcon:{ name:"bell", type:"FontAwesome" }, 
   label: { name: "Notifications" }, 
   component: Notifications 
 },
 {  
-  id:'Home_Explore', 
+  id:'MM_Home|Home_Explore', 
   icon:{ name:"explore", type:"MaterialIcons" }, 
   focusedIcon:{ name:"explore", type:"MaterialIcons" }, 
   label: { name: "Explore" }, 
   component: Explore  },
 {  
-  id:'Home_MyLearnings', 
+  id:'MM_Home|Home_MyLearnings', 
   icon:{ name:"journal-whills", type:""}, 
   focusedIcon:{ name:"book-open", type:"" }, 
   label: { name: "My Learnings" }, 
   component: MyLearnings 
 },
 {  
-  id:'Home_MyProgess', 
+  id:'MM_Home|Home_MyProgess', 
   icon:{ name:"award", type:"FontAwesome5" }, 
   focusedIcon:{ name:"award", type:"FontAwesome5" }, 
   label: { name: "My Progress" }, 
   component: MyProgress 
 },
 {  
-  id:'Home_DiscussionForum', 
+  id:'MM_Home|Home_DiscussionForum', 
   icon:{ name:"comment-o", type:"FontAwesome" }, 
   focusedIcon:{ name:"comments-o", type:"FontAwesome" }, 
   label: { name: "Discussion Forum" }, 

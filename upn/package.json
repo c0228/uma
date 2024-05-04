@@ -10,8 +10,10 @@
     "test": "jest"
   },
   "dependencies": {
+    "@notifee/react-native": "^7.8.2",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-firebase/app": "^19.2.2",
+    "@react-native-firebase/messaging": "^19.2.2",
     "@react-native-picker/picker": "^2.7.5",
     "@react-navigation/bottom-tabs": "^6.5.14",
     "@react-navigation/drawer": "^6.6.9",
@@ -19,6 +21,7 @@
     "@react-navigation/stack": "^6.3.23",
     "axios": "^1.6.8",
     "e-ui-react-native": "file:.yalc/e-ui-react-native",
+    "firebase-admin": "^12.1.0",
     "react": "18.2.0",
     "react-native": "0.73.5",
     "react-native-gesture-handler": "^2.15.0",

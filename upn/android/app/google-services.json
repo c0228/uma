@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "352692349545",
+    "project_id": "uprepnet",
+    "storage_bucket": "uprepnet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352692349545:android:bf9db622bcf74b97cc50f8",
+        "android_client_info": {
+          "package_name": "com.upn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwWlJk0HnggimMTqP4LU6KeaMNcLySZ4c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
