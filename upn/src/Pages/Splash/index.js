@@ -1,93 +1,40 @@
-import React, { useState, useEffect } from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
-import { Select } from '@AppFormElement/Select/index.js';
-import { Button } from '@AppFormElement/Button/index.js';
-import Intro from './components/intro/index.js';
-import Notify from './components/notify/index.js';
+import React, { useState } from 'react';
+import { View, Text } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Header from './utils/Header.js';
 import { dialogue } from './static-data/dialogue.js';
-/*
- blue - #31338f
- voilet - #890e2a
- indigo - #4a3a02
- green - #115300
-*/
 
 const bgs = {
     "blue": "#31338f",
     "voilet": "#890e2a",
     "indigo": "#4a3a02",
     "green": "#115300"
-}
+};
 
-const Splash = (props) =>{
- const [display, setDisplay] = useState('introduction');
- const [color, setColor] = useState('voilet');
- const [lang, setLang] = useState(['en']);
- const [imageUrl, setImgUrl] = useState();
+const Stack = createStackNavigator();
 
- const loadImage = async () => {  
-    let imageModule;
-    if(color==='voilet'){ imageModule = await require('@Assets/img/logo-voilet.png'); }
-    if(color==='indigo'){ imageModule = await require('@Assets/img/logo-indigo.png'); }
-    if(color==='blue'){ imageModule = await require('@Assets/img/logo-blue.png'); }
-    if(color==='green'){ imageModule = await require('@Assets/img/logo-green.png'); }
-    setImgUrl(imageModule);
-  };
-
- useEffect(() => {
-    loadImage();
-  }, [color]);
-
- const handleSelect = (option) =>{
-    console.log("handleSelect", option);
-    setLang(option);
- };
-
- const handleIntroduction = ()=>{
-    setColor('indigo');
-    setDisplay('notification');
- };
-
- const handleNotification = () =>{
-    setColor('blue');
-    setDisplay('storage');
- };
-
- return (
- <View style={[styles.view,{ backgroundColor: bgs[color] }]}>
-    
-    {imageUrl && (<View style={styles.titleView}>
-        <Text style={styles.title}>{dialogue?.["d1"]?.[lang]}</Text>
-        <Image style={styles.img} source={imageUrl} />
-    </View>)}
-    
-    <View style={styles.langView}>
-    <View style={styles.langPartition1}></View>
-    <View style={styles.langPartition2}>
-    <Select name="language" 
-        style={{ backgroundColor:'white' }}
-              placeholder="Language" 
-              popupTitle="Choose your Language"
-              value={lang} 
-              options={[{ id: 'en', label: 'English', value: 'en' },
-                        { id: 'hi', label: 'हिन्दी', value: 'hi' }]} 
-              onSelect={handleSelect} />
-    </View>
-    </View>
-   
-    {display==='introduction' && (<Intro lang={lang} dialogue={dialogue} handleIntroduction={handleIntroduction} />)}
-    {display==='notification' && (<Notify lang={lang} dialogue={dialogue} handleIntroduction={handleNotification} />)}
+const Home = ({ route }) =>{
+ const [lang, setLang] = useState(['en']); 
+ const navigation = useNavigation(); 
+ const { paramName } = route?.params || {};
+ return (<View style={{ flex:1, backgroundColor: bgs?.['voilet']}}>
+    <Header title={dialogue?.["d1"]?.[lang]} color="voilet" lang={lang} handleSelect={(option)=>setLang(option)}/>
+    <Text onPress={() => navigation.goBack()}>Back</Text>
+    <Text>Hello World, {paramName}</Text>
+    <Text  onPress={() => navigation.navigate('SS_Notifications',{ paramName:'value for Screen2' })}>Next</Text>
  </View>);
 };
 
-const styles = StyleSheet.create({
- view:{ flex:1, paddingTop: 8 },
- titleView:{ alignItems:'center', paddingTop:10, paddingBottom:20 },
- title:{ color:'#ffffc6', fontWeight:'bold', paddingBottom:15 },
- img:{  width:190, height:20 },
- langView:{ flexDirection:'row', paddingLeft:20, paddingRight:20 },
- langPartition1:{ width:'65%' },
- langPartition2:{ width:'35%' }
-});
+const Splash = () =>{
+ return (<NavigationContainer>
+ <Stack.Navigator>
+    <Stack.Screen name="SS_Introduction" component={Home}  options={{ headerShown: false }} />
+    <Stack.Screen name="SS_Notifications" component={Home}  options={{ headerShown: false }} />
+    <Stack.Screen name="SS_Storage" component={Home}  options={{ headerShown: false }} />
+    <Stack.Screen name="SS_Authentication" component={Home} options={{ headerShown: false }} />
+  </Stack.Navigator>
+  </NavigationContainer>);
+};
 
 export default Splash;
