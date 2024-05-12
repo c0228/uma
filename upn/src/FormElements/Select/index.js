@@ -6,7 +6,7 @@ import { FormInputValidate } from './../../Utils/Validations.js';
 import { FormStyles } from './../form-styles.js';
 import Modal from '@AppComponent/Modal/index.js';
 
-export const Select = ({ name, label, placeholder, value, validation, options, onSelect, multipleSelect, style }) => {
+export const Select = ({ name, label, placeholder, popupTitle, value, validation, options, onSelect, multipleSelect, style }) => {
   const formContext = getForm();
   const formName = formContext?.name;
   const form = formContext?.form;
@@ -100,7 +100,7 @@ export const Select = ({ name, label, placeholder, value, validation, options, o
         <AntDesign name="down" size={16} color="#ccc"  style={{ width:'20%', paddingTop:3, textAlign:'right'}} />
         </View>
       </TouchableOpacity>
-      <Modal title={placeholder} visible={modalVisible} onClose={(isVisible) => setModalVisible(isVisible)}>
+      <Modal title={popupTitle} visible={modalVisible} onClose={(isVisible) => setModalVisible(isVisible)}>
         <ScrollView style={{ paddingLeft:10, marginBottom:5 }}>
           {options?.map((option, index)=>{
             return (<View key={index} style={{ flexDirection:'row', paddingBottom:5 }}>

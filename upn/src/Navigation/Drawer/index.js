@@ -11,7 +11,7 @@ import PrevQP from '@AppPage/PrevQP/index.js';
 import MyProfile from '@AppPage/MyProfile/index.js';
 import Settings from '@AppPage/Settings/index.js';
 import StudyTT from '@AppPage/StudyTT/index.js';
-import Logo from "@Assets/img/logo.png";
+import Logo from "@Assets/img/logo-default.png";
 
 const Drawer = createDrawerNavigator();
 

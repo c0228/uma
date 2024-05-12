@@ -7,7 +7,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import 'react-native-gesture-handler';
 import { DrawerNavigation } from 'src/Navigation/Drawer/index.js';
 import NotificationHandler from '@AppComponent/NotificationHandler/index.js';
-
+import SplashScreen from '@AppPage/Splash/index.js';
 // Temporary Fix: Ignore warnings containing the word "defaultProps"
 LogBox.ignoreLogs([/defaultProps/]);
 
@@ -30,12 +30,14 @@ const App = ()=>{
     
   });
 
+  return (<SplashScreen />);
+  /*
   return (
     <NavigationContainer>
       <DrawerNavigation />
       <NotificationHandler />
     </NavigationContainer>
-  );
+  ); */
 };
 
 export default App;
