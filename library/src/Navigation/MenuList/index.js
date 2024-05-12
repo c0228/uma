@@ -13,7 +13,7 @@ export const MenuList = (props)=>{
             return (<View  key={index} style={{ flexDirection:'row' }}>
                 <TouchableOpacity onPress={()=>{
                     console.log("Selected: ", item?.id);
-                    props.navigation.navigate(item?.id);
+                    props?.navigation?.navigate(item?.id);
                 }}>
                     <View style={MenuListStyle.menuItem}>
                     <Icon type={item?.icon?.type} 
