@@ -5,25 +5,22 @@ const Language = ({ value, handleSelect }) =>{
  const options = [{ id: 'en', placeholder:'A', label: 'English', value: 'en' },
                 { id: 'hi', placeholder:'अ', label: 'हिन्दी', value: 'hi' }];
  const [modalVisible, setModalVisible] = useState(false);
- const initialValue = Array.isArray(value) ? value : [];
+ const initialValue = (value?.length>0) ? value : '';
  const [selectedOptions, setSelectedOptions] = useState(initialValue);
  const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
  const toggleOption = (option) => {
-  const index = selectedOptions.findIndex(item => item === option.value);
-  let val = [];
-  if (index === -1) { val=[option?.value]; }
-  setSelectedOptions(val);
+  setSelectedOptions(option.value);
   toggleModal();
-  handleSelect(val[0]);
+  handleSelect(option.value);
 };
 
  return (<View>
     <TouchableOpacity onPress={toggleModal}>
         <Text style={{ textAlign:'center', fontSize:18, color:'#fff', fontWeight:'bold', 
         width:35, height:35, borderWidth:1, borderRadius:6, borderColor:'#fff', padding:5 }}>
-            {options?.filter((opt)=>opt?.value===selectedOptions?.[0])?.[0]?.placeholder}
+            {options?.filter((opt)=>opt?.value===selectedOptions)?.[0]?.placeholder}
         </Text>
     </TouchableOpacity>
     <Modal title="Select Preferred Language" visible={modalVisible} onClose={(isVisible) => setModalVisible(isVisible)}>
@@ -31,7 +28,7 @@ const Language = ({ value, handleSelect }) =>{
           {options?.map((option, index)=>{
             return (<View key={index} style={{ flexDirection:'row', paddingBottom:5 }}>
               <Switch
-                      value={selectedOptions.some((selected) => selected === option.value)}
+                      value={selectedOptions === option.value}
                       onValueChange={() => toggleOption(option)} />
               <Text style={{ flex:1, fontSize: 15, lineHeight:22 }} onPress={()=>toggleOption(option)}>{option?.label}</Text>
             </View>);

@@ -4,6 +4,8 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Header from './utils/Header.js';
 import Language from './utils/Language.js';
+import Introduction from './components/intro/index.js';
+import Notify from './components/notify/index.js';
 import { dialogue } from './static-data/dialogue.js';
 
 const bgs = {
@@ -33,8 +35,8 @@ const Home = ({ route }) =>{
 const Splash = () =>{
  return (<NavigationContainer>
  <Stack.Navigator>
-    <Stack.Screen name="SS_Introduction" component={Home}  options={{ headerShown: false }} />
-    <Stack.Screen name="SS_Notifications" component={Home}  options={{ headerShown: false }} />
+    <Stack.Screen name="SS_Introduction" component={Introduction}  options={{ headerShown: false }} />
+    <Stack.Screen name="SS_Notifications" component={Notify}  options={{ headerShown: false }} />
     <Stack.Screen name="SS_Storage" component={Home}  options={{ headerShown: false }} />
     <Stack.Screen name="SS_Authentication" component={Home} options={{ headerShown: false }} />
   </Stack.Navigator>

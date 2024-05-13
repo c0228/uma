@@ -1,3 +1,10 @@
+export const bgs = {
+    "blue": "#31338f",
+    "voilet": "#890e2a",
+    "indigo": "#4a3a02",
+    "green": "#115300"
+};
+
 export const dialogue= {
     "d1":{
         "en":"A Warm Welcome to",
@@ -29,18 +36,22 @@ export const dialogue= {
     },
     "d8":{
         "en":"Stay On Track with us !!",
-        "hi":""
+        "hi":"हमारे साथ ट्रैक पर रहें !!"
     },
     "d9":{
         "en":"Enable notifications to stay updated and supercharge on your study plan!",
-        "hi":""
+        "hi":"अधिसूचनाएँ सक्रिय करें और अपनी अध्ययन योजना पर अपडेट रहें और उसे तेजी से बढ़ाएं"
     },
     "d10":{
         "en":"Our app will keep you on track by sending timely reminders and alerts based on your customized and personalized timetable, ensuring you never miss a study session.",
-        "hi":""
+        "hi":"हमारा ऐप आपको आपकी अनुकूलित और व्यक्तिगत समयसारणी पर आधारित समय पर यादें और चेतावनियाँ भेजकर आपको ट्रैक पर रखेगा, जिससे आपको कभी भी अध्ययन सत्र छूने का खतरा न रहे।"
     },
     "d11":{
         "en":"Enable Notifications",
-        "hi":""
+        "hi":"अधिसूचनाएँ सक्रिय करें"
+    },
+    "d12":{
+        "en":"Back",
+        "hi":"पीछे"
     }
  };

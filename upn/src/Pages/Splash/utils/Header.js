@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { Select } from '@AppFormElement/Select/index.js';
 
 const Header = (props) =>{
  const [imageUrl, setImgUrl] = useState();
@@ -27,7 +26,7 @@ const Header = (props) =>{
 };
 
 const styles= StyleSheet.create({
- titleView:{ alignItems:'center', paddingTop:10, paddingBottom:20 },
+ titleView:{ alignItems:'center', paddingTop:35, paddingBottom:20 },
  title:{ color:'#ffffc6', fontWeight:'bold', paddingBottom:15 },
  img:{  width:190, height:20 }
 });

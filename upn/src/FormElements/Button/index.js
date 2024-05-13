@@ -1,11 +1,14 @@
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const convertToKebabCase = (str) =>{
   return str.replace(/-([a-z])/g, (match, char) => char.toUpperCase());
 };
 
-export const Button =  ({ type, label, size, onPress, style }) => {
+export const Button =  ({ type, icon, label, size, onPress, style }) => {
   const fontSize = (size===undefined)?14:size;
   const typ = convertToKebabCase(type);
   const data= {
@@ -27,8 +30,15 @@ export const Button =  ({ type, label, size, onPress, style }) => {
     outlineLight:{ bgColor:'none', borderColor:'#f8f9fa', color:'#f8f9fa' }
   };
     return (
-      <TouchableOpacity style={[styles.buttonContainer, { backgroundColor: data?.[typ]?.bgColor, borderWidth:1, borderColor: data?.[typ]?.borderColor }, style]} onPress={onPress}>
+      <TouchableOpacity style={[styles.buttonContainer, { backgroundColor: data?.[typ]?.bgColor, borderWidth:1, 
+        borderColor: data?.[typ]?.borderColor }, style]} onPress={onPress}>
+          <View style={{ flexDirection:'row' }}>
+        {(icon?.type==='FontAwesome5') && (<FontAwesome5 name={icon?.label} size={(icon?.size)?(icon?.size):12} color="#fff" style={icon?.style} />)}
+        {(icon?.type==='Fontisto') && (<Fontisto name={icon?.label} size={(icon?.size)?(icon?.size):12} color="#fff" style={icon?.style} />)}
+        {(icon?.type==='MaterialCommunityIcons') && (<MaterialCommunityIcons name={icon?.label} size={(icon?.size)?(icon?.size):12} color="#fff" style={icon?.style} />)}
+        
         <Text style={[styles.button, { fontSize: fontSize, color: data?.[typ]?.color }]}>{label}</Text>
+        </View>
       </TouchableOpacity>
     );
 };
