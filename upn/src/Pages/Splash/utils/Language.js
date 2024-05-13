@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, TouchableOpacity, ScrollView, Switch } from 'react-native';
 
 const Language = ({ value, handleSelect }) =>{
  const options = [{ id: 'en', placeholder:'A', label: 'English', value: 'en' },
                 { id: 'hi', placeholder:'अ', label: 'हिन्दी', value: 'hi' }];
  const [modalVisible, setModalVisible] = useState(false);
- const initialValue = (value?.length>0) ? value : '';
- const [selectedOptions, setSelectedOptions] = useState(initialValue);
+ const [selectedOptions, setSelectedOptions] = useState();
  const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
@@ -15,12 +14,14 @@ const Language = ({ value, handleSelect }) =>{
   toggleModal();
   handleSelect(option.value);
 };
-
+useEffect(()=>{
+  setSelectedOptions( (value?.length>0) ? value : '' );
+},[value]);
  return (<View>
     <TouchableOpacity onPress={toggleModal}>
         <Text style={{ textAlign:'center', fontSize:18, color:'#fff', fontWeight:'bold', 
         width:35, height:35, borderWidth:1, borderRadius:6, borderColor:'#fff', padding:5 }}>
-            {options?.filter((opt)=>opt?.value===selectedOptions)?.[0]?.placeholder}
+            {selectedOptions && options?.filter((opt)=>opt?.value===selectedOptions)?.[0]?.placeholder}
         </Text>
     </TouchableOpacity>
     <Modal title="Select Preferred Language" visible={modalVisible} onClose={(isVisible) => setModalVisible(isVisible)}>
