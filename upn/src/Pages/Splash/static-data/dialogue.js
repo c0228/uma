@@ -53,5 +53,25 @@ export const dialogue= {
     "d12":{
         "en":"Back",
         "hi":"पीछे"
+    },
+    "d13":{
+        "en":"Unlock Access to Your Study Materials",
+        "hi":"अपने अध्ययन सामग्री तक पहुँच खोलें"
+    },
+    "d14":{
+        "en":"To enhance your learning experience, we needs permission to store study materials on your device securely.",
+        "hi":"आपके शिक्षा अनुभव को और अधिक बेहतर बनाने के लिए, हमें आपके डिवाइस पर अध्ययन सामग्री को सुरक्षित रूप से संग्रहित करने के लिए अनुमति की आवश्यकता है।"
+    },
+    "d15":{
+        "en":"Rest assured, we prioritize your data security and privacy. Your study materials will be encrypted and stored locally on your device, inaccessible to anyone else.",
+        "hi":"आप निश्चित रहें, हम आपकी डेटा सुरक्षा और गोपनीयता को प्राथमिकता देते हैं। आपकी अध्ययन सामग्री को एन्क्रिप्ट किया जाएगा और आपके डिवाइस पर स्थानीय रूप से संग्रहित किया जाएगा, किसी अन्य को पहुंच नहीं मिलेगी।"
+    },
+    "d16":{
+        "en":"Granting permission allows you to access your materials anytime, anywhere, with peace of mind.",
+        "hi":"अनुमति प्रदान करने से आपको अपनी सामग्री को कहीं भी, कभी भी शांति के साथ पहुंचने की सुविधा मिलती है।"
+    },
+    "d17":{
+        "en":"Grant Storage Access",
+        "hi":"संग्रह एक्सेस की अनुमति दें।"
     }
  };

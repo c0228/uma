@@ -1,6 +1,7 @@
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -33,8 +34,9 @@ export const Button =  ({ type, icon, label, size, onPress, style }) => {
       <TouchableOpacity style={[styles.buttonContainer, { backgroundColor: data?.[typ]?.bgColor, borderWidth:1, 
         borderColor: data?.[typ]?.borderColor }, style]} onPress={onPress}>
           <View style={{ flexDirection:'row' }}>
-        {(icon?.type==='FontAwesome5') && (<FontAwesome5 name={icon?.label} size={(icon?.size)?(icon?.size):12} color="#fff" style={icon?.style} />)}
-        {(icon?.type==='Fontisto') && (<Fontisto name={icon?.label} size={(icon?.size)?(icon?.size):12} color="#fff" style={icon?.style} />)}
+        {(icon?.type==='FontAwesome5') && (<FontAwesome5 name={icon?.label} size={(icon?.size)?(icon?.size):12} color="#000" style={icon?.style} />)}
+        {(icon?.type==='FontAwesome6') && (<FontAwesome6 name={icon?.label} size={(icon?.size)?(icon?.size):12} color="#000" style={icon?.style} />)}
+        {(icon?.type==='Fontisto') && (<Fontisto name={icon?.label} size={(icon?.size)?(icon?.size):12} color="#000" style={icon?.style} />)}
         {(icon?.type==='MaterialCommunityIcons') && (<MaterialCommunityIcons name={icon?.label} size={(icon?.size)?(icon?.size):12} color="#fff" style={icon?.style} />)}
         
         <Text style={[styles.button, { fontSize: fontSize, color: data?.[typ]?.color }]}>{label}</Text>

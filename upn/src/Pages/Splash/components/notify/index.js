@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -10,10 +10,17 @@ import { Button } from '@AppFormElement/Button/index.js';
 const Notify = ({ route }) =>{
  const [lang, setLang] = useState(route?.params?.language || 'en');
  const navigation = useNavigation();
+ 
+ useEffect(()=>{
+   if(route?.params?.language){ 
+     setLang( route?.params?.language );
+   }
+ },[route?.params]);
+ 
  const BackButton = () =>{
   return (
   <View style={{  position:'absolute', marginLeft:10, marginTop:18 }}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity onPress={() => navigation?.navigate('SS_Introduction', { language: lang })}>
             <View style={{ flexDirection:'row', padding:8, borderWidth:1, borderColor:'#fff', borderRadius:8 }} >
                 <FontAwesome5 name="arrow-left" size={12} color="#fff" style={{ marginTop:2,marginRight:5 }} />
                 <Text style={{ color:'#fff', fontSize: 13, fontWeight:'bold' }}>{dialogue?.["d12"]?.[lang]}</Text>  
@@ -22,7 +29,7 @@ const Notify = ({ route }) =>{
   </View>);
  };
  const handleNotification = () =>{
-    navigation.navigate('SS_Storage',{ paramName:'value for Screen2' });
+    navigation.navigate('SS_Storage',{ language: lang });
  };
  const SplashButton = ()=>{
     return (<View style={{ flex:1, justifyContent:'flex-end', alignItems:'center' }}>

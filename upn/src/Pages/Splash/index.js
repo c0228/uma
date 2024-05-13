@@ -6,6 +6,7 @@ import Header from './utils/Header.js';
 import Language from './utils/Language.js';
 import Introduction from './components/intro/index.js';
 import Notify from './components/notify/index.js';
+import Storage from './components/store/index.js';
 import { dialogue } from './static-data/dialogue.js';
 
 const bgs = {
@@ -37,7 +38,7 @@ const Splash = () =>{
  <Stack.Navigator>
     <Stack.Screen name="SS_Introduction" component={Introduction}  options={{ headerShown: false }} />
     <Stack.Screen name="SS_Notifications" component={Notify}  options={{ headerShown: false }} />
-    <Stack.Screen name="SS_Storage" component={Home}  options={{ headerShown: false }} />
+    <Stack.Screen name="SS_Storage" component={Storage}  options={{ headerShown: false }} />
     <Stack.Screen name="SS_Authentication" component={Home} options={{ headerShown: false }} />
   </Stack.Navigator>
   </NavigationContainer>);

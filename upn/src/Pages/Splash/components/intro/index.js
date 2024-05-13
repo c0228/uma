@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import Header from './../../utils/Header.js';
@@ -6,9 +6,20 @@ import Language from './../../utils/Language.js';
 import { bgs, dialogue } from './../../static-data/dialogue.js';
 import { Button } from '@AppFormElement/Button/index.js';
 
-const Introduction = () =>{
+const Introduction = ({ route }) =>{
  const [lang, setLang] = useState('en'); 
  const navigation = useNavigation(); 
+
+ useEffect(()=>{
+  console.log("useEffect [lang]", lang);
+ },[lang]);
+
+ useEffect(()=>{
+  if(route?.params?.language){ 
+    setLang( route?.params?.language );
+  }
+},[route?.params]);
+
  const BulletPoint = ({ text }) =>{
     return (<View style={{ paddingBottom:10, paddingLeft:20, paddingRight:20, flexDirection:'row'}}>
           <View style={{ width:'5%'}}>
