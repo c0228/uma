@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Header from './utils/Header.js';
+import Language from './utils/Language.js';
 import { dialogue } from './static-data/dialogue.js';
 
 const bgs = {
@@ -15,11 +16,14 @@ const bgs = {
 const Stack = createStackNavigator();
 
 const Home = ({ route }) =>{
- const [lang, setLang] = useState(route?.params?.lang || ['en']); 
+ // const [lang, setLang] = useState(route?.params?.lang || ['en']); 
+ const [lang, setLang] = useState(['en']); 
  const navigation = useNavigation(); 
- // const { paramName } = route?.params || {};
  return (<View style={{ flex:1, backgroundColor: bgs?.['voilet']}}>
-    <Header title={dialogue?.["d1"]?.[lang]} color="voilet" lang={lang} handleSelect={(option)=>setLang(option)}/>
+    <View style={{ position:'absolute', right:15, top:15 }}>
+      <Language value={lang} handleSelect={(option)=>setLang(option)} />
+    </View>
+    <Header title={dialogue?.["d1"]?.[lang]} color="voilet" lang={lang} />
     <Text onPress={() => navigation.goBack()}>Back</Text>
    {/* <Text>Hello World, {paramName}</Text> */}
     <Text  onPress={() => navigation.navigate('SS_Notifications',{ paramName:'value for Screen2' })}>Next</Text>

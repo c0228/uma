@@ -22,19 +22,6 @@ const Header = (props) =>{
         <Text style={styles.title}>{props?.title}</Text>
         <Image style={styles.img} source={imageUrl} />
     </View>)}
-    <View style={styles.langView}>
-    <View style={styles.langPartition1}></View>
-    <View style={styles.langPartition2}>
-    <Select name="language" 
-        style={{ backgroundColor:'white' }}
-              placeholder="Language" 
-              popupTitle="Choose your Language"
-              value={props?.lang} 
-              options={[{ id: 'en', label: 'English', value: 'en' },
-                        { id: 'hi', label: 'हिन्दी', value: 'hi' }]} 
-              onSelect={props?.handleSelect} />
-    </View>
-    </View>
 
  </View>);
 };
@@ -42,10 +29,7 @@ const Header = (props) =>{
 const styles= StyleSheet.create({
  titleView:{ alignItems:'center', paddingTop:10, paddingBottom:20 },
  title:{ color:'#ffffc6', fontWeight:'bold', paddingBottom:15 },
- img:{  width:190, height:20 },
- langView:{ flexDirection:'row', paddingLeft:20, paddingRight:20 },
- langPartition1:{ width:'65%' },
- langPartition2:{ width:'35%' }
+ img:{  width:190, height:20 }
 });
 
 export default Header;

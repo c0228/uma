@@ -5,6 +5,8 @@ export const HelloWorld = ()=>{
  return (<View><Text>Hello World</Text></View>);
 };
 
+export { ContextProvider, getAppContext } from './src/AdvancedTopics/ReactContext/index.js';
+
 export { Icon } from './src/Components/Icon/index.js';
 export { Order, Li } from './src/Components/Order/index.js';
 export { Select } from './src/Components/Select/index.js';
