@@ -9,7 +9,8 @@ module.exports = {
         '@AppFormElement': './src/FormElements',
         '@AppNavigation': './src/Navigation',
         '@AppPage': './src/Pages',
-        '@StaticData':'./src/StaticData'
+        '@StaticData':'./src/StaticData',
+        '@AppUtils':'./src/Utils'
       },
     }],
     "react-native-reanimated/plugin",

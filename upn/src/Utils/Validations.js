@@ -1,6 +1,6 @@
 import { RemoveItemsFromArray } from './ArrayManagement.js';
-
-const axios = require('axios');
+import axios from 'axios';
+// const axios = require('axios');
 
 export const FormToReqBodyFormatter = (form) =>{
   const requestBody = {};

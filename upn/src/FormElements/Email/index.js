@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Text, TextInput, StyleSheet } from "react-native";
 import { getForm, FORM_SUBMITTED, FORM_RESET } from './../Form/index.js';
-import { FormInputValidate } from './../../Utils/Validations.js';
+import { FormInputValidate } from '@AppUtils/Validations.js';
 import { FormStyles } from './../form-styles.js';
 
 export const Email =({ name, value, validation, disabled })=>{
