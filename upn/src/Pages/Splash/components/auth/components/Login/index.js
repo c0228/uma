@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { Email } from '@AppFormElement/Email/index.js';
 import { Password } from '@AppFormElement/Password/components/pwd.js';
 import { Form } from '@AppFormElement/Form/index.js';
@@ -51,11 +51,16 @@ const Login = () =>{
           onSubmit={(form, isValidForm)=>{
             console.log("Form Result:", form);
           }}>
-      <View style={{ marginTop:15 }}>
+      <View style={{ marginTop:5 }}>
           <EmailAddress />
       </View>
       <View style={{ marginTop:15, marginBottom:15 }}>
           <RegPwd />
+      </View>
+      <View style={{ alignItems:'flex-end', marginBottom:15 }}>
+        <TouchableOpacity>
+            <Text style={{ textDecorationLine:'underline', textDecorationColor:'#007bff', color:'#007bff' }}>Forgot Password?</Text>
+        </TouchableOpacity>
       </View>
    </Form>
   </View>);

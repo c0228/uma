@@ -68,9 +68,6 @@ const Register = () =>{
             onSubmit={(form, isValidForm)=>{
               console.log("Form Result:", form);
             }}>
-        <View>
-            <Comment />
-        </View>
         <View style={{ marginTop:5 }}>
             <SurName />
         </View>
