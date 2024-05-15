@@ -12,6 +12,7 @@ const convertToKebabCase = (str) =>{
 export const Button =  ({ type, icon, label, size, onPress, style }) => {
   const fontSize = (size===undefined)?14:size;
   const typ = convertToKebabCase(type);
+  console.log("typ [Button]", typ);
   const data= {
     primary:{ bgColor:'#007bff', borderColor:'#007bff', color:'#fff' },
     secondary:{ bgColor:'#6c757d', borderColor:'#6c757d', color:'#fff' },
@@ -21,14 +22,14 @@ export const Button =  ({ type, icon, label, size, onPress, style }) => {
     info:{ bgColor:'#0dcaf0', borderColor:'#0dcaf0', color:'#fefefe' },
     dark:{ bgColor:'#212529', borderColor:'#212529', color:'#fff' },
     light:{ bgColor:'#f8f9fa', borderColor:'#f8f9fa', color:'#000' },
-    outlinePrimary:{ bgColor:'none', borderColor:'#007bff', color:'#007bff' },
-    outlineSecondary:{ bgColor:'none', borderColor:'#6c757d', color:'#6c757d' },
-    outlineSuccess:{ bgColor:'none', borderColor:'#198754', color:'#198754' },
-    outlineDanger:{ bgColor:'none', borderColor:'#dc3545', color:'#dc3545' },
-    outlineWarning:{ bgColor:'none', borderColor:'#ffc107', color:'#ffc107' },
-    outlineInfo:{ bgColor:'none', borderColor:'#0dcaf0', color:'#0dcaf0' },
-    outlineDark:{ bgColor:'none', borderColor:'#212529', color:'#212529' },
-    outlineLight:{ bgColor:'none', borderColor:'#f8f9fa', color:'#f8f9fa' }
+    outlinePrimary:{ bgColor:'transparent', borderColor:'#007bff', color:'#007bff' },
+    outlineSecondary:{ bgColor:'transparent', borderColor:'#6c757d', color:'#6c757d' },
+    outlineSuccess:{ bgColor:'transparent', borderColor:'#198754', color:'#198754' },
+    outlineDanger:{ bgColor:'transparent', borderColor:'#dc3545', color:'#dc3545' },
+    outlineWarning:{ bgColor:'transparent', borderColor:'#ffc107', color:'#ffc107' },
+    outlineInfo:{ bgColor:'transparent', borderColor:'#0dcaf0', color:'#0dcaf0' },
+    outlineDark:{ bgColor:'transparent', borderColor:'#212529', color:'#212529' },
+    outlineLight:{ bgColor:'transparent', borderColor:'#f8f9fa', color:'#f8f9fa' }
   };
     return (
       <TouchableOpacity style={[styles.buttonContainer, { backgroundColor: data?.[typ]?.bgColor, borderWidth:1, 

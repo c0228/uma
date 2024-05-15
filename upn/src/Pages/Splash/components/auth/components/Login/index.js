@@ -1,10 +1,13 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Email } from '@AppFormElement/Email/index.js';
 import { Password } from '@AppFormElement/Password/components/pwd.js';
 import { Form } from '@AppFormElement/Form/index.js';
 
+
 const Login = () =>{
+  const navigation = useNavigation();
   const EmailAddress = () =>{
       return ( <Email name="email" 
           validation={{
@@ -50,6 +53,7 @@ const Login = () =>{
           }} 
           onSubmit={(form, isValidForm)=>{
             console.log("Form Result:", form);
+            navigation.navigate('SS_ExamTarget',{ });
           }}>
       <View style={{ marginTop:5 }}>
           <EmailAddress />

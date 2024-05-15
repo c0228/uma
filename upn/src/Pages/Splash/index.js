@@ -5,6 +5,7 @@ import Introduction from './components/intro/index.js';
 import Notify from './components/notify/index.js';
 import Storage from './components/store/index.js';
 import Auth from './components/auth/index.js';
+import ExamTarget from './components/exam-target/index.js';
 
 const bgs = {
     "blue": "#31338f",
@@ -22,6 +23,7 @@ const Splash = () =>{
     <Stack.Screen name="SS_Notifications" component={Notify}  options={{ headerShown: false }} />
     <Stack.Screen name="SS_Storage" component={Storage}  options={{ headerShown: false }} />
     <Stack.Screen name="SS_Authentication" component={Auth} options={{ headerShown: false }} />
+    <Stack.Screen name="SS_ExamTarget" component={ExamTarget} options={{ headerShown: false }} />
   </Stack.Navigator>
   </NavigationContainer>);
 };

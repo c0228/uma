@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { View, ScrollView, Text, Switch, TouchableOpacity, StyleSheet } from "react-native";
+import { View, ScrollView, Text, Switch, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { useNavigation } from '@react-navigation/native';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { Button } from '@AppFormElement/Button/index.js';
 import { Select } from '@AppFormElement/Select/index.js';
 import AlertModal from '@AppComponent/AlertModal/index.js';
+import Logo from '@Assets/img/logo-default.png';
+import { dialogue } from './../../static-data/dialogue.js';
 
 const ExamTarget = () =>{
+ const navigation = useNavigation();
  const exams= ['Civil Service Examination (CSE)','Indian Forest Service Examination (IFoSE)','Engineering Services Examination (ESE)',
     'Combined Defence Services (CDS) Examination', 'National Defence Academy (NDA) Examination','Indian Economic Service (IES) Examination',
     'Indian Statistical Service (ISS) Examination','Combined Medical Services (CMS) Examination','Naval Academy (NA) Examination',
@@ -47,9 +52,16 @@ const ExamTarget = () =>{
 
  const [modalVisible, setModalVisible] = useState(false);
 
- return (<ScrollView style={{ paddingLeft:5, paddingRight:5 }}>
+ return (
+    <View style={{ flex:1, backgroundColor:'#fff' }}>
+    <View style={{ padding:20, alignItems:'center' }}>
+       <Image style={{ width:160, height:18, marginLeft:8, marginTop:3 }} source={Logo} />
+    </View>
+    <View>
     <Text style={ExamTargetStyle.mainTitle}>Choose your Targeted Exams</Text>
     <Text style={ExamTargetStyle.examTargetDesc}>Specify the Examinations that you are planning to pursue in the Upcoming Years -</Text>
+    </View>
+ <ScrollView style={{ paddingLeft:5, paddingRight:5 }}>
     {exams?.map((exam,index)=>{
         const isSelected = examList?.some((selected) => selected?.exam === exam);
         return (<View key={index}>
@@ -91,32 +103,51 @@ const ExamTarget = () =>{
             </View>
             </View>);
     })}
-    <View style={{ marginBottom: 20 }}>
-        <Button type="primary" label="Next" size={14} onPress={()=>{
-            const undefinedList = examList?.filter(exam => exam?.year === undefined).map((list)=>list?.exam);
-            console.log("undefinedList", undefinedList);
-            if(undefinedList?.length>0){
-                setAlertMessage("You have not specified \"Expected Year\" for "+undefinedList.join(", ")+
-                    ". Please mention it, so that App plans your \"Study Timetable\".");
-                setModalVisible(true);
-            } else if(examList?.length === 0) {
-                setAlertMessage("Please Select an Exam");
-                setModalVisible(true);
-            } 
-        }} />
+ </ScrollView>
+ <View style={{  paddingLeft: 20, paddingBottom: 10, paddingRight:20, paddingTop:10 }}>
+    <View style={{ flexDirection:'row' }}>
+        <View style={{ width:'30%'}}>
+            <Button type="outline-primary" label="Previous" size={14} onPress={()=>{
+                navigation?.navigate('SS_Authentication', { });
+            }} />
+        </View>
+        <View style={{ width:'40%'}}>
+
+        </View>
+        <View style={{ width:'30%'}}>
+            <Button type="primary" label="Next" size={14} onPress={()=>{
+                const undefinedList = examList?.filter(exam => exam?.year === undefined).map((list)=>list?.exam);
+                console.log("undefinedList", undefinedList);
+                if(undefinedList?.length>0){
+                    setAlertMessage("You have not specified \"Expected Year\" for "+undefinedList.join(", ")+
+                        ". Please mention it, so that App plans your \"Study Timetable\".");
+                    setModalVisible(true);
+                } else if(examList?.length === 0) {
+                    setAlertMessage("Please Select an Exam");
+                    setModalVisible(true);
+                } 
+            }} />
+        </View>
+    </View>
+           {/*} <TouchableOpacity onPress={() => navigation?.navigate('SS_Notifications', { language: lang })}>
+              <View style={{ flexDirection:'row', padding:8, borderWidth:1, borderColor:'#fff', borderRadius:8 }} >
+                  <FontAwesome5 name="arrow-left" size={12} color="#fff" style={{ marginTop:2,marginRight:5 }} />
+                  <Text style={{ color:'#fff', fontSize: 13, fontWeight:'bold' }}>{dialogue?.["d12"]?.["en"]}</Text>  
+              </View>
+</TouchableOpacity>  */}
     </View>
     {<AlertModal title="Alert Message" visible={modalVisible} onClose={(isVisible) => setModalVisible(isVisible)}>
        <View style={{ paddingLeft:5, paddingRight:5, paddingBottom:15 }}>
         <Text style={{ lineHeight:22 }}>{alertMessage}</Text>
         </View>
     </AlertModal>}
- </ScrollView>);
+</View>);
 };
 
 const ExamTargetStyle = StyleSheet.create({ 
  mainTitle: { fontSize:18, paddingBottom:6, fontWeight:'bold', color:'#000', lineHeight: 22, textAlign: 'center' },
  examList:{ flex:1, paddingTop:10, paddingBottom:10, flexDirection:'row' },
- examTargetDesc: { marginTop:5, marginBottom:10, fontStyle:'italic', lineHeight:22, paddingLeft:10, paddingRight:10, color:'#333' },
+ examTargetDesc: { marginTop:5, marginBottom:10, fontStyle:'italic', lineHeight:22, paddingLeft:10, paddingRight:10, color:'#333', textAlign:'center' },
  examTitle:{ fontSize:15, lineHeight:22, color:'#555', fontWeight:'bold', fontStyle:'italic' },
  examParams:{ width:'100%', marginTop:6, borderWidth:1, borderRadius:5, borderColor:'#ccc', 
  padding:10, backgroundColor:'#fcfcfc' },
