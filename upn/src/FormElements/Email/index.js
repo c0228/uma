@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, TextInput, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet } from "react-native";
 import { getForm, FORM_SUBMITTED, FORM_RESET } from './../Form/index.js';
 import { FormInputValidate } from '@AppUtils/Validations.js';
 import { FormStyles } from './../form-styles.js';
@@ -53,7 +53,7 @@ useEffect(()=>{
                                 (isErrorMessageExist?[FormStyles.formControl,FormStyles.formControlInvalid]:
                                         [FormStyles.formControl,FormStyles.formControlValid]):
                                 (FormStyles.formControl);
- return (<>
+ return (<View>
  <Text style={labelStyles}>Email Address :</Text>
       <TextInput placeholder="Enter Email Address"
         placeholderTextColor="#777"
@@ -65,7 +65,7 @@ useEffect(()=>{
         <Text style={FormStyles.formFeedbackInvalid}>
           {FormErrorMessage}
         </Text>}
- </>);
+ </View>);
 };
 
 const styles = StyleSheet.create({

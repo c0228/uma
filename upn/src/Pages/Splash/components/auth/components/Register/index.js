@@ -1,11 +1,21 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { TextBox } from '@AppFormElement/TextBox/index.js';
 import { Email } from '@AppFormElement/Email/index.js';
 import { Password } from '@AppFormElement/Password/components/pwd.js';
 import { ConfirmPassword } from '@AppFormElement/Password/components/confirm-pwd.js';
 import { Form } from '@AppFormElement/Form/index.js';
 
 const Register = () =>{
+
+    const SurName = () =>{
+        return (<TextBox name="surname" label="Surname" placeholder="Enter your Surname" />);
+    };
+
+    const Name = () =>{
+        return (<TextBox name="name" label="Name" placeholder="Enter your Name" />);
+    };
+
     const EmailAddress = () =>{
         return ( <Email name="email" 
             validation={{
@@ -54,6 +64,12 @@ const Register = () =>{
             onSubmit={(form, isValidForm)=>{
               console.log("Form Result:", form);
             }}>
+        <View style={{ marginTop:5 }}>
+            <SurName />
+        </View>
+        <View style={{ marginTop:5 }}>
+            <Name />
+        </View>
         <View style={{ marginTop:15 }}>
             <EmailAddress />
         </View>

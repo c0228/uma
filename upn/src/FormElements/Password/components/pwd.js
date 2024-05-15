@@ -14,7 +14,7 @@ export const Password = ({ name, type, label, value, placeholder, validation })=
  const initialValue = ( (value === undefined) ? '' : value );
  const [passwordValue, setPasswordValue] = useState( initialValue );
  const errMessage = form?.[formName]?.[name]?.errorMessage;
- const pwdNoMatch = Array.isArray(errMessage) && (errMessage.includes('PASSWORD_NOT_MATCH') );
+ const pwdNoMatch =  Array.isArray(errMessage) && (errMessage.includes('PASSWORD_NOT_MATCH') );
  const charValidated = Array.isArray(errMessage) && (!errMessage.includes('MINLENGTH_FAILED') && !errMessage.includes('MAXLENGTH_FAILED') );
  const lowerCaseValidation=Array.isArray(errMessage) && !errMessage.includes('LOWERCASE_FAILED');
  const upperCaseValidation=Array.isArray(errMessage) && !errMessage.includes('UPPERCASE_FAILED');
@@ -78,7 +78,7 @@ export const Password = ({ name, type, label, value, placeholder, validation })=
         style={[textInputStyles]} />
 
 
-    {(type==='confirmPassword' && (pwdNoMatch)) &&
+    {(type==='confirmPassword' && (passwordValue?.length>0) && (pwdNoMatch)) &&
         (<Text style={[FormStyles.formFeedbackInvalid]}>
           Password and Confirm Password doesn't match</Text>)
     }
