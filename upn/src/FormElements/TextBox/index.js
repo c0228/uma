@@ -4,7 +4,7 @@ import { getForm, FORM_SUBMITTED, FORM_RESET } from './../Form/index.js';
 import { FormInputValidate } from '@AppUtils/Validations.js';
 import { FormStyles } from './../form-styles.js';
 
-export const TextBox = ({ name, label, width, placeholder, value, validation, disabled, onChange  }) =>{
+export const TextBox = ({ name, label, width, placeholder, value, validation, disabled, onChange, multiline, numberOfLines }) =>{
  const formContext = getForm();
  const formName = formContext?.name;
  const form = formContext?.form;
@@ -59,17 +59,22 @@ const textInputStyles = (validateOnSubmit)?
              [FormStyles.formControl,FormStyles.formControlValid]):
      (FormStyles.formControl);
 
+const isMultiLine = (multiline) ? { height: (numberOfLines>1)?numberOfLines*25:38, textAlignVertical: 'top' }: { };
+
  return(<View>
   {label && <Text style={labelStyles}>{label} :</Text>}
   <TextInput 
         id={name} 
         name={name} 
+        multiline={multiline}
+        minHeight={20}
+        numberOfLines={numberOfLines}
         value={textBoxValue}
         placeholder={placeholder} 
         placeholderTextColor="#777"
         editable={!disabled}
         onChangeText={text =>onTextBoxUpdate(text)}
-        style={[textInputStyles, disabled && FormStyles.formDisabledInput]} />
+        style={[textInputStyles, disabled && FormStyles.formDisabledInput, isMultiLine]} />
       {(validateOnSubmit && isErrorMessageExist) &&
         <Text style={FormStyles.formFeedbackInvalid}>
           {FormErrorMessage}

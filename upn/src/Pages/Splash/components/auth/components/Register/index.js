@@ -16,6 +16,10 @@ const Register = () =>{
         return (<TextBox name="name" label="Name" placeholder="Enter your Name" />);
     };
 
+    const Comment = () =>{
+        return (<TextBox name="comment" label="Add your Comment" placeholder="Enter your Comments" multiline={true} numberOfLines={4} />);
+    };
+
     const EmailAddress = () =>{
         return ( <Email name="email" 
             validation={{
@@ -64,6 +68,9 @@ const Register = () =>{
             onSubmit={(form, isValidForm)=>{
               console.log("Form Result:", form);
             }}>
+        <View>
+            <Comment />
+        </View>
         <View style={{ marginTop:5 }}>
             <SurName />
         </View>
