@@ -107,7 +107,7 @@ const ExamTarget = () =>{
  <View style={{  paddingLeft: 20, paddingBottom: 10, paddingRight:20, paddingTop:10 }}>
     <View style={{ flexDirection:'row' }}>
         <View style={{ width:'30%'}}>
-            <Button type="outline-primary" label="Previous" size={14} onPress={()=>{
+            <Button type="outline-danger" label="Previous" size={14} onPress={()=>{
                 navigation?.navigate('SS_Authentication', { });
             }} />
         </View>
@@ -115,7 +115,7 @@ const ExamTarget = () =>{
 
         </View>
         <View style={{ width:'30%'}}>
-            <Button type="primary" label="Next" size={14} onPress={()=>{
+            <Button type="danger" label="Next" size={14} onPress={()=>{
                 const undefinedList = examList?.filter(exam => exam?.year === undefined).map((list)=>list?.exam);
                 console.log("undefinedList", undefinedList);
                 if(undefinedList?.length>0){
