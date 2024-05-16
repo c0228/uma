@@ -65,8 +65,9 @@ const Register = () =>{
               label:'Create an Account',
               size: 14
             }} 
-            onSubmit={(form, isValidForm)=>{
+            onSubmit={(form, isValidForm, triggerReset)=>{
               console.log("Form Result:", form);
+              triggerReset();
             }}>
         <View style={{ marginTop:5 }}>
             <SurName />

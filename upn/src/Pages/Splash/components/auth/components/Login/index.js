@@ -51,9 +51,10 @@ const Login = () =>{
             label:'Login into Account',
             size: 14
           }} 
-          onSubmit={(form, isValidForm)=>{
+          onSubmit={(form, isValidForm, triggerReset)=>{
             console.log("Form Result:", form);
-            navigation.navigate('SS_ExamTarget',{ });
+            navigation.navigate('SS_EduStatus',{ });
+            triggerReset();
           }}>
       <View style={{ marginTop:5 }}>
           <EmailAddress />

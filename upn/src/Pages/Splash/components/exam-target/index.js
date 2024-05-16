@@ -4,7 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import { Button } from '@AppFormElement/Button/index.js';
 import { Select } from '@AppFormElement/Select/index.js';
 import AlertModal from '@AppComponent/AlertModal/index.js';
-import HeaderBE from './../../utils/HeaderBE.js';
+import BEHeader, { HeaderTitle } from './../../utils/BEHeader.js';
+import BEFooter from './../../utils/BEFooter.js';
 
 const ExamTarget = () =>{
  const navigation = useNavigation();
@@ -50,13 +51,22 @@ const ExamTarget = () =>{
 
  const [modalVisible, setModalVisible] = useState(false);
 
+ const AlertDisplayView = () =>{
+  return (<View>
+    {<AlertModal title="Alert Message" visible={modalVisible} onClose={(isVisible) => setModalVisible(isVisible)}>
+       <View style={{ paddingLeft:5, paddingRight:5, paddingBottom:15 }}>
+        <Text style={{ lineHeight:22 }}>{alertMessage}</Text>
+        </View>
+    </AlertModal>}
+  </View>);
+ };
+
  return (
     <View style={{ flex:1, backgroundColor:'#fff' }}>
-        <HeaderBE formSize={4} activeForm={1} />
-    <View>
-    <Text style={ExamTargetStyle.mainTitle}>Choose your Targeted Exams</Text>
-    <Text style={ExamTargetStyle.examTargetDesc}>Specify the Examinations that you are planning to pursue in the Upcoming Years -</Text>
-    </View>
+        <BEHeader formSize={4} activeForm={1} />
+        <HeaderTitle 
+            title="Choose your Targeted Exams" 
+            subTitle="Specify the Examinations that you are planning to pursue in the Upcoming Years -" />
     
  <ScrollView style={{ paddingLeft:5, marginBottom:5, paddingRight:5 }}>
     {exams?.map((exam,index)=>{
@@ -101,18 +111,7 @@ const ExamTarget = () =>{
             </View>);
     })}
 </ScrollView>
- <View style={{  paddingLeft: 20, paddingBottom: 10, paddingRight:20, paddingTop:10 }}>
-    <View style={{ flexDirection:'row' }}>
-        <View style={{ width:'30%'}}>
-            <Button type="outline-danger" label="Previous" size={14} onPress={()=>{
-                navigation?.navigate('SS_Authentication', { });
-            }} />
-        </View>
-        <View style={{ width:'40%'}}>
-
-        </View>
-        <View style={{ width:'30%'}}>
-            <Button type="danger" label="Next" size={14} onPress={()=>{
+ <BEFooter previousForm={()=>navigation?.navigate('SS_EduStatus', { })} nextForm={()=>{
                 const undefinedList = examList?.filter(exam => exam?.year === undefined).map((list)=>list?.exam);
                 console.log("undefinedList", undefinedList);
                 if(undefinedList?.length>0){
@@ -122,16 +121,12 @@ const ExamTarget = () =>{
                 } else if(examList?.length === 0) {
                     setAlertMessage("Please Select an Exam");
                     setModalVisible(true);
-                } 
+                } else {
+                    navigation?.navigate('SS_PrepSubj', { });
+                }
             }} />
-        </View>
-      </View>
-    </View>
-    {<AlertModal title="Alert Message" visible={modalVisible} onClose={(isVisible) => setModalVisible(isVisible)}>
-       <View style={{ paddingLeft:5, paddingRight:5, paddingBottom:15 }}>
-        <Text style={{ lineHeight:22 }}>{alertMessage}</Text>
-        </View>
-    </AlertModal>}
+
+    <AlertDisplayView />
 </View>);
 };
 
