@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { View, ScrollView, Text, Switch, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { View, ScrollView, Text, Switch, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { Button } from '@AppFormElement/Button/index.js';
 import { Select } from '@AppFormElement/Select/index.js';
 import AlertModal from '@AppComponent/AlertModal/index.js';
-import Logo from '@Assets/img/logo-default.png';
-import { dialogue } from './../../static-data/dialogue.js';
+import HeaderBE from './../../utils/HeaderBE.js';
 
 const ExamTarget = () =>{
  const navigation = useNavigation();
@@ -54,14 +52,13 @@ const ExamTarget = () =>{
 
  return (
     <View style={{ flex:1, backgroundColor:'#fff' }}>
-    <View style={{ padding:20, alignItems:'center' }}>
-       <Image style={{ width:160, height:18, marginLeft:8, marginTop:3 }} source={Logo} />
-    </View>
+        <HeaderBE formSize={4} activeForm={1} />
     <View>
     <Text style={ExamTargetStyle.mainTitle}>Choose your Targeted Exams</Text>
     <Text style={ExamTargetStyle.examTargetDesc}>Specify the Examinations that you are planning to pursue in the Upcoming Years -</Text>
     </View>
- <ScrollView style={{ paddingLeft:5, paddingRight:5 }}>
+    
+ <ScrollView style={{ paddingLeft:5, marginBottom:5, paddingRight:5 }}>
     {exams?.map((exam,index)=>{
         const isSelected = examList?.some((selected) => selected?.exam === exam);
         return (<View key={index}>
@@ -103,7 +100,7 @@ const ExamTarget = () =>{
             </View>
             </View>);
     })}
- </ScrollView>
+</ScrollView>
  <View style={{  paddingLeft: 20, paddingBottom: 10, paddingRight:20, paddingTop:10 }}>
     <View style={{ flexDirection:'row' }}>
         <View style={{ width:'30%'}}>
@@ -128,13 +125,7 @@ const ExamTarget = () =>{
                 } 
             }} />
         </View>
-    </View>
-           {/*} <TouchableOpacity onPress={() => navigation?.navigate('SS_Notifications', { language: lang })}>
-              <View style={{ flexDirection:'row', padding:8, borderWidth:1, borderColor:'#fff', borderRadius:8 }} >
-                  <FontAwesome5 name="arrow-left" size={12} color="#fff" style={{ marginTop:2,marginRight:5 }} />
-                  <Text style={{ color:'#fff', fontSize: 13, fontWeight:'bold' }}>{dialogue?.["d12"]?.["en"]}</Text>  
-              </View>
-</TouchableOpacity>  */}
+      </View>
     </View>
     {<AlertModal title="Alert Message" visible={modalVisible} onClose={(isVisible) => setModalVisible(isVisible)}>
        <View style={{ paddingLeft:5, paddingRight:5, paddingBottom:15 }}>
@@ -146,10 +137,10 @@ const ExamTarget = () =>{
 
 const ExamTargetStyle = StyleSheet.create({ 
  mainTitle: { fontSize:18, paddingBottom:6, fontWeight:'bold', color:'#000', lineHeight: 22, textAlign: 'center' },
- examList:{ flex:1, paddingTop:10, paddingBottom:10, flexDirection:'row' },
- examTargetDesc: { marginTop:5, marginBottom:10, fontStyle:'italic', lineHeight:22, paddingLeft:10, paddingRight:10, color:'#333', textAlign:'center' },
+ examList:{ flex:1, paddingTop:10, paddingBottom:8, flexDirection:'row' },
+ examTargetDesc: { marginTop:5, marginBottom:2, fontStyle:'italic', lineHeight:22, paddingLeft:10, paddingRight:10, color:'#333', textAlign:'center' },
  examTitle:{ fontSize:15, lineHeight:22, color:'#555', fontWeight:'bold', fontStyle:'italic' },
- examParams:{ width:'100%', marginTop:6, borderWidth:1, borderRadius:5, borderColor:'#ccc', 
+ examParams:{ width:'90%', marginTop:6, borderWidth:1, borderRadius:5, borderColor:'#ccc', 
  padding:10, backgroundColor:'#fcfcfc' },
  examRequired:{ width:'100%', justifyContent:'center', flexDirection:'row', paddingBottom:10 },
  fontBold:{ fontWeight:'bold' },
