@@ -102,7 +102,7 @@ export const Select = ({ name, label, placeholder, popupTitle, value, validation
         </View>
       </TouchableOpacity>
       <Modal title={popupTitle} visible={modalVisible} onClose={(isVisible) => setModalVisible(isVisible)}>
-        <ScrollView style={{ paddingLeft:10, marginBottom:5 }}>
+        <ScrollView style={{ paddingLeft:10, maxHeight:350, marginBottom:10 }}>
           {options?.map((option, index)=>{
             return (<View key={index} style={{ flexDirection:'row', paddingBottom:5 }}>
               <Switch

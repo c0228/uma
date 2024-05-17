@@ -7,11 +7,18 @@ import AlertModal from '@AppComponent/AlertModal/index.js';
 import BEHeader, { HeaderTitle } from './../../utils/BEHeader.js';
 import BEFooter from './../../utils/BEFooter.js';
 import EduDegrees from '@StaticData/en/edu-degrees.json';
+import { Range } from '@AppUtils/ArrayManagement.js';
 
 const EduStatus = () =>{
  const navigation = useNavigation();
- const [educationDetails, setEducationDetails] = useState({});
- const [test, setTest] = useState('');
+ const eduDegreeData = Object.keys(EduDegrees);
+ const [educationDetails, setEducationDetails] = useState({
+  status: '',
+  educationLevel: '',
+  specialization: '',
+  age: '',
+ });
+ const [specialization, setSpecialization] = useState([]);
 
  useEffect(()=>{
   console.log("educationDetails", educationDetails);
@@ -21,11 +28,11 @@ const EduStatus = () =>{
   const handleChange = (value, status) =>{
     console.log("handleChange", value);
     if (value) {
-      setEducationDetails({ status: status });
+      setEducationDetails({ ...educationDetails, educationLevel:'', specialization:'', status: status });
     } else {
-      const { status, ...newEducationDetails} = educationDetails;
-      setEducationDetails(newEducationDetails);
+      setEducationDetails({ ...educationDetails, educationLevel:'', specialization:'', status: '' });
     }
+    setSpecialization([]);
   };
   const SwitchOption = ({ label, value }) =>{
     return (<View style={{ width:'50%', flexDirection:'row' }}>
@@ -36,7 +43,7 @@ const EduStatus = () =>{
   </View>);
   };
 
-  return (<View>
+  return (<View style={{ paddingTop:15 }}>
           <Text style={{ fontSize:15, fontWeight:'bold', color:'#333' }}>Mention your Education Status</Text>
           <View style={{ flexDirection:'row', paddingTop:8 }}>
             <SwitchOption label="Still Studying" value="STUDYING" />
@@ -46,36 +53,70 @@ const EduStatus = () =>{
  };
 
  const EduStudyingView = () =>{
-  return (<View>
+  const level = ['Class 06', 'Class 07', 'Class 08', 'Class 09', 'Class 10', 'Class 11', 'Class 12', ...eduDegreeData];
+  return (<View style={{ paddingTop:15 }}>
     <Select name="highestDegree" 
       label="Mention your Current Education" 
       popupTitle="Select your Education"
       placeholder="Select your Education" 
       value={educationDetails?.educationLevel} 
-      options={['Class 06', 'Class 07', 'Class 08', 'Class 09', 'Class 10', 'Class 11', 
-        'Class 12', 'Bachelor Degree', 'Master Degree']?.map((deg)=>{ return { id:deg, label:deg, value: deg }; })} 
+      options={level?.map((deg)=>{ return { id:deg, label:deg, value: deg }; })} 
       onSelect={(value)=>{
-        console.log("value", value);
-        setEducationDetails({ ...educationDetails, educationLevel: value });
+        const degree = value?.[0];
+        setEducationDetails({ ...educationDetails, educationLevel: value, specialization:'' });
+        if(degree?.toLowerCase().startsWith("bachelor") || degree?.toLowerCase()?.startsWith("master")){
+          setSpecialization(EduDegrees?.[degree]);
+        }
       }} />
   </View>);
  };
 
  const EduCompletedView = () =>{
-  return (<View>
+  return (<View style={{ paddingTop: 15 }}>
     <Select name="highestDegree2" 
-      label="What is your highest Degree?" 
+      label="What is your Highest Degree?" 
       popupTitle="Choose your Highest Degree"
       placeholder="Choose your Highest Degree" 
-      value={[]} 
-      options={Object.keys(EduDegrees)?.map((deg)=>{
+      value={educationDetails?.educationLevel} 
+      options={eduDegreeData?.map((deg)=>{
         return { id:deg, label:deg, value: deg };
       })} 
-      onSelect={()=>{
-       
+      onSelect={(value)=>{
+        const degree = value?.[0];
+        setEducationDetails({ ...educationDetails, educationLevel: value, specialization:'' });
+        setSpecialization(EduDegrees?.[degree]);
       }} />
   </View>);
  };
+
+ const EduSpecialization = () =>{
+  return (<View style={{ paddingTop: 15 }}>
+    <Select name="eduSpecialization" 
+     label="Mention Specialization in Highest Degree" 
+     popupTitle="Select your Specialization"
+     placeholder="Choose your Specialization" 
+     value={educationDetails?.specialization} 
+     options={specialization?.map((deg)=>{ return { id:deg, label:deg, value: deg }; })} 
+     onSelect={(value)=>{
+      setEducationDetails({ ...educationDetails, specialization: value });
+     }} />
+  </View>);
+ };
+
+ const CandiateAge = ()=>{
+  return (<View>
+   <Select name="candidateAge" 
+     label="What's your Age?" 
+     popupTitle="Select your Age"
+     placeholder="Select your Age" 
+     value={educationDetails?.age} 
+     options={Range(10, 32)?.map((deg)=>{ return { id:deg+' years', label:deg+' years', value: deg+' years' }; })} 
+     onSelect={(value)=>{
+       setEducationDetails({ ...educationDetails, age: value });
+     }} />
+ </View>);
+};
+
 
  return ( <View style={{ flex:1, backgroundColor:'#fff' }}>
     <BEHeader formSize={4} activeForm={0} />
@@ -84,10 +125,17 @@ const EduStatus = () =>{
             subTitle="It helps App to understand your background and Customize resources to prepare effectively for their exams and academic challenges -" />
     <ScrollView style={{ paddingLeft:5, marginBottom:5, paddingRight:5 }}>
       <View style={{ padding:15 }}>
+         <CandiateAge />
          <EducationStatus />
-         <View style={{ paddingTop: 15 }}>
-          {educationDetails?.status === "STUDYING" && (<EduStudyingView />)}
-          {educationDetails?.status === "COMPLETED" && (<EduCompletedView />)}
+         <View>
+          {educationDetails?.status === "STUDYING" && (<View>
+          <EduStudyingView />
+          {specialization?.length>0 && <EduSpecialization />}
+          </View>)}
+          {educationDetails?.status === "COMPLETED" && (<View>
+            <EduCompletedView />
+            {specialization?.length>0 && <EduSpecialization />}
+            </View>)}
          </View>
       </View>
     </ScrollView>
