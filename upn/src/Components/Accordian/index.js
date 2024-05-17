@@ -18,10 +18,15 @@ export const Accordian = ({ id, data, defaultOpen}) => {
     }
   };
 
+  useEffect(()=>{
+    console.log("opened", opened);
+  },[]);
+
   return (
     <View>
         {data?.map((d, index)=>{
             const isExpanded = opened.includes(d?.id);
+            console.log("isExpanded", isExpanded);
             const headerCss = [{  padding:10, color:'#000', fontWeight:'bold', flexWrap:'wrap' }];
             const headerViewCss=[{  flexDirection:'row', borderWidth: 1, 
                 borderStyle:'solid',  
@@ -50,8 +55,8 @@ export const Accordian = ({ id, data, defaultOpen}) => {
                 </TouchableOpacity>
                 
                 {isExpanded && (
-                    <View>
-                    <Text style={componentCss}>{d?.component}</Text>
+                    <View style={componentCss}>
+                    {d?.component}
                     </View>
                 )}
             </View>);
