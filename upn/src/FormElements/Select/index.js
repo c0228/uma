@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, ScrollView, Text, TouchableOpacity, FlatList, Switch, StyleSheet } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { getForm, FORM_SUBMITTED, FORM_RESET } from './../Form/index.js';
@@ -19,19 +19,15 @@ export const Select = ({ name, label, placeholder, popupTitle, value, validation
 
   useEffect(() => {
     if (FormMode === FORM_RESET) {
+      console.log("setSelectedOptions Triggered at useEffect");
       setSelectedOptions(initialValue);
     }
-    // console.log("selectedOptions", selectedOptions);
   }, [FormMode]);
 
-  useEffect(() => {
-    onSelect(multipleSelect ? selectedOptions : selectedOptions[0]);
-    SelectValidate();
-  }, [selectedOptions]);
 
   const toggleOption = (option) => {
-    // console.log("toggleOption[Test]", option, multipleSelect);
-    if(multipleSelect){
+    const isMultipleSelect = multipleSelect !== undefined ? multipleSelect : false;
+    if(isMultipleSelect){
         // Check if the object exists in the array
         const index = selectedOptions.findIndex(item => item === option.value);
         const sOptions = [...selectedOptions];
@@ -44,15 +40,16 @@ export const Select = ({ name, label, placeholder, popupTitle, value, validation
           sOptions.push(option?.value);
           // console.log("Object added to array", selectedOptions);
         }
-        setSelectedOptions(sOptions);
+        SelectValidate(sOptions);
+        
     } else {
       const index = selectedOptions.findIndex(item => item === option.value);
       let val = [];
       if (index === -1) { val=[option?.value]; }
-      setSelectedOptions(val);
+      SelectValidate(val);
       toggleModal();
     }
-
+    
   };
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -61,19 +58,23 @@ export const Select = ({ name, label, placeholder, popupTitle, value, validation
     setModalVisible(!modalVisible);
   };
 
-  const SelectValidate = async () => {
+  const SelectValidate = async (val) => {
     // validation
-    // console.log("SelectValidate ", selectedOptions);
-    let result = { value: selectedOptions };
+    let result = { value: val };
     if (validation !== undefined) {
-      result = await FormInputValidate(validation, selectedOptions);
-      // console.log(result);
+      result = await FormInputValidate(validation, val);
     }
     // form Data
     if (formName !== undefined && form?.[formName] !== undefined) {
       formContext?.setForm(formName, { [name]: result });
     }
+    onSelect(val);
+    setSelectedOptions(val);
   };
+
+  useEffect(()=>{
+    console.log("selectedOptions", selectedOptions);
+  },[selectedOptions]);
 
   const validateOnSubmit = ( (FormMode === FORM_SUBMITTED) || selectedOptions?.length > 0);
   const isErrorMessageExist = (FormErrorMessage?.length > 0);

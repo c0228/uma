@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     flexItem: { flexGrow:1, margin:10, height:4, borderRadius:8 },
     mainTitle: { fontSize:18, paddingBottom:6, fontWeight:'bold', color:'#000', lineHeight: 22, textAlign: 'center' },
     examTargetDesc: { marginTop:5, marginBottom:2, fontStyle:'italic', lineHeight:22, paddingLeft:10, 
-        paddingRight:10, color:'#333', textAlign:'center' },
+        paddingRight:10, color:'#777', textAlign:'center' },
 });
 
 export default BEHeader;

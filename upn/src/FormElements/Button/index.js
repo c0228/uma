@@ -12,7 +12,7 @@ const convertToKebabCase = (str) =>{
 export const Button =  ({ type, icon, label, size, onPress, style }) => {
   const fontSize = (size===undefined)?14:size;
   const typ = convertToKebabCase(type);
-  console.log("typ [Button]", typ);
+  // console.log("typ [Button]", typ);
   const data= {
     primary:{ bgColor:'#007bff', borderColor:'#007bff', color:'#fff' },
     secondary:{ bgColor:'#6c757d', borderColor:'#6c757d', color:'#fff' },
