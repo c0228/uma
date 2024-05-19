@@ -39,7 +39,7 @@ colorConfig={{
                     </Text>
                     </TouchableOpacity>))}
             </View>
-            <ScrollView style={{ paddingLeft:10,paddingRight:10, paddingBottom: 35 }}>
+            <ScrollView style={{ paddingBottom: 35 }}>
               <MenuItemComponent component={data.find((menuItem) => menuItem.id === selectedMenu)?.component} />
             </ScrollView>
         </>

@@ -111,7 +111,10 @@ const ExamTarget = () =>{
             </View>);
     })}
 </ScrollView>
- <BEFooter previousForm={()=>navigation?.navigate('SS_EduStatus', { })} nextForm={()=>{
+ <BEFooter 
+    label={{ previous:'Previous', next:'Next' }}
+    previousForm={()=>navigation?.navigate('SS_EduStatus', { })} 
+    nextForm={()=>{
                 const undefinedList = examList?.filter(exam => exam?.year === undefined).map((list)=>list?.exam);
                 console.log("undefinedList", undefinedList);
                 if(undefinedList?.length>0){

@@ -1,14 +1,12 @@
 import React from "react";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import { HamburgerIcon } from '@AppNavigation/Drawer/index.js';
-import ExamTarget from './components/ExamTarget/index.js';
 
 const Explore = (props)=>{
  return (<View style={ExploreStyle.pageView}>
  <HamburgerIcon {...props}/>      
  <ScrollView style={ExploreStyle.scrollView}>
  {/*<Text>Explore Page</Text>*/}
- <ExamTarget />
  </ScrollView>
  </View>);
 };

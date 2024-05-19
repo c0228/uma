@@ -140,6 +140,7 @@ const EduStatus = () =>{
       </View>
     </ScrollView>
     <BEFooter 
+        label={{ previous:'Previous', next:'Next' }}
         previousForm={()=>{
           navigation?.navigate('SS_Authentication', { });
         }} 

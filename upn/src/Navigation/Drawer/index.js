@@ -3,15 +3,19 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import DrawerContent from './content';
 import { DrawerUserProfile, Icon } from 'e-ui-react-native';
-import Home from '@AppPage/Home/index.js';
-import About from '@AppPage/About/index.js';
-import Dashboard from '@AppPage/Dashboard/index.js';
-import ExamDates from '@AppPage/ExamDates/index.js';
-import PrevQP from '@AppPage/PrevQP/index.js';
-import MyProfile from '@AppPage/MyProfile/index.js';
-import Settings from '@AppPage/Settings/index.js';
-import StudyTT from '@AppPage/StudyTT/index.js';
+import Home from '@AppPage/Main/Home/index.js';
+import About from '@AppPage/Main/About/index.js';
+import Dashboard from '@AppPage/Main/Dashboard/index.js';
+import ExamDates from '@AppPage/Main/ExamDates/index.js';
+import PrevQP from '@AppPage/Main/PrevQP/index.js';
+import MyProfile from '@AppPage/Main/MyProfile/index.js';
+import Settings from '@AppPage/Main/Settings/index.js';
+import StudyTT from '@AppPage/Main/StudyTT/index.js';
 import Logo from "@Assets/img/logo-default.png";
+import { LogBox } from 'react-native';
+
+// Temporary Fix: Ignore warnings containing the word "defaultProps"
+LogBox.ignoreLogs([/defaultProps/]);
 
 const Drawer = createDrawerNavigator();
 

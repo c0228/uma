@@ -1,21 +1,18 @@
 import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { LogBox } from 'react-native';
-import messaging from '@react-native-firebase/messaging';
-import { NavigationContainer } from '@react-navigation/native';
+// import messaging from '@react-native-firebase/messaging';
+
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import 'react-native-gesture-handler';
-import { DrawerNavigation } from 'src/Navigation/Drawer/index.js';
-import NotificationHandler from '@AppComponent/NotificationHandler/index.js';
+
 import SplashScreen from '@AppPage/Splash/index.js';
 // Temporary Fix: Ignore warnings containing the word "defaultProps"
 LogBox.ignoreLogs([/defaultProps/]);
 
-const Drawer = createDrawerNavigator();
-
 const App = ()=>{
  
-  useEffect(() => {
+ /* useEffect(() => {
 
     // Calls to it New Token is assigned
     messaging().onTokenRefresh(token => {
@@ -28,16 +25,10 @@ const App = ()=>{
         console.log("Generated Token:", token);
     });
     
-  });
+  },[]); */
 
   return (<SplashScreen />);
-  /*
-  return (
-    <NavigationContainer>
-      <DrawerNavigation />
-      <NotificationHandler />
-    </NavigationContainer>
-  ); */
+ 
 };
 
 export default App;

@@ -9,12 +9,14 @@ import EduStatus from './components/edu-status/index.js';
 import ExamTarget from './components/exam-target/index.js';
 import PrepareSubjects from './components/prep-subj/index.js';
 import TimeTable from './components/time-table/index.js';
+import Main from '@AppPage/Main/index.js';
 
 const Stack = createStackNavigator();
 
 const Splash = () =>{
  return (<NavigationContainer>
  <Stack.Navigator>
+ <Stack.Screen name="SS_Main" component={Main} options={{ headerShown: false }} />
     <Stack.Screen name="SS_Introduction" component={Introduction}  options={{ headerShown: false }} />
     <Stack.Screen name="SS_Notifications" component={Notify}  options={{ headerShown: false }} />
     <Stack.Screen name="SS_Storage" component={Storage}  options={{ headerShown: false }} />
