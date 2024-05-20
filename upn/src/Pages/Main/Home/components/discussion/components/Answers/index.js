@@ -96,15 +96,17 @@ const Answers = () =>{
 
  return (<View style={{ backgroundColor:'#fff' }}>
     <StackHeader />
-    <Question />
-    <Text style={styles.answerHeader}>Answers</Text>
     <ScrollView>
-        <View style={{ marginBottom:280 }}>
-            <DisplayAnswer />
-            <DisplayAnswer />
-            <DisplayAnswer />
-            <DisplayAnswer />
-            <AspirantAnswer />
+        <View style={{ marginBottom: 45 }}>
+            <Question />
+            <Text style={styles.answerHeader}>Answers</Text>
+            <View>
+                <DisplayAnswer />
+                <DisplayAnswer />
+                <DisplayAnswer />
+                <DisplayAnswer />
+                <AspirantAnswer />
+            </View>
         </View>
     </ScrollView>
  </View>);
