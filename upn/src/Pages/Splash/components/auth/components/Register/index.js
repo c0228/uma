@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { TextBox } from '@AppFormElement/TextBox/index.js';
 import { Email } from '@AppFormElement/Email/index.js';
 import { Password } from '@AppFormElement/Password/components/pwd.js';
@@ -7,7 +8,7 @@ import { ConfirmPassword } from '@AppFormElement/Password/components/confirm-pwd
 import { Form } from '@AppFormElement/Form/index.js';
 
 const Register = () =>{
-
+    const navigation = useNavigation();
     const SurName = () =>{
         return (<TextBox name="surname" label="Surname" placeholder="Enter your Surname" />);
     };
@@ -67,6 +68,7 @@ const Register = () =>{
             }} 
             onSubmit={(form, isValidForm, triggerReset)=>{
               console.log("Form Result:", form);
+              navigation.navigate('SS_Avatar',{ });
               triggerReset();
             }}>
         <View style={{ marginTop:5 }}>

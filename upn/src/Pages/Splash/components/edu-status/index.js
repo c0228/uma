@@ -119,7 +119,7 @@ const EduStatus = () =>{
 
 
  return ( <View style={{ flex:1, backgroundColor:'#fff' }}>
-    <BEHeader formSize={4} activeForm={0} />
+    <BEHeader formSize={5} activeForm={1} />
     <HeaderTitle 
             title="Share your Education Details" 
             subTitle="It helps App to understand your background and Customize resources to prepare effectively for their exams and academic challenges -" />
@@ -142,7 +142,7 @@ const EduStatus = () =>{
     <BEFooter 
         label={{ previous:'Previous', next:'Next' }}
         previousForm={()=>{
-          navigation?.navigate('SS_Authentication', { });
+          navigation?.navigate('SS_Avatar', { });
         }} 
         nextForm={()=>{
          navigation?.navigate('SS_ExamTarget', { });

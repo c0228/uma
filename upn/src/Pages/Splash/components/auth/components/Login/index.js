@@ -53,7 +53,7 @@ const Login = () =>{
           }} 
           onSubmit={(form, isValidForm, triggerReset)=>{
             console.log("Form Result:", form);
-            navigation.navigate('SS_EduStatus',{ });
+            navigation.navigate('SS_Main',{ });
             triggerReset();
           }}>
       <View style={{ marginTop:5 }}>

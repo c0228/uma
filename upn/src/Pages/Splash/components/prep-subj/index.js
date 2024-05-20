@@ -93,7 +93,7 @@ const PrepareSubjects = () =>{
  };
 
  return ( <View style={{ flex:1, backgroundColor:'#fff' }}>
-    <BEHeader formSize={4} activeForm={2} />
+    <BEHeader formSize={5} activeForm={3} />
     <HeaderTitle 
             title="List of Subjects to Prepare" 
             subTitle="Specify the Examinations that you are planning to pursue in the Upcoming Years -" />

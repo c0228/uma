@@ -63,7 +63,7 @@ const ExamTarget = () =>{
 
  return (
     <View style={{ flex:1, backgroundColor:'#fff' }}>
-        <BEHeader formSize={4} activeForm={1} />
+        <BEHeader formSize={5} activeForm={2} />
         <HeaderTitle 
             title="Choose your Targeted Exams" 
             subTitle="Specify the Examinations that you are planning to pursue in the Upcoming Years -" />

@@ -42,7 +42,7 @@ const TimeTable = () =>{
  };
 
  return ( <View style={{ flex:1, backgroundColor:'#fff' }}>
-    <BEHeader formSize={4} activeForm={3} />
+    <BEHeader formSize={5} activeForm={4} />
     <HeaderTitle 
             title="Set your Weekly Availability" 
             subTitle="Please specify your available study hours per week so that we can effectively plan your study timetable." />
