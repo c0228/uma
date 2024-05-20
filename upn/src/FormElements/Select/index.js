@@ -40,13 +40,13 @@ export const Select = ({ name, label, placeholder, popupTitle, value, validation
           sOptions.push(option?.value);
           // console.log("Object added to array", selectedOptions);
         }
-        SelectValidate(sOptions);
+        setSelectedOptions(sOptions);
         
     } else {
       const index = selectedOptions.findIndex(item => item === option.value);
       let val = [];
       if (index === -1) { val=[option?.value]; }
-      SelectValidate(val);
+      setSelectedOptions(val);
       toggleModal();
     }
     
@@ -69,11 +69,11 @@ export const Select = ({ name, label, placeholder, popupTitle, value, validation
       formContext?.setForm(formName, { [name]: result });
     }
     onSelect(val);
-    setSelectedOptions(val);
   };
 
   useEffect(()=>{
     console.log("selectedOptions", selectedOptions);
+    SelectValidate(selectedOptions);
   },[selectedOptions]);
 
   const validateOnSubmit = ( (FormMode === FORM_SUBMITTED) || selectedOptions?.length > 0);
@@ -113,7 +113,10 @@ export const Select = ({ name, label, placeholder, popupTitle, value, validation
           })}
           </ScrollView>
       </Modal>
-      {FormErrorMessage?.length > 0 && <Text style={styles.errorMessage}>{FormErrorMessage}</Text>}
+      {(validateOnSubmit && isErrorMessageExist) &&
+        <Text style={FormStyles.formFeedbackInvalid}>
+          {FormErrorMessage}
+        </Text>}
     </View>
   );
 };

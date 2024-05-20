@@ -7,7 +7,6 @@ import AlertModal from '@AppComponent/AlertModal/index.js';
 import BEHeader, { HeaderTitle } from './../../utils/BEHeader.js';
 import BEFooter from './../../utils/BEFooter.js';
 import EduDegrees from '@StaticData/en/edu-degrees.json';
-import { Range } from '@AppUtils/ArrayManagement.js';
 
 const EduStatus = () =>{
  const navigation = useNavigation();
@@ -103,21 +102,6 @@ const EduStatus = () =>{
   </View>);
  };
 
- const CandiateAge = ()=>{
-  return (<View>
-   <Select name="candidateAge" 
-     label="What's your Age?" 
-     popupTitle="Select your Age"
-     placeholder="Select your Age" 
-     value={educationDetails?.age} 
-     options={Range(10, 32)?.map((deg)=>{ return { id:deg+' years', label:deg+' years', value: deg+' years' }; })} 
-     onSelect={(value)=>{
-       setEducationDetails({ ...educationDetails, age: value });
-     }} />
- </View>);
-};
-
-
  return ( <View style={{ flex:1, backgroundColor:'#fff' }}>
     <BEHeader formSize={5} activeForm={1} />
     <HeaderTitle 
@@ -125,7 +109,6 @@ const EduStatus = () =>{
             subTitle="It helps App to understand your background and Customize resources to prepare effectively for their exams and academic challenges -" />
     <ScrollView style={{ paddingLeft:5, marginBottom:5, paddingRight:5 }}>
       <View style={{ padding:15 }}>
-         <CandiateAge />
          <EducationStatus />
          <View>
           {educationDetails?.status === "STUDYING" && (<View>
