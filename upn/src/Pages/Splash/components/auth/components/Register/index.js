@@ -157,16 +157,16 @@ const Register = () =>{
               }
              // triggerReset();
             }}>
-        <View style={{ marginTop:5 }}>
+        <View style={{ marginTop:15 }}>
             <SurName />
         </View>
-        <View style={{ marginTop:5 }}>
+        <View style={{ marginTop:15 }}>
             <Name />
         </View>
-        <View style={{ marginTop:5 }}>
+        <View style={{ marginTop:15 }}>
             <Gender />
         </View>
-        <View style={{ marginTop:5 }}>
+        <View style={{ marginTop:15 }}>
             <Age />
         </View>
         <View style={{ marginTop:15 }}>
