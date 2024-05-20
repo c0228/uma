@@ -15,7 +15,12 @@ export const UrlAsyncFetch = async(url, method, requestBody=null)=>{
 const response = await axios({
     url: url,
     method: method,
-    data: requestBody
+    data: requestBody,
+    headers: {
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0'
+    }
   });
   console.log("response", url, method, requestBody, response);
   return response.data;       //api for the get request
@@ -105,7 +110,7 @@ export const FormInputValidate = async(validation, value) => {
               let response = isEmailExist?.value;
               if(url!==undefined && method!==undefined && response!==undefined && errorMessage!==undefined){
                   const data = await UrlAsyncFetch(url, method, { email: value });
-                  // console.log("data!==response", data, response);
+                  console.log("data!==response", data, response);
                   if(data?.trim() !== response.trim() ){
                     errorMessage =  isEmailExist?.errorMessage;
                   } 

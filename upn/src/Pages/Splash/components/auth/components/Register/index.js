@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { TextBox } from '@AppFormElement/TextBox/index.js';
@@ -10,6 +10,10 @@ import { Form } from '@AppFormElement/Form/index.js';
 import { Range } from '@AppUtils/ArrayManagement.js';
 
 const Register = () =>{
+    const [displayScreen, setDisplayScreen] = useState('REGISTER'); // REGISTER / EMAIL_VALIDATE / SUCCESS
+    const [registerData, setRegisterData] = useState({
+        email: 'xxxxxxxxxxxx@gmail.com' });
+
     const navigation = useNavigation();
     const SurName = () =>{
         return (<TextBox name="surname" label="Surname" placeholder="Enter your Surname" 
@@ -20,10 +24,29 @@ const Register = () =>{
                 },
                 minLength:{
                     value: 5,
-                    errorMessage:"Message should be greator than 5"
+                    errorMessage:"Surname should be greator than 5"
                 }
             }} />);
     };
+
+    const OtpCode = () =>{
+        return (<TextBox name="otp" label="Enter OTP Code" placeholder="_ _ _ _ _" 
+            validation={{
+                required:{
+                    value: true,
+                    errorMessage:"This is a Mandatory Field"
+                },
+                minLength:{
+                    value: 5,
+                    errorMessage:"OTP Code should be 5 digits"
+                },
+                maxLength:{
+                    value: 5,
+                    errorMessage:"OTP Code should be 5 digit"
+                }
+            }} />);
+    };
+
 
     const Name = () =>{
         return (<TextBox name="name" label="Name" placeholder="Enter your Name" 
@@ -92,7 +115,7 @@ const Register = () =>{
 
     const RegPwd = () =>{
         return (<View>
-            <ConfirmPassword  name="pwd2" 
+            <ConfirmPassword  name="pwd" 
             validation={{
                 required:{
                     value: true,
@@ -112,15 +135,26 @@ const Register = () =>{
         </View>);
     };
     
-    return (<View style={{ padding:10 }}>
-      <Form name="register" btnSubmit={{
+    return (<View style={{  borderTopWidth:1, borderTopColor:'#ddd', paddingLeft:15, paddingRight:15, marginBottom:120 }}>
+      {displayScreen=='REGISTER' && (<Form name="register" btnSubmit={{
               btnType:'primary',
               label:'Create an Account',
               size: 14
             }} 
             onSubmit={(form, isValidForm, triggerReset)=>{
               console.log("Form Result:", form);
-             // navigation.navigate('SS_Avatar',{ });
+              const data = { surname: form?.["register"]?.surname?.value,
+                            name: form?.["register"]?.name?.value,
+                            gender: form?.["register"]?.gender?.value,
+                            age: form?.["register"]?.gender?.value,
+                            email: form?.["register"]?.email?.value,
+                            pwd: form?.["register"]?.pwd?.value,
+                            pwdConfirm: form?.["register"]?.pwdConfirm?.value };
+              console.log("data", data);
+              if(data?.gender?.length>0 && data?.email?.length>0){
+                setRegisterData(data);
+                setDisplayScreen('EMAIL_VALIDATE');
+              }
              // triggerReset();
             }}>
         <View style={{ marginTop:5 }}>
@@ -141,7 +175,41 @@ const Register = () =>{
         <View style={{ marginTop:15, marginBottom:15 }}>
             <RegPwd />
         </View>
-     </Form>
+      </Form>)}
+      {displayScreen=='EMAIL_VALIDATE' && (<Form name="validateEmail" btnSubmit={{
+              btnType:'primary',
+              label:'Validate OTP Code',
+              size: 14
+            }} 
+            onSubmit={(form, isValidForm, triggerReset)=>{
+                setDisplayScreen('SUCCESS');
+            }}>
+                <View style={{ marginTop:15, marginBottom:15 }}>
+                    <Text style={{ lineHeight:22 }}>
+                    An OTP Code is sent to your mentioned Email Address {registerData?.email}
+                    </Text>
+                </View>
+                <View style={{ marginBottom:15 }}>
+                <OtpCode />
+                </View>
+            </Form>)}
+        {displayScreen=='SUCCESS' && (<Form name="validateEmail" btnSubmit={{
+              btnType:'primary',
+              label:'Next',
+              size: 14
+            }} 
+            onSubmit={(form, isValidForm, triggerReset)=>{
+                navigation.navigate('SS_Avatar', registerData);
+            }}>
+                <View style={{ marginTop:15, marginBottom:15 }}>
+                    <Text style={{ textAlign:'center', marginBottom:5}}>
+                      Your Account was successfully Created.
+                    </Text>
+                    <Text style={{ textAlign:'center', marginBottom:5}}>
+                    Please login into Account.
+                    </Text>
+                </View>
+            </Form>)}
     </View>);
 };
 

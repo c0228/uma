@@ -45,7 +45,7 @@ const Login = () =>{
   }} />);
   };
   
-  return (<View style={{ padding:10 }}>
+  return (<View style={{  borderTopWidth:1, borderTopColor:'#ddd', padding:10 }}>
     <Form name="login" btnSubmit={{
             btnType:'primary',
             label:'Login into Account',
