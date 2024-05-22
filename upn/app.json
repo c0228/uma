@@ -1,4 +1,8 @@
 {
   "name": "upn",
-  "displayName": "upn"
+  "displayName": "upn",
+  "react-native-google-mobile-ads":{
+    "android_app_id":"ca-app-pub-9032115287615251~8130042526",
+    "ios_app_id":"ca-app-pub-9032115287615251~8130042526"
+  }
 }

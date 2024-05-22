@@ -11,12 +11,18 @@ import ExamTarget from './components/exam-target/index.js';
 import PrepareSubjects from './components/prep-subj/index.js';
 import TimeTable from './components/time-table/index.js';
 import Main from '@AppPage/Main/index.js';
+import Test1 from './components/test1/index.js';
+import Test2 from './components/test2/index.js';
+import Test3 from './components/test3/index.js';
 
 const Stack = createStackNavigator();
 
 const Splash = () =>{
  return (<NavigationContainer>
  <Stack.Navigator>
+    <Stack.Screen name="SS_Test2" component={Test2}  options={{ headerShown: false }} />
+    <Stack.Screen name="SS_Test1" component={Test1}  options={{ headerShown: false }} />
+    <Stack.Screen name="SS_Test3" component={Test3}  options={{ headerShown: false }} />
     <Stack.Screen name="SS_Introduction" component={Introduction}  options={{ headerShown: false }} />
     <Stack.Screen name="SS_Notifications" component={Notify}  options={{ headerShown: false }} />
     <Stack.Screen name="SS_Storage" component={Storage}  options={{ headerShown: false }} />
