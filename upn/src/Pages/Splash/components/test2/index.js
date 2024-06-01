@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text,  Platform, NativeModules } from 'react-native';
 import axios from 'axios';
 import RNFS from 'react-native-fs';
 import RenderHtml from 'react-native-render-html';
 import { useWindowDimensions } from 'react-native';
 
+const { PlatformConstants } = NativeModules;
 
 const Test2 = ()=>{
-   const [htmlContent, setHtmlContent] = useState({ html: '' });
+   /*const [htmlContent, setHtmlContent] = useState({ html: '' });
    const secretKey = 'SECRET_KEY';
    const { width } = useWindowDimensions();
    const downloadHtmlFile = async (url) => {
+      let htmlContent;
       try {
         const axiosInstance = axios.create({
             maxContentLength: Infinity,
@@ -22,7 +24,7 @@ const Test2 = ()=>{
             }
         });
         const response = await axiosInstance.get(url);
-        const htmlContent = response.data;
+        htmlContent = response?.data;
         return htmlContent;
       } catch (error) {
         console.error('Error downloading the HTML file:', error);
@@ -60,7 +62,7 @@ const Test2 = ()=>{
          console.log("File contents:", htmlSource);
 
          const source = { html: htmlSource };
-         setHtmlContent( source );
+         setHtmlContent({ ...htmlContent, source });
          } catch(error){
           console.log(error);
          }
@@ -70,13 +72,14 @@ const Test2 = ()=>{
     process();
      
    },[]);
-
+*/
 
  return (<View>
     <Text>Test2 Page</Text>
-    <RenderHtml
+    <Text style={{ padding:15 }}>{Platform.OS} {PlatformConstants.Version}</Text>
+    {/*<RenderHtml
       contentWidth={width}
-      source={htmlContent} />
+ source={htmlContent} />*/}
  </View>);
 };
 

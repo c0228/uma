@@ -20,9 +20,6 @@ const Stack = createStackNavigator();
 const Splash = () =>{
  return (<NavigationContainer>
  <Stack.Navigator>
-    <Stack.Screen name="SS_Test2" component={Test2}  options={{ headerShown: false }} />
-    <Stack.Screen name="SS_Test1" component={Test1}  options={{ headerShown: false }} />
-    <Stack.Screen name="SS_Test3" component={Test3}  options={{ headerShown: false }} />
     <Stack.Screen name="SS_Introduction" component={Introduction}  options={{ headerShown: false }} />
     <Stack.Screen name="SS_Notifications" component={Notify}  options={{ headerShown: false }} />
     <Stack.Screen name="SS_Storage" component={Storage}  options={{ headerShown: false }} />
@@ -33,6 +30,10 @@ const Splash = () =>{
     <Stack.Screen name="SS_PrepSubj" component={PrepareSubjects} options={{ headerShown: false }} />
     <Stack.Screen name="SS_TimeTable" component={TimeTable} options={{ headerShown: false }} />
     <Stack.Screen name="SS_Main" component={Main} options={{ headerShown: false }} />
+    {/*
+    <Stack.Screen name="SS_Test3" component={Test3}  options={{ headerShown: false }} />
+    <Stack.Screen name="SS_Test2" component={Test2}  options={{ headerShown: false }} />
+    <Stack.Screen name="SS_Test1" component={Test1}  options={{ headerShown: false }} /> */}
   </Stack.Navigator>
   </NavigationContainer>);
 };
