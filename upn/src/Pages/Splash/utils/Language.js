@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Modal, TouchableOpacity, ScrollView, Switch } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Switch } from 'react-native';
+import Modal from '@AppComponent/Modal/index.js';
 
 const Language = ({ value, handleSelect }) =>{
  const options = [{ id: 'en', placeholder:'A', label: 'English', value: 'en' },
@@ -24,7 +25,9 @@ useEffect(()=>{
             {selectedOptions && options?.filter((opt)=>opt?.value===selectedOptions)?.[0]?.placeholder}
         </Text>
     </TouchableOpacity>
-    <Modal title="Select Preferred Language" visible={modalVisible} onClose={(isVisible) => setModalVisible(isVisible)}>
+    <Modal title="Select Preferred Language" 
+          visible={modalVisible} 
+          onClose={(isVisible) => setModalVisible(isVisible)}>
         <ScrollView style={{ paddingLeft:10, marginBottom:5 }}>
           {options?.map((option, index)=>{
             return (<View key={index} style={{ flexDirection:'row', paddingBottom:5 }}>
@@ -34,7 +37,7 @@ useEffect(()=>{
               <Text style={{ flex:1, fontSize: 15, lineHeight:22 }} onPress={()=>toggleOption(option)}>{option?.label}</Text>
             </View>);
           })}
-          </ScrollView>
+        </ScrollView>
     </Modal>
  </View>);
 };

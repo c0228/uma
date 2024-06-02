@@ -1,6 +1,30 @@
+import axios from 'axios';
 import messaging from '@react-native-firebase/messaging';
+import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
+import { GetCurrentTimeStamp, getDiffTimeFromNow, TIMESTAMP_TZ_FORMAT } from '@AppUtils/DateTime.js';
+import { NEXUS_URL } from '@StaticData/urls.js';
 
-export const initializeFCM = ()=>{
+async function forceTokenRefresh(userDetails) {
+  try {
+    await messaging().deleteToken(); // Delete the current FCM token
+    const token = await messaging().getToken(); // Get a new FCM token manually
+    /* Add/Update token and deviceId into mq_user_devices */
+    let postParams = { token: token };
+    if(userDetails?.device?.id?.length>0){ postParams.deviceId = userDetails?.device?.id; }
+    axios.post(NEXUS_URL+'add/token', postParams).then(response => { 
+      const device = {
+        id: response?.data?.params?.deviceId,
+        token: response?.data?.params?.token,
+        lastUpdated: GetCurrentTimeStamp()
+      };
+      AddToSPStore('USER_DETAILS', { device }); // Set deviceId and token in USER_DETAILS
+    });
+  } catch (error) {
+    console.error('Failed to refresh token:', error);
+  }
+}
+
+export const initializeFCM = async()=>{
 // Request user permission for notifications
 messaging().requestPermission()
 .then(authStatus => {
@@ -12,15 +36,14 @@ messaging().requestPermission()
     console.log('Authorization status:', authStatus);
   }
 });
+ 
+let userDetails = await getFromSPStore('USER_DETAILS');
+const timestamp = getDiffTimeFromNow(userDetails?.device?.lastUpdated, TIMESTAMP_TZ_FORMAT);
+if(timestamp?.remainingHours<-720){
+  await forceTokenRefresh(userDetails); 
+}
 
-messaging().getToken().then(token => { // Send this token to your backend server to use it for sending messages
-console.log('Device FCM Token:', token); 
-});
-
-messaging().onTokenRefresh(token => { // Update your server with the new token
-console.log('New FCM Token:', token);
-});
-/* 
+/*
 messaging().onMessage(async remoteMessage => { // Handle foreground messages
 console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
 });

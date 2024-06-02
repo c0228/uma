@@ -15,14 +15,17 @@ import Test1 from './components/test1/index.js';
 import Test2 from './components/test2/index.js';
 import Test3 from './components/test3/index.js';
 import { getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
+import { initializeFCM } from '@AppUtils/FCM.js';
 
 const Stack = createStackNavigator();
 
 const Splash = () =>{
- const [userDetails, setUserDetails] = useState();
+ const [userDetails, setUserDetails] = useState({});
  const initialize = async() =>{
-  const val = await getFromSPStore('USER_DETAILS');
-  if(val?.length>0){ setUserDetails(val); }
+  const userDetails = await getFromSPStore('USER_DETAILS'); 
+  console.log("userDetails, userDetails", userDetails);
+  if(userDetails?.device?.id?.length>0){ setUserDetails(userDetails); } 
+  initializeFCM();
  };
  useEffect(()=>{
   initialize();
