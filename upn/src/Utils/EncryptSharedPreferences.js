@@ -12,7 +12,11 @@ export const getFromSPStore = async(key)=>{
  try {
     const value = await EncryptedStorage.getItem(key);
     if (value !== null) {
-        return JSON.parse(value);
+      try {
+         return JSON.parse(value);
+      } catch (error) {
+         return value;
+      }
     }
     return ''; // Default value if no value is stored
  } catch (error) {
