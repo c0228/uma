@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, PermissionsAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Header from './../../utils/Header.js';
 import Language from './../../utils/Language.js';
 import { bgs, dialogue } from './../../static-data/dialogue.js';
 import { Button } from '@AppFormElement/Button/index.js';
+import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
 
 const Notify = ({ route }) =>{
  const [lang, setLang] = useState(route?.params?.language || 'en');
@@ -28,8 +29,22 @@ const Notify = ({ route }) =>{
          </TouchableOpacity>    
   </View>);
  };
- const handleNotification = () =>{
-    navigation.navigate('SS_Storage',{ language: lang });
+ const handleNotification = async() =>{
+   try {
+     const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
+     if(granted === PermissionsAndroid.RESULTS.GRANTED){
+       let permissions = userDetails?.permissions || [];
+       const userDetails = await getFromSPStore('USER_DETAILS');
+       if(permissions){ permissions.push('POST_NOTIFICATIONS'); }
+       await AddToSPStore('USER_DETAILS',{...userDetails, permissions});
+       navigation.navigate('SS_Storage',{ language: lang });
+     } else {
+        // Access Denied Message 
+        console.log("Access Denied");
+     }
+   } catch(err) {
+      console.warn(err);
+   }
  };
  const SplashButton = ()=>{
     return (<View style={{ flex:1, justifyContent:'flex-end', alignItems:'center' }}>

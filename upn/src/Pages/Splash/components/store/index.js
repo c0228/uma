@@ -1,14 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState, useEffect, BackHandler } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, PermissionsAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Header from './../../utils/Header.js';
 import Language from './../../utils/Language.js';
 import { bgs, dialogue } from './../../static-data/dialogue.js';
 import { Button } from '@AppFormElement/Button/index.js';
+import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
 
 const Storage = ({ route }) =>{
  const [lang, setLang] = useState(route?.params?.language || 'en');
+ 
+ const backHandler = async()=>{
+  const userDetails = await getFromSPStore('USER_DETAILS');
+  let permissions = userDetails?.permissions || [];
+  if(permissions?.includes('POST_NOTIFICATIONS')){
+    navigation.navigate('SS_Introduction',{ language: lang });
+  } else {
+    navigation.navigate('SS_Notifications',{ language: lang });
+  }
+ };
+
+ useEffect(()=>{
+  const unsubscribe = navigation.addListener('beforeRemove', async(e) => {
+    e.preventDefault();
+    unsubscribe();
+    backHandler();
+  });
+ },[navigation]);
 
  useEffect(()=>{
    if(route?.params?.language){ 
@@ -20,7 +39,7 @@ const Storage = ({ route }) =>{
  const BackButton = () =>{
   return (
   <View style={{  position:'absolute', marginLeft:10, marginTop:18 }}>
-        <TouchableOpacity onPress={() => navigation?.navigate('SS_Notifications', { language: lang })}>
+        <TouchableOpacity onPress={() =>backHandler()}>
             <View style={{ flexDirection:'row', padding:8, borderWidth:1, borderColor:'#fff', borderRadius:8 }} >
                 <FontAwesome5 name="arrow-left" size={12} color="#fff" style={{ marginTop:2,marginRight:5 }} />
                 <Text style={{ color:'#fff', fontSize: 13, fontWeight:'bold' }}>{dialogue?.["d12"]?.[lang]}</Text>  
@@ -28,8 +47,22 @@ const Storage = ({ route }) =>{
          </TouchableOpacity>    
   </View>);
  };
- const handleNotification = () =>{
-    navigation.navigate('SS_Authentication',{ language: lang });
+ const handleNotification = async() =>{
+  try {
+    const granted = await PermissionsAndroid.requestMultiple(
+      [PermissionsAndroid?.PERMISSIONS?.READ_EXTERNAL_STORAGE,
+        PermissionsAndroid?.PERMISSIONS?.WRITE_EXTERNAL_STORAGE
+      ]);
+    if(granted[PermissionsAndroid?.PERMISSIONS?.READ_EXTERNAL_STORAGE]===PermissionsAndroid?.RESULTS?.GRANTED &&
+      granted[PermissionsAndroid?.PERMISSIONS?.WRITE_EXTERNAL_STORAGE]===PermissionsAndroid?.RESULTS?.GRANTED){
+        navigation.navigate('SS_Authentication',{ language: lang });
+    } else {
+      console.log("Access Denied")
+    }
+  } catch(err){
+     console.warn(err);
+  }
+    
  };
  const SplashButton = ()=>{
     return (<View style={{ flex:1, justifyContent:'flex-end', alignItems:'center' }}>

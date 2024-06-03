@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Platform, NativeModules  } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import Header from './../../utils/Header.js';
 import Language from './../../utils/Language.js';
 import { bgs, dialogue } from './../../static-data/dialogue.js';
 import { Button } from '@AppFormElement/Button/index.js';
+import { getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
 
 const Introduction = ({ route }) =>{
+ const { PlatformConstants } = NativeModules;
  const [lang, setLang] = useState('en'); 
  const navigation = useNavigation(); 
 
@@ -30,8 +32,17 @@ const Introduction = ({ route }) =>{
           </View>
         </View>);
  };
- const handleIntroduction = () =>{
-  navigation.navigate('SS_Notifications',{ language: lang });
+ const handleIntroduction = async() =>{
+  const userDetails = await getFromSPStore('USER_DETAILS');
+  if(!userDetails?.permissions?.includes('POST_NOTIFICATIONS')){
+     navigation.navigate('SS_Notifications',{ language: lang });
+  } else if(!userDetails?.permissions?.includes('STORAGE') && 
+          Platform?.OS?.toLowerCase()==='android' && 
+          PlatformConstants?.Version<=23){
+     navigation.navigate('SS_Storage',{ language: lang });
+  } else {
+     navigation.navigate('SS_Authentication',{ language: lang });
+  }
  };
 
  const SplashButton = ()=>{
