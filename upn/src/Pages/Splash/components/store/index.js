@@ -55,6 +55,9 @@ const Storage = ({ route }) =>{
       ]);
     if(granted[PermissionsAndroid?.PERMISSIONS?.READ_EXTERNAL_STORAGE]===PermissionsAndroid?.RESULTS?.GRANTED &&
       granted[PermissionsAndroid?.PERMISSIONS?.WRITE_EXTERNAL_STORAGE]===PermissionsAndroid?.RESULTS?.GRANTED){
+        const userDetails = await getFromSPStore('USER_DETAILS');
+        if(permissions){ permissions.push('STORAGE'); }
+        await AddToSPStore('USER_DETAILS',{...userDetails, permissions});
         navigation.navigate('SS_Authentication',{ language: lang });
     } else {
       console.log("Access Denied")
