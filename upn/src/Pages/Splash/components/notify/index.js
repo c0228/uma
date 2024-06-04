@@ -33,11 +33,15 @@ const Notify = ({ route }) =>{
    try {
      const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
      if(granted === PermissionsAndroid.RESULTS.GRANTED){
-       let permissions = userDetails?.permissions || [];
        const userDetails = await getFromSPStore('USER_DETAILS');
-       if(permissions){ permissions.push('POST_NOTIFICATIONS'); }
+       let permissions = userDetails?.permissions || [];
+           permissions.push('POST_NOTIFICATIONS');
        await AddToSPStore('USER_DETAILS',{...userDetails, permissions});
-       navigation.navigate('SS_Storage',{ language: lang });
+       if(!userDetails?.permissions?.includes('STORAGE')){
+          navigation.navigate('SS_Storage',{ language: lang });
+       } else {
+          navigation.navigate('SS_Authentication',{ language: lang });
+       }
      } else {
         // Access Denied Message 
         console.log("Access Denied");

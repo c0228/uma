@@ -44,7 +44,7 @@ export const FormPasswordValidation = (validation, value) =>{
         }
       }
       if(step === 'maxLength'){
-        if(value?.toString()?.trim().length > validation[step]?.value) {
+        if(!value && value?.toString()?.trim().length > validation[step]?.value) {
           errorMessage.push("MAXLENGTH_FAILED"); 
         } else {
           validationSuccess.push(step);

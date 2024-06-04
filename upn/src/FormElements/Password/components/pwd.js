@@ -46,7 +46,7 @@ export const Password = ({ name, type, label, value, placeholder, validation })=
         if(formName!==undefined && form?.[formName]!==undefined){
          await formContext?.setForm(formName, { [name]: result });
         }
-        console.log("form", form);
+        console.log("form ["+name+"] ", form);
      };
 
   

@@ -3,8 +3,8 @@
 
 
 /* Logger Declaration in JSON */ 
-include('./../../vendor/apache/log4php/src/main/php/Logger.php'); 
-Logger::configure('./../../config/log-config.xml'); 
+// include('./../../vendor/apache/log4php/src/main/php/Logger.php'); 
+// Logger::configure('./../../config/log-config.xml'); 
 	
 /* Property Files */
 $propertyFile = './../../config/app-properties.ini';

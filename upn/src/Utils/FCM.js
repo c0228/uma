@@ -38,11 +38,14 @@ messaging().requestPermission()
 });
  
 let userDetails = await getFromSPStore('USER_DETAILS');
-const timestamp = getDiffTimeFromNow(userDetails?.device?.lastUpdated, TIMESTAMP_TZ_FORMAT);
-if(timestamp?.remainingHours<-720){
+if(!userDetails?.device?.token){
   await forceTokenRefresh(userDetails); 
+} else if(userDetails?.device?.lastUpdated){
+  const timestamp = getDiffTimeFromNow(userDetails?.device?.lastUpdated, TIMESTAMP_TZ_FORMAT);
+  if(timestamp?.remainingHours<-720){
+   await forceTokenRefresh(userDetails); 
+  }
 }
-
 /*
 messaging().onMessage(async remoteMessage => { // Handle foreground messages
 console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));

@@ -8,6 +8,7 @@ import { Password } from '@AppFormElement/Password/components/pwd.js';
 import { ConfirmPassword } from '@AppFormElement/Password/components/confirm-pwd.js';
 import { Form } from '@AppFormElement/Form/index.js';
 import { Range } from '@AppUtils/ArrayManagement.js';
+import md5 from 'md5';
 
 const Register = () =>{
     const [displayScreen, setDisplayScreen] = useState('REGISTER'); // REGISTER / EMAIL_VALIDATE / SUCCESS
@@ -143,19 +144,21 @@ const Register = () =>{
             }} 
             onSubmit={(form, isValidForm, triggerReset)=>{
               console.log("Form Result:", form);
-              const data = { surname: form?.["register"]?.surname?.value,
-                            name: form?.["register"]?.name?.value,
-                            gender: form?.["register"]?.gender?.value,
-                            age: form?.["register"]?.gender?.value,
-                            email: form?.["register"]?.email?.value,
-                            pwd: form?.["register"]?.pwd?.value,
-                            pwdConfirm: form?.["register"]?.pwdConfirm?.value };
-              console.log("data", data);
-              if(data?.gender?.length>0 && data?.email?.length>0){
+              if(isValidForm){
+                const data = { 
+                 surname: form?.["register"]?.surname?.value,
+                 name: form?.["register"]?.name?.value,
+                 gender: form?.["register"]?.gender?.value,
+                 age: form?.["register"]?.gender?.value,
+                 email: form?.["register"]?.email?.value,
+                 pwd: md5( form?.["register"]?.pwd?.value ) 
+                };
+                console.log("data", data);
                 setRegisterData(data);
                 setDisplayScreen('EMAIL_VALIDATE');
+                triggerReset();
               }
-             // triggerReset();
+              
             }}>
         <View style={{ marginTop:15 }}>
             <SurName />

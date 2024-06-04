@@ -23,6 +23,7 @@
     "crypto-js": "^4.2.0",
     "e-ui-react-native": "file:.yalc/e-ui-react-native",
     "firebase-admin": "^12.1.0",
+    "md5": "^2.3.0",
     "moment": "^2.30.1",
     "react": "18.2.0",
     "react-native": "^0.74.1",

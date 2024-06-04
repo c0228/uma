@@ -20,8 +20,7 @@ export const ConfirmPassword = ({ name, value, validation })=>{
  const formElement2 = form?.[formName]?.[element2];
 
  useEffect(()=>{
-    console.log("formElement1", formElement1?.value, "formElement2", formElement2?.value);
-    let errorMessage = formElement2?.errorMessage || [];
+   let errorMessage = formElement2?.errorMessage || [];
     if( formElement1?.value !== formElement2?.value ) {
         if(formName!==undefined && form?.[formName]!==undefined && !errorMessage.includes('PASSWORD_NOT_MATCH') ){
             errorMessage.push("PASSWORD_NOT_MATCH");
@@ -29,6 +28,7 @@ export const ConfirmPassword = ({ name, value, validation })=>{
     } else {
         errorMessage = errorMessage?.filter(item => item !== 'PASSWORD_NOT_MATCH');
     }
+    console.log("formElement [errorMessage]:", errorMessage);
     formContext?.setForm(formName, { [element2]: {  ...formElement2, errorMessage } });
  },[formElement1?.value, formElement2?.value]);
 

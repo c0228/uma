@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Platform, NativeModules } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Introduction from './components/intro/index.js';
@@ -14,17 +15,23 @@ import Main from '@AppPage/Main/index.js';
 import Test1 from './components/test1/index.js';
 import Test2 from './components/test2/index.js';
 import Test3 from './components/test3/index.js';
-import { getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
+import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
 import { initializeFCM } from '@AppUtils/FCM.js';
 
 const Stack = createStackNavigator();
 
 const Splash = () =>{
+ const { PlatformConstants } = NativeModules;
  const [userDetails, setUserDetails] = useState({});
  const initialize = async() =>{
-  const userDetails = await getFromSPStore('USER_DETAILS'); 
-  console.log("userDetails, userDetails", userDetails);
-  if(userDetails?.device?.id?.length>0){ setUserDetails(userDetails); } 
+  let details = await getFromSPStore('USER_DETAILS'); 
+  console.log("userDetails, userDetails", details);
+  if(Platform?.OS?.toLowerCase()==='android' && PlatformConstants?.Version>23){
+    let permissions = details?.permissions || [];
+        permissions.push('STORAGE');
+    await AddToSPStore('USER_DETAILS', {...details, permissions})
+  }
+  setUserDetails(details);
   initializeFCM();
  };
  useEffect(()=>{

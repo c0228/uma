@@ -7,6 +7,8 @@ header("Access-Control-Allow-Headers: Content-Type");
 require_once './../core/app.database.php';
 require_once './../core/app.initiator.php';
 require_once './../repo/data.app.settings.php';
+require_once './../mail-templates/send-otpcode/template1.php';
+require_once './../utils/Mail.php';
 require_once './../utils/Math.php';
 
 if($_GET["action"]=='ADD_FCM_TOKEN' && $_SERVER['REQUEST_METHOD']=='POST'){
@@ -33,5 +35,12 @@ if($_GET["action"]=='ADD_FCM_TOKEN' && $_SERVER['REQUEST_METHOD']=='POST'){
  $result["params"] =  $params;
  $result["message"] = $message;
  echo json_encode( $result );
+}
+else if($_GET["action"]=='SEND_OTPCODE'){
+  // sendMail($data);
+  
+}
+else if($_GET["action"]=='VERIFY_OTPCODE' && $_SERVER['REQUEST_METHOD']=='POST'){
+
 }
 ?>

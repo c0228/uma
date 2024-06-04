@@ -84,7 +84,7 @@ export const Select = ({ name, label, placeholder, popupTitle, value, validation
                                         [FormStyles.formLabel,FormStyles.formLabelValid]):
                             (FormStyles.formLabel);
   const textInputStyles = (validateOnSubmit)?
-                            (isErrorMessageExist?[FormStyles.formControl,FormStyles.formControlValid, style]:
+                            (isErrorMessageExist?[FormStyles.formControl,FormStyles.formControlInvalid, style]:
                                     [FormStyles.formControl,FormStyles.formControlValid, style]):
                             ([FormStyles.formControl, style]);
  
