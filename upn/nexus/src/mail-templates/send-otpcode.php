@@ -3,8 +3,9 @@ require_once './../core/app.database.php';
 require_once './../core/app.initiator.php';
 
 function generateHTML() {
-  global $PROJ_APP_NAME;
-  global $PROJ_APP_LOGO;
+  global $APP_PROPERTIES;
+  $PROJ_APP_NAME = $APP_PROPERTIES["PROJ_APP_NAME"];
+  $PROJ_APP_LOGO = $APP_PROPERTIES["PROJ_APP_LOGO"];
   // Start buffering the output
   ob_start();
 ?>
