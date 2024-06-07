@@ -1,10 +1,13 @@
 RewriteEngine On
 
+# APP SETTINGS MODULE
 RewriteRule add/token src/controllers/module.app.settings.php?action=ADD_FCM_TOKEN [QSA]
-RewriteRule email/validate/([^/]+)$ src/controllers/module.app.settings.php?action=EMAIL_VALIDATE&email=$1  [QSA]
 RewriteRule send/otp src/controllers/module.app.settings.php?action=SEND_OTPCODE [QSA]
 RewriteRule verify/otp src/controllers/module.app.settings.php?action=VERIFY_OTPCODE [QSA]
+RewriteRule clean/otp src/controllers/module.app.settings.php?action=CJ_CLEAN_OTPCODE [QSA]
 
+# USER ACCOUNT MODULE
+RewriteRule email/validate/([^/]+)$ src/controllers/module.app.settings.php?action=EMAIL_VALIDATE&email=$1  [QSA]
 # RewriteRule timezones/list src/controllers/config.static.apis.php?action=GetTimezones [QSA]
 
 # RewriteRule upload/file src/controllers/module.upload.file.php [QSA]

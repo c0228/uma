@@ -12,28 +12,35 @@ require_once './../repo/data.user.account.info.php';
 require_once './../utils/Mail.php';
 require_once './../utils/DateTime.php';
 
-if($_GET["action"]=='USER_REGISTER' && $_SERVER['REQUEST_METHOD']=='POST'){
+if($_GET["action"]=='USER_VALIDATE_EMAIL' && $_SERVER['REQUEST_METHOD']=='POST'){
+  $htmlData = json_decode( file_get_contents('php://input'), true );	
+  $email = ''; if( array_key_exists("email", $htmlData) ){ $email = $htmlData["email"]; }
+  $query = $userAccountModule->query_validate_userEmail($email);
+  $data = json_decode( $database->getJSONData($query) );
+  $status = 'NOT_EXIST';
+  if(count($data)>0){ $status = 'EXIST'; }
+  echo $status;
+}
+else if($_GET["action"]=='USER_REGISTER' && $_SERVER['REQUEST_METHOD']=='POST'){
  $htmlData = json_decode( file_get_contents('php://input'), true );	
- $surName = ''; if( array_key_exists("surName", $htmlData) ){ $surName = $htmlData["surName"]; }
+ $userId=''; // Generate Unique Code
+ $surname = ''; if( array_key_exists("surname", $htmlData) ){ $surname = $htmlData["surname"]; }
  $name = ''; if( array_key_exists("name", $htmlData) ){ $name = $htmlData["name"];   }
- $dob = ''; if( array_key_exists("dob", $htmlData) ){ $dob = $htmlData["dob"];  }
  $gender = ''; if( array_key_exists("gender", $htmlData) ){ $gender = $htmlData["gender"];  }
+ $age = ''; if( array_key_exists("age", $htmlData) ){ $age = $htmlData["age"];  }
  $email = ''; if( array_key_exists("email", $htmlData) ){ $email = $htmlData["email"];  }
- $emailVal = 'N'; if( array_key_exists("emailVal", $htmlData) ){ $emailVal = $htmlData["emailVal"];  }
  $accPwd = ''; if( array_key_exists("accPwd", $htmlData) ){ $accPwd = $htmlData["accPwd"];  }
- $mcountrycode = ''; if( array_key_exists("mcountrycode", $htmlData) ){ $mcountrycode = $htmlData["mcountrycode"];  }
- $mobile = ''; if( array_key_exists("mobile", $htmlData) ){ $mobile = $htmlData["mobile"];  }
- $mobileVal = 'N'; if( array_key_exists("mobileVal", $htmlData) ){ $mobileVal = $htmlData["mobileVal"]; }
- $dp = ''; if( array_key_exists("dp", $htmlData) ){ $dp = $htmlData["dp"];   }
- $userTz = 'Asia/Kolkata'; if( array_key_exists("userTz", $htmlData) ){ $userTz = $htmlData["userTz"];  }
- $accactive = ''; if( array_key_exists("accactive", $htmlData) ){ $accactive = $htmlData["accactive"];  }
- $userRole = ''; if( array_key_exists("userRole", $htmlData) ){ $userRole = $htmlData["userRole"];  }
- $query = $userAccountModule->query_add_userAccount($surName, $name, $dob, $gender, $email, $emailVal, $accPwd, $mcountrycode, $mobile, $mobileVal, $dp, 
-	$userTz, $accactive, $userRole);
+ $avatar = ''; if( array_key_exists("avatar", $htmlData) ){ $avatar = $htmlData["avatar"];  }
+ $locality = ''; if( array_key_exists("locality", $htmlData) ){ $locality = $htmlData["locality"];  }
+ $location = ''; if( array_key_exists("location", $htmlData) ){ $location = $htmlData["location"]; }
+ $state = ''; if( array_key_exists("state", $htmlData) ){ $state = $htmlData["state"];   }
+ $country = ''; if( array_key_exists("country", $htmlData) ){ $country = $htmlData["country"];  }
+ $query = $userAccountModule->query_add_userAccount($userId, $surname, $name, $gender, $age, $email, $accPwd, $avatar, 
+ 	$locality, $location, $state, $country);
  $result = array();
  $status = $database->addupdateData($query);
  $message = 'New User Created Successfully';
- if($status === 'Error') { $message = 'Query Failed - [userRole is Required Field to Create a User Account]'; }
+ if($status === 'Error') { $message = 'Query Failed'; }
  $result["status"] = $status;
  $result["message"] = $message;
  echo json_encode( $result );
@@ -52,16 +59,8 @@ else if($_GET["action"]=='USER_LOGIN' && $_SERVER['REQUEST_METHOD']=='POST'){
 	}
 	$result["status"] = $status;
 	echo json_encode( $result );
-} 
-else if($_GET["action"]=='USER_VALIDATE_EMAIL' && $_SERVER['REQUEST_METHOD']=='POST'){
-   $htmlData = json_decode( file_get_contents('php://input'), true );	
-   $email = ''; if( array_key_exists("email", $htmlData) ){ $email = $htmlData["email"]; }
-   $query = $userAccountModule->query_validate_userEmail($email);
-   $data = json_decode( $database->getJSONData($query) );
-   $status = 'NOT_EXIST';
-   if(count($data)>0){ $status = 'EXIST'; }
-   echo $status;
 }
+/*
 else if($_GET["action"]=='USER_DETAILS_UPDATE' && $_SERVER['REQUEST_METHOD']=='POST'){
  $htmlData = json_decode( file_get_contents('php://input'), true );	
  $userId = ''; if( array_key_exists("userId", $htmlData) ){ $userId = $htmlData["userId"]; }
@@ -123,3 +122,4 @@ else if($_GET["action"]=='SEND_RESETPASSWORD_EMAIL' && $_SERVER['REQUEST_METHOD'
    }
    echo json_encode($status);
 }
+*/
