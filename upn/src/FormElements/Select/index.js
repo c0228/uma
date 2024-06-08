@@ -21,8 +21,10 @@ export const Select = ({ name, label, placeholder, popupTitle, value, validation
     if (FormMode === FORM_RESET) {
       console.log("setSelectedOptions Triggered at useEffect");
       setSelectedOptions(initialValue);
+    }  else if (FormMode === FORM_SUBMITTED || selectedOptions.length > 0) {
+        SelectValidate(selectedOptions);
     }
-  }, [FormMode]);
+  }, [FormMode, selectedOptions]);
 
 
   const toggleOption = (option) => {
