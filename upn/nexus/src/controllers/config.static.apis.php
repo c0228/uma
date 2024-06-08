@@ -2,7 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json; charset=utf-8');
 
-if($_GET["action"]==='GetTimezones'){
+ if($_GET["action"]==='GetTimezones'){
     $timezone_identifiers = DateTimeZone::listIdentifiers();
     $timezones = array();
     

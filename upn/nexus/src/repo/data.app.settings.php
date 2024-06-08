@@ -20,4 +20,4 @@ class AppSettings {
  }
 }
 $appSettings = new AppSettings();
-?>
+?> 

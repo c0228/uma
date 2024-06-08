@@ -39,7 +39,7 @@ if($_GET["action"]=='ADD_FCM_TOKEN' && $_SERVER['REQUEST_METHOD']=='POST'){
  $result["message"] = $message;
  echo json_encode( $result );
 }
-else if($_GET["action"]=='SEND_OTPCODE'){
+else if($_GET["action"]=='SEND_OTPCODE' && $_SERVER['REQUEST_METHOD']=='POST'){
   $htmlData = json_decode( file_get_contents('php://input'), true );
   $name = ''; if( array_key_exists("name", $htmlData) ){ $name = $htmlData["name"]; }
   $email = ''; if( array_key_exists("email", $htmlData) ){ $email = $htmlData["email"]; }

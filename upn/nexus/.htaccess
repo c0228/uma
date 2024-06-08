@@ -7,7 +7,7 @@ RewriteRule verify/otp src/controllers/module.app.settings.php?action=VERIFY_OTP
 RewriteRule clean/otp src/controllers/module.app.settings.php?action=CJ_CLEAN_OTPCODE [QSA]
 
 # USER ACCOUNT MODULE
-RewriteRule email/validate/([^/]+)$ src/controllers/module.app.settings.php?action=EMAIL_VALIDATE&email=$1  [QSA]
+RewriteRule email/validate src/controllers/module.user.account.info.php?action=USER_VALIDATE_EMAIL  [QSA]
 # RewriteRule timezones/list src/controllers/config.static.apis.php?action=GetTimezones [QSA]
 
 # RewriteRule upload/file src/controllers/module.upload.file.php [QSA]

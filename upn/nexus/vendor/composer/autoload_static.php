@@ -17,7 +17,6 @@ class ComposerStaticInit399b61fcc9a73d14b4b40a251cde0780
         'b067bc7112e384b61c701452d53a14a8' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/JmesPath.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
-        '0ccdf99b8f62f02c52cba55802e0c2e7' => __DIR__ . '/..' . '/zircote/swagger-php/src/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -26,8 +25,6 @@ class ComposerStaticInit399b61fcc9a73d14b4b40a251cde0780
             'Symfony\\Polyfill\\Php81\\' => 23,
             'Symfony\\Polyfill\\Php80\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
-            'Symfony\\Component\\Finder\\' => 25,
-            'Swagger\\' => 8,
             'StellaMaris\\Clock\\' => 18,
         ),
         'R' => 
@@ -101,10 +98,6 @@ class ComposerStaticInit399b61fcc9a73d14b4b40a251cde0780
             'Firebase\\Auth\\Token\\' => 20,
             'Fig\\Http\\Message\\' => 17,
         ),
-        'D' => 
-        array (
-            'Doctrine\\Common\\Lexer\\' => 22,
-        ),
         'B' => 
         array (
             'Brick\\Math\\' => 11,
@@ -123,14 +116,6 @@ class ComposerStaticInit399b61fcc9a73d14b4b40a251cde0780
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
-        ),
-        'Symfony\\Component\\Finder\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/finder',
-        ),
-        'Swagger\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/zircote/swagger-php/src',
         ),
         'StellaMaris\\Clock\\' => 
         array (
@@ -325,23 +310,9 @@ class ComposerStaticInit399b61fcc9a73d14b4b40a251cde0780
         array (
             0 => __DIR__ . '/..' . '/fig/http-message-util/src',
         ),
-        'Doctrine\\Common\\Lexer\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/doctrine/lexer/lib/Doctrine/Common/Lexer',
-        ),
         'Brick\\Math\\' => 
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
-        ),
-    );
-
-    public static $prefixesPsr0 = array (
-        'D' => 
-        array (
-            'Doctrine\\Common\\Annotations\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/annotations/lib',
-            ),
         ),
     );
 
@@ -446,7 +417,6 @@ class ComposerStaticInit399b61fcc9a73d14b4b40a251cde0780
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit399b61fcc9a73d14b4b40a251cde0780::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit399b61fcc9a73d14b4b40a251cde0780::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit399b61fcc9a73d14b4b40a251cde0780::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit399b61fcc9a73d14b4b40a251cde0780::$classMap;
 
         }, null, ClassLoader::class);
