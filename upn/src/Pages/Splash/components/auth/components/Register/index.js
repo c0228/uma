@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
+import axios from 'axios';
+import md5 from 'md5';
 import { useNavigation } from '@react-navigation/native';
 import { TextBox } from '@AppFormElement/TextBox/index.js';
 import { Email } from '@AppFormElement/Email/index.js';
@@ -8,14 +10,14 @@ import { Password } from '@AppFormElement/Password/components/pwd.js';
 import { ConfirmPassword } from '@AppFormElement/Password/components/confirm-pwd.js';
 import { Form } from '@AppFormElement/Form/index.js';
 import { Range } from '@AppUtils/ArrayManagement.js';
-import md5 from 'md5';
+import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
+import { NEXUS_URL } from '@StaticData/urls.js';
 
 const Register = () =>{
     const [displayScreen, setDisplayScreen] = useState('REGISTER'); // REGISTER / EMAIL_VALIDATE / SUCCESS
-    const [registerData, setRegisterData] = useState({
-        email: 'xxxxxxxxxxxx@gmail.com' });
-
+    const [registerData, setRegisterData] = useState({ email: 'xxxxxxxxxxxx@gmail.com' });
     const navigation = useNavigation();
+
     const SurName = () =>{
         return (<TextBox name="surname" label="Surname" placeholder="Enter your Surname" 
             validation={{
@@ -142,8 +144,7 @@ const Register = () =>{
               label:'Create an Account',
               size: 14
             }} 
-            onSubmit={(form, isValidForm, triggerReset)=>{
-              console.log("Form Result:", form);
+            onSubmit={async(form, isValidForm, triggerReset)=>{
               if(isValidForm){
                 const data = { 
                  surname: form?.["register"]?.surname?.value,
@@ -153,10 +154,20 @@ const Register = () =>{
                  email: form?.["register"]?.email?.value,
                  pwd: md5( form?.["register"]?.pwd?.value ) 
                 };
-                console.log("data", data);
+                const userDetails = await getFromSPStore("USER_DETAILS");
+                await AddToSPStore("USER_DETAILS", { ...userDetails, accountInfo: data });
                 setRegisterData(data);
                 setDisplayScreen('EMAIL_VALIDATE');
-                triggerReset();
+                // Trigger API to send OTP
+                axios.post(NEXUS_URL+'send/otp', 
+                    { 
+                      name: data?.surname+' '+data?.name,
+                      email: data?.email,
+                      deviceId: userDetails?.device?.id
+                    }).then(response => { 
+                        console.log(response);
+                 });
+                // triggerReset();
               }
               
             }}>
@@ -185,6 +196,8 @@ const Register = () =>{
               size: 14
             }} 
             onSubmit={(form, isValidForm, triggerReset)=>{
+                // Validate OTP Code
+                const otpCode = form?.["validateEmail"]?.otp?.value;
                 setDisplayScreen('SUCCESS');
             }}>
                 <View style={{ marginTop:15, marginBottom:15 }}>

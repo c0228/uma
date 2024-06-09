@@ -26,7 +26,7 @@ const Splash = () =>{
  const initialize = async() =>{
   let details = await getFromSPStore('USER_DETAILS'); 
   console.log("userDetails, userDetails", details);
-  if(Platform?.OS?.toLowerCase()==='android' && PlatformConstants?.Version>23){
+  if(Platform?.OS?.toLowerCase()==='android' && PlatformConstants?.Version>23 && !details?.permissions?.includes('STORAGE')){
     let permissions = details?.permissions || [];
         permissions.push('STORAGE');
     await AddToSPStore('USER_DETAILS', {...details, permissions})
