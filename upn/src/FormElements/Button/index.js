@@ -4,6 +4,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { COLORS } from '@AppUtils/ColorManagement.js';
 
 const convertToKebabCase = (str) =>{
   return str.replace(/-([a-z])/g, (match, char) => char.toUpperCase());
@@ -14,22 +15,22 @@ export const Button =  ({ type, icon, label, size, onPress, style }) => {
   const typ = convertToKebabCase(type);
   // console.log("typ [Button]", typ);
   const data= {
-    primary:{ bgColor:'#007bff', borderColor:'#007bff', color:'#fff' },
-    secondary:{ bgColor:'#6c757d', borderColor:'#6c757d', color:'#fff' },
-    success: { bgColor:'#198754', borderColor:'#198754', color:'#fff' },
-    danger:{ bgColor:'#dc3545', borderColor:'#dc3545', color:'#fff' },
-    warning:{ bgColor:'#ffc107', borderColor:'#ffc107', color:'#000' },
-    info:{ bgColor:'#0dcaf0', borderColor:'#0dcaf0', color:'#fefefe' },
-    dark:{ bgColor:'#212529', borderColor:'#212529', color:'#fff' },
-    light:{ bgColor:'#f8f9fa', borderColor:'#f8f9fa', color:'#000' },
-    outlinePrimary:{ bgColor:'transparent', borderColor:'#007bff', color:'#007bff' },
-    outlineSecondary:{ bgColor:'transparent', borderColor:'#6c757d', color:'#6c757d' },
-    outlineSuccess:{ bgColor:'transparent', borderColor:'#198754', color:'#198754' },
-    outlineDanger:{ bgColor:'transparent', borderColor:'#dc3545', color:'#dc3545' },
-    outlineWarning:{ bgColor:'transparent', borderColor:'#ffc107', color:'#ffc107' },
-    outlineInfo:{ bgColor:'transparent', borderColor:'#0dcaf0', color:'#0dcaf0' },
-    outlineDark:{ bgColor:'transparent', borderColor:'#212529', color:'#212529' },
-    outlineLight:{ bgColor:'transparent', borderColor:'#f8f9fa', color:'#f8f9fa' }
+    primary:{ bgColor: COLORS.DARK_BLUE, borderColor: COLORS.DARK_BLUE, color: COLORS.WHITE },
+    secondary:{ bgColor: COLORS.MEDIUM_GREY, borderColor: COLORS.MEDIUM_GREY, color: COLORS.WHITE },
+    success: { bgColor: COLORS.DARK_GREEN, borderColor: COLORS.DARK_GREEN, color: COLORS.WHITE },
+    danger:{ bgColor: COLORS.DARK_RED, borderColor: COLORS.DARK_RED, color: COLORS.WHITE },
+    warning:{ bgColor: COLORS.MEDIUM_YELLOW, borderColor: COLORS.MEDIUM_YELLOW, color: COLORS.DARK_BLACK },
+    info:{ bgColor: COLORS.MEDIUM_SKYBLUE, borderColor: COLORS.MEDIUM_SKYBLUE, color: COLORS.MEDIUM_WHITE },
+    dark:{ bgColor: COLORS.DARK_GREY, borderColor: COLORS.DARK_GREY, color: COLORS.WHITE },
+    light:{ bgColor: COLORS.LIGHT, borderColor: COLORS.LIGHT, color: COLORS.DARK_BLACK },
+    outlinePrimary:{ bgColor:'transparent', borderColor: COLORS.DARK_BLUE, color: COLORS.DARK_BLUE },
+    outlineSecondary:{ bgColor:'transparent', borderColor: COLORS.MEDIUM_GREY, color: COLORS.MEDIUM_GREY },
+    outlineSuccess:{ bgColor:'transparent', borderColor: COLORS.DARK_GREEN, color: COLORS.DARK_GREEN },
+    outlineDanger:{ bgColor:'transparent', borderColor: COLORS.DARK_RED, color: COLORS.DARK_RED },
+    outlineWarning:{ bgColor:'transparent', borderColor: COLORS.MEDIUM_YELLOW, color: COLORS.MEDIUM_YELLOW },
+    outlineInfo:{ bgColor:'transparent', borderColor: COLORS.MEDIUM_SKYBLUE, color: COLORS.MEDIUM_SKYBLUE },
+    outlineDark:{ bgColor:'transparent', borderColor: COLORS.DARK_GREY, color: COLORS.DARK_GREY },
+    outlineLight:{ bgColor:'transparent', borderColor: COLORS.LIGHT, color: COLORS.LIGHT }
   };
     return (
       <TouchableOpacity style={[styles.buttonContainer, { backgroundColor: data?.[typ]?.bgColor, borderWidth:1, 
