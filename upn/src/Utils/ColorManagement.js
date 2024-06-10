@@ -17,17 +17,17 @@ export const COLORS = {
    /* RED */
    DARK_RED : '#cf1325',
    MEDIUM_RED : '',
-   LIGHT_RED : '',
+   LIGHT_RED : '#f8d7da',
 
    /* GREEN */
    DARK_GREEN : '#0a7543',
-   MEDIUM_GREEN : '',
-   LIGHT_GREEN : '',
+   MEDIUM_GREEN : '#3b8562',
+   LIGHT_GREEN : '#d4edda',
 
    /* YELLOW */
-   DARK_YELLOW : '',
+   DARK_YELLOW : '#856404',
    MEDIUM_YELLOW : '#ffc107',
-   LIGHT_YELLOW : '',
+   LIGHT_YELLOW : '#fff3cd',
 
    /* BLACK */
    DARK_BLACK : '#000',

@@ -3,27 +3,33 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-native-responsive-grid-system';
+import { COLORS } from '@AppUtils/ColorManagement.js';
 
 export const Alert = ({ type, show, heading, body }) => {
     const [visible, setVisible] = useState(show);
   let backgroundColor = '';
+  let headerColor = '';
   let color = '';
 
   switch (type) {
     case 'success':
-      backgroundColor = '#d4edda';
-      color = '#155724';
+      backgroundColor = COLORS.LIGHT_GREEN;
+      headerColor = COLORS.DARK_GREEN;
+      color = COLORS.MEDIUM_GREEN;
       break;
     case 'warning':
-      backgroundColor = '#fff3cd';
-      color = '#856404';
+      backgroundColor = COLORS.LIGHT_YELLOW;
+      headerColor = COLORS.DARK_YELLOW;
+      color = COLORS.DARK_YELLOW;
       break;
     case 'danger':
-      backgroundColor = '#f8d7da';
-      color = '#721c24';
+      backgroundColor = COLORS.LIGHT_RED;
+      headerColor = COLORS.DARK_RED;
+      color = COLORS.DARK_RED;
       break;
     default:
       backgroundColor = '#cce5ff';
+      headerColor = '';
       color = '#004085';
   }
 
@@ -33,7 +39,7 @@ export const Alert = ({ type, show, heading, body }) => {
 
   const CloseButton = ()=>{
     return (<TouchableOpacity style={styles.closeButton} onPress={()=>handleClose()}>
-        <Icon name="close-circle-outline" size={24} color={type==='danger'?"red":"#687180"} />
+        <Icon name="close-circle-outline" size={24} color={headerColor} />
     </TouchableOpacity>);
   };
 
@@ -44,7 +50,7 @@ export const Alert = ({ type, show, heading, body }) => {
                     <>
                     <Row rowStyles={{ borderBottomWidth: 1, borderColor: '#ccc', marginBottom: '2%' }}>
                         <Col xs={10} sm={10} md={10} lg={10}>
-                            <Text style={(type==='danger')?[styles.alertHeading,{ color:'red' }]:[styles.alertHeading]}>{heading}</Text>
+                            <Text style={[styles.alertHeading,{ color: headerColor }]}>{heading}</Text>
                         </Col>
                         <Col xs={2} sm={2} md={2} lg={2}>
                             <CloseButton />
@@ -52,7 +58,7 @@ export const Alert = ({ type, show, heading, body }) => {
                     </Row>
                     <Row>
                         <Col xs={12} sm={12} md={12} lg={12}>
-                            <Text style={[styles.alertBody]}>{body}</Text>
+                            <Text style={[styles.alertBody,{ color: color }]}>{body}</Text>
                         </Col>
                     </Row>
                     </>
