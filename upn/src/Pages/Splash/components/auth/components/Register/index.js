@@ -8,6 +8,7 @@ import { Email } from '@AppFormElement/Email/index.js';
 import { Select } from '@AppFormElement/Select/index.js';
 import { Password } from '@AppFormElement/Password/components/pwd.js';
 import { ConfirmPassword } from '@AppFormElement/Password/components/confirm-pwd.js';
+import { Alert } from '@AppComponent/Alert/index.js';
 import { Form } from '@AppFormElement/Form/index.js';
 import { Range } from '@AppUtils/ArrayManagement.js';
 import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
@@ -16,6 +17,7 @@ import { NEXUS_URL } from '@StaticData/urls.js';
 const Register = () =>{
     const [displayScreen, setDisplayScreen] = useState('REGISTER'); // REGISTER / EMAIL_VALIDATE / SUCCESS
     const [registerData, setRegisterData] = useState({ email: 'xxxxxxxxxxxx@gmail.com' });
+    const [alertMessage, setAlertMessage] = useState({ type:'', message:'' });
     const navigation = useNavigation();
 
     const SurName = () =>{
@@ -156,8 +158,6 @@ const Register = () =>{
                 };
                 const userDetails = await getFromSPStore("USER_DETAILS");
                 await AddToSPStore("USER_DETAILS", { ...userDetails, accountInfo: data });
-                setRegisterData(data);
-                setDisplayScreen('EMAIL_VALIDATE');
                 // Trigger API to send OTP
                 axios.post(NEXUS_URL+'send/otp', 
                     { 
@@ -166,11 +166,22 @@ const Register = () =>{
                       deviceId: userDetails?.device?.id
                     }).then(response => { 
                         console.log(response);
-                 });
-                // triggerReset();
+                        setRegisterData(data);
+                        setDisplayScreen('EMAIL_VALIDATE');
+                 }) .catch(error => {
+                    console.error(error);
+                    // Show Alert
+                    setAlertMessage({ type:'danger', message: error.message });
+                  });
+              } else { // Show Alert
+                setAlertMessage({ type:'danger', message: 'Please Fill All Required Fields' });
               }
               
             }}>
+            {alertMessage?.type?.length>0 && alertMessage?.message?.length>0  && 
+            (<View style={{ marginTop: 15 }}>
+              <Alert type={alertMessage?.type} show="true" heading="Error Message" body={alertMessage?.message} />
+            </View>)}
         <View style={{ marginTop:15 }}>
             <SurName />
         </View>

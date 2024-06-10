@@ -33,7 +33,7 @@ export const Alert = ({ type, show, heading, body }) => {
 
   const CloseButton = ()=>{
     return (<TouchableOpacity style={styles.closeButton} onPress={()=>handleClose()}>
-        <Icon name="close-circle-outline" size={24} color="#687180" />
+        <Icon name="close-circle-outline" size={24} color={type==='danger'?"red":"#687180"} />
     </TouchableOpacity>);
   };
 
@@ -44,7 +44,7 @@ export const Alert = ({ type, show, heading, body }) => {
                     <>
                     <Row rowStyles={{ borderBottomWidth: 1, borderColor: '#ccc', marginBottom: '2%' }}>
                         <Col xs={10} sm={10} md={10} lg={10}>
-                            <Text style={[styles.alertHeading]}>{heading}</Text>
+                            <Text style={(type==='danger')?[styles.alertHeading,{ color:'red' }]:[styles.alertHeading]}>{heading}</Text>
                         </Col>
                         <Col xs={2} sm={2} md={2} lg={2}>
                             <CloseButton />
@@ -82,14 +82,13 @@ const styles = StyleSheet.create({
       },
       alertHeading: {
         paddingBottom:'1%',
-        fontSize: 20,
+        fontSize: 14,
         fontWeight: 'bold',
         marginBottom: 5,
 
       },
       alertBody: {
-        fontSize: 16,
-        fontWeight: 'bold',
+        fontSize: 14,
       },
       closeButton: {
         alignItems: 'flex-end',
