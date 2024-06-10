@@ -174,7 +174,7 @@ const Register = () =>{
                     setAlertMessage({ type:'danger', message: error.message });
                   });
               } else { // Show Alert
-                setAlertMessage({ type:'danger', message: 'Please Fill All Required Fields' });
+                setAlertMessage({ type:'danger', message: 'Please complete all mandatory fields to proceed.' });
               }
               
             }}>

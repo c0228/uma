@@ -3,26 +3,31 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-native-responsive-grid-system';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { COLORS } from '@AppUtils/ColorManagement.js';
 
 export const Alert = ({ type, show, heading, body }) => {
     const [visible, setVisible] = useState(show);
+  let icon = '';
   let backgroundColor = '';
   let headerColor = '';
   let color = '';
 
   switch (type) {
     case 'success':
+      icon = (<FontAwesome5 name='check-circle' size={14} color={COLORS.DARK_GREEN} style={{ marginTop:3, marginRight:3 }} />);
       backgroundColor = COLORS.LIGHT_GREEN;
       headerColor = COLORS.DARK_GREEN;
       color = COLORS.MEDIUM_GREEN;
       break;
     case 'warning':
+      icon = (<FontAwesome5 name='exclamation-triangle' size={12} color={COLORS.DARK_YELLOW} style={{ marginTop:3, marginRight:3 }} />);
       backgroundColor = COLORS.LIGHT_YELLOW;
       headerColor = COLORS.DARK_YELLOW;
       color = COLORS.DARK_YELLOW;
       break;
     case 'danger':
+      icon = (<FontAwesome5 name='exclamation-triangle' size={12} color={COLORS.DARK_RED} style={{ marginTop:3, marginRight:3 }} />);
       backgroundColor = COLORS.LIGHT_RED;
       headerColor = COLORS.DARK_RED;
       color = COLORS.DARK_RED;
@@ -50,7 +55,10 @@ export const Alert = ({ type, show, heading, body }) => {
                     <>
                     <Row rowStyles={{ borderBottomWidth: 1, borderColor: '#ccc', marginBottom: '2%' }}>
                         <Col xs={10} sm={10} md={10} lg={10}>
+                          <View style={{ flexDirection:'row' }}>
+                            {icon}
                             <Text style={[styles.alertHeading,{ color: headerColor }]}>{heading}</Text>
+                          </View>
                         </Col>
                         <Col xs={2} sm={2} md={2} lg={2}>
                             <CloseButton />
