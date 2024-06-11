@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import axios from 'axios';
 import md5 from 'md5';
 import { useNavigation } from '@react-navigation/native';
@@ -13,9 +14,12 @@ import { Form } from '@AppFormElement/Form/index.js';
 import { Range } from '@AppUtils/ArrayManagement.js';
 import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
 import { NEXUS_URL } from '@StaticData/urls.js';
+import GifImage from '@lowkey/react-native-gif';
 
 const Register = () =>{
     const [displayScreen, setDisplayScreen] = useState('REGISTER'); // REGISTER / EMAIL_VALIDATE / SUCCESS
+    const [deviceId, setDeviceId] = useState();
+    const [loading, setLoading] = useState(false);
     const [registerData, setRegisterData] = useState({ email: 'xxxxxxxxxxxx@gmail.com' });
     const [alertMessage, setAlertMessage] = useState({ type:'', message:'' });
     const navigation = useNavigation();
@@ -42,12 +46,12 @@ const Register = () =>{
                     errorMessage:"This is a Mandatory Field"
                 },
                 minLength:{
-                    value: 5,
-                    errorMessage:"OTP Code should be 5 digits"
+                    value: 6,
+                    errorMessage:"OTP Code should be 6 digits"
                 },
                 maxLength:{
-                    value: 5,
-                    errorMessage:"OTP Code should be 5 digit"
+                    value: 6,
+                    errorMessage:"OTP Code should be 6 digit"
                 }
             }} />);
     };
@@ -141,84 +145,101 @@ const Register = () =>{
     };
     
     return (<View style={{  borderTopWidth:1, borderTopColor:'#ddd', paddingLeft:15, paddingRight:15, marginBottom:120 }}>
-      {displayScreen=='REGISTER' && (<Form name="register" btnSubmit={{
-              btnType:'primary',
-              label:'Create an Account',
-              size: 14
-            }} 
-            onSubmit={async(form, isValidForm, triggerReset)=>{
-              if(isValidForm){
-                const data = { 
-                 surname: form?.["register"]?.surname?.value,
-                 name: form?.["register"]?.name?.value,
-                 gender: form?.["register"]?.gender?.value,
-                 age: form?.["register"]?.gender?.value,
-                 email: form?.["register"]?.email?.value,
-                 pwd: md5( form?.["register"]?.pwd?.value ) 
-                };
-                const userDetails = await getFromSPStore("USER_DETAILS");
-                await AddToSPStore("USER_DETAILS", { ...userDetails, accountInfo: data });
-                // Trigger API to send OTP
-                axios.post(NEXUS_URL+'send/otp', 
-                    { 
-                      name: data?.surname+' '+data?.name,
-                      email: data?.email,
-                      deviceId: userDetails?.device?.id
-                    }).then(response => { 
-                        console.log(response);
-                        setRegisterData(data);
-                        setDisplayScreen('EMAIL_VALIDATE');
-                 }) .catch(error => {
-                    console.error(error);
-                    // Show Alert
-                    setAlertMessage({ type:'danger', message: error.message });
-                  });
-              } else { // Show Alert
-                setAlertMessage({ type:'danger', message: 'Please complete all mandatory fields to proceed.' });
-              }
-              
-            }}>
-            {alertMessage?.type?.length>0 && alertMessage?.message?.length>0  && 
+      {displayScreen=='REGISTER' && (
+        <View>
+            {loading? (<View style={{ marginTop:'55%', justifyContent:'center', alignItems:'center' }}>
+                <Image source={require('@Assets/img/loading.gif')} 
+            style={{ width:100, height: 100 }} />
+            </View>):(
+             <Form name="register" btnSubmit={{
+                btnType:'primary',
+                label:'Create an Account',
+                size: 14
+              }} 
+              onSubmit={async(form, isValidForm, triggerReset)=>{
+                if(isValidForm){
+                  setLoading(true);
+                  setAlertMessage({ type:'', message: '' });
+                  const data = { 
+                   surname: form?.["register"]?.surname?.value,
+                   name: form?.["register"]?.name?.value,
+                   gender: form?.["register"]?.gender?.value,
+                   age: form?.["register"]?.gender?.value,
+                   email: form?.["register"]?.email?.value,
+                   pwd: md5( form?.["register"]?.pwd?.value ) 
+                  };
+                  const userDetails = await getFromSPStore("USER_DETAILS");
+                  await AddToSPStore("USER_DETAILS", { ...userDetails, accountInfo: data });
+                  setDeviceId(userDetails?.device?.id);
+                  // Trigger API to send OTP
+                  axios.post(NEXUS_URL+'send/otp', 
+                      { 
+                        name: data?.surname+' '+data?.name,
+                        email: data?.email,
+                        deviceId: userDetails?.device?.id
+                      }).then(response => { 
+                          console.log(response);
+                          setRegisterData(data);
+                          setDisplayScreen('EMAIL_VALIDATE');
+                   }) .catch(error => {  // Show Alert
+                      console.error(error);
+                      setLoading(false);
+                      setAlertMessage({ type:'danger', message: error.message });
+                    });
+                } else { // Show Alert
+                  setLoading(false);
+                  setAlertMessage({ type:'danger', message: 'Please complete all mandatory fields to proceed.' });
+                }
+                
+              }}>
+                {alertMessage?.type?.length>0 && alertMessage?.message?.length>0  && 
             (<View style={{ marginTop: 15 }}>
               <Alert type={alertMessage?.type} show="true" heading="Error Message" body={alertMessage?.message} />
             </View>)}
-        <View style={{ marginTop:15 }}>
-            <SurName />
-        </View>
-        <View style={{ marginTop:15 }}>
-            <Name />
-        </View>
-        <View style={{ marginTop:15 }}>
-            <Gender />
-        </View>
-        <View style={{ marginTop:15 }}>
-            <Age />
-        </View>
-        <View style={{ marginTop:15 }}>
-            <EmailAddress />
-        </View>
-        <View style={{ marginTop:15, marginBottom:15 }}>
-            <RegPwd />
-        </View>
-      </Form>)}
+            <View style={{ marginTop:15 }}><SurName /></View>
+            <View style={{ marginTop:15 }}><Name /></View>
+            <View style={{ marginTop:15 }}><Gender /></View>
+            <View style={{ marginTop:15 }}><Age /></View>
+            <View style={{ marginTop:15 }}><EmailAddress /></View>
+            <View style={{ marginTop:15, marginBottom:15 }}><RegPwd /></View>
+              </Form>  
+            )}
+      </View>)}
       {displayScreen=='EMAIL_VALIDATE' && (<Form name="validateEmail" btnSubmit={{
               btnType:'primary',
               label:'Validate OTP Code',
               size: 14
             }} 
-            onSubmit={(form, isValidForm, triggerReset)=>{
+            onSubmit={async(form, isValidForm, triggerReset)=>{
                 // Validate OTP Code
-                const otpCode = form?.["validateEmail"]?.otp?.value;
-                setDisplayScreen('SUCCESS');
+                const otpcode = form?.["validateEmail"]?.otp?.value;
+                // Trigger API to send OTP
+                axios.post(NEXUS_URL+'verify/otp', { 
+                      otpcode: otpcode,
+                      deviceId: deviceId
+                    }).then(response => { 
+                        console.log(response);
+                        if(response?.data?.status?.toLowerCase()==='success'){
+                            navigation.navigate('SS_Avatar', registerData);
+                        } else {
+                            setAlertMessage({ type:'danger', message: response?.data?.message });
+                        }
+                 }) .catch(error => {  // Show Alert
+                    console.error(error);
+                    setAlertMessage({ type:'danger', message: error.message });
+                  });
+                
             }}>
+               {alertMessage?.type?.length>0 && alertMessage?.message?.length>0  && 
+               (<View style={{ marginTop: 15 }}>
+                    <Alert type={alertMessage?.type} show="true" heading="Error Message" body={alertMessage?.message} />
+                </View>)}
                 <View style={{ marginTop:15, marginBottom:15 }}>
                     <Text style={{ lineHeight:22 }}>
                     An OTP Code is sent to your mentioned Email Address {registerData?.email}
                     </Text>
                 </View>
-                <View style={{ marginBottom:15 }}>
-                <OtpCode />
-                </View>
+                <View style={{ marginBottom:15 }}><OtpCode /></View>
             </Form>)}
         {displayScreen=='SUCCESS' && (<Form name="validateEmail" btnSubmit={{
               btnType:'primary',
@@ -226,7 +247,7 @@ const Register = () =>{
               size: 14
             }} 
             onSubmit={(form, isValidForm, triggerReset)=>{
-                navigation.navigate('SS_Avatar', registerData);
+                
             }}>
                 <View style={{ marginTop:15, marginBottom:15 }}>
                     <Text style={{ textAlign:'center', marginBottom:5}}>

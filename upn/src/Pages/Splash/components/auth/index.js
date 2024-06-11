@@ -13,7 +13,7 @@ const Auth = () =>{
       <View style={{ padding:20, alignItems:'center' }}>
          <Image style={{ width:160, height:18, marginLeft:8, marginTop:3 }} source={Logo} />
       </View>
-      <View style={{ borderTopWidth:1, borderTopColor:'#ddd', paddingTop:10 }}>
+      <View style={{ paddingTop:10 }}>
         <HorizontalStaticMenu activeId="register" data={MenuListData} />
       </View>
  </View>);

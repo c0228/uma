@@ -88,7 +88,7 @@ else if($_GET["action"]=='VERIFY_OTPCODE' && $_SERVER['REQUEST_METHOD']=='POST')
       $result["message"] = 'OTP Code Successfully Verified';
     } else { // If User OTP Code and Database OTPCode doesn't matches
       $result["status"] = 'Failed';
-      $result["message"] = 'OTP Code doesn\'t Match';
+      $result["message"] = 'OTP Code doesn\'t Match ';
     }
    } else { // If Device not exists in the Database
       $result["status"] = 'Failed';
