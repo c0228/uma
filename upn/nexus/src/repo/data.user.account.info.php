@@ -2,7 +2,7 @@
 class UserAccountModule {
  function query_add_userAccount($userId, $surname, $name, $gender, $age, $email, $accPwd, $avatar, $locality, $location, $state, $country){
   return "INSERT INTO user_accounts_auth(user_id, surname, uname, gender, age, email_id, acc_pwd, avatar, locality, ".
-	"location, state, country, created_on, last_updated) VALUES ('".$userId."', '".$surname."', '".$name."', '".$gender."', '".
+	"location, state, country) VALUES ('".$userId."', '".$surname."', '".$name."', '".$gender."', '".
 	$age."', '".$email."', '".$accPwd."', '".$avatar."', '".$locality."', '".$location."', '".$state."', '".$country."');";
  }
   function query_view_userAccount($email,$accPwd){

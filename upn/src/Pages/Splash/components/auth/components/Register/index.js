@@ -163,8 +163,8 @@ const Register = () =>{
                   const data = { 
                    surname: form?.["register"]?.surname?.value,
                    name: form?.["register"]?.name?.value,
-                   gender: form?.["register"]?.gender?.value,
-                   age: form?.["register"]?.gender?.value,
+                   gender: form?.["register"]?.gender?.value?.[0],
+                   age: form?.["register"]?.age?.value?.[0],
                    email: form?.["register"]?.email?.value,
                    pwd: md5( form?.["register"]?.pwd?.value ) 
                   };
@@ -217,11 +217,22 @@ const Register = () =>{
                 axios.post(NEXUS_URL+'verify/otp', { 
                       otpcode: otpcode,
                       deviceId: deviceId
-                    }).then(response => { 
+                    }).then(async(response) => { 
                         console.log(response);
                         if(response?.data?.status?.toLowerCase()==='success'){
-                            setDisplayScreen('SUCCESS');
                             // Update Account Info Data into Database
+                            const userDetails = await getFromSPStore("USER_DETAILS");
+                            console.log("===================================");
+                            console.log("userDetails [accountInfo]", userDetails?.accountInfo);
+                            console.log("===================================");
+                            axios.post(NEXUS_URL+'user/create', userDetails?.accountInfo).then(response => { 
+                                    console.log(response?.data);
+                                    setDisplayScreen('SUCCESS');
+                            }).catch(error => {  // Show Alert
+                                console.error(error);
+                                setLoading(false);
+                                setAlertMessage({ type:'danger', message: error.message });
+                            });
                         } else {
                             setAlertMessage({ type:'danger', message: response?.data?.message });
                         }

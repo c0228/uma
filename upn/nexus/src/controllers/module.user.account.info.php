@@ -11,6 +11,7 @@ require_once './../core/app.initiator.php';
 require_once './../repo/data.user.account.info.php';
 require_once './../utils/Mail.php';
 require_once './../utils/DateTime.php';
+require_once './../utils/Math.php';
 
 if($_GET["action"]=='USER_VALIDATE_EMAIL' && $_SERVER['REQUEST_METHOD']=='POST'){
   $htmlData = json_decode( file_get_contents('php://input'), true );	
@@ -29,7 +30,7 @@ else if($_GET["action"]=='USER_REGISTER' && $_SERVER['REQUEST_METHOD']=='POST'){
  $gender = ''; if( array_key_exists("gender", $htmlData) ){ $gender = $htmlData["gender"];  }
  $age = ''; if( array_key_exists("age", $htmlData) ){ $age = $htmlData["age"];  }
  $email = ''; if( array_key_exists("email", $htmlData) ){ $email = $htmlData["email"];  }
- $accPwd = ''; if( array_key_exists("accPwd", $htmlData) ){ $accPwd = $htmlData["accPwd"];  }
+ $accPwd = ''; if( array_key_exists("pwd", $htmlData) ){ $accPwd = $htmlData["pwd"];  }
  $avatar = ''; if( array_key_exists("avatar", $htmlData) ){ $avatar = $htmlData["avatar"];  }
  $locality = ''; if( array_key_exists("locality", $htmlData) ){ $locality = $htmlData["locality"];  }
  $location = ''; if( array_key_exists("location", $htmlData) ){ $location = $htmlData["location"]; }
