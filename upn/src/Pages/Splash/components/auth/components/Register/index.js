@@ -152,7 +152,7 @@ const Register = () =>{
             style={{ width:100, height: 100 }} />
             </View>):(
              <Form name="register" btnSubmit={{
-                btnType:'primary',
+                btnType:'danger',
                 label:'Create an Account',
                 size: 14
               }} 
@@ -206,7 +206,7 @@ const Register = () =>{
             )}
       </View>)}
       {displayScreen=='EMAIL_VALIDATE' && (<Form name="validateEmail" btnSubmit={{
-              btnType:'primary',
+              btnType:'danger',
               label:'Validate OTP Code',
               size: 14
             }} 
@@ -220,7 +220,8 @@ const Register = () =>{
                     }).then(response => { 
                         console.log(response);
                         if(response?.data?.status?.toLowerCase()==='success'){
-                            navigation.navigate('SS_Avatar', registerData);
+                            setDisplayScreen('SUCCESS');
+                            // Update Account Info Data into Database
                         } else {
                             setAlertMessage({ type:'danger', message: response?.data?.message });
                         }
@@ -241,23 +242,15 @@ const Register = () =>{
                 </View>
                 <View style={{ marginBottom:15 }}><OtpCode /></View>
             </Form>)}
-        {displayScreen=='SUCCESS' && (<Form name="validateEmail" btnSubmit={{
-              btnType:'primary',
-              label:'Next',
-              size: 14
-            }} 
-            onSubmit={(form, isValidForm, triggerReset)=>{
-                
-            }}>
-                <View style={{ marginTop:15, marginBottom:15 }}>
+        {displayScreen=='SUCCESS' && (
+                <View style={{ marginTop:25, marginBottom:15 }}>
                     <Text style={{ textAlign:'center', marginBottom:5}}>
-                      Your Account was successfully Created.
+                      Your Account was created successfully.
                     </Text>
                     <Text style={{ textAlign:'center', marginBottom:5}}>
                     Please login into Account.
                     </Text>
-                </View>
-            </Form>)}
+                </View>)}
     </View>);
 };
 

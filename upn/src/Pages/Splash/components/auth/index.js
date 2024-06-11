@@ -10,10 +10,10 @@ const MenuListData = [{ id:'register', label:'Register', component: <Register />
 
 const Auth = () =>{
  return (<View style={{ flex:1, backgroundColor:'#fff' }}>
-      <View style={{ padding:20, alignItems:'center' }}>
+      <View style={{ padding:18, alignItems:'center' }}>
          <Image style={{ width:160, height:18, marginLeft:8, marginTop:3 }} source={Logo} />
       </View>
-      <View style={{ paddingTop:10 }}>
+      <View style={{ }}>
         <HorizontalStaticMenu activeId="register" data={MenuListData} />
       </View>
  </View>);
