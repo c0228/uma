@@ -15,7 +15,10 @@ class AppSettings {
   return "SELECT otpcode, last_updated FROM mq_user_otpcode WHERE device_id='".$deviceId.
    "' AND last_updated > NOW() - INTERVAL 10 MINUTE;";
  }
- function query_delete_otpcode(){
+ function query_delete_otpcode($deviceId){
+  return "DELETE FROM mq_user_otpcode WHERE device_id='".$deviceId."';";
+ }
+ function query_deleteAll_otpcode(){
   return "DELETE FROM mq_user_otpcode WHERE last_updated < NOW() - INTERVAL 20 MINUTE;";
  }
 }

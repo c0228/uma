@@ -84,7 +84,9 @@ else if($_GET["action"]=='VERIFY_OTPCODE' && $_SERVER['REQUEST_METHOD']=='POST')
     $encryptedOtpcode = $data[0]->{'otpcode'};
     $dbOtpcode = $masking->decrypt($encryptedOtpcode,$deviceId); // Encryption and Decryption can be added
     if(strcmp($otpcode,$dbOtpcode)==0){ // If User OTPCode and Database OTPCode matches
-      $result["status"] = 'Success';
+      // Delete Row from Table using DeviceId
+      $deleteQuery = $appSettings->query_delete_otpcode($deviceId);
+      $result["status"] = $database->addupdateData($deleteQuery);
       $result["message"] = 'OTP Code Successfully Verified';
     } else { // If User OTP Code and Database OTPCode doesn't matches
       $result["status"] = 'Failed';
@@ -96,7 +98,7 @@ else if($_GET["action"]=='VERIFY_OTPCODE' && $_SERVER['REQUEST_METHOD']=='POST')
    }
    echo json_encode( $result );
 } else if($_GET["action"]=='CJ_CLEAN_OTPCODE'){
-    $deleteQuery = $appSettings->query_delete_otpcode();
+    $deleteQuery = $appSettings->query_deleteAll_otpcode();
     $result = array();
     $result["status"] = $database->addupdateData($deleteQuery);
     $result["message"] = 'Successfully Cleaned Unrequired OTPCode Space in Database';
