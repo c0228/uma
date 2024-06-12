@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Email } from '@AppFormElement/Email/index.js';
 import { Password } from '@AppFormElement/Password/components/pwd.js';
 import { Form } from '@AppFormElement/Form/index.js';
-
+import { NEXUS_URL } from '@StaticData/urls.js';
 
 const Login = () =>{
   const navigation = useNavigation();
@@ -16,10 +16,10 @@ const Login = () =>{
                   isEmailExist:{ 
                       // If Email Already Exists, Returns 'EXIST'
                       // If Email not exists, Returns 'NOT_EXIST'
-                      url:"http://upn.nellutlalnrao.com/",
-                      method:"",
-                      value:"NOT_EXIST", // When Value not matches - throws Error Message
-                      errorMessage:"This Email Address is already Registered."
+                      url: NEXUS_URL+"email/validate",
+                      method:"POST",
+                      value:"EXIST", // When Value not matches - throws Error Message
+                      errorMessage:"This Email Address is not Registered."
                   }
               }
           }} />);
@@ -45,17 +45,15 @@ const Login = () =>{
   }} />);
   };
   
-  return (<View style={{  borderTopWidth:1, borderTopColor:'#ddd', padding:10 }}>
-    <Form name="login" btnSubmit={{
-            btnType:'primary',
-            label:'Login into Account',
-            size: 14
-          }} 
-          onSubmit={(form, isValidForm, triggerReset)=>{
-            console.log("Form Result:", form);
-            navigation.navigate('SS_Main',{ });
-            triggerReset();
-          }}>
+  const handleFormSubmit = () =>(form, isValidForm, triggerReset)=>{
+    if(isValidForm){
+      console.log("Form Result:", form);
+      navigation.navigate('SS_Main',{ });
+    }
+  };
+
+  return (<View style={{  borderTopWidth:1, borderTopColor:'#ddd', padding:15 }}>
+    <Form name="login" btnSubmit={{ btnType:'danger', label:'Login into Account', size: 14 }} onSubmit={handleFormSubmit}>
       <View style={{ marginTop:5 }}>
           <EmailAddress />
       </View>
