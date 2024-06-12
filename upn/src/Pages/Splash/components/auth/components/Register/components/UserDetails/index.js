@@ -117,8 +117,8 @@ const EmailAddress = () =>{
                 isEmailExist:{ 
                     // If Email Already Exists, Returns 'EXIST'
                     // If Email not exists, Returns 'NOT_EXIST'
-                    url:"http://upn.nellutlalnrao.com/",
-                    method:"",
+                    url: NEXUS_URL+"email/validate",
+                    method:"POST",
                     value:"NOT_EXIST", // When Value not matches - throws Error Message
                     errorMessage:"This Email Address is already Registered."
                 }
