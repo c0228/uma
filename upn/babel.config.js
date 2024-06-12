@@ -5,6 +5,7 @@ module.exports = {
       root: ['.'],
       alias: {
         '@Assets':'./assets',
+        '@AdvancedTopics': './src/AdvancedTopics',
         '@AppComponent': './src/Components',
         '@AppFormElement': './src/FormElements',
         '@AppNavigation': './src/Navigation',

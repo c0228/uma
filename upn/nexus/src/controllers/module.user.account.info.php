@@ -9,6 +9,7 @@ header('Content-Type: application/json; charset=utf-8');
 require_once './../core/app.database.php';
 require_once './../core/app.initiator.php';
 require_once './../repo/data.user.account.info.php';
+require_once './../mail-templates/account-created.php';
 require_once './../utils/Mail.php';
 require_once './../utils/DateTime.php';
 require_once './../utils/Math.php';
@@ -63,7 +64,12 @@ else if($_GET["action"]=='USER_REGISTER' && $_SERVER['REQUEST_METHOD']=='POST'){
  if($status === 'Error') { $message = 'Query Failed'; }
  else {
 	// Send Success Email to User as he was registered Successfully.
-	
+	$data = '{'.
+    '"from":{ "name":"'.$APP_PROPERTIES["PROJ_APP_NAME"].'", "email":"'.$APP_PROPERTIES["PROJ_APP_EMAIL"].'" },'.
+    '"to":[{ "name":"'.$surname.' '.$name.'", "email":"'.$email.'" }]'.
+    '}';
+  	$body =AccountConfirmationMail($surname.' '.$name, $email);
+  	sendMail($data, $APP_PROPERTIES["EMAIL_SUBJ_ACCOUNT_CREATED"], $body);
  }
  $result = [
 	"status" => "$status",

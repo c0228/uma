@@ -2,7 +2,7 @@
 require_once './../core/app.database.php';
 require_once './../core/app.initiator.php';
 
-function SendOTPMail($otpCode, $name, $email) {
+function AccountConfirmationMail($name, $email) {
   global $APP_PROPERTIES;
   $PROJ_APP_NAME = $APP_PROPERTIES["PROJ_APP_NAME"];
   $PROJ_APP_LOGO = $APP_PROPERTIES["PROJ_APP_LOGO"];
@@ -22,18 +22,16 @@ function SendOTPMail($otpCode, $name, $email) {
    <!-- Body ::: START -->
    <div style="border:1px solid #ccc;float:left;width:100%;">
     <div style="margin:15px;line-height:22px;">
-      <div style="font-size: 16px;margin-bottom:10px;"><br/><b><i>Dear <?php echo $name; ?>,</i></b></div>
+      <div style="font-size: 16px;margin-bottom:10px;"><br/><b><i>Hello <?php echo $name; ?>,</i></b></div>
       <div style="font-size:14px;">
-        <br/>To ensure the security of your account, we require a one-time password (OTP) for your recent request.<br/><br/>
-        Your OTP Code is:
-        <span style="background-color:#f1f1f1;border-radius:8px;margin-left:15px;font-size:16px;border:1px solid #000;padding:10px 15px 10px 15px;"><b><?php echo $otpCode; ?></b></span><br/><br/>
-        Please enter this code at the Website (or) Mobile App of <u><i><?php echo $PROJ_APP_NAME; ?></i></u> to proceed. This OTP is valid for 10 minutes.<br/><br/>
-        <b>Important Security Tips:</b>
+      <br/>AWESOME! YOUR USER ACCOUNT IS ALL SET AND YOU ARE READY TO GO -<br/><br/>
+      We're thrilled to welcome you to the <?php echo $PROJ_APP_NAME; ?> community!.<br/>
+      Your account has been successfully created and you're now ready to explore everything and have a learning adventure that <?php echo $PROJ_APP_NAME; ?> App offers to you.<br/><br/>
+        <b>Get Started with  <?php echo $PROJ_APP_NAME; ?>:</b>
         <ul>
-          <li>Do not share this OTP with anyone.</li>
-          <li><?php echo $PROJ_APP_NAME; ?> will never ask for your OTP via phone call or email.</li>
-          <li>If you did not request this OTP, please contact our support team immediately at 
-            <u><i><?php echo $PROJ_APP_EMAIL; ?></i></u>.</li>
+          <li><b>Explore courses:</b> Dive into a vast library of courses and many more.</li>
+          <li><b>Personalize your learning:</b> Set your goals, choose your preferred learning style, and track your progress every step of the way.</li>
+          <li><b>Connect with the community:</b> Join discussions, ask questions, and collaborate with fellow learners.</li>
         </ul><br/>
       </div>
     </div>
@@ -62,7 +60,9 @@ function SendOTPMail($otpCode, $name, $email) {
 <?php
   // Get the buffered output
   $html = ob_get_clean();
-
   // Return the HTML content
   return $html;
 } ?>
+<?php 
+// echo AccountConfirmationMail('Nellutla L N Rao','nellutlalnrao@gmail.com');
+?>

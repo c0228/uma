@@ -63,7 +63,7 @@ else if($_GET["action"]=='SEND_OTPCODE' && $_SERVER['REQUEST_METHOD']=='POST'){
     '"from":{ "name":"'.$APP_PROPERTIES["PROJ_APP_NAME"].'", "email":"'.$APP_PROPERTIES["PROJ_APP_EMAIL"].'" },'.
     '"to":[{ "name":"'.$name.'", "email":"'.$email.'" }]'.
     '}';
-  $body = generateHTML($otpcode, $name, $email);
+  $body = SendOTPMail($otpcode, $name, $email);
   sendMail($data, $APP_PROPERTIES["EMAIL_SUBJ_SEND_OTPCODE"], $body);
   // Display API Response 
   $result = array();
