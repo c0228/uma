@@ -169,7 +169,6 @@ const Register = () =>{
                    pwd: md5( form?.["register"]?.pwd?.value ) 
                   };
                   const userDetails = await getFromSPStore("USER_DETAILS");
-                  await AddToSPStore("USER_DETAILS", { ...userDetails, accountInfo: data });
                   setDeviceId(userDetails?.device?.id);
                   // Trigger API to send OTP
                   axios.post(NEXUS_URL+'send/otp', 
@@ -225,9 +224,10 @@ const Register = () =>{
                             console.log("===================================");
                             console.log("userDetails [accountInfo]", userDetails?.accountInfo);
                             console.log("===================================");
-                            axios.post(NEXUS_URL+'user/create', userDetails?.accountInfo).then(response => { 
-                                    console.log(response?.data);
-                                    setDisplayScreen('SUCCESS');
+                            axios.post(NEXUS_URL+'user/create', userDetails?.accountInfo).then(async(response) => { 
+                                console.log("response: ", response?.data);
+                                await AddToSPStore("USER_DETAILS", { ...userDetails, accountInfo: response?.data?.params });
+                                setDisplayScreen('SUCCESS');
                             }).catch(error => {  // Show Alert
                                 console.error(error);
                                 setLoading(false);
@@ -256,10 +256,13 @@ const Register = () =>{
         {displayScreen=='SUCCESS' && (
                 <View style={{ marginTop:25, marginBottom:15 }}>
                     <Text style={{ textAlign:'center', marginBottom:5}}>
+                      Your OTP Code is verified &
+                    </Text>
+                    <Text style={{ textAlign:'center', marginBottom:5}}>
                       Your Account was created successfully.
                     </Text>
                     <Text style={{ textAlign:'center', marginBottom:5}}>
-                    Please login into Account.
+                    Please login into your Account.
                     </Text>
                 </View>)}
     </View>);

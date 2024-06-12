@@ -24,7 +24,13 @@ if($_GET["action"]=='USER_VALIDATE_EMAIL' && $_SERVER['REQUEST_METHOD']=='POST')
 }
 else if($_GET["action"]=='USER_REGISTER' && $_SERVER['REQUEST_METHOD']=='POST'){
  $htmlData = json_decode( file_get_contents('php://input'), true );	
- $userId=''; // Generate Unique Code
+ generateUserId:
+ 	$userId=generateNumber(15); // Generate Unique Code
+ 	$query = $userAccountModule->query_check_userAccount($userId);
+ 	$database->getJSONData($query);
+ 	$data = json_decode( $database->getJSONData($query) );
+ 	if(intVal($data[0]->{"count(*)"})>0){ goto generateUserId; }
+
  $surname = ''; if( array_key_exists("surname", $htmlData) ){ $surname = $htmlData["surname"]; }
  $name = ''; if( array_key_exists("name", $htmlData) ){ $name = $htmlData["name"];   }
  $gender = ''; if( array_key_exists("gender", $htmlData) ){ $gender = $htmlData["gender"];  }
@@ -38,12 +44,32 @@ else if($_GET["action"]=='USER_REGISTER' && $_SERVER['REQUEST_METHOD']=='POST'){
  $country = ''; if( array_key_exists("country", $htmlData) ){ $country = $htmlData["country"];  }
  $query = $userAccountModule->query_add_userAccount($userId, $surname, $name, $gender, $age, $email, $accPwd, $avatar, 
  	$locality, $location, $state, $country);
- $result = array();
+ $params = [
+	"userId" => "$userId",
+	"surname" => "$surname",
+	"name" => "$name",
+	"gender" => "$gender",
+	"age" => "$age",
+	"email" => "$email",
+	"pwd" => "$accPwd",
+	"avatar" => "$avatar",
+	"locality" => "$locality",
+	"location" => "$location",
+	"state" => "$state",
+	"country" => "$country"
+ ];
  $status = $database->addupdateData($query);
  $message = 'New User Created Successfully';
  if($status === 'Error') { $message = 'Query Failed'; }
- $result["status"] = $status;
- $result["message"] = $message;
+ else {
+	// Send Success Email to User as he was registered Successfully.
+	
+ }
+ $result = [
+	"status" => "$status",
+	"message" => "$message",
+	"params" => $params
+ ];
  echo json_encode( $result );
 } 
 else if($_GET["action"]=='USER_LOGIN' && $_SERVER['REQUEST_METHOD']=='POST'){
@@ -55,7 +81,7 @@ else if($_GET["action"]=='USER_LOGIN' && $_SERVER['REQUEST_METHOD']=='POST'){
 	if(strlen($email)>0 && strlen($accPwd)>0){
 	 $query = $userAccountModule-> query_view_userAccount($email, $accPwd);
 	 $data = json_decode( $database->getJSONData($query) );
-	 $result["data"] = $data;
+	 $result["params"] = $data;
 	 $status = 'Record Found';
 	}
 	$result["status"] = $status;

@@ -53,7 +53,7 @@ else if($_GET["action"]=='SEND_OTPCODE' && $_SERVER['REQUEST_METHOD']=='POST'){
     $encryptedOtpcode = $data[0]->{'otpcode'};
     $otpcode = $masking->decrypt($encryptedOtpcode,$deviceId); // Encryption and Decryption can be added
   } else { // If LastUpdated is greator than 10 minutes, share new OTP Code
-     $otpcode = generateOTP();
+     $otpcode = generateNumber();
      $encryptedOtpcode = $masking->encrypt($otpcode,$deviceId);
      $query = $appSettings->query_add_otpcode($deviceId,$encryptedOtpcode);
      $status = $database->addupdateData($query);

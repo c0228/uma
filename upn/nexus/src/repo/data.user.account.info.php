@@ -13,6 +13,9 @@ class UserAccountModule {
   function query_validate_userEmail($email){
 	return "SELECT user_id, CONCAT(surname,' ',uname) As user FROM user_accounts_auth WHERE email_id='".$email."';"; 
   }
+  function query_check_userAccount($userId){
+   return "SELECT count(*) FROM user_accounts_auth WHERE user_id='".$userId."';";
+  }
   function query_update_userAccount($userId, $surname, $uname, $gender, $age, $email, $accPwd, $avatar, $locality, 
   	$location, $state, $country){
 	$sql="UPDATE user_accounts_auth SET";
