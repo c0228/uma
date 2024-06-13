@@ -6,8 +6,9 @@ class UserAccountModule {
 	$age."', '".$email."', '".$accPwd."', '".$avatar."', '".$locality."', '".$location."', '".$state."', '".$country."');";
  }
   function query_view_userAccount($email,$accPwd){
-	$sql = "SELECT * FROM user_accounts_auth WHERE email_id='".$email."' AND acc_pwd='".md5($accPwd)."';";  
-	echo $sql;
+	$sql = "SELECT user_id As userId, surname, uname As name, gender, age, email_id As email, acc_pwd As pwd, avatar, locality, ".
+	"location, state, country, created_on As createdOn, last_updated As lastUpdated FROM user_accounts_auth WHERE ".
+	"email_id='".$email."' AND acc_pwd='".$accPwd."';";  
 	return $sql;
   }
   function query_validate_userEmail($email){

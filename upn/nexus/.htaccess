@@ -9,6 +9,8 @@ RewriteRule clean/otp src/controllers/module.app.settings.php?action=CJ_CLEAN_OT
 # USER ACCOUNT MODULE
 RewriteRule email/validate src/controllers/module.user.account.info.php?action=USER_VALIDATE_EMAIL  [QSA]
 RewriteRule user/create src/controllers/module.user.account.info.php?action=USER_REGISTER  [QSA]
+RewriteRule user/login src/controllers/module.user.account.info.php?action=USER_LOGIN  [QSA]
+
 # RewriteRule timezones/list src/controllers/config.static.apis.php?action=GetTimezones [QSA]
 
 # RewriteRule upload/file src/controllers/module.upload.file.php [QSA]

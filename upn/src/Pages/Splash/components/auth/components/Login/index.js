@@ -1,14 +1,20 @@
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import axios from 'axios';
+import md5 from 'md5';
 import { useNavigation } from '@react-navigation/native';
+import { Alert } from '@AppComponent/Alert/index.js';
 import { Email } from '@AppFormElement/Email/index.js';
 import { Password } from '@AppFormElement/Password/components/pwd.js';
 import { Form } from '@AppFormElement/Form/index.js';
 import { NEXUS_URL } from '@StaticData/urls.js';
+import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
 
 const Login = () =>{
-  const navigation = useNavigation();
-  const EmailAddress = () =>{
+ const [loading, setLoading] = useState(false);
+ const [alertMessage, setAlertMessage] = useState({ type:'', message:'' });
+ const navigation = useNavigation();
+ const EmailAddress = () =>{
       return ( <Email name="email" 
           validation={{
               email:{
@@ -45,15 +51,49 @@ const Login = () =>{
   }} />);
   };
   
-  const handleFormSubmit = () =>(form, isValidForm, triggerReset)=>{
+  const handleFormSubmit = async(form, isValidForm, triggerReset)=>{
+    console.log("----------------------------------");
+    console.log("isValidForm", isValidForm);
+    console.log("----------------------------------");
     if(isValidForm){
+      setLoading(true);
       console.log("Form Result:", form);
-      navigation.navigate('SS_Main',{ });
+      const data = { 
+        email: form?.["login"]?.email?.value,
+        pwd: md5( form?.["login"]?.pwd?.value ) 
+      };
+      axios.post(NEXUS_URL+'user/login', data).then(async(response) => { 
+        setLoading(false);
+        console.log(response?.data);
+        let userDetails = await getFromSPStore("USER_DETAILS");
+            userDetails.accountInfo = { ...userDetails.accountInfo, ...response?.data?.params };
+        await AddToSPStore("USER_DETAILS", userDetails);
+        if(userDetails?.accountInfo?.avatar?.length===0){
+            navigation.navigate('SS_Avatar',{ });
+        } else {
+            navigation.navigate('SS_Main',{ });
+        }
+      }) .catch(error => {  // Show Alert
+        console.error(error);
+        setLoading(false);
+        setAlertMessage({ type:'danger', message: error.message });
+      });
+    } else {
+        setLoading(false);
+        setAlertMessage({ type:'danger', message: 'Please complete all mandatory fields to proceed.' });
     }
   };
 
   return (<View style={{  borderTopWidth:1, borderTopColor:'#ddd', padding:15 }}>
+    {loading?(<View style={styles.loadingView}>
+                <Image source={require('@Assets/img/loading.gif')} style={styles.loadingImg} />
+              </View>):
+    (<View>
     <Form name="login" btnSubmit={{ btnType:'danger', label:'Login into Account', size: 14 }} onSubmit={handleFormSubmit}>
+      {alertMessage?.type?.length>0 && alertMessage?.message?.length>0  && 
+        (<View style={{ marginTop: 5, marginBottom: 10 }}>
+            <Alert type={alertMessage?.type} show="true" heading="Error Message" body={alertMessage?.message} />
+        </View>)}
       <View style={{ marginTop:5 }}>
           <EmailAddress />
       </View>
@@ -66,8 +106,14 @@ const Login = () =>{
         </TouchableOpacity>
       </View>
    </Form>
-  </View>);
+  </View>)}
+ </View>);
 };
 
+const styles = StyleSheet.create({
+ loadingView: { marginTop:'55%', justifyContent:'center', alignItems:'center' },
+ loadingImg: { width:100, height: 100 }
+});
+   
 
 export default Login;

@@ -8,13 +8,14 @@ import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences
 
 const Avatar = () =>{
     const route = useRoute();
-    const [userDetails, setUserDetails] = useState({});
+    const [userDetails, setUserDetails] = useState();
     const [selectedAvatar, setSelectedAvatar] = useState('');
     
-    const { gender } = route?.params;
+    const [gender, setGender] = useState();
     const initialize = async() =>{
         const details = await getFromSPStore('USER_DETAILS'); 
         setUserDetails( details );
+       // setGender(  );
     };
     useEffect(()=>{
         initialize();
@@ -38,8 +39,9 @@ const Avatar = () =>{
             "female-05": require("@Assets/avatar/female5.jpg")
         }
     };
-    const handleImageSelect = (img) =>{
+    const handleImageSelect = async(img) =>{
       setSelectedAvatar(img);
+      await AddToSPStore('USER_DETAILS', );
     };
     const navigation = useNavigation();
     return (<View style={styles.avatarPage}>
@@ -49,14 +51,14 @@ const Avatar = () =>{
             subTitle="Please Select your Perfect Avatar for a Unique Social Media Experience -" />
         <ScrollView style={styles.scrollView}>
             <View style={styles.avatarView}>
-                {gender && Object.keys(images?.[gender])?.map((img, index)=>{
+                {userDetails?.accountInfo?.gender && Object.keys(images?.[userDetails?.accountInfo?.gender])?.map((img, index)=>{
                     return (<View key={index} style={{ padding:15 }}>
                         {img && <TouchableOpacity onPress={()=>handleImageSelect(img)}>
                             {selectedAvatar?.length>0 && (selectedAvatar===img) && 
                                 (<View style={styles.selectView}>
                                     <FontAwesome5 name="check" size={12} color="#eee" />
                                 </View>)}
-                            <Image source={images?.[gender]?.[img]} 
+                            <Image source={images?.[userDetails?.accountInfo?.gender]?.[img]} 
                                 style={(selectedAvatar===img)?styles.avatarHgl:styles.avatar} />
                         </TouchableOpacity>}
                     </View>);
@@ -69,6 +71,7 @@ const Avatar = () =>{
                 navigation?.navigate('SS_Authentication', { });
             }} 
             nextForm={()=>{
+                // Set Avatar into USER_DETAILS
                 navigation?.navigate('SS_EduStatus', { });
             }} />
     </View>);

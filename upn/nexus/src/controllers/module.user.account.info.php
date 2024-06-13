@@ -81,13 +81,13 @@ else if($_GET["action"]=='USER_REGISTER' && $_SERVER['REQUEST_METHOD']=='POST'){
 else if($_GET["action"]=='USER_LOGIN' && $_SERVER['REQUEST_METHOD']=='POST'){
 	$htmlData = json_decode( file_get_contents('php://input'), true );	
 	$email = ''; if( array_key_exists("email", $htmlData) ){ $email = $htmlData["email"];  }
-	$accPwd = ''; if( array_key_exists("accPwd", $htmlData) ){ $accPwd = $htmlData["accPwd"];  }
+	$accPwd = ''; if( array_key_exists("pwd", $htmlData) ){ $accPwd = $htmlData["pwd"];  }
 	$result = array();
 	$status = 'No Record Found';
 	if(strlen($email)>0 && strlen($accPwd)>0){
 	 $query = $userAccountModule-> query_view_userAccount($email, $accPwd);
 	 $data = json_decode( $database->getJSONData($query) );
-	 $result["params"] = $data;
+	 $result["params"] = $data[0];
 	 $status = 'Record Found';
 	}
 	$result["status"] = $status;
