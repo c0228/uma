@@ -30,12 +30,11 @@ const UserDetails = () =>{
     };
     let userDetails = contextData.userDetails;
         userDetails.accountInfo = data;
-    setContextData({ userDetails: userDetails })
     // Trigger API to send OTP
     axios.post(NEXUS_URL+'send/otp', { name: data?.surname+' '+data?.name, 
             email: data?.email, deviceId: contextData?.userDetails?.device?.id }).then(response => { 
         console.log(response?.data);
-        setContextData({ displayScreen: 'EMAIL_VALIDATE' });
+        setContextData({ userDetails: userDetails, displayScreen: 'EMAIL_VALIDATE' });
     }) .catch(error => {  // Show Alert
             console.error(error);
             setLoading(false);

@@ -30,10 +30,6 @@ const EmailValidate = () =>{
                      console.log(NEXUS_URL+'user/create', response?.data);
                      let userDetails = contextData?.userDetails;
                          userDetails.accountInfo = { ...userDetails.accountInfo, ...response?.data?.params };
-                     console.log("===================================");
-                     console.log("userDetails [EMAIL_VALIDATE]", userDetails);
-                     console.log("===================================");
-                     await AddToSPStore("USER_DETAILS", userDetails);
                      setLoading(false);
                      setContextData({ displayScreen: 'SUCCESS' });
                  }).catch(error => {  // Show Alert
