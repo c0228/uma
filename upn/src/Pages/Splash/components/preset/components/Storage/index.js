@@ -2,9 +2,9 @@ import React, { useState, useEffect, BackHandler } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, PermissionsAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Header from './../../utils/Header.js';
-import Language from './../../utils/Language.js';
-import { bgs, dialogue } from './../../static-data/dialogue.js';
+import Header from './../Header.js';
+import Language from '@AppUtils/Language.js';
+import { bgs, dialogue } from '@StaticData/dialogue.js';
 import { Button } from '@AppFormElement/Button/index.js';
 import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
 
@@ -14,7 +14,7 @@ const Storage = ({ route }) =>{
  const backHandler = async()=>{
   const userDetails = await getFromSPStore('USER_DETAILS');
   let permissions = userDetails?.permissions || [];
-  if(permissions?.includes('POST_NOTIFICATIONS')){
+  if(permissions?.includes('NOTIFICATIONS')){
     navigation.navigate('SS_Introduction',{ language: lang });
   } else {
     navigation.navigate('SS_Notifications',{ language: lang });

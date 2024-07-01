@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { View, Image, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation, useRoute  } from '@react-navigation/native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import BEHeader, { HeaderTitle } from './../../utils/BEHeader.js';
-import BEFooter from './../../utils/BEFooter.js';
+import BEHeader, { HeaderTitle } from './../BEHeader.js';
+import BEFooter from './../BEFooter.js';
 import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
 
 const Avatar = () =>{

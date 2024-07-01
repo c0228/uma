@@ -5,8 +5,8 @@ import { Select } from '@AppFormElement/Select/index.js';
 import { Form } from '@AppFormElement/Form/index.js';
 import { RadioSwitch } from '@AppFormElement/RadioSwitch/index.js';
 import AlertModal from '@AppComponent/AlertModal/index.js';
-import BEHeader, { HeaderTitle } from './../../utils/BEHeader.js';
-import BEFooter from './../../utils/BEFooter.js';
+import BEHeader, { HeaderTitle } from './../BEHeader.js';
+import BEFooter from './../BEFooter.js';
 import EduDegrees from '@StaticData/en/edu-degrees.json';
 
 const EduStatus = () =>{

@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, PermissionsAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Header from './../../utils/Header.js';
-import Language from './../../utils/Language.js';
-import { bgs, dialogue } from './../../static-data/dialogue.js';
+import Header from './../Header.js';
+import Language from '@AppUtils/Language.js';
+import { bgs, dialogue } from '@StaticData/dialogue.js';
 import { Button } from '@AppFormElement/Button/index.js';
 import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
 
-const Notify = ({ route }) =>{
+const Notifications = ({ route }) =>{
  const [lang, setLang] = useState(route?.params?.language || 'en');
  const navigation = useNavigation();
  
@@ -83,4 +83,4 @@ const styles = StyleSheet.create({
  desc:{ color:'#fff', fontSize:16, lineHeight:24  },
 });
 
-export default Notify;
+export default Notifications;

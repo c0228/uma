@@ -66,10 +66,11 @@ const Login = () =>{
         setLoading(false);
         console.log(response?.data);
         let userDetails = await getFromSPStore("USER_DETAILS");
-            userDetails.accountInfo = { ...userDetails.accountInfo, ...response?.data?.params };
+            userDetails.accountInfo = { isAuthenticated: true, ...response?.data?.params };
         await AddToSPStore("USER_DETAILS", userDetails);
         if(userDetails?.accountInfo?.avatar?.length===0){
-            navigation.navigate('SS_Avatar',{ });
+           // navigation.navigate('SS_Avatar',{ });
+            navigation.navigate('SS_Extra',{ });
         } else {
             navigation.navigate('SS_Main',{ });
         }
