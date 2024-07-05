@@ -5,14 +5,28 @@ import Introduction from "./components/Introduction/index.js";
 import Notifications from "./components/Notifications/index.js";
 import Storage from "./components/Storage/index.js";
 import { getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
+import Language from '@AppUtils/Language.js';
 
 const Preset = () =>{
  const Content = () =>{
-  const { contextData, setContextData } = getAppContext();
+  const { contextData, setContextData } = getAppContext(); // Used to change Display's
+  // const [lang, setLang] = useState();
+  const handleLang = (option) =>{
+   // setLang(option);
+    setContextData({...contextData, lang: option });
+  };
+  const initialize = async() =>{
+    let details = await getFromSPStore('USER_DETAILS');
+    console.log("details", details);
+    setContextData({...contextData, lang: details?.lang });
+  };
   useEffect(()=>{
-    setContextData({...contextData, lang:'en' }); // Set Language
+    initialize();
   },[]);
   return (<View style={styles.presetView}>
+    <View style={styles.langView}>
+      <Language value={contextData?.lang} handleSelect={handleLang} />
+    </View>
     {contextData?.displayScreen === 'INTRODUCTION' && (<Introduction />)}
     {contextData?.displayScreen === 'NOTIFICATIONS' && (<Notifications />)}
     {contextData?.displayScreen === 'STORAGE' && (<Storage />)}
@@ -24,7 +38,8 @@ const Preset = () =>{
 };
 
 const styles = StyleSheet.create({
- presetView:{ flex:1 }
+ presetView:{ flex:1 },
+ langView: { position:'absolute', right:15, top:15, zIndex:2 },
 });
 
 export default Preset;

@@ -4,40 +4,40 @@ import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences
 import { GetCurrentTimeStamp, getDiffTimeFromNow, TIMESTAMP_TZ_FORMAT } from '@AppUtils/DateTime.js';
 import { NEXUS_URL } from '@StaticData/urls.js';
 
-async function forceTokenRefresh(userDetails) {
+const forceTokenRefresh = async(userDetails) => {
   try {
     await messaging().deleteToken(); // Delete the current FCM token
     const token = await messaging().getToken(); // Get a new FCM token manually
     /* Add/Update token and deviceId into mq_user_devices */
     let postParams = { token: token };
     if(userDetails?.device?.id?.length>0){ postParams.deviceId = userDetails?.device?.id; }
-    axios.post(NEXUS_URL+'add/token', postParams).then(response => { 
+    axios.post(NEXUS_URL+'add/token', postParams).then(async(response) => { 
       const device = {
         id: response?.data?.params?.deviceId,
         token: response?.data?.params?.token,
         lastUpdated: GetCurrentTimeStamp()
       };
-      AddToSPStore('USER_DETAILS', { device }); // Set deviceId and token in USER_DETAILS
-    });
+      AddToSPStore('USER_DETAILS', {...userDetails, device }); // Set deviceId and token in USER_DETAILS
+    }).catch((err)=>console.log("forceTokenRefresh", err));
   } catch (error) {
     console.error('Failed to refresh token:', error);
   }
-}
+};
 
 export const initializeFCM = async()=>{
 // Request user permission for notifications
-messaging().requestPermission()
-.then(authStatus => {
+messaging().requestPermission().then(authStatus => {
   const enabled =
     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
     authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
   if (enabled) {
     console.log('Authorization status:', authStatus);
   }
 });
  
 let userDetails = await getFromSPStore('USER_DETAILS');
+
+console.log("[fcm]", userDetails, !userDetails?.device?.token);
 if(!userDetails?.device?.token){
   await forceTokenRefresh(userDetails); 
 } else if(userDetails?.device?.lastUpdated){

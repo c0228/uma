@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Platform, NativeModules } from 'react-native';
 import { getAppContext, ContextProvider as PresetContextProvider } from '@AdvancedTopics/ReactContext/index.js';
-// import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Header from './../Header.js';
 import Language from '@AppUtils/Language.js';
 import { bgs, dialogue } from '@StaticData/dialogue.js';
@@ -11,47 +11,29 @@ import { getFromSPStore, AddToSPStore } from '@AppUtils/EncryptSharedPreferences
 const Introduction = () =>{
  const { contextData, setContextData } = getAppContext();
  const { PlatformConstants } = NativeModules;
- const [lang, setLang] = useState(); 
- useEffect(()=>{
-   setLang(contextData?.lang);
- },[]);
- // const navigation = useNavigation(); 
- const checkStoragePermissions = async() =>{
-   let details = await getFromSPStore('USER_DETAILS'); 
-   console.log("userDetails, userDetails", details);
-  /*  if(Platform?.OS?.toLowerCase()==='android' && 
-      PlatformConstants?.Version>23 && 
-      !details?.permissions?.includes('STORAGE')){
+ const lang = contextData?.lang; // language 
+ const navigation = useNavigation(); 
+ const checkStoragePermissions = async(userDetails) =>{
+   let details = {...userDetails}; 
+   if(Platform?.OS?.toLowerCase()==='android' && PlatformConstants?.Version>23 && !details?.permissions?.includes('STORAGE')){
      let permissions = details?.permissions || [];
          permissions.push('STORAGE');
-     await AddToSPStore('USER_DETAILS', {...details, permissions})
-   } */
+         details = {...details, permissions};
+     await AddToSPStore('USER_DETAILS', details);
+   }
+   return details;
  };
  const handleIntroduction = async() =>{
   let userDetails = await getFromSPStore('USER_DETAILS');
-  console.log("userDetails [handleIntroduction]", userDetails);
   // Based on Android Version set permissions details of 'STORAGE'
-  await checkStoragePermissions();
-  if(!userDetails?.permissions?.includes('NOTIFICATIONS')){
-   console.log("NOTIFICATIONS");
+  const details = await checkStoragePermissions(userDetails);
+  if(!details?.permissions?.includes('NOTIFICATIONS')){ // displayScreen of 'NOTIFICATIONS'
     setContextData({ displayScreen: 'NOTIFICATIONS' });
-    // displayScreen of 'NOTIFICATIONS'
-  } else if(!userDetails?.permissions?.includes('STORAGE')){
-   // displayScreen of 'STORAGE'
+  } else if(!details?.permissions?.includes('STORAGE')){ // displayScreen of 'STORAGE'
       setContextData({ displayScreen: 'STORAGE' });
-      console.log("STORAGE");
-  } else {
-      // navigate to auth
+  } else { // navigate to auth
+     navigation.navigate('SS_Authentication');
   }
-  // IF 
-  /*
-  if(!userDetails?.permissions?.includes('POST_NOTIFICATIONS')){
-     navigation.navigate('SS_Notifications',{ language: lang });
-  } else if(!userDetails?.permissions?.includes('STORAGE')){
-     navigation.navigate('SS_Storage',{ language: lang });
-  } else {
-     navigation.navigate('SS_Authentication',{ language: lang });
-  }*/
  };
  const BulletPoint = ({ text }) =>{
    return (<View style={styles.bulletView}>
@@ -66,15 +48,12 @@ const Introduction = () =>{
  const SplashButton = ()=>{
       return (<View style={styles.splashButtonView}>
       <View style={styles.splashButton}>
-      <Button type="light" label={dialogue?.["d7"]?.[lang]} size={16} onPress={()=>handleIntroduction()} />
+         <Button type="light" label={dialogue?.["d7"]?.[lang]} size={16} onPress={()=>handleIntroduction()} />
       </View>
     </View>);
  };
 
  return (<View style={styles.introductionView}>
-    <View style={styles.langView}>
-      <Language value={lang} handleSelect={(option)=>setLang(option)} />
-    </View>
     <Header title={dialogue?.["d1"]?.[lang]} color="voilet" lang={lang} />
     <View style={styles.subTitleView}>
         <Text style={styles.subTitle}>{dialogue?.["d2"]?.[lang]}</Text>
@@ -89,7 +68,6 @@ const Introduction = () =>{
 
 const styles = StyleSheet.create({
  introductionView: { flex:1, backgroundColor: bgs?.['voilet'] },
- langView: { position:'absolute', right:15, top:15 },
  bulletView:{ paddingBottom:10, paddingLeft:20, paddingRight:20, flexDirection:'row' },
  bulletPointView:{ width:'5%'},
  bulletPoint:{ marginTop:10, width:5, height:5, borderRadius: 2.5, backgroundColor:'#fff' },
