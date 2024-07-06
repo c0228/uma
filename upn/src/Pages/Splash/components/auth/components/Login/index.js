@@ -11,6 +11,7 @@ import { NEXUS_URL } from '@StaticData/urls.js';
 import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
 
 const Login = () =>{
+ const [displayScreen, setDisplayScreen] = useState('LOGIN');
  const [loading, setLoading] = useState(false);
  const [alertMessage, setAlertMessage] = useState({ type:'', message:'' });
  const navigation = useNavigation();
@@ -90,7 +91,13 @@ const Login = () =>{
                 <Image source={require('@Assets/img/loading.gif')} style={styles.loadingImg} />
               </View>):
     (<View>
-    <Form name="login" btnSubmit={{ btnType:'danger', label:'Login into Account', size: 14 }} onSubmit={handleFormSubmit}>
+    {displayScreen==='LOGIN' && (<Form name="login" btnSubmit={{ btnType:'danger', label:'Login into Account', size: 14 }} onSubmit={handleFormSubmit}>
+      <View style={styles.formDescView}>
+        <Text style={styles.formHeadText}>Get Started your Journey !!</Text>
+        <Text style={styles.formDescText}>
+          "Login using your new account to access a world of knowledge and personalized learning paths."
+        </Text>
+      </View>
       {alertMessage?.type?.length>0 && alertMessage?.message?.length>0  && 
         (<View style={{ marginTop: 5, marginBottom: 10 }}>
             <Alert type={alertMessage?.type} show="true" heading="Error Message" body={alertMessage?.message} />
@@ -101,19 +108,46 @@ const Login = () =>{
       <View style={{ marginTop:15, marginBottom:15 }}>
           <RegPwd />
       </View>
-      <View style={{ alignItems:'flex-end', marginBottom:15 }}>
-        <TouchableOpacity>
-            <Text style={{ textDecorationLine:'underline', textDecorationColor:'#007bff', color:'#007bff' }}>Forgot Password?</Text>
+      <View style={styles.forgotPwdView}>
+        <TouchableOpacity onPress={()=>setDisplayScreen('FORGOT_PWD')}>
+            <Text style={styles.forgotPwdText}>Forgot Password?</Text>
         </TouchableOpacity>
       </View>
+   </Form>)}
+   {displayScreen==='FORGOT_PWD' && (<>
+    <Form name="forgotPwd" btnSubmit={{ btnType:'danger', label:'Send Link to Reset Account', size: 14 }} onSubmit={handleFormSubmit}>
+      <View style={styles.formDescView}>
+        <Text style={styles.formHeadText}>Forgot Your Password - Don't worry !!</Text>
+        <Text style={styles.formDescText}>
+          "Having trouble remembering your password? No problem! Enter your email address and we'll send you a link to reset it."
+        </Text>
+      </View>
+      {alertMessage?.type?.length>0 && alertMessage?.message?.length>0  && 
+        (<View style={{ marginTop: 5, marginBottom: 10 }}>
+            <Alert type={alertMessage?.type} show="true" heading="Error Message" body={alertMessage?.message} />
+        </View>)}
+      <View style={{ marginTop:5, marginBottom:15 }}>
+          <EmailAddress />
+      </View>
    </Form>
+  <View style={[styles.forgotPwdView, { marginTop:15 }]}>
+    <TouchableOpacity onPress={()=>setDisplayScreen('LOGIN')}>
+      <Text style={styles.forgotPwdText}>Back to Login</Text>
+    </TouchableOpacity>
+  </View>
+  </>)}
   </View>)}
  </View>);
 };
 
 const styles = StyleSheet.create({
  loadingView: { marginTop:'55%', justifyContent:'center', alignItems:'center' },
- loadingImg: { width:100, height: 100 }
+ loadingImg: { width:100, height: 100 },
+ formDescView:{ marginTop:5, marginBottom: 10  },
+ formHeadText:{ marginBottom:8, textAlign:'center', lineHeight:24, fontSize:16, color:'#000', fontStyle: 'italic', fontWeight:'bold' },
+ formDescText:{ textAlign:'center', lineHeight:24, fontSize:15, fontStyle: 'italic' },
+ forgotPwdView:{ alignItems:'flex-end', marginBottom:15 },
+ forgotPwdText: { textDecorationLine:'underline', textDecorationColor:'#007bff', color:'#007bff' },
 });
    
 

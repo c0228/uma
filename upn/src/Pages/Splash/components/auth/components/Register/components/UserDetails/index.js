@@ -154,11 +154,15 @@ const RegPwd = () =>{
               </View>):
     (<View>
       <Form name="register" btnSubmit={{ btnType:'danger', label:'Create an Account', size: 14 }} onSubmit={handleFormSubmit}>
+        <View style={styles.formDescView}>
+            <Text style={styles.formHeadText}>Join Our Community by Creating Account !!</Text>
+            <Text style={styles.formDescText}>"Register for a free account and embark on a personalized learning journey."</Text>
+        </View>
         {alertMessage?.type?.length>0 && alertMessage?.message?.length>0  && 
         (<View style={{ marginTop: 15 }}>
             <Alert type={alertMessage?.type} show="true" heading="Error Message" body={alertMessage?.message} />
         </View>)}
-        <View style={{ marginTop:15 }}><SurName /></View>
+        <View style={{ marginTop:13 }}><SurName /></View>
         <View style={{ marginTop:15 }}><Name /></View>
         <View style={{ marginTop:15 }}><Gender /></View>
         <View style={{ marginTop:15 }}><Age /></View>
@@ -171,7 +175,10 @@ const RegPwd = () =>{
 
 const styles = StyleSheet.create({
  loadingView: { marginTop:'55%', justifyContent:'center', alignItems:'center' },
- loadingImg: { width:100, height: 100 }
+ loadingImg: { width:100, height: 100 },
+ formDescView:{ marginTop:15  },
+ formHeadText:{ marginBottom:8, textAlign:'center', lineHeight:24, fontSize:16, color:'#000', fontStyle: 'italic', fontWeight:'bold' },
+ formDescText:{ textAlign:'center', lineHeight:24, fontSize:15, fontStyle: 'italic' },
 });
 
 export default UserDetails;

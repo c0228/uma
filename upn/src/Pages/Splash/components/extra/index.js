@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { getAppContext, ContextProvider as ExtraContextProvider } from '@AdvancedTopics/ReactContext/index.js';
 import { getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
 import Avatar from "./components/Avatar/index.js";
@@ -19,7 +19,7 @@ const Extra = () =>{
   useEffect(()=>{
     initialize();
   },[]);
-  return (<View style={styles.registerView}>
+  return (<View style={styles.extraView}>
     {contextData?.displayScreen === 'AVATAR' && (<Avatar />)}
     {contextData?.displayScreen === 'EMAIL_VALIDATE' && (<Avatar />)}
     {contextData?.displayScreen === 'SUCCESS' && (<Avatar />)}
@@ -29,5 +29,9 @@ const Extra = () =>{
     <Content />
  </ExtraContextProvider>);
 };
+
+const styles = StyleSheet.create({
+  extraView:{ borderTopWidth:1, borderTopColor:'#ddd', paddingLeft:15, paddingRight:15, marginBottom:120 }
+});
 
 export default Extra;

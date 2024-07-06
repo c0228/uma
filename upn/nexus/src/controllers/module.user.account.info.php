@@ -92,6 +92,9 @@ else if($_GET["action"]=='USER_LOGIN' && $_SERVER['REQUEST_METHOD']=='POST'){
 	}
 	$result["status"] = $status;
 	echo json_encode( $result );
+} else if($_GET["action"]=='SEND_RESETPASSWORD_EMAIL' && $_SERVER['REQUEST_METHOD']=='POST'){
+	$htmlData = json_decode( file_get_contents('php://input'), true );
+	$to ='';if( array_key_exists("to", $htmlData) ){ $to = $htmlData["to"];  }
 }
 /*
 else if($_GET["action"]=='USER_DETAILS_UPDATE' && $_SERVER['REQUEST_METHOD']=='POST'){

@@ -24,28 +24,19 @@ const forceTokenRefresh = async(userDetails) => {
   }
 };
 
-export const initializeFCM = async()=>{
-// Request user permission for notifications
-messaging().requestPermission().then(authStatus => {
-  const enabled =
-    authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-    authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-  if (enabled) {
-    console.log('Authorization status:', authStatus);
-  }
-});
- 
-let userDetails = await getFromSPStore('USER_DETAILS');
-
-console.log("[fcm]", userDetails, !userDetails?.device?.token);
-if(!userDetails?.device?.token){
+export const initializeFCM = async()=>{ // Request user permission for notifications
+ messaging().requestPermission().then(authStatus => {
+  const enabled = (authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+                  authStatus === messaging.AuthorizationStatus.PROVISIONAL);
+  if (enabled) { console.log('Authorization status:', authStatus); }
+ });
+ let userDetails = await getFromSPStore('USER_DETAILS');
+ if(!userDetails?.device?.token){
   await forceTokenRefresh(userDetails); 
-} else if(userDetails?.device?.lastUpdated){
-  const timestamp = getDiffTimeFromNow(userDetails?.device?.lastUpdated, TIMESTAMP_TZ_FORMAT);
-  if(timestamp?.remainingHours<-720){
-   await forceTokenRefresh(userDetails); 
-  }
-}
+ } else if(userDetails?.device?.lastUpdated){
+    const timestamp = getDiffTimeFromNow(userDetails?.device?.lastUpdated, TIMESTAMP_TZ_FORMAT);
+    if(timestamp?.remainingHours<-720){ await forceTokenRefresh(userDetails); }
+ }
 /*
 messaging().onMessage(async remoteMessage => { // Handle foreground messages
 console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
