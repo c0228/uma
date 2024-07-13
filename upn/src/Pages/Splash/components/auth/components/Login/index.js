@@ -63,7 +63,8 @@ const Login = () =>{
         email: form?.["login"]?.email?.value,
         pwd: md5( form?.["login"]?.pwd?.value ) 
       };
-      axios.post(NEXUS_URL+'user/login', data).then(async(response) => { 
+      axios.post(NEXUS_URL+'user/login', data)
+      .then(async(response) => { 
         setLoading(false);
         console.log(response?.data);
         let userDetails = await getFromSPStore("USER_DETAILS");

@@ -1,1 +1,1 @@
-export const NEXUS_URL = 'http://192.168.107.28//projects/uma/upn/nexus/';
+export const NEXUS_URL = 'http://192.168.1.10/projects/uma/upn/nexus/';

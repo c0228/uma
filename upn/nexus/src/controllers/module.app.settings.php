@@ -2,9 +2,6 @@
 // Set headers to allow CORS
 session_start();
 session_destroy();
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST");
-header("Access-Control-Allow-Headers: Content-Type");
 
 require_once './../core/app.database.php';
 require_once './../core/app.initiator.php';
