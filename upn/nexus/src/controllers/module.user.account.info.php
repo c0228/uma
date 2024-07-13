@@ -87,9 +87,6 @@ else if($_GET["action"]=='USER_LOGIN' && $_SERVER['REQUEST_METHOD']=='POST'){
 	}
 	$result["status"] = $status;
 	echo json_encode( $result );
-} else if($_GET["action"]=='SEND_RESETPASSWORD_EMAIL' && $_SERVER['REQUEST_METHOD']=='POST'){
-	$htmlData = json_decode( file_get_contents('php://input'), true );
-	$to ='';if( array_key_exists("to", $htmlData) ){ $to = $htmlData["to"];  }
 }
 /*
 else if($_GET["action"]=='USER_DETAILS_UPDATE' && $_SERVER['REQUEST_METHOD']=='POST'){
@@ -118,39 +115,27 @@ else if($_GET["action"]=='USER_DETAILS_UPDATE' && $_SERVER['REQUEST_METHOD']=='P
  $result["status"] = $status;
  $result["message"] = $message;
  echo json_encode( $result );
-}
+} */
 else if($_GET["action"]=='SEND_RESETPASSWORD_EMAIL' && $_SERVER['REQUEST_METHOD']=='POST'){
 	$htmlData = json_decode( file_get_contents('php://input'), true );
 	$to ='';if( array_key_exists("to", $htmlData) ){ $to = $htmlData["to"];  }
 	// Get projectName, projectLogo, from, subject, emailExpiryTime from Properties File
-	$AppName = $PROJ_APP_NAME;
-	$logo = $PROJ_APP_LOGO;
-	$from =  $PROJ_APP_EMAIL;
-	$subject = $EMAIL_SUBJ_FORGOTPWD;
-	$emailExpiryTime = $EMAIL_EXPIRY_TIME;
-
+	global $APP_PROPERTIES;
+	$PROJ_APP_EMAIL = $APP_PROPERTIES["PROJ_APP_EMAIL"];
+	$EMAIL_SUBJ_FORGOTPWD = $APP_PROPERTIES["EMAIL_SUBJ_FORGOTPWD"];
 	// TODO: Using "to" email - Get the Customer Timezone, Customer Name and Customer ID
 	$query = $userAccountModule->query_validate_userEmail($to);
 	$data = json_decode( $database->getJSONData($query) );
 	$status=array();
 	if( count($data)>0 ){
-		$timezone = $data[0]->{"userTz"};
-		$customerName = $data[0]->{"user"};
-		$customerId = $data[0]->{"userId"};
-		$userInfo=base64_encode('EmailAt'.$to.'|'.
-			'CustomerAt'.$customerId.'|'.
-			'ExpiryAt'.getExpiryTimestamp($emailExpiryTime, $TIMESTAMP_TZ_FORMAT, $timezone).'|'.
-			'TimezoneAt'.$timezone);
-		
-		echo 'getExpiryTimestamp: '.getExpiryTimestamp($emailExpiryTime, $TIMESTAMP_TZ_FORMAT, $timezone);
-
-		if( array_key_exists("template", $htmlData) ){ 
-			$template = $htmlData["template"]; 
-			require_once './../mail-templates/password-change/'.$template.'.php';
-			$body = generateHTML($PROJ_URL, $AppName, $logo, $userInfo, $customerName, getCurrentDateTime($timezone, $DATE_FORMAT));
-			$status = sendMail($from,$to,$subject,$body);
-		}
-   }
-   echo json_encode($status);
+		$customerId = $data[0]->{'user_id'};
+		$customerName = $data[0]->{'user'};
+		require_once './../mail-templates/password-change.php';
+		$body = generateHTML($customerId, $customerName, $to);
+		$dataString = '{"from":{ "name":"UPSC Preparation Network", "email":"'.$PROJ_APP_EMAIL.'" },'.
+				'"to":[{ "name":"'.$customerName.'", "email":"'. $to.'" }]}';
+		$msgId = sendMail($dataString, $EMAIL_SUBJ_FORGOTPWD, $body);
+		$status["message"]=$msgId;
+    }
+    echo json_encode($status);
 }
-*/

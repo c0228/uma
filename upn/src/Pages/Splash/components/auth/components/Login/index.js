@@ -9,6 +9,7 @@ import { Password } from '@AppFormElement/Password/components/pwd.js';
 import { Form } from '@AppFormElement/Form/index.js';
 import { NEXUS_URL } from '@StaticData/urls.js';
 import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
+import ForgotPwd from './../ForgotPwd/index.js';
 
 const Login = () =>{
  const [displayScreen, setDisplayScreen] = useState('LOGIN');
@@ -116,26 +117,12 @@ const Login = () =>{
       </View>
    </Form>)}
    {displayScreen==='FORGOT_PWD' && (<>
-    <Form name="forgotPwd" btnSubmit={{ btnType:'danger', label:'Send Link to Reset Account', size: 14 }} onSubmit={handleFormSubmit}>
-      <View style={styles.formDescView}>
-        <Text style={styles.formHeadText}>Forgot Your Password - Don't worry !!</Text>
-        <Text style={styles.formDescText}>
-          "Having trouble remembering your password? No problem! Enter your email address and we'll send you a link to reset it."
-        </Text>
-      </View>
-      {alertMessage?.type?.length>0 && alertMessage?.message?.length>0  && 
-        (<View style={{ marginTop: 5, marginBottom: 10 }}>
-            <Alert type={alertMessage?.type} show="true" heading="Error Message" body={alertMessage?.message} />
-        </View>)}
-      <View style={{ marginTop:5, marginBottom:15 }}>
-          <EmailAddress />
-      </View>
-   </Form>
-  <View style={[styles.forgotPwdView, { marginTop:15 }]}>
-    <TouchableOpacity onPress={()=>setDisplayScreen('LOGIN')}>
-      <Text style={styles.forgotPwdText}>Back to Login</Text>
-    </TouchableOpacity>
-  </View>
+    <ForgotPwd />
+    <View style={[styles.forgotPwdView, { marginTop:15 }]}>
+      <TouchableOpacity onPress={()=>setDisplayScreen('LOGIN')}>
+        <Text style={styles.forgotPwdText}>Back to Login</Text>
+      </TouchableOpacity>
+    </View>
   </>)}
   </View>)}
  </View>);

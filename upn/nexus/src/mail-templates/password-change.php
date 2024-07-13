@@ -1,6 +1,27 @@
 <?php 
+require_once './../core/app.database.php';
+require_once './../core/app.initiator.php';
+require_once './../utils/DateTime.php';
 
-function generateHTML($ProjectURL, $AppName, $logo, $userInfo, $customerName, $dateTime) {
+function generateHTML($customerId, $customerName, $customerEmail) {
+  global $APP_PROPERTIES;
+  global $PROJ_NEXUS_URL;
+  global $TIMESTAMP_TZ_FORMAT;
+  global $DATE_FORMAT;
+
+  $PROJ_APP_NAME = $APP_PROPERTIES["PROJ_APP_NAME"];
+  $PROJ_APP_LOGO = $APP_PROPERTIES["PROJ_APP_LOGO"];
+  $PROJ_APP_EMAIL = $APP_PROPERTIES["PROJ_APP_EMAIL"];
+  $EMAIL_EXPIRY_TIME = $APP_PROPERTIES["EMAIL_EXPIRY_TIME"];
+
+  // Define things
+  $timezone = 'Asia/Kolkata';
+  $dateTime = getCurrentDateTime($timezone, $DATE_FORMAT);
+  $userInfo=base64_encode('EmailAt'.$customerEmail.'|'.
+			'CustomerAt'.$customerId.'|'.
+			'ExpiryAt'.getExpiryTimestamp($EMAIL_EXPIRY_TIME, $TIMESTAMP_TZ_FORMAT, $timezone).'|'.
+			'TimezoneAt'.$timezone);
+
   // Start buffering the output
   ob_start();
 ?>
@@ -9,7 +30,7 @@ function generateHTML($ProjectURL, $AppName, $logo, $userInfo, $customerName, $d
 <div style="margin:10px;">
   <!-- Header ::: START -->
   <div style="width:50%;float:left;">
-    <img style="width: 130px;" src="<?php echo $logo; ?>" />
+    <img style="width: 130px;" src="<?php echo $PROJ_APP_LOGO; ?>" />
   </div>
 
    <div align="right" style="width:50%;float:left;padding-top:15px;">
@@ -29,7 +50,7 @@ function generateHTML($ProjectURL, $AppName, $logo, $userInfo, $customerName, $d
         your password.<br/><br/>
         Click on the following button to reset your password:<br/>
           <div align="center">
-            <a href="<?php echo $ProjectURL."UserModules/Authentication/Template1/ChangePwd/".$userInfo; ?>">
+            <a href="<?php echo $PROJ_NEXUS_URL."changePwd/".$userInfo; ?>">
              <button><b>Reset your Password</b></button>
             </a>
           </div>
@@ -47,12 +68,17 @@ function generateHTML($ProjectURL, $AppName, $logo, $userInfo, $customerName, $d
     </div>
     
    </div>
+   <div style="color:#555;padding-top:8px;font-size:12px;width:100%;float:left;">
+    <b>Disclaimer:</b> This email was sent to <u><i><?php echo $customerEmail; ?></i></u> because of a request to verify your identity at 
+    <u><i><?php echo $PROJ_APP_NAME; ?></i></u>. If you did not make this request, please ignore this email or contact us at 
+    <u><i><?php echo $PROJ_APP_EMAIL; ?></i></u>.
+   </div>
    <!-- Body ::: END -->
    <!-- Footer ::: START -->
    <div style="width:100%;float:left;">
    <div align="right" style="margin-top:10px;">
       We Sincerely,<br/>
-      <?php echo $AppName; ?> 
+      <?php echo $PROJ_APP_NAME; ?> 
    </div>
    </div>
    <!-- Footer ::: END -->
@@ -69,5 +95,4 @@ function generateHTML($ProjectURL, $AppName, $logo, $userInfo, $customerName, $d
   // Return the HTML content
   return $html;
 }
-
 ?>

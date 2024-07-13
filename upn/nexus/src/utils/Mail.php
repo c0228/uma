@@ -14,8 +14,7 @@ $data = '{
     "cc":[{ "name":"Nellutla L N Rao", "email":"nellutlalnrao@gmail.com" }],
     "bcc":[{ "name":"Nellutla L N Rao", "email":"nellutlalnrao@gmail.com" }]
 }';
-*/    
-print_r($dataString);
+*/
 $data = json_decode($dataString);
 try {
       $mail = new PHPMailer(true);
@@ -43,9 +42,10 @@ try {
       $mail->Body = $body;
   
       $mail->send();
-      echo 'Email sent successfully';
+      return 'EMAIL_SENT_SUCCESS';
     } catch (Exception $e) {
       print_r($e);
+      return 'EMAIL_SENT_FAILED';
     }
   }
 
