@@ -93,7 +93,9 @@ const Login = () =>{
                 <Image source={require('@Assets/img/loading.gif')} style={styles.loadingImg} />
               </View>):
     (<View>
-    {displayScreen==='LOGIN' && (<Form name="login" btnSubmit={{ btnType:'danger', label:'Login into Account', size: 14 }} onSubmit={handleFormSubmit}>
+    {displayScreen==='LOGIN' && (<Form name="login" 
+      btnSubmit={{ btnType:'danger', label:'Login into Account', size: 14 }} 
+      onSubmit={handleFormSubmit}>
       <View style={styles.formDescView}>
         <Text style={styles.formHeadText}>Get Started your Journey !!</Text>
         <Text style={styles.formDescText}>

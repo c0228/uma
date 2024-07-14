@@ -103,6 +103,8 @@ const styles = StyleSheet.create({
       },
       alertBody: {
         fontSize: 14,
+        lineHeight:22,
+        padding:2
       },
       closeButton: {
         alignItems: 'flex-end',
