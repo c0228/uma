@@ -1,0 +1,45 @@
+{
+ "products":[{
+    "id":"BR17070",
+    "image":"./assets/products/BR17070.png",
+    "title":"BR17070.Blackout",
+    "desc":"100% Polyester",
+    "weight":"370g/m2(+-)5%",
+    "thickness":"0.63mm(+-)0.05mm"
+ },{
+    "id":"BR13027",
+    "image":"./assets/products/BR13027.png",
+    "title":"BR13027.Blackout",
+    "desc":"100% Polyester",
+    "weight":"430g/m2(+-)10%",
+    "thickness":"0.65mm(+-)0.05mm"
+ },{
+    "id":"BR17069",
+    "image":"./assets/products/BR17069.png",
+    "title":"BR17069.Blackout",
+    "desc":"100% Polyester",
+    "weight":"340g/m2(+-)5%",
+    "thickness":"0.53mm(+-)0.05mm"
+ },{
+    "id":"SBR05770",
+    "image":"./assets/products/SBR05770.png",
+    "title":"SBR05770.Blackout",
+    "desc":"100% Polyester",
+    "weight":"275g/m2(+-)5%",
+    "thickness":"0.4mm(+-)0.05mm"
+ },{
+    "id":"BR05770",
+    "image":"./assets/products/BR05770.png",
+    "title":"BR05770.Blackout",
+    "desc":"100% Polyester",
+    "weight":"330g/m2(+-)5%",
+    "thickness":"0.45mm(+-)0.05mm"
+ },{
+    "id":"BR13009",
+    "image":"./assets/products/BR13009.png",
+    "title":"BR13009.Blackout",
+    "desc":"100% Polyester",
+    "weight":"420g/m2(+-)5%",
+    "thickness":"0.62mm(+-)0.05mm"
+ }]
+}

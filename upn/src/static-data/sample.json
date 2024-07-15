@@ -1,0 +1,33 @@
+{
+    "quoteBy": "Nellutla L N Rao",
+    "quoteEmail": "nellutlalnrao@gmail.com",
+    "quotePhone": "122323r4",
+    "detTitle": "1",
+    "detWeight": "22kg",
+    "detThickness": "3",
+    "detControlOptions": "Manual Chain",
+    "detMount": "IM",
+    "detQuantity": "2",
+    "detRoom": "Qwert",
+    "detRoomWidth": "20",
+    "detRoomLength": "20",
+    "ccPosition": "L",
+    "ccMaterial": "Plastic Chain",
+    "ccLength": "12",
+    "withCassette": "Round",
+    "coveredWithFabric": [
+        {
+            "id": 1,
+            "label": "Covered With Fabric",
+            "value": "Covered With Fabric",
+            "checked": true,
+            "disabled": false
+        }
+    ],
+    "compColor": "Beige",
+    "remoteMotorized": "L",
+    "motorType": "qewew",
+    "multiChannel": "sdvsd",
+    "ezLift": "dscsd",
+    "rollDirection": "Standard"
+}
