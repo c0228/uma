@@ -12,18 +12,32 @@ import './index.css';
 const Home = ()=>{
  const [fadeItems, setFadeItems] = useState("fade d-none");
  useEffect(()=>{
-  document.title = 'Home | Shudiksha Enterprises';
+  document.title = 'Home | UPSCPrepNetwork';
   setTimeout(()=>setFadeItems("fade-in-right"),1000);
  },[]);
 
 
  return (<>
  <Header menulinks={HeaderMenu} activeId="Home" />
- <div className="img-section" style={{ backgroundImage: "url('./assets/images/welcome.jpg')" }}>
-  <div className="img-section-text">
+ <div className="img-section" style={{
+   backgroundColor:'#e53700' 
+  // backgroundImage: "url('./assets/carousel/1.jpg')" 
+  // backgroundImage: "url('./assets/images/welcome.jpg')" 
+  }}>
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-sm-7"></div>
+        <div className="col-sm-5">
+            
+           
+        </div>
+      </div>
+    </div>
+  {/*<div className="img-section-text">
+
     <h4 style={{ color:'#000', lineHeight:'26px' }}><b>"Powerful Electrical Solutions & Seamless Elevator Installations"</b></h4>
     <h5 style={{ color:'#000', lineHeight:'26px' }}>We partner with you to create a functional and efficient building environment.</h5>
-  </div>
+  </div>*/}
  </div>
 
  <AboutUs />
