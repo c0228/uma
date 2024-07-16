@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Icon } from "e-ui-react";
 import { Link } from 'react-router-dom';
+import Logo from "@Assets/images/logo.png";
 import './index.css';
 
 const Header = ({ activeId, menulinks })=>{
@@ -31,7 +32,7 @@ const Header = ({ activeId, menulinks })=>{
  <nav className="navbar navbar-expand-sm">
  <div className="container-fluid">
    <a className="navbar-brand padTop0p padBot0p" href="#">
-    <img src={"./assets/images/logo.png"} className="logo-img" />
+    <img src={Logo} className="logo-img" />
    </a>
    <button className="navbar-toggler btn-border btn-border-lgt-purple" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar" onClick={()=>setShowCollapse(!showCollapse)}>
      <i className="fa fa-bars font-lgt-purple"></i>
