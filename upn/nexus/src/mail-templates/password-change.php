@@ -5,7 +5,7 @@ require_once './../utils/DateTime.php';
 
 function generateHTML($customerId, $customerName, $customerEmail) {
   global $APP_PROPERTIES;
-  global $PROJ_NEXUS_URL;
+  global $PROJ_URL;
   global $TIMESTAMP_TZ_FORMAT;
   global $DATE_FORMAT;
 
@@ -50,18 +50,18 @@ function generateHTML($customerId, $customerName, $customerEmail) {
         your password.<br/><br/>
         Click on the following button to reset your password:<br/>
           <div align="center">
-            <a href="<?php echo $PROJ_NEXUS_URL."changePwd/".$userInfo; ?>">
+            <a href="<?php echo $PROJ_URL."change-pwd/".$userInfo; ?>">
              <button><b>Reset your Password</b></button>
             </a>
           </div>
           <br/></br>
         If you did not initiate this password reset request or suspect any unauthorized activity on your account, 
-        please contact our support team immediately at [support contact information]. We take your account security 
+        please contact our support team immediately at <?php echo $PROJ_APP_EMAIL; ?>. We take your account security 
         very seriously and will assist you in resolving any potential issues.<br/><br/>
         Remember to update your password regularly and avoid using the same password across multiple platforms. 
         This practice will help protect your account and maintain your online security.<br/><br/>
         If you have any further questions or need additional assistance, please do not hesitate to reach out to our 
-        support team. We are available [support hours and contact information].<br/><br/>
+        support team.<br/> We are available here to support you 24/7 in a Week.<br/><br/>
         Thank you for your prompt attention to this matter. We apologize for any inconvenience caused and appreciate 
         your cooperation in maintaining the security of your account.<br/><br/>
       </div>
