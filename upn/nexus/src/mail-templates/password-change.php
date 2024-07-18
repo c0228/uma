@@ -75,9 +75,10 @@ function generateHTML($customerId, $customerName, $customerEmail) {
     
    </div>
    <div style="color:#555;padding-top:8px;font-size:12px;width:100%;float:left;">
-    <b>Disclaimer:</b> This email was sent to <u><i><?php echo $customerEmail; ?></i></u> because of a request to verify your identity at 
-    <u><i><?php echo $PROJ_APP_NAME; ?></i></u>. If you did not make this request, please ignore this email or contact us at 
-    <u><i><?php echo $PROJ_APP_EMAIL; ?></i></u>.
+    <b>Disclaimer:</b> 
+    <u><i><?php echo $PROJ_APP_NAME; ?></i></u> will never send you an email asking for your password. This email is for password 
+    reset purposes only. If you receive an email requesting your password or other account information, please do not respond and 
+    report it to our security team at <u><i><?php echo $PROJ_APP_EMAIL; ?></i></u>
    </div>
    <!-- Body ::: END -->
    <!-- Footer ::: START -->
