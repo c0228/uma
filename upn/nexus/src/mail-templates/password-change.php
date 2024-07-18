@@ -68,8 +68,8 @@ function generateHTML($customerId, $customerName, $customerEmail) {
           This practice will help protect your account and maintain your online security. If you have any further questions or need 
           additional assistance, please do not hesitate to reach out to our 
           support team. We are available here to support you 24/7 in a Week.<br/><br/>
-          <div align="center">Thank you for your prompt attention to this matter.<br/> We apologize for any inconvenience caused and appreciate 
-          your cooperation in maintaining the security of your account.</div><br/><br/>
+          <div align="center">Thank you for your prompt attention to this matter.<br/> We apologize for any inconvenience 
+          caused and appreciate your cooperation in maintaining the security of your account.</div><br/><br/>
       </div>
     </div>
     
