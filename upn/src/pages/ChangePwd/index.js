@@ -98,6 +98,7 @@ const AccPwdUpdate = ()=>{
        <Row>
            <Col xxl={4} xl={3} md={4}></Col>
            <Col xxl={4} xl={6} md={4}>
+            <div style={{ marginTop:'40px' }}>
                <h4 className="bs-header"><b>Change Your Account Password</b></h4>
                <div className="mtop15p mbot15p" style={{color: 'rgb(119, 119, 119)', fontWeight: 'bold' }}>
                    Stay Protected ! Your Safety First : Please Reset Your Password
@@ -127,9 +128,10 @@ const AccPwdUpdate = ()=>{
                        <AccPwdUpdate />
                        <AgreeTermsAndConditions />
                </Form>
+            </div>
            </Col>
            <Col xxl={4} xl={3} md={4}>
-               <div align="right" style={{fontSize:'12px', color: 'rgb(119, 119, 119)', fontWeight: 'bold' }}>
+               <div align="right" style={{ marginTop:'20px', marginRight:'15px', fontSize:'12px', color: 'rgb(119, 119, 119)', fontWeight: 'bold' }}>
                    {"This Link expires in "}<br/>
                    {(expiryValidate?.remainingHours >= 0 || 
                    expiryValidate?.remainingMinutes >= 0 || 
