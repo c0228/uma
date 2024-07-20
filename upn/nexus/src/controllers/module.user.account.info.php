@@ -88,26 +88,22 @@ else if($_GET["action"]=='USER_LOGIN' && $_SERVER['REQUEST_METHOD']=='POST'){
 	$result["status"] = $status;
 	echo json_encode( $result );
 }
-/*
 else if($_GET["action"]=='USER_DETAILS_UPDATE' && $_SERVER['REQUEST_METHOD']=='POST'){
  $htmlData = json_decode( file_get_contents('php://input'), true );	
  $userId = ''; if( array_key_exists("userId", $htmlData) ){ $userId = $htmlData["userId"]; }
- $surName = ''; if( array_key_exists("surName", $htmlData) ){ $surName = $htmlData["surName"]; }
- $name = ''; if( array_key_exists("name", $htmlData) ){ $name = $htmlData["name"];   }
- $dob = ''; if( array_key_exists("dob", $htmlData) ){ $dob = $htmlData["dob"];  }
+ $surname = ''; if( array_key_exists("surName", $htmlData) ){ $surname = $htmlData["surname"]; }
+ $uname = ''; if( array_key_exists("name", $htmlData) ){ $uname = $htmlData["name"];   }
  $gender = ''; if( array_key_exists("gender", $htmlData) ){ $gender = $htmlData["gender"];  }
+ $age = 'N'; if( array_key_exists("age", $htmlData) ){ $age = $htmlData["age"];  }
  $email = ''; if( array_key_exists("email", $htmlData) ){ $email = $htmlData["email"];  }
- $emailVal = 'N'; if( array_key_exists("emailVal", $htmlData) ){ $emailVal = $htmlData["emailVal"];  }
  $accPwd = ''; if( array_key_exists("accPwd", $htmlData) ){ $accPwd = $htmlData["accPwd"];  }
- $mcountrycode = ''; if( array_key_exists("mcountrycode", $htmlData) ){ $mcountrycode = $htmlData["mcountrycode"];  }
- $mobile = ''; if( array_key_exists("mobile", $htmlData) ){ $mobile = $htmlData["mobile"];  }
- $mobileVal = 'N'; if( array_key_exists("mobileVal", $htmlData) ){ $mobileVal = $htmlData["mobileVal"]; }
- $dp = ''; if( array_key_exists("dp", $htmlData) ){ $dp = $htmlData["dp"];   }
- $userTz = ''; if( array_key_exists("userTz", $htmlData) ){ $userTz = $htmlData["userTz"];  }
- $accactive = ''; if( array_key_exists("accactive", $htmlData) ){ $accactive = $htmlData["accactive"];  }
- $userRole = ''; if( array_key_exists("userRole", $htmlData) ){ $userRole = $htmlData["userRole"];  }
- $query = $userAccountModule->query_update_userAccount($userId, $surName, $name, $dob, $gender, $email, $emailVal, $accPwd, $mcountrycode, $mobile, $mobileVal, $dp, 
-	$userTz, $accactive, $userRole);
+ $avatar = ''; if( array_key_exists("avatar", $htmlData) ){ $avatar = $htmlData["avatar"];  }
+ $locality = ''; if( array_key_exists("locality", $htmlData) ){ $locality = $htmlData["locality"];  }
+ $location = ''; if( array_key_exists("location", $htmlData) ){ $location = $htmlData["location"]; }
+ $state = ''; if( array_key_exists("state", $htmlData) ){ $state = $htmlData["state"];   }
+ $country = ''; if( array_key_exists("country", $htmlData) ){ $country = $htmlData["country"];  }
+ $query = $userAccountModule->query_update_userAccount($userId, $surname, $uname, $gender, $age, $email, $accPwd, $avatar, $locality, 
+ 				$location, $state, $country);
  $result = array();
  $status = $database->addupdateData($query);
  $message = 'Updated Record Successfully for userId \''.$userId.'\'';
@@ -115,7 +111,7 @@ else if($_GET["action"]=='USER_DETAILS_UPDATE' && $_SERVER['REQUEST_METHOD']=='P
  $result["status"] = $status;
  $result["message"] = $message;
  echo json_encode( $result );
-} */
+}
 else if($_GET["action"]=='SEND_RESETPASSWORD_EMAIL' && $_SERVER['REQUEST_METHOD']=='POST'){
 	$htmlData = json_decode( file_get_contents('php://input'), true );
 	$to ='';if( array_key_exists("to", $htmlData) ){ $to = $htmlData["to"];  }
