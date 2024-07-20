@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import md5 from 'md5';
 import { ContainerFluid, Row, Col, Email, ConfirmPassword, Form, Switch, Alert, FormToReqBodyFormatter, 
    StopWatchTimer, 
    UrlAsyncFetch, getDiffTimeFromNow, TIMESTAMP_TZ_FORMAT, Colors } from "e-ui-react";
@@ -116,10 +117,10 @@ const AccPwdUpdate = ()=>{
 
                        if(isValidForm){
                            const reqBody = FormToReqBodyFormatter(form.ChangePasswordForm);
-                           reqBody.userId = customerId;
+                           reqBody.userId = userDetails?.customerId;
+                           reqBody.accPwd = md5(reqBody.accPwd);
                            console.log("process.env.NEXUS_URL", process.env.NEXUS_URL);
-                           UrlAsyncFetch( process.env.NEXUS_URL + 'user/update', 
-                               'POST', reqBody );
+                           UrlAsyncFetch( process.env.NEXUS_URL + 'user/update', 'POST', reqBody );
                            setViewScreen('RESET_SUCCESS');
                        }
                    }}>
@@ -167,7 +168,6 @@ const AccPwdUpdate = ()=>{
                        experience.
                    </div>
                </div>
-               <GoToLogin />
            </Col>
            <Col xxl={4} xl={3} md={4}></Col>
        </Row>
