@@ -10,9 +10,9 @@ RewriteRule clean/otp src/controllers/module.app.settings.php?action=CJ_CLEAN_OT
 RewriteRule email/validate src/controllers/module.user.account.info.php?action=USER_VALIDATE_EMAIL  [QSA]
 RewriteRule user/create src/controllers/module.user.account.info.php?action=USER_REGISTER  [QSA]
 RewriteRule user/login src/controllers/module.user.account.info.php?action=USER_LOGIN  [QSA]
+RewriteRule user/update src/controllers/module.user.account.info.php?action=USER_DETAILS_UPDATE  [QSA]
 RewriteRule user/reset/password/link src/controllers/module.user.account.info.php?action=SEND_RESETPASSWORD_EMAIL [QSA]
 
-RewriteRule changePwd/([^/]+)$ src/web/page.reset.php?userInfo=$1 [QSA]
 # RewriteRule timezones/list src/controllers/config.static.apis.php?action=GetTimezones [QSA]
 
 # RewriteRule upload/file src/controllers/module.upload.file.php [QSA]

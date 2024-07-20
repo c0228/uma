@@ -118,7 +118,7 @@ const AccPwdUpdate = ()=>{
                            const reqBody = FormToReqBodyFormatter(form.ChangePasswordForm);
                            reqBody.userId = customerId;
                            console.log("process.env.NEXUS_URL", process.env.NEXUS_URL);
-                           UrlAsyncFetch( process.env.NEXUS_URL + 'user/details/update', 
+                           UrlAsyncFetch( process.env.NEXUS_URL + 'user/update', 
                                'POST', reqBody );
                            setViewScreen('RESET_SUCCESS');
                        }
