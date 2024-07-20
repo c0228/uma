@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import DrawerNavigation from './Drawer/index.js';
 import Home from '@AppPage/Main/Home/index.js';
 import About from '@AppPage/Main/About/index.js';
@@ -18,9 +20,18 @@ const Main = () => {
   { id:'MM_StudyTimeTable', name:'Study Timetable', icon:'',component: StudyTT },
   { id:'MM_MyProfile', name:'My Profile', icon:'',component: MyProfile },
   { id:'MM_Settings', name:'Settings', icon:'',component: Settings },
-  { id:'MM_Signout', name:'Signout', icon:'',component: Settings }];
+  { id: 'MM_Signout', name: 'Signout', icon: '', component: LogoutButton }];
 
     return ( <DrawerNavigation screens={screens} /> );
 };
 
+
+const LogoutButton = () => {
+  const navigation = useNavigation();
+  useEffect(()=>{
+    // Reset User Details to Empty over here
+    navigation.navigate('SS_Preset');
+  });
+  return (<></>); // Replace Button with your UI component
+};
 export default Main;
