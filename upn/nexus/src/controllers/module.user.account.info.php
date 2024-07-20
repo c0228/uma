@@ -94,7 +94,7 @@ else if($_GET["action"]=='USER_DETAILS_UPDATE' && $_SERVER['REQUEST_METHOD']=='P
  $surname = ''; if( array_key_exists("surName", $htmlData) ){ $surname = $htmlData["surname"]; }
  $uname = ''; if( array_key_exists("name", $htmlData) ){ $uname = $htmlData["name"];   }
  $gender = ''; if( array_key_exists("gender", $htmlData) ){ $gender = $htmlData["gender"];  }
- $age = 'N'; if( array_key_exists("age", $htmlData) ){ $age = $htmlData["age"];  }
+ $age = ''; if( array_key_exists("age", $htmlData) ){ $age = $htmlData["age"];  }
  $email = ''; if( array_key_exists("email", $htmlData) ){ $email = $htmlData["email"];  }
  $accPwd = ''; if( array_key_exists("accPwd", $htmlData) ){ $accPwd = $htmlData["accPwd"];  }
  $avatar = ''; if( array_key_exists("avatar", $htmlData) ){ $avatar = $htmlData["avatar"];  }
