@@ -21,7 +21,7 @@ const Splash = () =>{
       (<Stack.Screen name="SS_Introduction" component={Introduction}  options={{ headerShown: false }} />)}
       <Stack.Screen name="SS_Notifications" component={Notify}  options={{ headerShown: false }} />
       <Stack.Screen name="SS_Storage" component={Storage}  options={{ headerShown: false }} />
-      <Stack.Screen name="SS_Authentication" component={Auth} options={{ headerShown: false }} />
+      <Stack.Screen name="SS_Auth" component={Auth} options={{ headerShown: false }} />
       <Stack.Screen name="SS_Avatar" component={Avatar} options={{ headerShown: false }} />
       <Stack.Screen name="SS_EduStatus" component={EduStatus} options={{ headerShown: false }} />
       <Stack.Screen name="SS_ExamTarget" component={ExamTarget} options={{ headerShown: false }} />

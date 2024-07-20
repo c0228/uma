@@ -1,16 +1,26 @@
-import React from 'react';
-import { View, Text, ScrollView, Switch } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, ScrollView, Switch, BackHandler } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { getAppContext } from '@AdvancedTopics/ReactContext/index.js';
 import { Select } from '@AppFormElement/Select/index.js';
 import AlertModal from '@AppComponent/AlertModal/index.js';
 import { Accordian } from '@AppComponent/Accordian/index.js';
-import BEHeader, { HeaderTitle } from './../../utils/BEHeader.js';
-import BEFooter from './../../utils/BEFooter.js';
+import BEHeader, { HeaderTitle } from './../BEHeader.js';
+import BEFooter from './../BEFooter.js';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const PrepareSubjects = () =>{
+ const { contextData, setContextData } = getAppContext();
+ const accountInfo = contextData?.userDetails?.accountInfo;
  const navigation = useNavigation();
-
+ const backButton = () =>{
+  const backHandler = BackHandler.addEventListener('hardwareBackPress',  () => { // onBack Press
+    setContextData({ displayScreen: 'EXAMTARGET' }); // Move to Introduction
+    return true; // Prevent default back action
+  });
+  return () => backHandler.remove();
+ }; 
+ useEffect(() => { backButton(); }, []);
  const MandatorySubjects = () =>{
 
   const accordianData = [{ id:"geography", title: "Geography", desc: "Learning this Subject will help you to score marks in Union Public Service Commission (UPSC)," },
@@ -93,7 +103,7 @@ const PrepareSubjects = () =>{
  };
 
  return ( <View style={{ flex:1, backgroundColor:'#fff' }}>
-    <BEHeader formSize={5} activeForm={3} />
+    <BEHeader name={accountInfo?.surname+" "+accountInfo?.name} formSize={5} activeForm={3} />
     <HeaderTitle 
             title="List of Subjects to Prepare" 
             subTitle="Specify the Examinations that you are planning to pursue in the Upcoming Years -" />
@@ -106,10 +116,10 @@ const PrepareSubjects = () =>{
     <BEFooter 
         label={{ previous:'Previous', next:'Next' }}
         previousForm={()=>{
-          navigation?.navigate('SS_ExamTarget', { });
+          setContextData({ displayScreen: 'EXAMTARGET' });
         }} 
         nextForm={()=>{
-         navigation?.navigate('SS_TimeTable', { });
+          setContextData({ displayScreen: 'TIMETABLE' });
         }} />
     </View>);
 };

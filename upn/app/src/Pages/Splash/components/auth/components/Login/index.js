@@ -70,6 +70,7 @@ const Login = () =>{
         console.log(response?.data);
         let userDetails = await getFromSPStore("USER_DETAILS");
             userDetails.accountInfo = { isAuthenticated: true, ...response?.data?.params };
+        console.log("userDetails [Login Page]", userDetails);
         await AddToSPStore("USER_DETAILS", userDetails);
         if(userDetails?.accountInfo?.avatar?.length===0){
            // navigation.navigate('SS_Avatar',{ });

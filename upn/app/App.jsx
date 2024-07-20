@@ -37,7 +37,7 @@ const App = ()=>{
       <Stack.Navigator>
         {/* Splash Screen ::: START */}
         <Stack.Screen name="SS_Preset" component={Preset}  options={{ headerShown: false }} />
-        <Stack.Screen name="SS_Authentication" component={Auth} options={{ headerShown: false }} />
+        <Stack.Screen name="SS_Auth" component={Auth} options={{ headerShown: false }} />
         <Stack.Screen name="SS_Extra" component={Extra}  options={{ headerShown: false }} />
         {/* Splash Screen ::: END */}
         <Stack.Screen name="SS_Main" component={Main} options={{ headerShown: false }} />

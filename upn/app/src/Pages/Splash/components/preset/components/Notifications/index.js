@@ -36,7 +36,7 @@ const Notifications = ({ route }) =>{
        else if(!userDetails?.permissions?.includes('STORAGE')){
           setContextData({ displayScreen: 'STORAGE' });
        } else {
-          navigation.navigate('SS_Authentication');
+          navigation.navigate('SS_Auth');
        }
      } else {
         console.log("Access Denied"); // Access Denied Message 

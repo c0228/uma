@@ -18,8 +18,8 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 const Tab = createBottomTabNavigator();
 
-export const TabNavigation = ({ data })=>{
-   return (<Tab.Navigator screenOptions={({ route }) => ({
+export const TabNavigation = ({ data, initialRouteName })=>{
+   return (<Tab.Navigator initialRouteName={initialRouteName} screenOptions={({ route }) => ({
       headerShown: false,
       tabBarButton:(props) => (
         <TouchableOpacity style={{

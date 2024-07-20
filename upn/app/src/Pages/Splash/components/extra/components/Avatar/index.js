@@ -1,25 +1,24 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Image, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, ScrollView, TouchableOpacity, BackHandler, StyleSheet } from 'react-native';
 import { useNavigation, useRoute  } from '@react-navigation/native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { getAppContext } from '@AdvancedTopics/ReactContext/index.js';
 import BEHeader, { HeaderTitle } from './../BEHeader.js';
 import BEFooter from './../BEFooter.js';
 import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
 
 const Avatar = () =>{
+    const { contextData, setContextData } = getAppContext();
+    const accountInfo = contextData?.userDetails?.accountInfo;
     const route = useRoute();
-    const [userDetails, setUserDetails] = useState();
     const [selectedAvatar, setSelectedAvatar] = useState('');
-    
-    const [gender, setGender] = useState();
-    const initialize = async() =>{
-        const details = await getFromSPStore('USER_DETAILS'); 
-        setUserDetails( details );
-       // setGender(  );
-    };
-    useEffect(()=>{
-        initialize();
-    },[]);
+    const backButton = () =>{
+        const backHandler = BackHandler.addEventListener('hardwareBackPress',  () => { // onBack Press
+          return true; // Prevent default back action
+        });
+        return () => backHandler.remove();
+       }; 
+    useEffect(() => { backButton(); }, []);
     const images = {
         "Male":{
             "male-01": require("@Assets/avatar/male1.jpg"), 
@@ -41,24 +40,24 @@ const Avatar = () =>{
     };
     const handleImageSelect = async(img) =>{
       setSelectedAvatar(img);
-      await AddToSPStore('USER_DETAILS', );
+    //  await AddToSPStore('USER_DETAILS', );
     };
     const navigation = useNavigation();
     return (<View style={styles.avatarPage}>
-        <BEHeader formSize={5} activeForm={0} />
+        <BEHeader name={accountInfo?.surname+" "+accountInfo?.name} formSize={5} activeForm={0} />
         <HeaderTitle 
             title="Choose your Avatar" 
             subTitle="Please Select your Perfect Avatar for a Unique Social Media Experience -" />
         <ScrollView style={styles.scrollView}>
             <View style={styles.avatarView}>
-                {userDetails?.accountInfo?.gender && Object.keys(images?.[userDetails?.accountInfo?.gender])?.map((img, index)=>{
+                {accountInfo?.gender && Object.keys(images?.[accountInfo?.gender])?.map((img, index)=>{
                     return (<View key={index} style={{ padding:15 }}>
                         {img && <TouchableOpacity onPress={()=>handleImageSelect(img)}>
                             {selectedAvatar?.length>0 && (selectedAvatar===img) && 
                                 (<View style={styles.selectView}>
                                     <FontAwesome5 name="check" size={12} color="#eee" />
                                 </View>)}
-                            <Image source={images?.[userDetails?.accountInfo?.gender]?.[img]} 
+                            <Image source={images?.[accountInfo?.gender]?.[img]} 
                                 style={(selectedAvatar===img)?styles.avatarHgl:styles.avatar} />
                         </TouchableOpacity>}
                     </View>);
@@ -66,19 +65,16 @@ const Avatar = () =>{
             </View>
         </ScrollView>
         <BEFooter 
-            label={{ previous:'Previous', next:'Next' }}
-            previousForm={()=>{
-                navigation?.navigate('SS_Authentication', { });
-            }} 
+            label={{  next:'Next' }}
             nextForm={()=>{
                 // Set Avatar into USER_DETAILS
-                navigation?.navigate('SS_EduStatus', { });
+                setContextData({ displayScreen: 'EDUSTATUS' });
             }} />
     </View>);
 };
 
 const styles = StyleSheet.create({
- avatarPage:{ flex:1, backgroundColor:'#fff' },
+ avatarPage: { flex:1 },
  scrollView:{ paddingLeft:5, marginBottom:5, paddingRight:5 },
  avatarView:{ flexDirection:'row',  justifyContent:'center', flexWrap:'wrap' },
  avatar: { borderRadius:50, borderColor:'#333', borderWidth:2, width:80, height:80 },

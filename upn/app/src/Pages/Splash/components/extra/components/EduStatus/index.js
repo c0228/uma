@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, Switch, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, Switch, TouchableOpacity, ScrollView, BackHandler } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { getAppContext } from '@AdvancedTopics/ReactContext/index.js';
 import { Select } from '@AppFormElement/Select/index.js';
 import { Form } from '@AppFormElement/Form/index.js';
 import { RadioSwitch } from '@AppFormElement/RadioSwitch/index.js';
@@ -10,6 +11,8 @@ import BEFooter from './../BEFooter.js';
 import EduDegrees from '@StaticData/en/edu-degrees.json';
 
 const EduStatus = () =>{
+ const { contextData, setContextData } = getAppContext();
+ const accountInfo = contextData?.userDetails?.accountInfo;
  const navigation = useNavigation();
  const eduDegreeData = Object.keys(EduDegrees);
  const initialValues = { status: '', educationLevel: '', specialization: '' };
@@ -23,14 +26,21 @@ const EduStatus = () =>{
   setEducationDetails({ ...initialValues, status: val });
   setSpecialization([]);
  };
-
+ const backButton = () =>{
+  const backHandler = BackHandler.addEventListener('hardwareBackPress',  () => { // onBack Press
+    setContextData({ displayScreen: 'AVATAR' }); // Move to Introduction
+    return true; // Prevent default back action
+  });
+  return () => backHandler.remove();
+ }; 
+useEffect(() => { backButton(); }, []);
  useEffect(()=>{
   console.log("educationDetails: ", educationDetails);
  },[educationDetails]);
 
 
  return (<View style={{ flex:1, backgroundColor:'#fff' }}>
-    <BEHeader formSize={5} activeForm={1} />
+    <BEHeader name={accountInfo?.surname+" "+accountInfo?.name} formSize={5} activeForm={1} />
     <HeaderTitle 
             title="Share your Education Details" 
             subTitle="It helps App to understand your background and Customize resources to prepare effectively for their exams and academic challenges -" />
@@ -110,10 +120,10 @@ const EduStatus = () =>{
     <BEFooter 
         label={{ previous:'Previous', next:'Next' }}
         previousForm={()=>{
-          navigation?.navigate('SS_Avatar', { });
+          setContextData({ displayScreen: 'AVATAR' });
         }} 
         nextForm={()=>{
-         navigation?.navigate('SS_ExamTarget', { });
+          setContextData({ displayScreen: 'EXAMTARGET' });
         }} />
     </View>);
 };

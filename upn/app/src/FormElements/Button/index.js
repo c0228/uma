@@ -49,5 +49,5 @@ export const Button =  ({ type, icon, label, size, onPress, style }) => {
 
 const styles = StyleSheet.create({
     buttonContainer:{ alignItems: 'center', justifyContent: 'center', borderRadius:5,  },
-    button: { fontWeight:'bold', padding: 10 },
+    button: { fontWeight:'bold', paddingLeft: 10, paddingRight:10, paddingTop:5, paddingBottom:8 },
 });

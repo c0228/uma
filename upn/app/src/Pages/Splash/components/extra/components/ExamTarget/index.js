@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { View, ScrollView, Text, Switch, TouchableOpacity, StyleSheet } from "react-native";
+import { View, ScrollView, Text, Switch, TouchableOpacity, BackHandler, StyleSheet } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import { getAppContext } from '@AdvancedTopics/ReactContext/index.js';
 import { Button } from '@AppFormElement/Button/index.js';
 import { Select } from '@AppFormElement/Select/index.js';
 import AlertModal from '@AppComponent/AlertModal/index.js';
-import BEHeader, { HeaderTitle } from './../../utils/BEHeader.js';
-import BEFooter from './../../utils/BEFooter.js';
+import BEHeader, { HeaderTitle } from './../BEHeader.js';
+import BEFooter from './../BEFooter.js';
 
 const ExamTarget = () =>{
+ const { contextData, setContextData } = getAppContext();
+ const accountInfo = contextData?.userDetails?.accountInfo;
  const navigation = useNavigation();
  const exams= ['Civil Service Examination (CSE)','Indian Forest Service Examination (IFoSE)','Engineering Services Examination (ESE)',
     'Combined Defence Services (CDS) Examination', 'National Defence Academy (NDA) Examination','Indian Economic Service (IES) Examination',
@@ -15,7 +18,14 @@ const ExamTarget = () =>{
     'Combined Geoscientist and Geologist (CGG) Examination', 'Central Armed Police Forces (CAPF) Examination'];
  const [examList, setExamList] = useState([]);
  const [alertMessage, setAlertMessage] = useState("");
-
+ const backButton = () =>{
+    const backHandler = BackHandler.addEventListener('hardwareBackPress',  () => { // onBack Press
+      setContextData({ displayScreen: 'EDUSTATUS' }); // Move to Introduction
+      return true; // Prevent default back action
+    });
+    return () => backHandler.remove();
+   }; 
+ useEffect(() => { backButton(); }, []);
  useEffect(()=>{
     console.log("alertMessage", alertMessage);
   },[alertMessage]);
@@ -63,7 +73,7 @@ const ExamTarget = () =>{
 
  return (
     <View style={{ flex:1, backgroundColor:'#fff' }}>
-        <BEHeader formSize={5} activeForm={2} />
+        <BEHeader name={accountInfo?.surname+" "+accountInfo?.name} formSize={5} activeForm={2} />
         <HeaderTitle 
             title="Choose your Targeted Exams" 
             subTitle="Specify the Examinations that you are planning to pursue in the Upcoming Years -" />
@@ -113,7 +123,9 @@ const ExamTarget = () =>{
 </ScrollView>
  <BEFooter 
     label={{ previous:'Previous', next:'Next' }}
-    previousForm={()=>navigation?.navigate('SS_EduStatus', { })} 
+    previousForm={()=>{
+        setContextData({ displayScreen: 'EDUSTATUS' });
+    }} 
     nextForm={()=>{
                 const undefinedList = examList?.filter(exam => exam?.year === undefined).map((list)=>list?.exam);
                 console.log("undefinedList", undefinedList);
@@ -125,7 +137,7 @@ const ExamTarget = () =>{
                     setAlertMessage("Please Select an Exam");
                     setModalVisible(true);
                 } else {
-                    navigation?.navigate('SS_PrepSubj', { });
+                    setContextData({ displayScreen: 'PREPSUBJ' });
                 }
             }} />
 

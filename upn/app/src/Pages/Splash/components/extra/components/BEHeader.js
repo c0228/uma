@@ -1,8 +1,9 @@
 import React from "react";
 import { View, Text, Image, StyleSheet } from 'react-native';
+import { Button } from '@AppFormElement/Button/index.js';
 import Logo from '@Assets/img/logo-default.png';
 
-const BEHeader = ({ formSize, activeForm }) =>{
+const BEHeader = ({ formSize, activeForm, name }) =>{
  return (<View>
  <View style={{ flexDirection:'row', marginTop:10, marginBottom:10, marginLeft:10, marginRight:10 }}>
  <View style={{ width:'52%', padding:10, justifyContent:'center' }}>
@@ -11,6 +12,15 @@ const BEHeader = ({ formSize, activeForm }) =>{
  <View style={{ width:'48%',  borderLeftWidth:2, borderLeftColor:'#000', padding:10 }}>
      <Text style={{ textAlign:'center', lineHeight:20, fontWeight:'bold', color:'#000', letterSpacing:0.3 }}>FOR YOUR BETTER EXPERIENCE</Text>
  </View>
+</View>
+<View style={{ flexDirection:'row', paddingLeft:20, paddingRight:20 }}>
+    <View style={{ width:'70%', justifyContent:'flex-end' }}><Text style={{ color:'#000' }}>Hello {name},</Text></View>
+    <View style={{  width:'30%', alignItems:'flex-end' }}>
+        <Button type="outline-danger" label="Logout" size={12} />
+    </View>
+</View>
+<View style={{ flexDirection:'row', paddingTop:5, paddingLeft:20, paddingRight:20 }}>
+    <Text style={{ lineHeight:22 }}>Please provide the following details to help tailor the service to your needs -</Text>
 </View>
 <View style={styles.flexContainer}>
     {Array.from({ length: formSize })?.map((_,index)=>{

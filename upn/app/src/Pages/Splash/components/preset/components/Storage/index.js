@@ -59,7 +59,7 @@ const Storage = () =>{
     } else {
       console.log("Access Denied")
     }
-    navigation.navigate('SS_Authentication');
+    navigation.navigate('SS_Auth');
   } catch(err){
      console.warn(err);
   } 

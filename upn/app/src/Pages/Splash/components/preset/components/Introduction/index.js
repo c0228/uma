@@ -32,7 +32,7 @@ const Introduction = () =>{
   } else if(!details?.permissions?.includes('STORAGE')){ // displayScreen of 'STORAGE'
       setContextData({ displayScreen: 'STORAGE' });
   } else { // navigate to auth
-     navigation.navigate('SS_Authentication');
+     navigation.navigate('SS_Auth');
   }
  };
  const BulletPoint = ({ text }) =>{

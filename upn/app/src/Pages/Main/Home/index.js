@@ -46,7 +46,7 @@ const TabData = [{
 }];
 
 const Home = (props)=>{
-   return (<TabNavigation data={TabData} />);
+   return (<TabNavigation data={TabData} initialRouteName={TabData?.[1]?.id} />);
 }
 
 export default Home;
