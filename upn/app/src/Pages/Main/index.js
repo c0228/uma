@@ -10,8 +10,7 @@ import PrevQP from '@AppPage/Main/PrevQP/index.js';
 import MyProfile from '@AppPage/Main/MyProfile/index.js';
 import Settings from '@AppPage/Main/Settings/index.js';
 import StudyTT from '@AppPage/Main/StudyTT/index.js';
-import { useNavigationState } from '@react-navigation/native';
-import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
+import LogoutButton from '@AppPage/Main/Logout/index.js';
 
 const Main = () => {
  const navigation = useNavigation();
@@ -37,18 +36,4 @@ const Main = () => {
     return ( <DrawerNavigation screens={screens} /> );
 };
 
-const LogoutButton = () => {
-  const navigation = useNavigation();
-  const resetData = async() =>{
-    let userDetails = await getFromSPStore("USER_DETAILS");
-    delete userDetails.accountInfo;
-    console.log("userDetails [Logout]: ", userDetails);
-    await AddToSPStore("USER_DETAILS", userDetails);
-  };
-  useEffect(()=>{
-    resetData(); // Reset User Details to Empty over here
-    navigation.navigate('SS_Preset');
-  });
-  return (<></>); // Replace Button with your UI component
-};
 export default Main;

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { Button } from '@AppFormElement/Button/index.js';
+import LogoutButton from '@AppPage/Main/Logout/index.js';
 import Logo from '@Assets/img/logo-default.png';
 
 const BEHeader = ({ formSize, activeForm, name }) =>{
+ const [signout, setSignout] = useState(false);
  return (<View>
  <View style={{ flexDirection:'row', marginTop:10, marginBottom:10, marginLeft:10, marginRight:10 }}>
  <View style={{ width:'52%', padding:10, justifyContent:'center' }}>
@@ -16,8 +18,9 @@ const BEHeader = ({ formSize, activeForm, name }) =>{
 <View style={{ flexDirection:'row', paddingLeft:20, paddingRight:20 }}>
     <View style={{ width:'70%', justifyContent:'flex-end' }}><Text style={{ color:'#000' }}>Hello {name},</Text></View>
     <View style={{  width:'30%', alignItems:'flex-end' }}>
-        <Button type="outline-danger" label="Logout" size={12} />
+        <Button type="outline-danger" label="Logout" size={12} onPress={()=>setSignout(true)} />
     </View>
+    {signout && (<LogoutButton />)}
 </View>
 <View style={{ flexDirection:'row', paddingTop:5, paddingLeft:20, paddingRight:20 }}>
     <Text style={{ lineHeight:22 }}>Please provide the following details to help tailor the service to your needs -</Text>
