@@ -26,7 +26,11 @@ const Home = ()=>{
   }}>
     <div className="container-fluid">
       <div className="row">
-        <div className="col-sm-7"></div>
+        <div align="center" className="col-sm-4">
+          <div style={{ padding:'15px', marginTop:'10px', marginBottom:'20px' }}>
+            <img src="./assets/home/screen.png" style={{ width:'250px', height:'auto', transform: 'rotate(-5deg)' }} />
+          </div>
+        </div>
         <div className="col-sm-5">
             
            
