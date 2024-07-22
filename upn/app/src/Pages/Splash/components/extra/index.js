@@ -13,7 +13,12 @@ const Extra = () =>{
   const { contextData, setContextData } = getAppContext();
   const initialize = async() =>{
     const userDetails = await getFromSPStore("USER_DETAILS"); // Gets Details After Login
-    setContextData({ displayScreen: 'AVATAR', userDetails: userDetails });
+    if(userDetails?.accountInfo?.avatar?.length>0){
+      setContextData({ displayScreen: 'EDUSTATUS', userDetails: userDetails });
+    } else {
+      setContextData({ displayScreen: 'AVATAR', userDetails: userDetails });   
+    }
+    
   };
   useEffect(()=>{
     console.log("---------------------------");

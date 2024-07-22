@@ -17,6 +17,7 @@ export const Select = ({ name, label, placeholder, popupTitle, value, validation
   const FormMode = form?.[formName]?.mode;
   const FormErrorMessage = form?.[formName]?.[name]?.errorMessage;
 
+  /*
   useEffect(() => {
     if (FormMode === FORM_RESET) {
       console.log("setSelectedOptions Triggered at useEffect");
@@ -24,7 +25,7 @@ export const Select = ({ name, label, placeholder, popupTitle, value, validation
     }  else if (FormMode === FORM_SUBMITTED || selectedOptions.length > 0) {
         SelectValidate(selectedOptions);
     }
-  }, [FormMode, selectedOptions]);
+  }, [FormMode, selectedOptions]); */
 
 
   const toggleOption = (option) => {
@@ -43,6 +44,7 @@ export const Select = ({ name, label, placeholder, popupTitle, value, validation
           // console.log("Object added to array", selectedOptions);
         }
         setSelectedOptions(sOptions);
+        SelectValidate(sOptions);
         
     } else {
       const index = selectedOptions.findIndex(item => item === option.value);
@@ -50,6 +52,7 @@ export const Select = ({ name, label, placeholder, popupTitle, value, validation
       if (index === -1) { val=[option?.value]; }
       setSelectedOptions(val);
       toggleModal();
+      SelectValidate(val);
     }
     
   };
@@ -72,11 +75,6 @@ export const Select = ({ name, label, placeholder, popupTitle, value, validation
     }
     onSelect(val);
   };
-
-  useEffect(()=>{
-    console.log("selectedOptions", selectedOptions);
-    SelectValidate(selectedOptions);
-  },[selectedOptions]);
 
   const validateOnSubmit = ( (FormMode === FORM_SUBMITTED) || selectedOptions?.length > 0);
   const isErrorMessageExist = (FormErrorMessage?.length > 0);
