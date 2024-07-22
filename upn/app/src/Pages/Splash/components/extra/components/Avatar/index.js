@@ -11,7 +11,7 @@ const Avatar = () =>{
     const { contextData, setContextData } = getAppContext();
     const accountInfo = contextData?.userDetails?.accountInfo;
     const route = useRoute();
-    const [selectedAvatar, setSelectedAvatar] = useState('');
+    const [selectedAvatar, setSelectedAvatar] = useState(accountInfo?.avatar || '');
     const backButton = () =>{
         const backHandler = BackHandler.addEventListener('hardwareBackPress',  () => { // onBack Press
           return true; // Prevent default back action
@@ -40,7 +40,10 @@ const Avatar = () =>{
     };
     const handleImageSelect = async(img) =>{
       setSelectedAvatar(img);
-    //  await AddToSPStore('USER_DETAILS', );
+      const details = await getFromSPStore("USER_DETAILS");
+            details.accountInfo.avatar = img;
+      await AddToSPStore('USER_DETAILS', details);
+      setContextData({ userDetails: details });
     };
     const navigation = useNavigation();
     return (<View style={styles.avatarPage}>

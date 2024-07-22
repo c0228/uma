@@ -1,5 +1,6 @@
 import React, { useState, createContext, useEffect } from "react";
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 import { getAppContext, ContextProvider as PresetContextProvider } from '@AdvancedTopics/ReactContext/index.js';
 import Introduction from "./components/Introduction/index.js";
 import Notifications from "./components/Notifications/index.js";
@@ -9,20 +10,27 @@ import Language from '@AppUtils/Language.js';
 
 const Preset = () =>{
  const Content = () =>{
+  const navigation = useNavigation();
   const { contextData, setContextData } = getAppContext(); // Used to change Display's
   // const [lang, setLang] = useState();
   const handleLang = (option) =>{
    // setLang(option);
-    setContextData({...contextData, lang: option });
+    setContextData({ lang: option });
   };
   const initialize = async() =>{
     let details = await getFromSPStore('USER_DETAILS');
     console.log("details", details);
-    setContextData({...contextData, lang: details?.lang });
+    
+    if(details?.accountInfo?.isAuthenticated){
+      navigation?.navigate('SS_Extra');
+    } else {
+      setContextData({ displayScreen: 'INTRODUCTION', lang: details?.lang || 'en' });
+    }
   };
   useEffect(()=>{
     initialize();
   },[]);
+  
   return (<View style={styles.presetView}>
     <View style={styles.langView}>
       <Language value={contextData?.lang} handleSelect={handleLang} />
@@ -32,7 +40,7 @@ const Preset = () =>{
     {contextData?.displayScreen === 'STORAGE' && (<Storage />)}
   </View>);
  };
- return (<PresetContextProvider variables={{ displayScreen: 'INTRODUCTION' }}>{/* REGISTER / EMAIL_VALIDATE / SUCCESS */}
+ return (<PresetContextProvider>{/* REGISTER / EMAIL_VALIDATE / SUCCESS */}
   <Content />
  </PresetContextProvider>);
 };
