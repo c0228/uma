@@ -13,6 +13,9 @@ RewriteRule user/login src/controllers/module.user.account.info.php?action=USER_
 RewriteRule user/update src/controllers/module.user.account.info.php?action=USER_DETAILS_UPDATE  [QSA]
 RewriteRule user/reset/password/link src/controllers/module.user.account.info.php?action=SEND_RESETPASSWORD_EMAIL [QSA]
 
+# EXAMS MODULE
+RewriteRule user/exams/list src/controllers/module.app.exams.php?action=USER_EXAMS_LIST  [QSA]
+
 # RewriteRule timezones/list src/controllers/config.static.apis.php?action=GetTimezones [QSA]
 
 # RewriteRule upload/file src/controllers/module.upload.file.php [QSA]
