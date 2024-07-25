@@ -3,6 +3,7 @@ import { View, Text, BackHandler, ScrollView, StyleSheet } from "react-native";
 import { getAppContext } from '@AdvancedTopics/ReactContext/index.js';
 import { Select } from '@AppFormElement/Select/index.js';
 import { RadioSwitch } from '@AppFormElement/RadioSwitch/index.js';
+import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
 import BEHeader, { HeaderTitle } from './../BEHeader.js';
 import BEFooter from './../BEFooter.js';
 import EduDegrees from '@StaticData/en/edu-degrees.json';
@@ -98,7 +99,13 @@ const EduStatus = () =>{
     <BEFooter 
         label={{ previous:'Previous', next:'Next' }}
         previousForm={()=>{ setContextData({ displayScreen: 'AVATAR' }); }} 
-        nextForm={()=>{ setContextData({ displayScreen: 'EXAMTARGET' }); }} />
+        nextForm={async()=>{
+          // educationDetails
+          const details = await getFromSPStore("USER_DETAILS");
+            details.educationDetails = educationDetails;
+          await AddToSPStore('USER_DETAILS', details);
+          setContextData({ displayScreen: 'EXAMTARGET' });
+        }} />
  </View>);
 };
 
