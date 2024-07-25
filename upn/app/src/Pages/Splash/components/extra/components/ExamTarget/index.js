@@ -5,6 +5,7 @@ import { getAppContext } from '@AdvancedTopics/ReactContext/index.js';
 import { Button } from '@AppFormElement/Button/index.js';
 import { Select } from '@AppFormElement/Select/index.js';
 import AlertModal from '@AppComponent/AlertModal/index.js';
+import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
 import BEHeader, { HeaderTitle } from './../BEHeader.js';
 import BEFooter from './../BEFooter.js';
 
@@ -24,16 +25,21 @@ const ExamTarget = () =>{
       return true; // Prevent default back action
     });
     return () => backHandler.remove();
-   }; 
+ }; 
  useEffect(() => { backButton(); }, []);
  useEffect(()=>{
     console.log("alertMessage", alertMessage);
   },[alertMessage]);
-
  useEffect(()=>{
    console.log("examList", examList);
  },[examList]);
-
+ const initialize = async() =>{
+  const details = await getFromSPStore("USER_DETAILS");
+  console.log("details: ", details);
+ };
+ useEffect(()=>{
+  initialize();
+ },[]);
  const selectedExam= (value)=>{
     // Check if the object exists in the array
     const index = examList.findIndex(item => item?.exam === value);

@@ -11,9 +11,9 @@ import EduDegrees from '@StaticData/en/edu-degrees.json';
 const EduStatus = () =>{
  const { contextData, setContextData } = getAppContext();
  const initialValues = { status:'', // STUDYING / COMPLETED
-  current: { degree:[], specialization: [] }, // STUDYING
-  planned: { degree:[], specialization: [] }, // STUDYING
-  completed: { degree:[], specialization: [] } // COMPLETED
+  current: { degree:'', specialization: '' }, // STUDYING
+  planned: { degree:'', specialization: '' }, // STUDYING
+  completed: { degree:'', specialization: '' } // COMPLETED
  };
  const [educationDetails, setEducationDetails] = useState( initialValues );
  const [specializationList, setSpecializationList] = useState({ current:[], planned:[], completed:[] });
@@ -39,28 +39,30 @@ const EduStatus = () =>{
     if(degree?.toLowerCase()?.startsWith("bachelor") || degree?.toLowerCase()?.startsWith("master")){
       setSpecializationList({...specializationList, [mode]: EduDegrees?.[degree] });
     }
-    setEducationDetails({...educationDetails, [mode]: { degree: val, specialization: '' } });
+    setEducationDetails({...educationDetails, [mode]: { degree: degree, specialization: '' } });
   }
+  const degreeStudy = educationDetails?.[mode]?.degree;
+  const specializationStudy = educationDetails?.[mode]?.specialization;
   return (<View style={{ paddingTop: 15 }}>
     <Select name={mode+"Degree"} 
       label={label?.degree}
       popupTitle="Select your Education"
       placeholder="Select your Education" 
-      value={educationDetails?.[mode]?.degree}
+      value={degreeStudy?.length>0?[degreeStudy]:[]}
       options={[...schooling, ...eduDegreeData]?.map((deg)=>{ return { id:deg, label:deg, value: deg }; })} 
       onSelect={(value)=>handleStudy(value)} />
     {specializationList?.[mode]?.length>0 && 
-    (educationDetails?.[mode]?.degree?.[0]?.toLowerCase().startsWith("bachelor") || 
-    educationDetails?.[mode]?.degree?.[0]?.toLowerCase()?.startsWith("master"))
+    (degreeStudy?.toLowerCase().startsWith("bachelor") || 
+    degreeStudy?.toLowerCase()?.startsWith("master"))
     &&(<View style={{ paddingTop: 15 }}>
         <Select name={mode+"Specialization"}
           label={label?.specialization}
           popupTitle="Select your Specialization"
           placeholder="Choose your Specialization" 
-          value={educationDetails?.[mode]?.specialization} 
+          value={specializationStudy?.length>0?[specializationStudy]:[]} 
           options={specializationList?.[mode]?.map((deg)=>{ return { id:deg, label:deg, value: deg }; })} 
           onSelect={(value)=>{
-            setEducationDetails({ ...educationDetails, [mode]: {...educationDetails?.[mode], specialization: value } });
+            setEducationDetails({ ...educationDetails, [mode]: {...educationDetails?.[mode], specialization: value?.[0] } });
           }} />
       </View>)}
   </View>);
