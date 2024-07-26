@@ -97,7 +97,8 @@ const Age = ()=>{
        label="Age" 
        popupTitle="Select your Age"
        placeholder="Select your Age"
-       options={Range(10, 32)?.map((val)=>{ return { id:val+' years', label:val+' years', value: val+' years' }; })} 
+       options={[...Range(10, 32)?.map((val)=>{ return { id:val+' years', label:val+' years', value: val+' years' }; }),
+        { id:'32+ years', label: '32+ years', value:'32+ years' }]} 
        onSelect={(value)=>{}}
        validation={{
          required:{
