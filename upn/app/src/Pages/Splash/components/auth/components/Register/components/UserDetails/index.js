@@ -24,7 +24,6 @@ const UserDetails = () =>{
       surname: form?.["register"]?.surname?.value,
       name: form?.["register"]?.name?.value,
       gender: form?.["register"]?.gender?.value?.[0],
-      age: form?.["register"]?.age?.value?.[0],
       email: form?.["register"]?.email?.value,
       pwd: md5( form?.["register"]?.pwd?.value ) 
     };
@@ -87,24 +86,6 @@ const Gender = ()=>{
                 value: true,
                 errorMessage:"This is a Mandatory Field"
             }
-      }} />
-   </View>);
-};
-
-const Age = ()=>{
-    return (<View>
-     <Select name="age" 
-       label="Age" 
-       popupTitle="Select your Age"
-       placeholder="Select your Age"
-       options={[...Range(10, 32)?.map((val)=>{ return { id:val+' years', label:val+' years', value: val+' years' }; }),
-        { id:'32+ years', label: '32+ years', value:'32+ years' }]} 
-       onSelect={(value)=>{}}
-       validation={{
-         required:{
-            value: true,
-            errorMessage:"This is a Mandatory Field"
-         }
       }} />
    </View>);
 };

@@ -30,7 +30,6 @@ else if($_GET["action"]=='USER_REGISTER' && $_SERVER['REQUEST_METHOD']=='POST'){
  $surname = ''; if( array_key_exists("surname", $htmlData) ){ $surname = $htmlData["surname"]; }
  $name = ''; if( array_key_exists("name", $htmlData) ){ $name = $htmlData["name"];   }
  $gender = ''; if( array_key_exists("gender", $htmlData) ){ $gender = $htmlData["gender"];  }
- $age = ''; if( array_key_exists("age", $htmlData) ){ $age = $htmlData["age"];  }
  $email = ''; if( array_key_exists("email", $htmlData) ){ $email = $htmlData["email"];  }
  $accPwd = ''; if( array_key_exists("pwd", $htmlData) ){ $accPwd = $htmlData["pwd"];  }
  $avatar = ''; if( array_key_exists("avatar", $htmlData) ){ $avatar = $htmlData["avatar"];  }
@@ -38,14 +37,13 @@ else if($_GET["action"]=='USER_REGISTER' && $_SERVER['REQUEST_METHOD']=='POST'){
  $location = ''; if( array_key_exists("location", $htmlData) ){ $location = $htmlData["location"]; }
  $state = ''; if( array_key_exists("state", $htmlData) ){ $state = $htmlData["state"];   }
  $country = ''; if( array_key_exists("country", $htmlData) ){ $country = $htmlData["country"];  }
- $query = $userAccountModule->query_add_userAccount($userId, $surname, $name, $gender, $age, $email, $accPwd, $avatar, 
+ $query = $userAccountModule->query_add_userAccount($userId, $surname, $name, $gender, $email, $accPwd, $avatar, 
  	$locality, $location, $state, $country);
  $params = [
 	"userId" => "$userId",
 	"surname" => "$surname",
 	"name" => "$name",
 	"gender" => "$gender",
-	"age" => "$age",
 	"email" => "$email",
 	"pwd" => "$accPwd",
 	"avatar" => "$avatar",
@@ -94,7 +92,6 @@ else if($_GET["action"]=='USER_DETAILS_UPDATE' && $_SERVER['REQUEST_METHOD']=='P
  $surname = ''; if( array_key_exists("surName", $htmlData) ){ $surname = $htmlData["surname"]; }
  $uname = ''; if( array_key_exists("name", $htmlData) ){ $uname = $htmlData["name"];   }
  $gender = ''; if( array_key_exists("gender", $htmlData) ){ $gender = $htmlData["gender"];  }
- $age = ''; if( array_key_exists("age", $htmlData) ){ $age = $htmlData["age"];  }
  $email = ''; if( array_key_exists("email", $htmlData) ){ $email = $htmlData["email"];  }
  $accPwd = ''; if( array_key_exists("accPwd", $htmlData) ){ $accPwd = $htmlData["accPwd"];  }
  $avatar = ''; if( array_key_exists("avatar", $htmlData) ){ $avatar = $htmlData["avatar"];  }
@@ -102,7 +99,7 @@ else if($_GET["action"]=='USER_DETAILS_UPDATE' && $_SERVER['REQUEST_METHOD']=='P
  $location = ''; if( array_key_exists("location", $htmlData) ){ $location = $htmlData["location"]; }
  $state = ''; if( array_key_exists("state", $htmlData) ){ $state = $htmlData["state"];   }
  $country = ''; if( array_key_exists("country", $htmlData) ){ $country = $htmlData["country"];  }
- $query = $userAccountModule->query_update_userAccount($userId, $surname, $uname, $gender, $age, $email, $accPwd, $avatar, $locality, 
+ $query = $userAccountModule->query_update_userAccount($userId, $surname, $uname, $gender, $email, $accPwd, $avatar, $locality, 
  				$location, $state, $country);
  $result = array();
  $status = $database->addupdateData($query);
