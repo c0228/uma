@@ -9,6 +9,10 @@ require_once './../utils/Mail.php';
 require_once './../utils/DateTime.php';
 require_once './../utils/Math.php';
 
+if($_GET["action"]=='USER_EXAMS_TT' && $_SERVER['REQUEST_METHOD']=='POST'){
+
+}
+/*
 if($_GET["action"]=='USER_EXAMS_LIST' && $_SERVER['REQUEST_METHOD']=='POST'){
   $htmlData = json_decode( file_get_contents('php://input'), true );	
   $age = ''; if( array_key_exists("age", $htmlData) ){ $age = $htmlData["age"]; }
@@ -24,7 +28,7 @@ if($_GET["action"]=='USER_EXAMS_LIST' && $_SERVER['REQUEST_METHOD']=='POST'){
   //  -> For these Exams filter with age.
   //  -> This gives Final Exam List and their Subjects too.
 
-  /* 1. Get List of Exams, he is eligible for */
+  // 1. Get List of Exams, he is eligible for 
   $query1 = $appExams->query_get_examsByCourse($eduDegreeCompleted, $eduSpecializationCompleted, 
                 $eduDegreeCurrent, $eduSpecializationCurrent, $eduDegreePlanned, $eduSpecializationPlanned);
   $examsList = [];
@@ -34,20 +38,20 @@ if($_GET["action"]=='USER_EXAMS_LIST' && $_SERVER['REQUEST_METHOD']=='POST'){
   }
   $examsList = array_unique($examsList);
 
-  /*  2. For these Exams filter with age */
+  //  2. For these Exams filter with age
   $query2 = $appExams->query_get_examsByAge($age, $examsList);
   $examsByAge = json_decode( $database->getJSONData($query2) );
 
-  /* 3. This gives Final Exam List and their Subjects too */
+  // 3. This gives Final Exam List and their Subjects too
   $query3 = $appExams->query_get_examsBySubject($examsList);
   $subjects = json_decode( $database->getJSONData($query3) );
 
-  /* 4. Final */
+  // 4. Final
   $data = [
 	"courses" => $examsByCourse,
 	"eligibleExams" => $examsByAge,
     "subjects" => $subjects
  ];
  echo json_encode( $data );
-}
+} */
 ?>

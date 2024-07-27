@@ -14,7 +14,9 @@ RewriteRule user/update src/controllers/module.user.account.info.php?action=USER
 RewriteRule user/reset/password/link src/controllers/module.user.account.info.php?action=SEND_RESETPASSWORD_EMAIL [QSA]
 
 # EXAMS MODULE
-RewriteRule user/exams/list src/controllers/module.app.exams.php?action=USER_EXAMS_LIST  [QSA]
+RewriteRule user/prepare/plan src/controllers/module.user.exams.info.php?action=USER_EXAMS_LIST  [QSA]
+
+#RewriteRule user/exams/list src/controllers/module.app.exams.php?action=USER_EXAMS_LIST  [QSA]
 
 # RewriteRule timezones/list src/controllers/config.static.apis.php?action=GetTimezones [QSA]
 

@@ -33,6 +33,17 @@ class UserAccountModule {
 	$sql=chop($sql,",")." WHERE user_id=".$userId.";";
 	return $sql;
   }
+  function query_add_preparePlan($user_id, $capf, $cds, $cgg, $cms, $cse, $ese, $ies, $ifose, $iss, $na, $nda, 
+    $sunday, $monday, $tuesday, $wednesday, $thursday, $friday, $saturday){
+   return "INSERT INTO user_accounts_ett(user_id, CAPF, CDS, CGG, CMS, CSE, ESE, IES, IFoSE, ISS, NA, NDA, Sunday, Monday, Tuesday, ".
+    "Wednesday, Thursday, Friday, Saturday) VALUES ('".$user_id."','".$capf."','".$cds."','".$cgg."','".$cms."','".$cse.
+    "','".$ese."','".$ies."','".$ifose."','".$iss."','".$na."','".$nda."','".$sunday."','".$monday."','".$tuesday."','".$wednesday.
+    "','".$thursday."','".$friday."','".$saturday."');";
+ }
+ function query_get_preparePlan($user_id){
+   return "SELECT CAPF, CDS, CGG, CMS, CSE, ESE, IES, IFoSE, ISS, NA, NDA, Sunday, Monday, Tuesday, ".
+    "Wednesday, Thursday, Friday, Saturday FROM user_accounts_ett WHERE user_id='".$user_id."';";
+ }
 }
 
 $userAccountModule = new UserAccountModule();

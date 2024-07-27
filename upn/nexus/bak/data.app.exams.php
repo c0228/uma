@@ -1,6 +1,7 @@
 <?php
 class AppExams {
- function query_get_examsByCourse($eduDegreeCompleted, $eduSpecializationCompleted, $eduDegreeCurrent, $eduSpecializationCurrent, 
+
+/*  function query_get_examsByCourse($eduDegreeCompleted, $eduSpecializationCompleted, $eduDegreeCurrent, $eduSpecializationCurrent, 
         $eduDegreePlanned, $eduSpecializationPlanned){ // Get List of Exams
   return "SELECT course, specialization, exams FROM app_courses_list WHERE (course='".$eduDegreeCompleted."' AND specialization='".$eduSpecializationCompleted."')".
     " OR (course='".$eduDegreeCurrent."' AND specialization='".$eduSpecializationCurrent."') OR ".
@@ -21,7 +22,8 @@ class AppExams {
   $sql.= implode(" OR ", $examConditions);
   $sql.= ";";
   return $sql;
- }
+ } */
+
 }
 $appExams = new AppExams();
 ?> 

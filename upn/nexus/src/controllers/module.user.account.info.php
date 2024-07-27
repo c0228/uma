@@ -78,9 +78,12 @@ else if($_GET["action"]=='USER_LOGIN' && $_SERVER['REQUEST_METHOD']=='POST'){
 	$result = array();
 	$status = 'No Record Found';
 	if(strlen($email)>0 && strlen($accPwd)>0){
-	 $query = $userAccountModule-> query_view_userAccount($email, $accPwd);
-	 $data = json_decode( $database->getJSONData($query) );
-	 $result["params"] = $data[0];
+	 $query1 = $userAccountModule->query_view_userAccount($email, $accPwd);
+	 $data1 =  json_decode( $database->getJSONData($query1) ); // json_decode()
+	 $userId = $data1[0]->{"userId"};
+	 $query2 = $userAccountModule->query_get_preparePlan($userId);
+	 $data2 = json_decode( $database->getJSONData($query2) );  // json_decode()
+	 $result["params"] = array_merge( (array) $data1[0], (array) $data2[0] );
 	 $status = 'Record Found';
 	}
 	$result["status"] = $status;
