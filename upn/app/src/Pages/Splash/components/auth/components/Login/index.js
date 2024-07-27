@@ -67,15 +67,18 @@ const Login = () =>{
       axios.post(NEXUS_URL+'user/login', data)
       .then(async(response) => { 
         setLoading(false);
-        console.log(response?.data);
         let userDetails = await getFromSPStore("USER_DETAILS");
             userDetails.accountInfo = { isAuthenticated: true, ...response?.data?.params };
-        console.log("userDetails [Login Page]", userDetails);
+        console.log("userDetails [Login Page]", response?.data, userDetails);
         await AddToSPStore("USER_DETAILS", userDetails);
         if(userDetails?.accountInfo?.avatar?.length===0){
-           // navigation.navigate('SS_Avatar',{ });
-            navigation.navigate('SS_Extra',{ });
-        } else {
+           navigation.navigate('SS_Extra',{ });
+        } else if(userDetails?.accountInfo?.examTargetList?.length===0){
+          navigation.navigate('SS_Extra',{ });
+        } else if(Object.keys(userDetails?.accountInfo?.timeAvailability)?.length===0){
+          navigation.navigate('SS_Extra',{ });
+        }
+        else {
             navigation.navigate('SS_Main',{ });
         }
       }) .catch(error => {  // Show Alert

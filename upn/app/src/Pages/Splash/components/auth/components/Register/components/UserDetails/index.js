@@ -147,7 +147,6 @@ const RegPwd = () =>{
         <View style={{ marginTop:13 }}><SurName /></View>
         <View style={{ marginTop:15 }}><Name /></View>
         <View style={{ marginTop:15 }}><Gender /></View>
-        <View style={{ marginTop:15 }}><Age /></View>
         <View style={{ marginTop:15 }}><EmailAddress /></View>
         <View style={{ marginTop:15, marginBottom:15 }}><RegPwd /></View>
       </Form>  

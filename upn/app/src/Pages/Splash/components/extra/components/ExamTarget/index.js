@@ -144,19 +144,12 @@ const ExamTarget = () =>{
  const [examList, setExamList] = useState([]);
  const backButton = () =>{
     const backHandler = BackHandler.addEventListener('hardwareBackPress',  () => { // onBack Press
-      setContextData({ displayScreen: 'EDUSTATUS' }); // Move to Introduction
+      setContextData({ displayScreen: 'AVATAR' }); // Move to Introduction
       return true; // Prevent default back action
     });
     return () => backHandler.remove();
  }; 
  useEffect(() => { backButton(); }, []);
- const initialize = async() =>{
-  const details = await getFromSPStore("USER_DETAILS");
-  console.log("details: ", details);
- };
- useEffect(()=>{
-  initialize();
- },[]);
  const selectedExam= (exam)=>{
     // Check if the object exists in the array
     const index = examList.findIndex(item => item?.exam === exam?.name);
@@ -180,14 +173,12 @@ const ExamTarget = () =>{
     </AlertModal>}
   </View>);
  };
- return (
-    <View style={{ flex:1, backgroundColor:'#fff' }}>
-        <AlertView />
-        <BEHeader name={accountInfo?.surname+" "+accountInfo?.name} formSize={3} activeForm={1} />
-        <HeaderTitle 
-            title="Choose your Targeted Exams" 
-            subTitle="Specify the Examinations that you are planning to pursue in the Upcoming Years -" />
-    
+ return (<View style={{ flex:1, backgroundColor:'#fff' }}>
+ <AlertView />
+ <BEHeader name={accountInfo?.surname+" "+accountInfo?.name} formSize={3} activeForm={1} />
+ <HeaderTitle 
+    title="Choose your Targeted Exams" 
+    subTitle="Specify the Examinations that you are planning to pursue in the Upcoming Years -" />    
  <ScrollView style={{ paddingLeft:5, marginBottom:5, paddingRight:5 }}>
     {exams?.map((exam,index)=>{
         const isSelected = examList?.some((selected) => selected?.id === exam?.id);
@@ -215,11 +206,14 @@ const ExamTarget = () =>{
     previousForm={()=>{
         setContextData({ displayScreen: 'AVATAR' });
     }} 
-    nextForm={()=>{
+    nextForm={async()=>{
       if(examList?.length>0){
-          setContextData({ displayScreen: 'TIMETABLE' });
+        let details = await getFromSPStore("USER_DETAILS");
+            details.accountInfo.examTargetList = examList;
+        await AddToSPStore("USER_DETAILS", details);
+        setContextData({ displayScreen: 'TIMETABLE' });
       } else {
-          setShowAlert(true);
+        setShowAlert(true);
       }
         
     }} />
