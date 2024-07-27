@@ -61,6 +61,11 @@ const TimeTable = () =>{
     </AlertModal>}
   </View>);
  };
+ const initialize = async() =>{
+  const details = await getFromSPStore("USER_DETAILS");
+  setTimeTableValues( details?.accountInfo?.timeAvailability );
+ };
+ useEffect(()=>{ initialize(); },[]);
  return ( <View style={{ flex:1, backgroundColor:'#fff' }}>
     <AlertView />
     <BEHeader name={accountInfo?.surname+" "+accountInfo?.name} formSize={3} activeForm={2} />
@@ -97,7 +102,6 @@ const TimeTable = () =>{
             let details = await getFromSPStore("USER_DETAILS");
                 details.accountInfo.timeAvailability = timeTableValues;
             await AddToSPStore("USER_DETAILS", details);
-            setContextData({ displayScreen: 'TIMETABLE' });
             navigation?.navigate('SS_Main', { from: 'SS_Extra' });
           }
         }} />

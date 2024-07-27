@@ -8,7 +8,6 @@ import AlertModal from '@AppComponent/AlertModal/index.js';
 import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
 import BEHeader, { HeaderTitle } from './../BEHeader.js';
 import BEFooter from './../BEFooter.js';
-import { Order, Li } from "e-ui-react-native";
 
 const exams= [{ 
     id: "CSE",
@@ -164,6 +163,11 @@ const ExamTarget = () =>{
     console.log("sOptions [out]", sOptions);
  };
  const [showAlert, setShowAlert] = useState(false);
+ const initialize = async() =>{
+  const details = await getFromSPStore("USER_DETAILS");
+  setExamList( details?.accountInfo?.examTargetList );
+ };
+ useEffect(()=>{ initialize(); },[]);
  const AlertView = ()=>{
   return (<View>
     {showAlert && <AlertModal title="Missing Targeted Exams" type="danger" onClose={()=>setShowAlert(false)}>
