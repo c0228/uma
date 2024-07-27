@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 import { getAppContext, ContextProvider as ExtraContextProvider } from '@AdvancedTopics/ReactContext/index.js';
 import { getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
 import Avatar from "./components/Avatar/index.js";
@@ -7,14 +8,19 @@ import ExamTarget from "./components/ExamTarget/index.js";
 import TimeTable from "./components/TimeTable/index.js";
 
 const Extra = () =>{
+ const navigation = useNavigation();
  const Content = () =>{
   const { contextData, setContextData } = getAppContext();
   const initialize = async() =>{
     const userDetails = await getFromSPStore("USER_DETAILS"); // Gets Details After Login
-    if(userDetails?.accountInfo?.avatar?.length>0){
-      setContextData({ displayScreen: 'EXAMTARGET', userDetails: userDetails });
-    } else {
+    if(userDetails?.accountInfo?.avatar?.length===0){
       setContextData({ displayScreen: 'AVATAR', userDetails: userDetails });   
+    } else if(userDetails?.accountInfo?.examTargetList?.length===0){
+      setContextData({ displayScreen: 'EXAMTARGET', userDetails: userDetails });
+    } else if(Object.keys(userDetails?.accountInfo?.timeAvailability)?.length===0){
+      setContextData({ displayScreen: 'TIMETABLE', userDetails: userDetails });
+    } else {
+      navigation?.navigate('SS_Main', { from: 'SS_Extra' });  
     }
     
   };

@@ -97,7 +97,6 @@ const TimeTable = () =>{
             let details = await getFromSPStore("USER_DETAILS");
                 details.accountInfo.timeAvailability = timeTableValues;
             await AddToSPStore("USER_DETAILS", details);
-            console.log("TIME AVAILABILITY: ", details);
             setContextData({ displayScreen: 'TIMETABLE' });
             navigation?.navigate('SS_Main', { from: 'SS_Extra' });
           }

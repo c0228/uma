@@ -71,16 +71,7 @@ const Login = () =>{
             userDetails.accountInfo = { isAuthenticated: true, ...response?.data?.params };
         console.log("userDetails [Login Page]", response?.data, userDetails);
         await AddToSPStore("USER_DETAILS", userDetails);
-        if(userDetails?.accountInfo?.avatar?.length===0){
-           navigation.navigate('SS_Extra',{ });
-        } else if(userDetails?.accountInfo?.examTargetList?.length===0){
-          navigation.navigate('SS_Extra',{ });
-        } else if(Object.keys(userDetails?.accountInfo?.timeAvailability)?.length===0){
-          navigation.navigate('SS_Extra',{ });
-        }
-        else {
-            navigation.navigate('SS_Main',{ });
-        }
+        navigation.navigate('SS_Extra');
       }) .catch(error => {  // Show Alert
         console.error(error);
         setLoading(false);

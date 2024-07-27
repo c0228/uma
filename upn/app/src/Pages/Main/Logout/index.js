@@ -13,7 +13,7 @@ const LogoutButton = () => {
     };
     useEffect(()=>{
       resetData(); // Reset User Details to Empty over here
-    });
+    },[]);
     return (<></>); // Replace Button with your UI component
 };
 
