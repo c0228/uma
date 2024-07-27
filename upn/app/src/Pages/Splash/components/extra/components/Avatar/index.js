@@ -6,6 +6,7 @@ import { getAppContext } from '@AdvancedTopics/ReactContext/index.js';
 import BEHeader, { HeaderTitle } from './../BEHeader.js';
 import BEFooter from './../BEFooter.js';
 import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
+import AlertModal from '@AppComponent/AlertModal/index.js';
 
 const Avatar = () =>{
     const { contextData, setContextData } = getAppContext();
@@ -45,8 +46,18 @@ const Avatar = () =>{
       await AddToSPStore('USER_DETAILS', details);
       setContextData({ userDetails: details });
     };
-    const navigation = useNavigation();
+    const [showAlert, setShowAlert] = useState(false);
+    const AlertView = ()=>{
+     return (<View>
+        {showAlert && <AlertModal title="Missing Avatar" type="danger" onClose={()=>setShowAlert(false)}>
+          <View style={styles.alertModalBody}>
+            <Text>Please Select an Avatar</Text>
+          </View>
+        </AlertModal>}
+     </View>);
+    };
     return (<View style={styles.avatarPage}>
+        <AlertView />
         <BEHeader name={accountInfo?.surname+" "+accountInfo?.name} formSize={3} activeForm={0} />
         <HeaderTitle 
             title="Choose your Avatar" 
@@ -70,8 +81,11 @@ const Avatar = () =>{
         <BEFooter 
             label={{  next:'Next' }}
             nextForm={()=>{
-                // Set Avatar into USER_DETAILS
+              if(selectedAvatar?.length>0) {
                 setContextData({ displayScreen: 'EXAMTARGET' });
+              } else {
+                 setShowAlert(true);
+              } 
             }} />
     </View>);
 };
@@ -79,6 +93,7 @@ const Avatar = () =>{
 const styles = StyleSheet.create({
  avatarPage: { flex:1 },
  scrollView:{ paddingLeft:5, marginBottom:5, paddingRight:5 },
+ alertModalBody:{ paddingLeft:5, paddingBottom:8 },
  avatarView:{ flexDirection:'row',  justifyContent:'center', flexWrap:'wrap' },
  avatar: { borderRadius:50, borderColor:'#333', borderWidth:2, width:80, height:80 },
  avatarHgl:{ borderWidth:3, borderColor:'#046e08', opacity:0.5, borderRadius:50, width:80, height:80 },

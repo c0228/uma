@@ -4,25 +4,29 @@ import { useNavigation } from '@react-navigation/native';
 import { getAppContext } from '@AdvancedTopics/ReactContext/index.js';
 import { Button } from '@AppFormElement/Button/index.js';
 import { Select } from '@AppFormElement/Select/index.js';
-import { Alert } from '@AppComponent/Alert/index.js';
 import AlertModal from '@AppComponent/AlertModal/index.js';
 import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
 import BEHeader, { HeaderTitle } from './../BEHeader.js';
 import BEFooter from './../BEFooter.js';
 import { Order, Li } from "e-ui-react-native";
 
-const exams= [{ name:"Civil Service Examination (CSE)",
+const exams= [{ 
+    id: "CSE",
+    name:"Civil Service Examination (CSE)",
     desc: (<View><Text style={{ lineHeight:22 }}>A candidate should satisfy Age Limit and he/she must have a graduate degree from a 
         recognized university or an equivalent qualification.</Text></View>) },
-   { name:"Indian Forest Service Examination (IFoSE)",
+   { id: "IFoSE",
+     name:"Indian Forest Service Examination (IFoSE)",
      desc:(<View><Text style={{ lineHeight:22 }}>A candidate should satisfy Age Limit and he/she must have a graduate degree from a recognized university 
         with at least one of the subjects - Animal Husbandry & Veterinary Science, Botany, Chemistry, Geology, Mathematics, 
         Physics, Statistics, Zoology, Agriculture, Forestry, Engineering (any discipline).</Text></View>)
-   },{ name:"Engineering Services Examination (ESE)",
+   },{ id: "ESE",
+       name:"Engineering Services Examination (ESE)",
        desc:(<View><Text style={{ lineHeight:22 }}>A candidate should satisfy Age Limit and he/she must have  graduate degree from a recognized university 
         who was specialized in one of the stream - Civil Engineering, Mechanical Engineering, Electrical Engineering and 
         Electronics & Telecommunication Engineering</Text></View>) },
-   { name:"Combined Defence Services (CDS) Examination",
+   {   id: "CDS",
+       name:"Combined Defence Services (CDS) Examination",
        desc: (<View><Text style={{ lineHeight:22 }}>Combined Defence Services (CDS) Exam is conducted for recruitment into </Text>
         <View style={{ paddingTop:5 }}>
             <Text style={{ fontWeight:'bold' }}>1. Indian Military Academy (IMA)</Text>
@@ -45,8 +49,9 @@ const exams= [{ name:"Civil Service Examination (CSE)",
         </View>
        </View>)
    },
-   { name:"National Defence Academy (NDA) Examination",
-       desc: (<View><Text style={{ lineHeight:22 }}>National Defence Academy (NDA) Exam is conducted for recruitment into </Text>
+   {  id:"NDA",
+      name:"National Defence Academy (NDA) Examination",
+      desc: (<View><Text style={{ lineHeight:22 }}>National Defence Academy (NDA) Exam is conducted for recruitment into </Text>
         <View style={{ paddingTop:5 }}>
             <Text style={{ lineHeight:22, fontWeight:'bold' }}>1. For Army Wing of National Defence Academy</Text>
             <Text style={{ lineHeight:22 }}>A candidate should satisfy Age Limit and he/she must have passed the 12th class 
@@ -62,26 +67,31 @@ const exams= [{ name:"Civil Service Examination (CSE)",
         </View>
        </View>)
    },
-   { name:"Indian Economic Service (IES) Examination",
-       desc: (<View><Text style={{ lineHeight:22 }}>A candidate should satisfy Age Limit and he/she must have a Post-Graduate Degree 
+   {  id:"IES",
+      name:"Indian Economic Service (IES) Examination",
+      desc: (<View><Text style={{ lineHeight:22 }}>A candidate should satisfy Age Limit and he/she must have a Post-Graduate Degree 
        in Economics/Applied Economics/Business Economics/Econometrics from a recognized university or institution.</Text></View>)
    },
-   { name:"Indian Statistical Service (ISS) Examination",
-       desc: (<View><Text style={{ lineHeight:22 }}>A candidate should satisfy Age Limit and he/she must have a Bachelor's / Master's Degree 
+   { id:"ISS",
+     name:"Indian Statistical Service (ISS) Examination",
+     desc: (<View><Text style={{ lineHeight:22 }}>A candidate should satisfy Age Limit and he/she must have a Bachelor's / Master's Degree 
        with Statistics/Mathematical Statistics/Applied Statistics as one of the subjects  from a recognized university.</Text></View>)
    },
-   { name:"Combined Medical Services (CMS) Examination",
-       desc: (<View><Text style={{ lineHeight:22 }}>A candidate should satisfy Age Limit and he/she must have passed the written 
+   { id:"CMS",
+     name:"Combined Medical Services (CMS) Examination",
+     desc: (<View><Text style={{ lineHeight:22 }}>A candidate should satisfy Age Limit and he/she must have passed the written 
        and practical parts of the final MBBS Examination.</Text></View>)
    },
-   { name:"Naval Academy (NA) Examination",
-       desc: (<View><Text style={{ lineHeight:22 }}>The Naval Academy (NA) Examination is conducted by the Union Public Service 
+   {  id:"NA",
+      name:"Naval Academy (NA) Examination",
+      desc: (<View><Text style={{ lineHeight:22 }}>The Naval Academy (NA) Examination is conducted by the Union Public Service 
        Commission (UPSC) as part of the National Defence Academy (NDA) & Naval Academy (NA) Examination. It is held for admission 
        to the Indian Naval Academy for the 10+2 Cadet Entry Scheme.A candidate should satisfy Age Limit and he/she must have 
        passed the 12th Class (10+2) or equivalent with Physics and Mathematics from a recognized board or university.</Text></View>)
    },
-   { name:"Combined Geoscientist and Geologist (CGG) Examination",
-       desc: (<View>
+   { id:"CGG",
+     name:"Combined Geoscientist and Geologist (CGG) Examination",
+     desc: (<View>
         <Text style={{ lineHeight:22 }}>Combined Geoscientist and Geologist (CGG) Exam is conducted for recruitment into </Text>
         <View>
             <Text style={{ lineHeight:22, fontWeight:'bold' }}>1. Geologist</Text>
@@ -119,8 +129,9 @@ const exams= [{ name:"Civil Service Examination (CSE)",
         </View>
       </View>)
    },
-   { name:"Central Armed Police Forces (CAPF) Examination",
-       desc: (<View><Text style={{ lineHeight:22 }}>Central Armed Police Forces (CAPF) Examination is conducted for recruitment 
+   { id:"CAPF",
+     name:"Central Armed Police Forces (CAPF) Examination",
+     desc: (<View><Text style={{ lineHeight:22 }}>Central Armed Police Forces (CAPF) Examination is conducted for recruitment 
        to the various Central Armed Police Forces (CAPFs) in India that includes Border Security Force (BSF), 
        Central Reserve Police Force (CRPF), Central Industrial Security Force (CISF), Indo-Tibetan Border Police (ITBP), 
        Sashastra Seema Bal (SSB). A candidate should satisfy Age Limit and he/she must hold a Bachelor's degree from a 
@@ -130,9 +141,7 @@ const exams= [{ name:"Civil Service Examination (CSE)",
 const ExamTarget = () =>{
  const { contextData, setContextData } = getAppContext();
  const accountInfo = contextData?.userDetails?.accountInfo;
- const navigation = useNavigation();
  const [examList, setExamList] = useState([]);
- const [alertMessage, setAlertMessage] = useState("");
  const backButton = () =>{
     const backHandler = BackHandler.addEventListener('hardwareBackPress',  () => { // onBack Press
       setContextData({ displayScreen: 'EDUSTATUS' }); // Move to Introduction
@@ -141,12 +150,6 @@ const ExamTarget = () =>{
     return () => backHandler.remove();
  }; 
  useEffect(() => { backButton(); }, []);
- useEffect(()=>{
-    console.log("alertMessage", alertMessage);
-  },[alertMessage]);
- useEffect(()=>{
-   console.log("examList", examList);
- },[examList]);
  const initialize = async() =>{
   const details = await getFromSPStore("USER_DETAILS");
   console.log("details: ", details);
@@ -162,37 +165,24 @@ const ExamTarget = () =>{
     if (index !== -1) { // Object exists, so remove it from the array
         sOptions.splice(index, 1);
     } else { // Object doesn't exist, so add it to the array
-        sOptions.push({ exam: exam?.name });
+        sOptions.push({ id: exam?.id, exam: exam?.name });
     }
     setExamList(sOptions);
     console.log("sOptions [out]", sOptions);
  };
-
- const addExpectedYear = (examName, year) =>{
-  const eList = examList.map(list => {
-    if (list.exam === examName) {
-      return { ...list, year };
-    } else {
-        return list;
-    }
-  });
-  setExamList(eList);
- };
-
- const [modalVisible, setModalVisible] = useState(false);
-
- const AlertDisplayView = () =>{
+ const [showAlert, setShowAlert] = useState(false);
+ const AlertView = ()=>{
   return (<View>
-    {<AlertModal title="Alert Message" visible={modalVisible} onClose={(isVisible) => setModalVisible(isVisible)}>
-       <View style={{ paddingLeft:5, paddingRight:5, paddingBottom:15 }}>
-        <Text style={{ lineHeight:22 }}>{alertMessage}</Text>
-        </View>
+    {showAlert && <AlertModal title="Missing Targeted Exams" type="danger" onClose={()=>setShowAlert(false)}>
+     <View style={ExamTargetStyle.alertModalBody}>
+      <Text>Please Select atleast One Examination</Text>
+     </View>
     </AlertModal>}
   </View>);
  };
-
  return (
     <View style={{ flex:1, backgroundColor:'#fff' }}>
+        <AlertView />
         <BEHeader name={accountInfo?.surname+" "+accountInfo?.name} formSize={3} activeForm={1} />
         <HeaderTitle 
             title="Choose your Targeted Exams" 
@@ -200,7 +190,7 @@ const ExamTarget = () =>{
     
  <ScrollView style={{ paddingLeft:5, marginBottom:5, paddingRight:5 }}>
     {exams?.map((exam,index)=>{
-        const isSelected = examList?.some((selected) => selected?.exam === exam);
+        const isSelected = examList?.some((selected) => selected?.id === exam?.id);
         return (<View key={index}>
         <View style={ExamTargetStyle.examList}>
             <View style={{ width:'15%' }}>
@@ -226,14 +216,18 @@ const ExamTarget = () =>{
         setContextData({ displayScreen: 'AVATAR' });
     }} 
     nextForm={()=>{
-        setContextData({ displayScreen: 'TIMETABLE' });
+      if(examList?.length>0){
+          setContextData({ displayScreen: 'TIMETABLE' });
+      } else {
+          setShowAlert(true);
+      }
+        
     }} />
-
-    <AlertDisplayView />
 </View>);
 };
 
 const ExamTargetStyle = StyleSheet.create({ 
+ alertModalBody:{ paddingLeft:5, paddingBottom:8 },
  mainTitle: { fontSize:18, paddingBottom:6, fontWeight:'bold', color:'#000', lineHeight: 22, textAlign: 'center' },
  examList:{ flex:1, paddingTop:10, paddingBottom:8, flexDirection:'row' },
  examTargetDesc: { marginTop:5, marginBottom:2, fontStyle:'italic', lineHeight:22, paddingLeft:10, paddingRight:10, color:'#333', textAlign:'center' },
