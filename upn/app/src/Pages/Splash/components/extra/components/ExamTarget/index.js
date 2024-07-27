@@ -193,18 +193,12 @@ const ExamTarget = () =>{
 
  return (
     <View style={{ flex:1, backgroundColor:'#fff' }}>
-        <BEHeader name={accountInfo?.surname+" "+accountInfo?.name} formSize={5} activeForm={2} />
+        <BEHeader name={accountInfo?.surname+" "+accountInfo?.name} formSize={3} activeForm={1} />
         <HeaderTitle 
             title="Choose your Targeted Exams" 
             subTitle="Specify the Examinations that you are planning to pursue in the Upcoming Years -" />
     
  <ScrollView style={{ paddingLeft:5, marginBottom:5, paddingRight:5 }}>
-    
-    <View style={{ margin:15, padding:10, borderWidth:1, borderColor:'#8be18d', backgroundColor:'#dfffe0', borderRadius:8 }}>
-        <Text style={{ fontWeight:'bold', marginRight:5 }}>Note:</Text>
-        <Text style={{ flex:1, flexWrap:'wrap', lineHeight:22 }}>Even your Age is 32+ years, preparing for these Exams will 
-            help you to learn and understand about Public Administration and helps you to develop your Political Career.</Text>
-    </View>
     {exams?.map((exam,index)=>{
         const isSelected = examList?.some((selected) => selected?.exam === exam);
         return (<View key={index}>
@@ -229,10 +223,10 @@ const ExamTarget = () =>{
  <BEFooter 
     label={{ previous:'Previous', next:'Next' }}
     previousForm={()=>{
-        setContextData({ displayScreen: 'EDUSTATUS' });
+        setContextData({ displayScreen: 'AVATAR' });
     }} 
     nextForm={()=>{
-        setContextData({ displayScreen: 'PREPSUBJ' });
+        setContextData({ displayScreen: 'TIMETABLE' });
     }} />
 
     <AlertDisplayView />

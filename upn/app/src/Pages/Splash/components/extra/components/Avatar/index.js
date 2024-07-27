@@ -47,7 +47,7 @@ const Avatar = () =>{
     };
     const navigation = useNavigation();
     return (<View style={styles.avatarPage}>
-        <BEHeader name={accountInfo?.surname+" "+accountInfo?.name} formSize={5} activeForm={0} />
+        <BEHeader name={accountInfo?.surname+" "+accountInfo?.name} formSize={3} activeForm={0} />
         <HeaderTitle 
             title="Choose your Avatar" 
             subTitle="Please Select your Perfect Avatar for a Unique Social Media Experience -" />
@@ -71,7 +71,7 @@ const Avatar = () =>{
             label={{  next:'Next' }}
             nextForm={()=>{
                 // Set Avatar into USER_DETAILS
-                setContextData({ displayScreen: 'EDUSTATUS' });
+                setContextData({ displayScreen: 'EXAMTARGET' });
             }} />
     </View>);
 };

@@ -52,7 +52,7 @@ const TimeTable = () =>{
  };
 
  return ( <View style={{ flex:1, backgroundColor:'#fff' }}>
-    <BEHeader name={accountInfo?.surname+" "+accountInfo?.name} formSize={5} activeForm={4} />
+    <BEHeader name={accountInfo?.surname+" "+accountInfo?.name} formSize={3} activeForm={2} />
     <HeaderTitle 
             title="Set your Weekly Availability" 
             subTitle="Please specify your available study hours per week so that we can effectively plan your study timetable." />
@@ -71,7 +71,7 @@ const TimeTable = () =>{
     <BEFooter 
         label={{ previous:'Previous', next:'Submit' }}
         previousForm={()=>{
-          setContextData({ displayScreen: 'PREPSUBJ' });
+          setContextData({ displayScreen: 'EXAMTARGET' });
         }} 
         nextForm={()=>{
          navigation?.navigate('SS_Main', { from: 'SS_Extra' });
