@@ -40,9 +40,15 @@ class UserAccountModule {
     "','".$ese."','".$ies."','".$ifose."','".$iss."','".$na."','".$nda."','".$sunday."','".$monday."','".$tuesday."','".$wednesday.
     "','".$thursday."','".$friday."','".$saturday."');";
  }
- function query_get_preparePlan($user_id){
-   return "SELECT CAPF, CDS, CGG, CMS, CSE, ESE, IES, IFoSE, ISS, NA, NDA, Sunday, Monday, Tuesday, ".
-    "Wednesday, Thursday, Friday, Saturday FROM user_accounts_ett WHERE user_id='".$user_id."';";
+ function query_get_userPrepareExam($user_id){
+   return "SELECT e.exam_id, e.exam FROM app_exam_list e JOIN user_accounts_ett u ON u.user_id = '".$user_id."' ".
+	"WHERE (u.CAPF = 'Y' AND e.exam_id = 'CAPF') OR (u.CDS = 'Y' AND e.exam_id = 'CDS') OR (u.CGG = 'Y' AND e.exam_id = 'CGG') ".
+   	"OR (u.CMS = 'Y' AND e.exam_id = 'CMS') OR (u.CSE = 'Y' AND e.exam_id = 'CSE') OR (u.ESE = 'Y' AND e.exam_id = 'ESE') ".
+   	"OR (u.IES = 'Y' AND e.exam_id = 'IES') OR (u.IFoSE = 'Y' AND e.exam_id = 'IFoSE') OR (u.ISS = 'Y' AND e.exam_id = 'ISS') ".
+   	"OR (u.NA = 'Y' AND e.exam_id = 'NA') OR (u.NDA = 'Y' AND e.exam_id = 'NDA');";
+ }
+ function query_get_timeAvailability($user_id){
+   return "SELECT Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday FROM user_accounts_ett WHERE user_id='".$user_id."';";
  }
 }
 

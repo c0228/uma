@@ -9,6 +9,12 @@ require_once './../utils/Mail.php';
 require_once './../utils/DateTime.php';
 require_once './../utils/Math.php';
 
+function ttAvailable($val){
+ $value = intval($val);
+ $day = (($value>1)?($value.' hours'):(($value==1)?($value.' hour'):'NOT_AVAILABLE'));
+ return $day;
+};
+
 if($_GET["action"]=='USER_VALIDATE_EMAIL' && $_SERVER['REQUEST_METHOD']=='POST'){
   $htmlData = json_decode( file_get_contents('php://input'), true );	
   $email = ''; if( array_key_exists("email", $htmlData) ){ $email = $htmlData["email"]; }
@@ -78,12 +84,35 @@ else if($_GET["action"]=='USER_LOGIN' && $_SERVER['REQUEST_METHOD']=='POST'){
 	$result = array();
 	$status = 'No Record Found';
 	if(strlen($email)>0 && strlen($accPwd)>0){
+
 	 $query1 = $userAccountModule->query_view_userAccount($email, $accPwd);
-	 $data1 =  json_decode( $database->getJSONData($query1) ); // json_decode()
-	 $userId = $data1[0]->{"userId"};
-	 $query2 = $userAccountModule->query_get_preparePlan($userId);
-	 $data2 = json_decode( $database->getJSONData($query2) );  // json_decode()
-	 $result["params"] = array_merge( (array) $data1[0], (array) $data2[0] );
+	 $accountData =  json_decode( $database->getJSONData($query1) ); // json_decode()
+	 $userId = $accountData[0]->{"userId"};
+
+	 $query2 = $userAccountModule->query_get_userPrepareExam($userId);
+	 $prepareExamData = json_decode( $database->getJSONData($query2) ); // json_decode()
+
+	 $examTargetList = array();
+	 $examTargetList["examTargetList"] = $prepareExamData;
+
+	 $query3 = $userAccountModule->query_get_timeAvailability($userId);
+	 $timeAvailableData = json_decode( $database->getJSONData($query3) );  // json_decode()
+	 
+	 $timeAvailability = array();
+	 $ta='{}';
+     if(count($timeAvailableData)>0){
+		$ta = array();
+		$ta["Sunday"] = ttAvailable($timeAvailableData[0]->{"Sunday"});
+		$ta["Monday"] = ttAvailable($timeAvailableData[0]->{"Monday"});
+		$ta["Tuesday"] = ttAvailable($timeAvailableData[0]->{"Tuesday"});
+		$ta["Wednesday"] = ttAvailable($timeAvailableData[0]->{"Wednesday"});
+		$ta["Thursday"] = ttAvailable($timeAvailableData[0]->{"Thursday"});
+		$ta["Friday"] = ttAvailable($timeAvailableData[0]->{"Friday"});
+		$ta["Saturday"] = ttAvailable($timeAvailableData[0]->{"Saturday"});
+	 } else { $ta = json_decode($ta); }
+	 $timeAvailability["timeAvailability"]=$ta;
+
+	 $result["params"] = array_merge( (array) $accountData[0], (array) $examTargetList, (array) $timeAvailability );
 	 $status = 'Record Found';
 	}
 	$result["status"] = $status;
@@ -134,4 +163,13 @@ else if($_GET["action"]=='SEND_RESETPASSWORD_EMAIL' && $_SERVER['REQUEST_METHOD'
 		$status["message"]=$msgId;
     }
     echo json_encode($status);
+}
+else if($_GET["action"]=='USER_PREPARE_PLAN' && $_SERVER['REQUEST_METHOD']=='POST'){
+ $htmlData = json_decode( file_get_contents('php://input'), true );
+ $examTargetList = '';if( array_key_exists("examTargetList", $htmlData) ){ $examTargetList = $htmlData["examTargetList"];  }
+ $timeAvailability = '';if( array_key_exists("timeAvailability", $htmlData) ){ $timeAvailability = $htmlData["timeAvailability"];  }
+
+ // INSERT OR UPDATE DUPLICATE "user_id" KEY
+ print_r($examTargetList);
+ print_r($timeAvailability);
 }
