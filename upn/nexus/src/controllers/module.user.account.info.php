@@ -173,6 +173,7 @@ else if($_GET["action"]=='SEND_RESETPASSWORD_EMAIL' && $_SERVER['REQUEST_METHOD'
 }
 else if($_GET["action"]=='USER_PREPARE_PLAN' && $_SERVER['REQUEST_METHOD']=='POST'){
  $htmlData = json_decode( file_get_contents('php://input'), true );
+ $avatar = '';if( array_key_exists("avatar", $htmlData) ){ $avatar = $htmlData["avatar"];  }
  $examTargetList = '';if( array_key_exists("examTargetList", $htmlData) ){ $examTargetList = $htmlData["examTargetList"];  }
  $timeAvailability = '';if( array_key_exists("timeAvailability", $htmlData) ){ $timeAvailability = $htmlData["timeAvailability"];  }
  $userId = '';if( array_key_exists("userId", $htmlData) ){ $userId = $htmlData["userId"];  }
@@ -180,7 +181,7 @@ else if($_GET["action"]=='USER_PREPARE_PLAN' && $_SERVER['REQUEST_METHOD']=='POS
  if(count($examTargetList)>0){
   $capf = 'N'; $cds = 'N'; $cgg = 'N'; $cms = 'N'; $cse = 'N'; $ese = 'N'; $ies = 'N'; $ifose = 'N'; $iss = 'N'; $na = 'N'; $nda = 'N';
   foreach ($examTargetList as $examTarget) {
-	$examId = $examTarget["exam_id"]; 
+	$examId = $examTarget["id"]; 
 	if($examId == 'CAPF'){ $capf = 'Y'; }
 	if($examId == 'CDS'){ $cds = 'Y'; }
 	if($examId == 'CGG'){ $cgg = 'Y'; }
@@ -201,12 +202,14 @@ else if($_GET["action"]=='USER_PREPARE_PLAN' && $_SERVER['REQUEST_METHOD']=='POS
   $friday = ttAvailable2($timeAvailability["Friday"]);
   $saturday = ttAvailable2($timeAvailability["Saturday"]);
 
+  $avatarQuery = $userAccountModule->query_update_userAccount($userId, '', '', '', '', '', $avatar, '', '', '', '');
+  $status1 = $database->addupdateData($avatarQuery);
   $prepareExamQuery = $userAccountModule->query_add_userPrepareExam($userId, $capf, $cds, $cgg, $cms, $cse, $ese, $ies, $ifose, $iss, $na, $nda, 
  	$sunday, $monday, $tuesday, $wednesday, $thursday, $friday, $saturday);
-  $status = $database->addupdateData($prepareExamQuery);
+  $status2 = $database->addupdateData($prepareExamQuery);
   $message = 'Updated Record Successfully for userId \''.$userId.'\'';
-  if($status === 'Error') { $message = 'Query Failed - []'; }
-  $result["status"] = $status;
+  if($status2 === 'Error') { $message = 'Query Failed - []'; }
+  $result["status"] = $status2;
   $result["message"] = $message;
   echo json_encode( $result );
  }

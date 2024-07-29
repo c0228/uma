@@ -8,6 +8,8 @@ import { Range } from '@AppUtils/ArrayManagement.js';
 import { AddToSPStore, getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
 import BEHeader, { HeaderTitle } from './../BEHeader.js';
 import BEFooter from './../BEFooter.js';
+import axios from 'axios';
+import { NEXUS_URL } from '@StaticData/urls.js';
 
 const TimeTable = () =>{
  const { contextData, setContextData } = getAppContext();
@@ -102,8 +104,18 @@ const TimeTable = () =>{
             let details = await getFromSPStore("USER_DETAILS");
                 details.accountInfo.timeAvailability = timeTableValues;
             await AddToSPStore("USER_DETAILS", details);
-            // 
-            navigation?.navigate('SS_Main', { from: 'SS_Extra' });
+            // Axios Call
+            // Trigger API to send OTP
+            axios.post(NEXUS_URL+'user/prepare/plan', { 
+              avatar: details.accountInfo.avatar,
+              examTargetList: details.accountInfo.examTargetList, 
+              timeAvailability: details.accountInfo.timeAvailability, userId: details.accountInfo.userId }).
+            then(response => {
+              console.log("TIME AVAILABILITY PAGE: ",response?.data);
+              navigation?.navigate('SS_Main', { from: 'SS_Extra' });
+            }) .catch(error => {  // Show Alert
+                  console.error(error);
+            });
           }
         }} />
     </View>);
