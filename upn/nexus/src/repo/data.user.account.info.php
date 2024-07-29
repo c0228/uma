@@ -33,10 +33,10 @@ class UserAccountModule {
 	$sql=chop($sql,",")." WHERE user_id=".$userId.";";
 	return $sql;
   }
-  function query_add_preparePlan($user_id, $capf, $cds, $cgg, $cms, $cse, $ese, $ies, $ifose, $iss, $na, $nda, 
+  function query_add_preparePlan($userId, $capf, $cds, $cgg, $cms, $cse, $ese, $ies, $ifose, $iss, $na, $nda, 
     $sunday, $monday, $tuesday, $wednesday, $thursday, $friday, $saturday){
    return "INSERT INTO user_accounts_ett(user_id, CAPF, CDS, CGG, CMS, CSE, ESE, IES, IFoSE, ISS, NA, NDA, Sunday, Monday, Tuesday, ".
-    "Wednesday, Thursday, Friday, Saturday) VALUES ('".$user_id."','".$capf."','".$cds."','".$cgg."','".$cms."','".$cse.
+    "Wednesday, Thursday, Friday, Saturday) VALUES ('".$userId."','".$capf."','".$cds."','".$cgg."','".$cms."','".$cse.
     "','".$ese."','".$ies."','".$ifose."','".$iss."','".$na."','".$nda."','".$sunday."','".$monday."','".$tuesday."','".$wednesday.
     "','".$thursday."','".$friday."','".$saturday."');";
  }
@@ -49,6 +49,17 @@ class UserAccountModule {
  }
  function query_get_timeAvailability($user_id){
    return "SELECT Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday FROM user_accounts_ett WHERE user_id='".$user_id."';";
+ }
+ function query_add_userPrepareExam($userId, $capf, $cds, $cgg, $cms, $cse, $ese, $ies, $ifose, $iss, $na, $nda, 
+ 	$sunday, $monday, $tuesday, $wednesday, $thursday, $friday, $saturday){
+   return "INSERT INTO user_accounts_ett(user_id, CAPF, CDS, CGG, CMS, CSE, ESE, IES, IFoSE, ISS, NA, NDA, ".
+    "Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday) VALUES ('".$userId."','".$capf."','".$cds."','".$cgg.
+	"','".$cms."','".$cse."','".$ese."','".$ies."','".$ifose."','".$iss."','".$na."','".$nda."',".$sunday.",".$monday.
+	",".$tuesday.",".$wednesday.",".$thursday.",".$friday.",".$saturday.") ON DUPLICATE KEY UPDATE ".
+	"CAPF = VALUES(CAPF), CDS = VALUES(CDS), CGG = VALUES(CGG), CMS = VALUES(CMS), CSE = VALUES(CSE), ESE = VALUES(ESE), ". 
+	"IES = VALUES(IES), IFoSE = VALUES(IFoSE), ISS = VALUES(ISS), NA = VALUES(NA), NDA = VALUES(NDA), Sunday = VALUES(Sunday), ".
+    "Monday = VALUES(Monday), Tuesday = VALUES(Tuesday), Wednesday = VALUES(Wednesday), Thursday = VALUES(Thursday), ". 
+	"Friday = VALUES(Friday), Saturday = VALUES(Saturday);";
  }
 }
 

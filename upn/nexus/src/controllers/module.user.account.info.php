@@ -9,11 +9,18 @@ require_once './../utils/Mail.php';
 require_once './../utils/DateTime.php';
 require_once './../utils/Math.php';
 
-function ttAvailable($val){
+function ttAvailable1($val){
  $value = intval($val);
  $day = (($value>1)?($value.' hours'):(($value==1)?($value.' hour'):'NOT_AVAILABLE'));
  return $day;
 };
+
+function ttAvailable2($val){
+ $newVal = str_ireplace('NOT_AVAILABLE', '0', $val);
+ $newVal = str_ireplace(' hours', '', $newVal);
+ $newVal = str_ireplace(' hour', '', $newVal);
+ return intval($newVal);
+}
 
 if($_GET["action"]=='USER_VALIDATE_EMAIL' && $_SERVER['REQUEST_METHOD']=='POST'){
   $htmlData = json_decode( file_get_contents('php://input'), true );	
@@ -102,13 +109,13 @@ else if($_GET["action"]=='USER_LOGIN' && $_SERVER['REQUEST_METHOD']=='POST'){
 	 $ta='{}';
      if(count($timeAvailableData)>0){
 		$ta = array();
-		$ta["Sunday"] = ttAvailable($timeAvailableData[0]->{"Sunday"});
-		$ta["Monday"] = ttAvailable($timeAvailableData[0]->{"Monday"});
-		$ta["Tuesday"] = ttAvailable($timeAvailableData[0]->{"Tuesday"});
-		$ta["Wednesday"] = ttAvailable($timeAvailableData[0]->{"Wednesday"});
-		$ta["Thursday"] = ttAvailable($timeAvailableData[0]->{"Thursday"});
-		$ta["Friday"] = ttAvailable($timeAvailableData[0]->{"Friday"});
-		$ta["Saturday"] = ttAvailable($timeAvailableData[0]->{"Saturday"});
+		$ta["Sunday"] = ttAvailable1($timeAvailableData[0]->{"Sunday"});
+		$ta["Monday"] = ttAvailable1($timeAvailableData[0]->{"Monday"});
+		$ta["Tuesday"] = ttAvailable1($timeAvailableData[0]->{"Tuesday"});
+		$ta["Wednesday"] = ttAvailable1($timeAvailableData[0]->{"Wednesday"});
+		$ta["Thursday"] = ttAvailable1($timeAvailableData[0]->{"Thursday"});
+		$ta["Friday"] = ttAvailable1($timeAvailableData[0]->{"Friday"});
+		$ta["Saturday"] = ttAvailable1($timeAvailableData[0]->{"Saturday"});
 	 } else { $ta = json_decode($ta); }
 	 $timeAvailability["timeAvailability"]=$ta;
 
@@ -168,8 +175,39 @@ else if($_GET["action"]=='USER_PREPARE_PLAN' && $_SERVER['REQUEST_METHOD']=='POS
  $htmlData = json_decode( file_get_contents('php://input'), true );
  $examTargetList = '';if( array_key_exists("examTargetList", $htmlData) ){ $examTargetList = $htmlData["examTargetList"];  }
  $timeAvailability = '';if( array_key_exists("timeAvailability", $htmlData) ){ $timeAvailability = $htmlData["timeAvailability"];  }
-
+ $userId = '';if( array_key_exists("userId", $htmlData) ){ $userId = $htmlData["userId"];  }
  // INSERT OR UPDATE DUPLICATE "user_id" KEY
- print_r($examTargetList);
- print_r($timeAvailability);
+ if(count($examTargetList)>0){
+  $capf = 'N'; $cds = 'N'; $cgg = 'N'; $cms = 'N'; $cse = 'N'; $ese = 'N'; $ies = 'N'; $ifose = 'N'; $iss = 'N'; $na = 'N'; $nda = 'N';
+  foreach ($examTargetList as $examTarget) {
+	$examId = $examTarget["exam_id"]; 
+	if($examId == 'CAPF'){ $capf = 'Y'; }
+	if($examId == 'CDS'){ $cds = 'Y'; }
+	if($examId == 'CGG'){ $cgg = 'Y'; }
+	if($examId == 'CMS'){ $cms = 'Y'; }
+	if($examId == 'CSE'){ $cse = 'Y'; }
+	if($examId == 'ESE'){ $ese = 'Y'; }
+	if($examId == 'IES'){ $ies = 'Y'; }
+	if($examId == 'IFoSE'){ $ifose = 'Y'; }
+	if($examId == 'ISS'){ $iss = 'Y'; }
+	if($examId == 'NA'){ $na = 'Y'; }
+	if($examId == 'NDA'){ $nda = 'Y'; }
+  }
+  $sunday = ttAvailable2($timeAvailability["Sunday"]);
+  $monday = ttAvailable2($timeAvailability["Monday"]);
+  $tuesday = ttAvailable2($timeAvailability["Tuesday"]);
+  $wednesday = ttAvailable2($timeAvailability["Wednesday"]);
+  $thursday = ttAvailable2($timeAvailability["Thursday"]);
+  $friday = ttAvailable2($timeAvailability["Friday"]);
+  $saturday = ttAvailable2($timeAvailability["Saturday"]);
+
+  $prepareExamQuery = $userAccountModule->query_add_userPrepareExam($userId, $capf, $cds, $cgg, $cms, $cse, $ese, $ies, $ifose, $iss, $na, $nda, 
+ 	$sunday, $monday, $tuesday, $wednesday, $thursday, $friday, $saturday);
+  $status = $database->addupdateData($prepareExamQuery);
+  $message = 'Updated Record Successfully for userId \''.$userId.'\'';
+  if($status === 'Error') { $message = 'Query Failed - []'; }
+  $result["status"] = $status;
+  $result["message"] = $message;
+  echo json_encode( $result );
+ }
 }
