@@ -9,5 +9,11 @@ class MockExamModule {
   $sql=chop($sql,' OR').';';
   return $sql;
  }
+ function query_get_listOfTopicsBySubject($subject){
+  return "SELECT topic_id, topic FROM app_subjects_mtopic WHERE subject='".$subject."';";
+ }
+ function query_get_listOfSubTopicsByTopic($topicId){
+  return "SELECT stopic_id, subtopic FROM app_subjects_stopic WHERE topic_id='".$topicId."';";
+ }
 }
 $mockExamModule = new MockExamModule();

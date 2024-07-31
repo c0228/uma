@@ -20,5 +20,24 @@ if($_GET["action"]=='EXAM_SUBJECT_LIST' && $_SERVER['REQUEST_METHOD']=='GET'){
 }
 else if($_GET["action"]=='SUBJECT_TOPICS_LIST' && $_SERVER['REQUEST_METHOD']=='GET'){
  // GET Topics and SubTopics List in a Hierarchy
- 
+ $htmlData = json_decode( file_get_contents('php://input'), true );	
+ $subject = ''; if( array_key_exists("subject", $htmlData) ){ $subject = $htmlData["subject"]; }
+ $query1 = $mockExamModule->query_get_listOfTopicsBySubject($subject);
+ $data1 = json_decode( $database->getJSONData($query1) );
+ $status = array();
+ if(count($data1)>0){
+    $status1 = [];
+    foreach ($data1 as $row1){
+      $topicId = $row1->{"topic_id"};
+      $query2 = $mockExamModule->query_get_listOfSubTopicsByTopic($topicId);
+      $data2 = json_decode( $database->getJSONData($query2) );
+      $row1->{"subtopics"} = $data2;
+      $status1[] = $row1;
+    }
+    $status[$subject] = $status1;
+ }
+ echo json_encode($status);
+}
+else if($_GET["action"]=='SUBJECT_TOPICS_LIST' && $_SERVER['REQUEST_METHOD']=='GET'){
+
 }
