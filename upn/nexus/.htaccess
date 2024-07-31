@@ -15,6 +15,9 @@ RewriteRule user/reset/password/link src/controllers/module.user.account.info.ph
 RewriteRule user/prepare/plan src/controllers/module.user.account.info.php?action=USER_PREPARE_PLAN [QSA]
 
 # EXAMS MODULE
+RewriteRule exams/subject/list src/controllers/module.user.mock.exams.php?action=EXAM_SUBJECT_LIST [QSA]
+RewriteRule subject/topic/list src/controllers/module.user.mock.exams.php?action=SUBJECT_TOPICS_LIST [QSA]
+
 
 
 #RewriteRule user/exams/list src/controllers/module.app.exams.php?action=USER_EXAMS_LIST  [QSA]
