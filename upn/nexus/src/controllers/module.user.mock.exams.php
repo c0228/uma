@@ -38,6 +38,15 @@ else if($_GET["action"]=='SUBJECT_TOPICS_LIST' && $_SERVER['REQUEST_METHOD']=='G
  }
  echo json_encode($status);
 }
-else if($_GET["action"]=='SUBJECT_TOPICS_LIST' && $_SERVER['REQUEST_METHOD']=='GET'){
+else if($_GET["action"]=='ADD_EXAM_SUBJECTS' && $_SERVER['REQUEST_METHOD']=='POST'){
+
+}
+else if($_GET["action"]=='ADD_SUBJECT_TOPICS' && $_SERVER['REQUEST_METHOD']=='POST'){
+
+}
+else if($_GET["action"]=='ADD_SUBJECT_SUBTOPICS' && $_SERVER['REQUEST_METHOD']=='POST'){
+
+}
+else if($_GET["action"]=='ADD_EXAM_QA' && $_SERVER['REQUEST_METHOD']=='POST'){
 
 }
