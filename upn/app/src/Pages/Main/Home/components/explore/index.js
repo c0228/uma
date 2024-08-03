@@ -1,16 +1,26 @@
 import React, { useEffect } from 'react';
-import { View, Text } from 'react-native';
-import { Button, BackHandler } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { View, Text, ScrollView, StatusBar, StyleSheet } from 'react-native';
 import { DrawerHeader } from '@AppPage/Main/Drawer/index.js';
 
 const Explore = () =>{
- const navigation = useNavigation();
- return (<View>
+ return (<View style={styles.pageView}>
+  <StatusBar animated={true} backgroundColor="#000" />
+  <View>
     <DrawerHeader>
-      <Text style={{ fontSize:16, fontWeight:'bold' }}>Explore</Text>
+      <Text style={styles.pageTitle}>Explore</Text>
     </DrawerHeader>
+  </View>
+  <View style={{ flex:1, backgroundColor:'#fff', borderColor:'#fff', borderWidth:1, borderTopLeftRadius:25, borderTopRightRadius:25, }}>
+    <ScrollView style={{ padding:15 }}>
+      <Text>Test</Text>
+    </ScrollView>
+  </View>
  </View>);
 };
+
+const styles = StyleSheet.create({
+ pageView:{ backgroundColor:'#df0d55', display:'flex', flex:1 },
+ pageTitle:{ color:'#fff', paddingTop:4, fontSize:16, fontWeight:'bold' }
+});
 
 export default Explore;

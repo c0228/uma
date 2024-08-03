@@ -32,44 +32,47 @@ export const TabNavigation = ({ data, initialRouteName })=>{
     {props?.children}
   </TouchableOpacity>
       ),
-      tabBarIcon: ({ focused, color, size }) => {
+      tabBarIcon: ({ focused }) => {
         const tabData = data?.filter((d)=>d?.id===route.name)[0];
         const iconType = tabData?.icon?.type;
         const iconName = tabData?.icon?.name;
+        const activeColor = tabData?.icon?.color || '#df0d55';
         const focusedIconType = tabData?.focusedIcon?.type;
         const focusedIconName = tabData?.focusedIcon?.name;
+        const inActiveColor = tabData?.focusedIcon?.color || '#ccc';
+        const icon = focused?(focusedIconName):(iconName);
+        const color = focused?activeColor:inActiveColor;
+        
         if(iconType==='AntDesign' || focusedIconType==='AntDesign' ){
-            return (<AntDesign name={focused?(focusedIconName):(iconName)} size={24} color={color} />);
+            return (<AntDesign name={icon} size={24} color={color} />);
         } else if(iconType==='Entypo' || focusedIconType==='Entypo'){
-            return (<Entypo name={focused?(focusedIconName):(iconName)} size={24} color={color} />);
+            return (<Entypo name={icon} size={24} color={color} />);
         } else if(iconType==='EvilIcons' || focusedIconType==='EvilIcons'){
-            return (<EvilIcons name={focused?(focusedIconName):(iconName)} size={24} color={color} />);
+            return (<EvilIcons name={icon} size={24} color={color} />);
         } else if(iconType==='Feather' || focusedIconType==='Feather'){
-            return (<Feather name={focused?(focusedIconName):(iconName)} size={24} color={color} />);
+            return (<Feather name={icon} size={24} color={color} />);
         } else if(iconType==='FontAwesome' || focusedIconType==='FontAwesome'){
-            return (<FontAwesome name={focused?(focusedIconName):(iconName)} size={24} color={color} />);
+            return (<FontAwesome name={icon} size={24} color={color} />);
         } else if(iconType==='Fontisto' || focusedIconType==='Fontisto'){
-            return (<Fontisto name={focused?(focusedIconName):(iconName)} size={24} color={color} />);
+            return (<Fontisto name={icon} size={24} color={color} />);
         } else if(iconType==='Foundation' || focusedIconType==='Foundation'){
-            return (<Foundation name={focused?(focusedIconName):(iconName)} size={24} color={color} />);
+            return (<Foundation name={icon} size={24} color={color} />);
         } else if(iconType==='Ionicons' || focusedIconType==='Ionicons'){
-            return (<Ionicons name={focused?(focusedIconName):(iconName)} size={24} color={color} />);
+            return (<Ionicons name={icon} size={24} color={color} />);
         } else if(iconType==='MaterialIcons' || focusedIconType==='MaterialIcons'){
-            return (<MaterialIcons name={focused?(focusedIconName):(iconName)} size={26} color={color} />);
+            return (<MaterialIcons name={icon} size={26} color={color} />);
         } else if(iconType==='MaterialCommunityIcons' || focusedIconType==='MaterialCommunityIcons'){
-            return (<MaterialCommunityIcons name={focused?(focusedIconName):(iconName)} size={24} color={color} />);
+            return (<MaterialCommunityIcons name={icon} size={24} color={color} />);
         } else if(iconType==='Octicons' || focusedIconType==='Octicons'){
-            return (<Octicons name={focused?(focusedIconName):(iconName)} size={24} color={color} />);
+            return (<Octicons name={icon} size={24} color={color} />);
         } else if(iconType==='Zocial' || focusedIconType==='Zocial'){
-            return (<Zocial name={focused?(focusedIconName):(iconName)} size={24} color={color} />);
+            return (<Zocial name={icon} size={24} color={color} />);
         } else if(iconType==='SimpleLineIcons' || focusedIconType==='SimpleLineIcons'){
-            return (<SimpleLineIcons name={focused?(focusedIconName):(iconName)} size={24} color={color} />);
+            return (<SimpleLineIcons name={icon} size={24} color={color} />);
         } else {
-            return (<FontAwesome5 name={focused?(focusedIconName):(iconName)} size={24} color={color} />);
+            return (<FontAwesome5 name={icon} size={24} color={color} />);
         }
       },
-      tabBarActiveTintColor: '#df0d55',
-      tabBarInactiveTintColor: '#ccc',
       tabBarStyle: { paddingTop:8 },
       tabBarLabelStyle: { fontSize: 13 },
       tabBarShowLabel: false

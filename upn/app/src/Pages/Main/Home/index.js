@@ -13,8 +13,8 @@ const Tab = createBottomTabNavigator();
 const TabData = [
 { 
       id:'MM_Home|Home_Notifications', 
-      icon:{ name:"bell-o", type:"FontAwesome" }, 
-      focusedIcon:{ name:"bell", type:"FontAwesome" }, 
+      icon:{ name:"bell-o", type:"FontAwesome", color:'#6b046b' }, 
+      focusedIcon:{ name:"bell", type:"FontAwesome", color:'#ccc' },
       label: { name: "Notifications" }, 
       component: Notifications 
 },

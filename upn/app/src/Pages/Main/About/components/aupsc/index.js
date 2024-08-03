@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ScrollView , StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { HamburgerIcon } from '@AppNavigation/Drawer/index.js';
 import { Order, Li } from "e-ui-react-native";
 
