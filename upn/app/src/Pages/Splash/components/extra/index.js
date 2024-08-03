@@ -6,6 +6,7 @@ import { getFromSPStore } from '@AppUtils/EncryptSharedPreferences.js';
 import Avatar from "./components/Avatar/index.js";
 import ExamTarget from "./components/ExamTarget/index.js";
 import TimeTable from "./components/TimeTable/index.js";
+import { CommonActions } from '@react-navigation/native';
 
 const Extra = () =>{
  const navigation = useNavigation();
@@ -20,7 +21,9 @@ const Extra = () =>{
     } else if(Object.keys(userDetails?.accountInfo?.timeAvailability)?.length===0){
       setContextData({ displayScreen: 'TIMETABLE', userDetails: userDetails });
     } else {
-      navigation?.navigate('SS_Main', { from: 'SS_Extra' });  
+      navigation.dispatch(CommonActions.reset({
+        index: 0, routes: [{ name: 'SS_Main', params: { from: 'SS_Extra' } }],
+      }));
     }
     
   };

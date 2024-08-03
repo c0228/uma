@@ -11,18 +11,9 @@ import MyProfile from '@AppPage/Main/MyProfile/index.js';
 import Settings from '@AppPage/Main/Settings/index.js';
 import StudyTT from '@AppPage/Main/StudyTT/index.js';
 import LogoutButton from '@AppPage/Main/Logout/index.js';
+import { CommonActions } from '@react-navigation/native';
 
 const Main = () => {
- const navigation = useNavigation();
- const route = useRoute();
- const { from } = route.params || {};
- const backButton = () =>{
-    const backHandler = BackHandler.addEventListener('hardwareBackPress',  () => { // onBack Press
-      return true; // Prevent default back action
-    });
-    return () => backHandler.remove();
- }; 
- useEffect(() => { backButton(); }, [from, navigation]);
   const screens = [{ id:'MM_Home', name:'Home', icon:'',component: Home },
   { id:'MM_AboutUPSC', name:'About UPSC Examination', icon:'',component: About },
   { id:'MM_Dashboard', name:'Dashboard', icon:'',component: Dashboard },
@@ -32,8 +23,7 @@ const Main = () => {
   { id:'MM_MyProfile', name:'My Profile', icon:'',component: MyProfile },
   { id:'MM_Settings', name:'Settings', icon:'',component: Settings },
   { id: 'MM_Signout', name: 'Signout', icon: '', component: LogoutButton }];
-
-    return ( <DrawerNavigation screens={screens} /> );
+  return ( <DrawerNavigation initialRouteName="MM_Home" screens={screens} /> );
 };
 
 export default Main;

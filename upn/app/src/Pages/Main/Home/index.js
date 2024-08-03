@@ -10,19 +10,21 @@ import Notifications from './components/notifications/index.js';
 
 const Tab = createBottomTabNavigator();
 
-const TabData = [{ 
-  id:'MM_Home|Home_Notifications', 
-  icon:{ name:"bell-o", type:"FontAwesome" }, 
-  focusedIcon:{ name:"bell", type:"FontAwesome" }, 
-  label: { name: "Notifications" }, 
-  component: Notifications 
+const TabData = [
+{ 
+      id:'MM_Home|Home_Notifications', 
+      icon:{ name:"bell-o", type:"FontAwesome" }, 
+      focusedIcon:{ name:"bell", type:"FontAwesome" }, 
+      label: { name: "Notifications" }, 
+      component: Notifications 
 },
 {  
   id:'MM_Home|Home_Explore', 
   icon:{ name:"explore", type:"MaterialIcons" }, 
   focusedIcon:{ name:"explore", type:"MaterialIcons" }, 
   label: { name: "Explore" }, 
-  component: Explore  },
+  component: Explore  
+},
 {  
   id:'MM_Home|Home_MyLearnings', 
   icon:{ name:"journal-whills", type:""}, 
