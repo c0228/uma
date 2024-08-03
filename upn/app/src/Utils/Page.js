@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, StatusBar, ScrollView, StyleSheet } from 'react-native';
 import { DrawerHeader } from '@AppPage/Main/Drawer/index.js';
 
 const Page = ({ title, backgroundColor, children }) =>{
  return (<View style={[styles.pageView,{ backgroundColor: backgroundColor }]}>
+    <StatusBar animated={true} backgroundColor="#000" />
     <View>
       <DrawerHeader>
         <Text style={styles.pageTitle}>{title}</Text>

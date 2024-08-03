@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
-import { DrawerHeader } from '@AppPage/Main/Drawer/index.js';
-import Page from './../../page.js';
+import { View, Text, StyleSheet } from 'react-native';
+import Page from '@AppUtils/Page.js';
 
 const Notifications = () =>{
   return (<Page backgroundColor="#6b046b" title="Notifications">
