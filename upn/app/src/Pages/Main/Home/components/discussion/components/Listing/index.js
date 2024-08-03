@@ -6,6 +6,7 @@ import { HorizontalStaticMenu } from '@AppComponent/HorizontalStaticMenu/index.j
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SubjTopics from './components/SubjTopics/index.js';
 import Questions from './components/Questions/index.js';
+import Page from '@AppUtils/Page.js';
 
 const Listing = () =>{
  
@@ -37,13 +38,13 @@ const Listing = () =>{
 
 
  return (
-  <View style={{ backgroundColor:'#fff' }}>
-    <DiscussionHeader />
-    <View style={{ paddingTop: 6 }}>
-     <HorizontalStaticMenu activeId="topics" data={[{ id:'topics', label:'Subjects / Topics', component: (<SubjTopics />) },
+    <Page backgroundColor="#044375" title="Join the Discussion">
+     <View style={{ paddingTop:10 }}>
+     <HorizontalStaticMenu colorConfig={{ active: { color:'#044375' } }}
+     activeId="topics" data={[{ id:'topics', label:'Subjects / Topics', component: (<SubjTopics />) },
     { id:'questions', label:'Questions', component:(<Questions />) }]} />
     </View>
- </View>);
+ </Page>);
 };
 
 export default Listing;

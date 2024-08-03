@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, StatusBar, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, StatusBar, StyleSheet } from 'react-native';
 import { DrawerHeader } from '@AppPage/Main/Drawer/index.js';
 
 const Page = ({ title, backgroundColor, children }) =>{
@@ -11,9 +11,7 @@ const Page = ({ title, backgroundColor, children }) =>{
       </DrawerHeader>
     </View>
     <View style={styles.pageContentView}>
-      <ScrollView style={styles.pageScrollView}>
-        {children}
-      </ScrollView>
+      {children}
     </View>
  </View>);
 };
@@ -21,8 +19,7 @@ const Page = ({ title, backgroundColor, children }) =>{
 const styles = StyleSheet.create({
  pageView:{ display:'flex', flex:1 },
  pageTitle:{ color:'#fff', paddingTop:4, fontSize:16, fontWeight:'bold' },
- pageContentView:{ flex:1, backgroundColor:'#fff', borderColor:'#fff', borderWidth:1, borderTopLeftRadius:25, borderTopRightRadius:25 },
- pageScrollView:{ padding:15 }
+ pageContentView:{ flex:1, backgroundColor:'#fff', borderColor:'#fff', borderWidth:1, borderTopLeftRadius:45, borderTopRightRadius:45 },
 });
   
 export default Page;

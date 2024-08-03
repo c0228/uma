@@ -30,7 +30,7 @@ colorConfig={{
 
     return (
         <>
-            <View style={{ flexDirection: 'row', backgroundColor:'#fff' }}>
+            <View style={{ flexDirection: 'row', backgroundColor:'transparent' }}>
                 {data.map((menuItem) => (
                     <TouchableOpacity key={menuItem.id} style={{ width: `${100 / data.length}%` }} 
                         onPress={() => handleMenuPress(menuItem.id)}>
@@ -39,9 +39,9 @@ colorConfig={{
                     </Text>
                     </TouchableOpacity>))}
             </View>
-            <ScrollView style={{ paddingBottom: 35 }}>
+            <View>
               <MenuItemComponent component={data.find((menuItem) => menuItem.id === selectedMenu)?.component} />
-            </ScrollView>
+            </View>
         </>
     );
 };
@@ -49,5 +49,5 @@ colorConfig={{
 
 const HorizontalStaticMenuStyle = StyleSheet.create({ 
  hrMenuSelected: { textAlign:'center', borderBottomWidth:2, paddingBottom:10, fontWeight:'bold', marginRight:10 },
- hrMenu:{ textAlign:'center', paddingBottom:10, fontWeight:'bold' }
+ hrMenu:{ textAlign:'center', paddingBottom:10, fontWeight:'bold', borderBottomWidth:1, borderColor:'#ccc' }
 });
