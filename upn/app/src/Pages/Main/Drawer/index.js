@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Logo from "@Assets/img/logo-default.png";
 
 const Drawer = createDrawerNavigator();
 
@@ -46,8 +47,9 @@ function DrawerContent(props) {
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <View style={styles.header}>
-            <Text style={styles.headerText}>Custom Header</Text>
-          </View>
+          {/*<Text style={styles.headerText}>Custom Header</Text>*/}
+          <Image style={{ width:160, height:18, marginLeft:3, marginTop:3 }} source={Logo} />
+        </View>
         <DrawerContentScrollView {...props}>
           {state.routes.map((route, index) => {
             const { drawerLabel, drawerIcon } = descriptors[route.key].options;
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
  customHeader: { flexDirection: 'row', paddingLeft: 15, paddingRight:15, paddingTop:12, paddingBottom:8 },
  hamburgerIcon: { marginRight: 15, color:'#000' },
  headerTitle: { fontSize: 18, fontWeight: 'bold' },
- header: { padding: 20, backgroundColor: '#f4f4f4' },
+ header: { padding: 20 },
  headerText: { fontSize: 18, fontWeight: 'bold' },
  footer: { padding: 20, backgroundColor: '#f4f4f4', marginTop: 'auto' },
  footerText: { fontSize: 16 },
