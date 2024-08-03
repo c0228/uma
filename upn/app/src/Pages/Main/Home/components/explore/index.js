@@ -10,17 +10,19 @@ const Explore = () =>{
       <Text style={styles.pageTitle}>Explore</Text>
     </DrawerHeader>
   </View>
-  <View style={{ flex:1, backgroundColor:'#fff', borderColor:'#fff', borderWidth:1, borderTopLeftRadius:25, borderTopRightRadius:25, }}>
-    <ScrollView style={{ padding:15 }}>
-      <Text>Test</Text>
-    </ScrollView>
+  <View style={styles.pageContentView}>
+      <ScrollView style={styles.pageScrollView}>
+        <Text>Test</Text>
+      </ScrollView>
   </View>
  </View>);
 };
 
 const styles = StyleSheet.create({
  pageView:{ backgroundColor:'#df0d55', display:'flex', flex:1 },
- pageTitle:{ color:'#fff', paddingTop:4, fontSize:16, fontWeight:'bold' }
+ pageTitle:{ color:'#fff', paddingTop:4, fontSize:16, fontWeight:'bold' },
+ pageContentView:{ flex:1, backgroundColor:'#fff', borderColor:'#fff', borderWidth:1, borderTopLeftRadius:25, borderTopRightRadius:25 },
+ pageScrollView:{ padding:15 }
 });
 
 export default Explore;

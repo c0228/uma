@@ -9,8 +9,8 @@ const Notifications = () =>{
         <Text style={styles.pageTitle}>Notifications</Text>
       </DrawerHeader>
     </View>
-    <View style={{ flex:1, backgroundColor:'#fff', borderColor:'#fff', borderWidth:1, borderTopLeftRadius:25, borderTopRightRadius:25, }}>
-      <ScrollView style={{ padding:15 }}>
+    <View style={styles.pageContentView}>
+      <ScrollView style={styles.pageScrollView}>
         <Text>Test</Text>
       </ScrollView>
     </View>
@@ -19,7 +19,9 @@ const Notifications = () =>{
 
 const styles = StyleSheet.create({
   pageView:{ backgroundColor:'#6b046b', display:'flex', flex:1 },
-  pageTitle:{ color:'#fff', paddingTop:4, fontSize:16, fontWeight:'bold' }
+  pageTitle:{ color:'#fff', paddingTop:4, fontSize:16, fontWeight:'bold' },
+  pageContentView:{ flex:1, backgroundColor:'#fff', borderColor:'#fff', borderWidth:1, borderTopLeftRadius:25, borderTopRightRadius:25 },
+  pageScrollView:{ padding:15 }
 });
 
 export default Notifications;
