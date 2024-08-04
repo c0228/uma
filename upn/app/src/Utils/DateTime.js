@@ -27,3 +27,29 @@ export const getDiffTimeFromNow = (targetDateString, format) => {
   const remainingSeconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
   return { remainingHours, remainingMinutes, remainingSeconds };
 };
+
+export const TimeAgo = (dateString) => { // dateString : YYYY-MM-dd H:i:s
+   const now = new Date();
+   const date = new Date(dateString.replace(" ", "T"));
+   const seconds = Math.floor((now - date) / 1000);
+
+   const intervals = {
+       year: 31536000,
+       month: 2592000,
+       week: 604800,
+       day: 86400,
+       hour: 3600,
+       minute: 60,
+       second: 1
+   };
+
+   for (const interval in intervals) {
+       const timeInterval = Math.floor(seconds / intervals[interval]);
+       if (timeInterval >= 1) {
+           return `${timeInterval} ${interval}${timeInterval > 1 ? 's' : ''} ago`;
+       }
+   }
+   return 'Just now';
+}
+
+
