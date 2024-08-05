@@ -126,13 +126,15 @@ const Explore = () =>{
   const ExploreSubjectSection = () =>{
     return (<View>
       <HeaderTitle data={{ title:'Our Study Topics', subTitle: 'For UPSC Examinations' }} />
+      <View style={{ marginLeft:5, marginRight:6 }}>
       <ScrollView horizontal={true}>
-        <View style={styles.subjectGroupView}>
+        <View style={[styles.subjectGroupView]}>
           {subjectsData?.map((d,i)=>{
             return (<Subject key={i} data={d} />);
           })}
         </View>
       </ScrollView>
+      </View>
     </View>);
   };
   const News = ({ data }) =>{
@@ -163,7 +165,9 @@ const Explore = () =>{
   const ExploreNewsSection = ()=>{
     return (<View style={styles.padTop20}>
       <HeaderTitle data={{ title:'Trending Current Affairs', subTitle: 'Stay updated for UPSC Examinations' }} />
-      {newsData?.map((d,i)=><News key={i} data={d} />)}
+      <View style={[styles.padLeft5, styles.padRight5]}>
+       {newsData?.map((d,i)=><News key={i} data={d} />)}
+      </View>
     </View>);
   };
   return (<Page backgroundColor="#df0d55" title="Explore">
@@ -180,22 +184,23 @@ const styles = StyleSheet.create({
   row:{ flexDirection:'row' },
   padRight3:{ paddingRight:3 },
   padLeft5:{ paddingLeft:5 },
+  padRight5:{ paddingRight:5 },
   padTop20:{ paddingTop:20 },
   title:{ fontSize:18, color:'#333', fontWeight:'bold' },
   subTitle:{ fontSize:12, color:'#777', paddingTop:2 },
-  subjectView:{ width:125 },
+  subjectView:{ width:118 },
   subjectImgView:{ alignItems:'center' },
-  subjectImg:{ width:100, height:100, borderRadius:60, borderWidth:2, borderColor:'#777' },
+  subjectImg:{ width:90, height:90, borderRadius:60, borderWidth:2, borderColor:'#777' },
   subjectTextView:{ paddingTop:3, alignItems:'center' },
   subjectTitle:{ fontSize:16, color:'#333', fontWeight:'bold', textAlign:'center', flexWrap:'wrap' },
   subjectChapters:{ fontSize:14, color:'#333' },
-  subjectGroupView:{ flexDirection:'row', marginTop:15, marginLeft:-10 },
+  subjectGroupView:{ flexDirection:'row', marginTop:15, marginLeft:-13 },
   exploreTitleView:{ flexDirection:'row', paddingLeft:20, paddingRight:10, paddingTop:15 },
   exploreHeader:{ width:'65%' },
   inviteFriendsView1:{ justifyContent:'center', alignItems:'flex-end', width:'35%', paddingRight:15 },
   inviteFriendsView2:{ flexDirection:'row', borderWidth:1, borderColor:'#df0d55', borderRadius:6, padding:5 },
   inviteFriendsText:{ paddingLeft:6, fontSize:11, color:'#df0d55', fontWeight:'bold' },
-  newsView:{ marginTop:10, padding:10, borderWidth:1, borderRadius:6, borderColor:'#ccc' },
+  newsView:{ marginTop:10, padding:10, borderWidth:1, borderRadius:6, borderColor:'#ccc', backgroundColor:'#fbf9f9' },
   newsTitle:{ fontSize:16, fontWeight:'bold', lineHeight:22, color:'#555' },
   newsSubView:{ flexDirection:'row', paddingTop:5 },
   newsImgView:{ width:'35%', justifyContent:'center' },
