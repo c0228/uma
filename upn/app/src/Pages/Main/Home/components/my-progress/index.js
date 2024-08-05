@@ -19,8 +19,8 @@ const MyProgress = () =>{
   const WeekDatesComponent = ()=>{
     const today = todayDateView?.day+', '+todayDateView?.date+' '+todayDateView?.month+' '+todayDateView?.year;
     const selDate = selectedDateView?.day+', '+selectedDateView?.date+' '+selectedDateView?.month+' '+selectedDateView?.year;
-    return (
-      <View style={styles.weekDatesContainer}>
+    return (<View>
+      {selectedDateView && <View style={styles.weekDatesContainer}>
         <View style={styles.todayDateView}>
           <View style={styles.todayDateIcon}>
             <Icon type="FontAwesome" name="calendar" size={20} color="black"/>
@@ -39,8 +39,8 @@ const MyProgress = () =>{
             </View>);
           })}
         </View>
-      </View>
-    );
+      </View>}
+    </View>);
   };
   const SubjectView = ({ subject, data, progress })=>{
     const progressColor = (progress===1)?'green':'red';
