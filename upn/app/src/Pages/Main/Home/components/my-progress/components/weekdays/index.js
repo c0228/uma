@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { GetWeekOfDays } from '@AppUtils/DateTime.js';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export const WeekDatesComponent = () => {
@@ -7,8 +8,15 @@ export const WeekDatesComponent = () => {
   const [todayDateView, setTodayDateView] = useState('');
   const [selectedDateView, setSelectedDateView] = useState('');
 
+ 
+
+
   useEffect(() => {
-    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const data = GetWeekOfDays();
+    setWeekDates(data?.weekDates);
+    setTodayDateView(data?.today?.week+', '+data?.today?.date+' '+data?.today?.month+' '+data?.today?.year);
+    setSelectedDateView(data?.today?.week+', '+data?.today?.date+' '+data?.today?.month+' '+data?.today?.year);
+    /*const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const monthsOfYear = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     
     const today = new Date();
@@ -37,7 +45,7 @@ export const WeekDatesComponent = () => {
       });
     }
     
-    setWeekDates(dates);
+    setWeekDates(dates); */
   }, []);
 
   return (
@@ -64,14 +72,14 @@ export const WeekDatesComponent = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  todayDateView:{ flex:1, flexDirection:'row', marginBottom: 10, justifyContent:'center' },
+  container: { paddingLeft:15, paddingTop:15, paddingRight:15 },
+  todayDateView:{ flexDirection:'row', marginBottom: 10, justifyContent:'center' },
   todayDateIcon:{ marginTop:-2 },
   todayText1:{ fontWeight: 'bold', marginBottom: 5, fontSize:14, color:'#333', marginLeft: 5, marginRight:5, color:'black'  },
   todayText2:{ fontSize:14, color:'#555', marginLeft: 5 },
   flexContainer: { flexDirection: 'row', justifyContent: 'space-between' },
   flexItem: { alignItems:'center', flex: 1, padding: 5, marginTop: 5, marginRight: 5, backgroundColor: '#f5f5f5', borderRadius: 8 },
-  flexItemActive: { borderColor: 'tomato', borderWidth: 1 },
+  flexItemActive: { borderColor: '#000', borderWidth: 2 },
   flexItemDay: { textTransform: 'uppercase', fontSize:11, color:'#333', fontWeight:'bold' },
   flexItemDate:{ color:'#555' }
 });

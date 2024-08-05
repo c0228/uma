@@ -52,4 +52,53 @@ export const TimeAgo = (dateString) => { // dateString : YYYY-MM-dd H:i:s
    return 'Just now';
 }
 
+const format = (value)=>{
+ return value>9?(''+value):('0'+value);
+};
+export const GetWeekOfDays = ()=>{
+   const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+   const monthsOfYear = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+   
+   const today = new Date();
+   const todayDayIndex = today.getDay();
+   const todayDay = daysOfWeek[todayDayIndex];
+   const todayDate = today.getDate();
+   const todayMonthIndex = today.getMonth();
+   const todayMonth = monthsOfYear[todayMonthIndex];
+   const todayYear = today.getFullYear();
 
+   const currentDay = today.getDay(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
+   const startDate = new Date(today);
+   startDate.setDate(today.getDate() - currentDay); // Set start date to Sunday of the current week
+   
+   let dates = [];
+   for (let i = 0; i < 7; i++) {
+     const date = new Date(startDate);
+     date.setDate(startDate.getDate() + i);
+     const dayIndex = date.getDay();
+     const monthIndex = date.getMonth();
+     const day = daysOfWeek[dayIndex];
+     const formattedDate = date.toLocaleDateString('en-GB', { day: '2-digit' });
+     dates.push({
+       dayIndex: format(dayIndex+1),
+       day: day,
+       date: format(date.getDate()),
+       monthIndex: format(monthIndex+1),
+       month: monthsOfYear[monthIndex],
+       year: date.getFullYear(),
+       formattedDate: formattedDate
+     });
+   }
+
+   return { 
+     weekDates: dates, 
+     today:{
+       dayIndex: format(todayDayIndex+1),
+       day: todayDay,
+       date: format(todayDate),
+       monthIndex:format(todayMonthIndex+1),
+       month: todayMonth,
+       year: todayYear
+     }
+   }
+ };
