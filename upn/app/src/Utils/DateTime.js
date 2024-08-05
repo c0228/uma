@@ -102,3 +102,15 @@ export const GetWeekOfDays = ()=>{
      }
    }
  };
+
+ export const CompareDates = (date1, date2) => { // Convert the date strings to Date objects
+   let d1 = new Date(date1);
+   let d2 = new Date(date2);
+   if (d1 < d2) {
+      return 'LESS';
+   } else if (d1 > d2) {
+      return 'GREATOR';
+   } else {
+      return 'EQUAL';
+   }
+}
