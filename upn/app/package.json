@@ -35,6 +35,7 @@
     "react-native-google-mobile-ads": "^13.6.0",
     "react-native-paper": "^5.12.3",
     "react-native-picker-select": "^9.1.3",
+    "react-native-progress": "^5.0.1",
     "react-native-reanimated": "^3.11.0",
     "react-native-render-html": "^6.3.4",
     "react-native-responsive-grid-system": "^1.0.4",

@@ -1,0 +1,15 @@
+.container {
+    width: 300px;
+    margin: 0 auto;
+  }
+  
+  .draggable {
+    padding: 16px;
+    margin: 8px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: grab;
+  }
+  

@@ -7,6 +7,7 @@ import Features from './Components/Features/index.js';
 import Services from './Components/Services/index.js';
 import Process from './Components/Process/index.js';
 import Footer from '@Templates/Footer/index.js';
+import ManageSubjects from './Components/Dashboard/index.js';
 import './index.css';
 
 const Home = ()=>{
@@ -43,6 +44,7 @@ const Home = ()=>{
     <h5 style={{ color:'#000', lineHeight:'26px' }}>We partner with you to create a functional and efficient building environment.</h5>
   </div>*/}
  </div>
+ <ManageSubjects /> 
 
  <AboutUs />
  <Features data={[{ 
