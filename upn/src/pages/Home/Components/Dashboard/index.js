@@ -12,7 +12,7 @@ const ManageSubjects = () =>{
     <Col md={3}>
       <AddSubjectForm />
     </Col>
-    <Col md={6}>
+    <Col md={9}>
       <AddTopicForm />
     </Col>
   </Row>

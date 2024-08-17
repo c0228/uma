@@ -1,0 +1,5 @@
+.topic-header { border-top:1px solid #000;border-bottom:1px solid #000;padding-top:8px;padding-bottom:8px; }
+.topic-row { border-bottom:1px solid #ccc;padding-top:8px;padding-bottom:8px;  }
+.topic-action { display:flex;flex-direction:row; }
+.topic-action-edit { width:50%;margin-right:15px; }
+.topic-action-delete { width:50%; }

@@ -21,7 +21,7 @@ RewriteRule subject/topic/list src/controllers/module.user.mock.exams.php?action
 # ADMIN MODULE
 RewriteRule exams/list src/controllers/module.admin.prep.php?action=EXAMS_LIST [QSA]
 RewriteRule subjects/list src/controllers/module.admin.prep.php?action=SUBJECT_LIST [QSA]
-
+RewriteRule topics/list src/controllers/module.admin.prep.php?action=TOPICS_LIST [QSA]
 
 #RewriteRule user/exams/list src/controllers/module.app.exams.php?action=USER_EXAMS_LIST  [QSA]
 
