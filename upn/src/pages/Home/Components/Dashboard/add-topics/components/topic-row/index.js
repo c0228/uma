@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { ContainerFluid, Row, Col, Button, Icon, Card, Select, UrlAsyncFetch, TextArea, NumRange } from 'e-ui-react';
+import { Modal, ContainerFluid, Row, Col, Button, Icon, Card, Select, UrlAsyncFetch, TextArea, NumRange } from 'e-ui-react';
 import './index.css';
 
 const TopicRow = ({ subject, selectedNewRows }) =>{
  const [topicsList, setTopicsList] = useState();
- 
+ const [ showModal, setShowModal ] = useState(false);
+ const [modalDetails, setModalDetails] = useState({
+  header:''
+ });
  useEffect(()=>{ console.log("topicsList: ", topicsList); },[topicsList]);
  useEffect(()=>{ initialize(subject); },[subject]);
  const initialize = async(subject) =>{
@@ -45,7 +48,11 @@ const TopicRow = ({ subject, selectedNewRows }) =>{
           <TextArea name="surname" placeholder="Enter Topic" lines={2} value={topic} />
         </div>
       </Col>
-      <Col md={2}><div align="center">{subTopics}</div></Col>
+      <Col md={2}><div align="center" style={{ color:'blue', textDecoration:'underline', cursor:'pointer' }} onClick={()=>{ 
+          setShowModal(true);
+          setModalDetails({ header:'Subtopics of "'+topic+'"' })
+          }}>{subTopics}</div>
+      </Col>
       <Col md={2}>
         <div className="topic-action">
           <div className="topic-action-edit">
@@ -68,7 +75,11 @@ const TopicRow = ({ subject, selectedNewRows }) =>{
     })}
   </div>);
  };
+ const SubTopicViewer = () =>{
+  return (<div>Hello World</div>);
+ };
  return (<div className="mtop15p">
+     <Modal title={modalDetails?.header} show={showModal} onClose={setShowModal} content={<SubTopicViewer />} width="80%" />
     <ContainerFluid>
       <Header />
       <Body />
