@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Modal, ContainerFluid, Row, Col, Button, Icon, Card, Select, UrlAsyncFetch, TextArea, NumRange } from 'e-ui-react';
+import { Form, Modal, ContainerFluid, Row, Col, Button, Icon, Card, Select, UrlAsyncFetch, TextArea, NumRange } from 'e-ui-react';
 import './index.css';
 
 const TopicRow = ({ subject, selectedNewRows }) =>{
+ const [initialTopicsList, setInitialTopicList] = useState();
  const [topicsList, setTopicsList] = useState();
  const [ showModal, setShowModal ] = useState(false);
- const [modalDetails, setModalDetails] = useState({
-  header:''
- });
+ const [modalDetails, setModalDetails] = useState({ header:'' });
  useEffect(()=>{ console.log("topicsList: ", topicsList); },[topicsList]);
  useEffect(()=>{ initialize(subject); },[subject]);
  const initialize = async(subject) =>{
   const data = await UrlAsyncFetch('http://localhost/projects/uma/upn/nexus/topics/list', 'POST', { subject: subject });
+  setInitialTopicList( data?.topics );
   setTopicsList( data?.topics );
  };
  const Header = () =>{
@@ -45,7 +45,13 @@ const TopicRow = ({ subject, selectedNewRows }) =>{
       </Col>
       <Col md={6}>
         <div align="center">
-          <TextArea name="surname" placeholder="Enter Topic" lines={2} value={topic} />
+          <TextArea name={"topic-"+seq} placeholder="Enter Topic" lines={2} value={topic} 
+            validation={{
+              required:{
+                  value: true,
+                  errorMessage:"This is a Mandatory Field"
+              }
+            }} />
         </div>
       </Col>
       <Col md={2}><div align="center" style={{ color:'blue', textDecoration:'underline', cursor:'pointer' }} onClick={()=>{ 
@@ -67,11 +73,11 @@ const TopicRow = ({ subject, selectedNewRows }) =>{
     </div>);
   };
   return (<div>
-    {topicsList?.map((topics)=>{
-      return (<RowTemplate seq={topics?.seq} topic={topics?.topic} subTopics={4} />);
+    {topicsList?.map((topics, index)=>{
+      return (<RowTemplate key={index} seq={topics?.seq} topic={topics?.topic} subTopics={4} />);
     })}
-    {NumRange(1,parseInt(selectedNewRows))?.map((num)=>{
-      return (<RowTemplate seq={topicsList?.length+parseInt(num)} topic="" subTopics={0} />);
+    {NumRange(1,parseInt(selectedNewRows))?.map((num, index)=>{
+      return (<RowTemplate key={index} seq={topicsList?.length+parseInt(num)} topic="" subTopics={0} />);
     })}
   </div>);
  };
@@ -79,10 +85,27 @@ const TopicRow = ({ subject, selectedNewRows }) =>{
   return (<div>Hello World</div>);
  };
  return (<div className="mtop15p">
-     <Modal title={modalDetails?.header} show={showModal} onClose={setShowModal} content={<SubTopicViewer />} width="80%" />
+    <Modal title={modalDetails?.header} show={showModal} onClose={setShowModal} content={<SubTopicViewer />} width="80%" />
     <ContainerFluid>
       <Header />
+      <Form name="addUpdateTopics" btnSubmit={{
+              btnType:'primary',
+              label:'Add / Update Topics',
+              size: 14
+            }}
+            btnReset={{
+              btnType:'danger',
+              label:'Reset Topics',
+              size: 14
+            }}
+            onSubmit={(form, isValidForm)=>{
+              console.log("Form Result:", form);
+            }}
+            onReset={()=>{
+              setTopicsList( initialTopicsList );
+            }}>
       <Body />
+      </Form>
     </ContainerFluid>
     </div>);
 };
