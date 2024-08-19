@@ -3,7 +3,7 @@ import { Form, Modal, ContainerFluid, Row, Col, Button, Icon, Card, Select, UrlA
 import './index.css';
 
 const TopicRow = ({ subject, selectedNewRows }) =>{
- const [initialTopicsList, setInitialTopicList] = useState();
+ const [initialTopicsList, setInitialTopicList] = useState(); // Saves InitialTopicsList 
  const [topicsList, setTopicsList] = useState();
  const [ showModal, setShowModal ] = useState(false);
  const [modalDetails, setModalDetails] = useState({ header:'' });
@@ -24,12 +24,17 @@ const TopicRow = ({ subject, selectedNewRows }) =>{
  };
  const Body = () =>{
   const handleTopicDrag = (e, topic)=>{
-
+    e.dataTransfer.setData('DraggedTopic', JSON.stringify(topic));
   };
-  const handleTopicDrop = (e, topic) =>{
-
+  const handleTopicDrop = (e, droppedTopic) =>{
+    let draggedTopic = e.dataTransfer.getData('DraggedTopic');
+    console.log("draggedTopic: ", draggedTopic);
+    console.log("droppedTopic: ", droppedTopic);
   };
-  const RowTemplate = ({ seq, topic, subTopics })=>{
+  const RowTemplate = ({ topics })=>{
+    const seq = topics?.seq;
+    const topic= topics?.topic;
+    const subTopics= 4;
     return (<div
       draggable
       onDragStart={(e) => handleTopicDrag(e, topic)}
@@ -74,10 +79,10 @@ const TopicRow = ({ subject, selectedNewRows }) =>{
   };
   return (<div>
     {topicsList?.map((topics, index)=>{
-      return (<RowTemplate key={index} seq={topics?.seq} topic={topics?.topic} subTopics={4} />);
+      return (<RowTemplate key={index} topics={topics} />);
     })}
     {NumRange(1,parseInt(selectedNewRows))?.map((num, index)=>{
-      return (<RowTemplate key={index} seq={topicsList?.length+parseInt(num)} topic="" subTopics={0} />);
+      return (<RowTemplate key={index} topics={{ seq: topicsList?.length+parseInt(num), topic:'' }} />);
     })}
   </div>);
  };
