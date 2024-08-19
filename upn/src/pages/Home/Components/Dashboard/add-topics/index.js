@@ -56,7 +56,8 @@ const AddTopicForm = () => {
       </Row>
     </ContainerFluid>
     </div>
-    {selectedSubject?.length>0 && <TopicRow subjectName={selectedSubject} selectedNewRows={selectedNewRows} topicsData={topicsData} />}
+    {selectedSubject?.length>0 && 
+    (<TopicRow subjectName={selectedSubject} selectedNewRows={selectedNewRows} topicsData={topicsData} />)}
   </Card>);
 };
 

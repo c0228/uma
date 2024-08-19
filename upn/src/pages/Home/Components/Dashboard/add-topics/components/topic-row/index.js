@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Form, Modal, ContainerFluid, Row, Col, Button, Icon, Card, Select, UrlAsyncFetch, TextArea, NumRange } from 'e-ui-react';
+import SubTopicRow from "./../subtopic-row/index.js";
 import './index.css';
 
 const TopicRow = ({ subjectName, selectedNewRows, topicsData }) =>{
@@ -43,7 +44,7 @@ const TopicRow = ({ subjectName, selectedNewRows, topicsData }) =>{
     const topic_id = topics?.topic_id;
     const seq = topics?.seq;
     const topic= topics?.topic;
-    const subTopics= topics?.subTopics || 0;
+    const subTopics= topics?.subtopics || 0;
     return (<div
       draggable
       onDragStart={(e) => handleTopicDrag(e, topics)}
@@ -68,10 +69,7 @@ const TopicRow = ({ subjectName, selectedNewRows, topicsData }) =>{
             }} />
         </div>
       </Col>
-      <Col md={2}><div align="center" style={{ color:'blue', textDecoration:'underline', cursor:'pointer' }} onClick={()=>{ 
-          setShowModal(true);
-          setModalDetails({ header:'Subtopics of "'+topic+'"' })
-          }}>{subTopics}</div>
+      <Col md={2}><div align="center">{subTopics}</div>
       </Col>
       <Col md={2}>
         <div className="topic-action">
@@ -95,9 +93,6 @@ const TopicRow = ({ subjectName, selectedNewRows, topicsData }) =>{
     })}
   </div>);
  };
- const SubTopicViewer = () =>{
-  return (<div>Hello World</div>);
- };
  const transformFormData = (form) => {
   const { addUpdateTopics } = form;
   const result = Object.keys(addUpdateTopics)
@@ -115,7 +110,6 @@ const TopicRow = ({ subjectName, selectedNewRows, topicsData }) =>{
   return result;
 };
  return (<div className="mtop15p">
-    <Modal title={modalDetails?.header} show={showModal} onClose={setShowModal} content={<SubTopicViewer />} width="80%" />
     <ContainerFluid>
       <Header />
       <Form name="addUpdateTopics" btnSubmit={{
