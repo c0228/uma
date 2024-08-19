@@ -2,18 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Form, Modal, ContainerFluid, Row, Col, Button, Icon, Card, Select, UrlAsyncFetch, TextArea, NumRange } from 'e-ui-react';
 import './index.css';
 
-const TopicRow = ({ subject, selectedNewRows }) =>{
- const [initialTopicsList, setInitialTopicList] = useState(); // Saves InitialTopicsList 
+const TopicRow = ({ subjectName, selectedNewRows, topicsData }) =>{
  const [topicsList, setTopicsList] = useState();
  const [ showModal, setShowModal ] = useState(false);
  const [modalDetails, setModalDetails] = useState({ header:'' });
- useEffect(()=>{ console.log("topicsList: ", topicsList); },[topicsList]);
- useEffect(()=>{ initialize(subject); },[subject]);
- const initialize = async(subject) =>{
-  const data = await UrlAsyncFetch('http://localhost/projects/uma/upn/nexus/topics/list', 'POST', { subject: subject });
-  setInitialTopicList( data?.topics );
-  setTopicsList( data?.topics );
- };
+ useEffect(()=>{ setTopicsList(topicsData); },[topicsData]);
  const Header = () =>{
   return (<Row className="topic-header">
     <Col md={1}><div align="center"><b>Seq</b></div></Col>
@@ -23,22 +16,38 @@ const TopicRow = ({ subject, selectedNewRows }) =>{
   </Row>);
  };
  const Body = () =>{
-  const handleTopicDrag = (e, topic)=>{
-    e.dataTransfer.setData('DraggedTopic', JSON.stringify(topic));
+  const swapData = (draggedTopicId, droppedTopicId, topics) => {
+    const updatedTopics = topics?.map(topic => {
+      if (topic.topic_id === draggedTopicId) {
+        return { ...topic, seq: topics.find(t => t.topic_id === droppedTopicId).seq };
+      } else if (topic.topic_id === droppedTopicId) {
+        return { ...topic, seq: topics.find(t => t.topic_id === draggedTopicId).seq };
+      } else {
+        return topic;
+      }
+    });
+    return updatedTopics?.sort((a, b) => a.seq - b.seq);
+  };
+  const handleTopicDrag = (e, draggedTopic)=>{
+    e.dataTransfer.setData('DraggedTopic', JSON.stringify(draggedTopic));
   };
   const handleTopicDrop = (e, droppedTopic) =>{
     let draggedTopic = e.dataTransfer.getData('DraggedTopic');
-    console.log("draggedTopic: ", draggedTopic);
-    console.log("droppedTopic: ", droppedTopic);
+      draggedTopic = JSON.parse(draggedTopic);
+    const draggedTopicId = draggedTopic?.topic_id;
+    const droppedTopicId = droppedTopic?.topic_id;
+    const updatedTopics = swapData(draggedTopicId, droppedTopicId, topicsList);
+    setTopicsList( updatedTopics );
   };
   const RowTemplate = ({ topics })=>{
+    const topic_id = topics?.topic_id;
     const seq = topics?.seq;
     const topic= topics?.topic;
-    const subTopics= 4;
+    const subTopics= topics?.subTopics || 0;
     return (<div
       draggable
-      onDragStart={(e) => handleTopicDrag(e, topic)}
-      onDrop={(e) => handleTopicDrop(e, topic)}
+      onDragStart={(e) => handleTopicDrag(e, topics)}
+      onDrop={(e) => handleTopicDrop(e, topics)}
       onDragOver={(e) => e.preventDefault()}>
     <Row className="topic-row">
       <Col md={1}>
@@ -50,7 +59,7 @@ const TopicRow = ({ subject, selectedNewRows }) =>{
       </Col>
       <Col md={6}>
         <div align="center">
-          <TextArea name={"topic-"+seq} placeholder="Enter Topic" lines={2} value={topic} 
+          <TextArea name={"topic-"+topic_id+"-"+seq} placeholder="Enter Topic" lines={2} value={topic} 
             validation={{
               required:{
                   value: true,
@@ -82,13 +91,29 @@ const TopicRow = ({ subject, selectedNewRows }) =>{
       return (<RowTemplate key={index} topics={topics} />);
     })}
     {NumRange(1,parseInt(selectedNewRows))?.map((num, index)=>{
-      return (<RowTemplate key={index} topics={{ seq: topicsList?.length+parseInt(num), topic:'' }} />);
+      return (<RowTemplate key={index} topics={{ topic_id:'_', seq: topicsList?.length+parseInt(num), topic:'' }} />);
     })}
   </div>);
  };
  const SubTopicViewer = () =>{
   return (<div>Hello World</div>);
  };
+ const transformFormData = (form) => {
+  const { addUpdateTopics } = form;
+  const result = Object.keys(addUpdateTopics)
+    .filter(key => key.startsWith('topic-'))
+    .map(key => {
+      const [_, topic_id, seq] = key.split('-');
+      return {
+        topic_id: topic_id,
+        topic: addUpdateTopics[key].value,
+        subject: subjectName,
+        seq: seq
+      };
+    })
+    .sort((a, b) => a.seq - b.seq);
+  return result;
+};
  return (<div className="mtop15p">
     <Modal title={modalDetails?.header} show={showModal} onClose={setShowModal} content={<SubTopicViewer />} width="80%" />
     <ContainerFluid>
@@ -104,10 +129,13 @@ const TopicRow = ({ subject, selectedNewRows }) =>{
               size: 14
             }}
             onSubmit={(form, isValidForm)=>{
-              console.log("Form Result:", form);
+              if(isValidForm){
+                const formData = transformFormData( form );
+                console.log("Form Result:", formData);
+              }
             }}
             onReset={()=>{
-              setTopicsList( initialTopicsList );
+              setTopicsList( topicsData );
             }}>
       <Body />
       </Form>

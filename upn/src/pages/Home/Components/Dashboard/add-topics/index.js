@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { ContainerFluid, Row, Col, Button, Icon, Card, Select, UrlAsyncFetch, TextArea, NumRange } from 'e-ui-react';
+import { ContainerFluid, Row, Col, Card, Select, UrlAsyncFetch, NumRange } from 'e-ui-react';
 import TopicRow from './components/topic-row/index.js';
 
 const AddTopicForm = () => {
   const [subjectList, setSubjectList] = useState([]);
-  const [selectedSubject, setSelectedSubject] = useState();
+  const [selectedSubject, setSelectedSubject] = useState('');
   const [selectedNewRows, setSelectedNewRows] = useState();
+  const [topicsData, setTopicsData] = useState([]);
   const initialize = async() =>{
     const response = await UrlAsyncFetch('http://localhost/projects/uma/upn/nexus/subjects/list', 'GET', {});
     let subjects = [];
@@ -15,9 +16,11 @@ const AddTopicForm = () => {
     setSubjectList( subjects );
   };
   useEffect(()=>{ initialize(); },[]);
- 
-
-
+  const handleTopicsOfSubject = async(subject) =>{
+    setSelectedSubject( subject );
+    const data = await UrlAsyncFetch('http://localhost/projects/uma/upn/nexus/topics/list', 'POST', { subject: subject });
+    setTopicsData(  data?.topics );
+  };
   return (<Card padding={15}>
     <div><h4 style={{ paddingBottom:15, borderBottom:'1px solid #ccc' }}><b>Add / Update Topics</b></h4></div>
     <div className="mtop15p">
@@ -31,7 +34,7 @@ const AddTopicForm = () => {
                 className="navbar-layout"
                 fontSize="12"
                 onChange={(event) => {
-                  setSelectedSubject(event.target.value);
+                  handleTopicsOfSubject(event.target.value);
                 }}
             />)}
         </Col>
@@ -53,7 +56,7 @@ const AddTopicForm = () => {
       </Row>
     </ContainerFluid>
     </div>
-    {selectedSubject && <TopicRow subject={selectedSubject} selectedNewRows={selectedNewRows} />}
+    {selectedSubject?.length>0 && <TopicRow subjectName={selectedSubject} selectedNewRows={selectedNewRows} topicsData={topicsData} />}
   </Card>);
 };
 
