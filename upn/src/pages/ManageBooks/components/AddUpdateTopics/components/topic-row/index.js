@@ -150,10 +150,8 @@ return (<div>
               size: 14
             }}
             onSubmit={(form, isValidForm)=>{
-              console.log("isValidForm: ", isValidForm);
               if(isValidForm){
                 let tList = [...topicsList];
-                console.log("form [isValidForm]: ", form, tList); 
                 let updatedTList = tList?.map((tL)=>{
                   const topicId = tL?.topic_id;
                   const topicVal = form?.["addUpdateTopics"]?.["topic-"+topicId]?.value;
