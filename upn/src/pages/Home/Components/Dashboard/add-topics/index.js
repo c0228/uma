@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ContainerFluid, Row, Col, Card, Select, UrlAsyncFetch, NumRange } from 'e-ui-react';
+import { Switch, ContainerFluid, Row, Col, Card, Select, UrlAsyncFetch, NumRange } from 'e-ui-react';
 import TopicRow from './components/topic-row/index.js';
 
 const AddTopicForm = () => {
@@ -38,7 +38,8 @@ const AddTopicForm = () => {
                 }}
             />)}
         </Col>
-        <Col md={4}></Col>
+        <Col md={4}>
+        </Col>
         <Col md={2}>
           <div className="mtop25p">
             <Select

@@ -17,6 +17,9 @@ RewriteRule user/prepare/plan src/controllers/module.user.account.info.php?actio
 # EXAMS MODULE
 RewriteRule exams/subject/list src/controllers/module.user.mock.exams.php?action=EXAM_SUBJECT_LIST [QSA]
 RewriteRule subject/topic/list src/controllers/module.user.mock.exams.php?action=SUBJECT_TOPICS_LIST [QSA]
+RewriteRule add/new/subject src/controllers/module.user.mock.exams.php?action=ADD_NEW_SUBJECT [QSA]
+RewriteRule add/new/topics src/controllers/module.user.mock.exams.php?action=ADD_NEW_TOPICS [QSA]
+RewriteRule add/new/subtopics src/controllers/module.user.mock.exams.php?action=ADD_NEW_SUBTOPICS [QSA]
 
 # ADMIN MODULE
 RewriteRule exams/list src/controllers/module.admin.prep.php?action=EXAMS_LIST [QSA]

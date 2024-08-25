@@ -28,4 +28,4 @@ else if($_GET["action"]=='TOPICS_LIST' && $_SERVER['REQUEST_METHOD']=='POST'){
   $result = array();
   $result["topics"] =  json_decode( $database->getJSONData($query) );
   echo json_encode($result);
-}
+} 
