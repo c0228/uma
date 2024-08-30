@@ -1,5 +1,6 @@
 <?php
 class MockExamModule {
+ /** MANAGE SUBJECTS : Add New Subject Form */
  function query_get_listOfSubjectsByExam($exams){
   if (empty($exams)) { return ""; }
   $sql="SELECT * FROM app_subjects_list WHERE";
@@ -9,15 +10,17 @@ class MockExamModule {
   $sql=chop($sql,' OR').';';
   return $sql;
  }
+ function query_add_examSubjects($subject,$exam){
+  return "INSERT INTO app_subjects_list(subject, exam) VALUES ('".$subject."','".$exam."');";
+ }
+ /** MANAGE SUBJECTS : View Subjects List */
  function query_get_listOfTopicsBySubject($subject){
   return "SELECT topic_id, topic FROM app_subjects_mtopic WHERE subject='".$subject."';";
  }
  function query_get_listOfSubTopicsByTopic($topicId){
   return "SELECT stopic_id, subtopic FROM app_subjects_stopic WHERE topic_id='".$topicId."';";
  }
- function query_add_examSubjects($subject,$exam){
-  return "INSERT INTO app_subjects_list(subject, exam) VALUES ('".$subject."','".$exam."');";
- }
+
  function query_add_subjectTopics($topic,$subject){
   return "INSERT INTO app_subjects_mtopic(topic, subject) VALUES ('".$topic."','".$subject."');";
  }

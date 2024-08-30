@@ -9,6 +9,7 @@ require_once './../utils/Mail.php';
 require_once './../utils/DateTime.php';
 require_once './../utils/Math.php';
 
+/** MANAGE SUBJECTS : Add New Subject Form */
 if($_GET["action"]=='EXAM_SUBJECT_LIST' && $_SERVER['REQUEST_METHOD']=='GET'){
  $htmlData = json_decode( file_get_contents('php://input'), true );	
  $exams = ''; if( array_key_exists("exams", $htmlData) ){ $exams = $htmlData["exams"]; }
@@ -18,6 +19,18 @@ if($_GET["action"]=='EXAM_SUBJECT_LIST' && $_SERVER['REQUEST_METHOD']=='GET'){
  $status["subjects"] = $data;
  echo json_encode($status);
 }
+else if($_GET["action"]=='ADD_NEW_SUBJECT' && $_SERVER['REQUEST_METHOD']=='POST'){
+  $htmlData = json_decode( file_get_contents('php://input'), true );	
+  $subject = ''; if( array_key_exists("subject", $htmlData) ){ $subject = $htmlData["subject"]; }
+  $exams = ''; if( array_key_exists("exams", $htmlData) ){ $exams = $htmlData["exams"]; }
+  $query = $mockExamModule->query_add_examSubjects($subject,$exams);
+  $status = $database->addupdateData($query);
+  $message = 'New Subject added to the List Successfully';
+  if($status === 'Error') { $message = 'Query Failed'; }
+  $result = ["status" => "$status", "message" => "$message" ];
+  echo json_encode( $result );
+}
+/** MANAGE SUBJECTS : View Subjects List */
 else if($_GET["action"]=='SUBJECT_TOPICS_LIST' && $_SERVER['REQUEST_METHOD']=='GET'){
  // GET Topics and SubTopics List in a Hierarchy
  $htmlData = json_decode( file_get_contents('php://input'), true );	
@@ -38,9 +51,7 @@ else if($_GET["action"]=='SUBJECT_TOPICS_LIST' && $_SERVER['REQUEST_METHOD']=='G
  }
  echo json_encode($status);
 }
-else if($_GET["action"]=='ADD_EXAM_SUBJECTS' && $_SERVER['REQUEST_METHOD']=='POST'){
 
-}
 else if($_GET["action"]=='ADD_SUBJECT_TOPICS' && $_SERVER['REQUEST_METHOD']=='POST'){
 
 }
