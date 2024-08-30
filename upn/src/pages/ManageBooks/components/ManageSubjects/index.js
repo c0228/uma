@@ -46,7 +46,7 @@ const ManageSubjects = () =>{
           <Button type="primary" label="Add New Subject" size={11} style={{ marginRight:'15px' }} onClick={()=>setShowModal(true)} />
           <SubjectListSort />
         </div>} />
-        {selectedListView==='View All' && (<ViewAllSubjects />)}
+        {selectedListView==='View All' && (<ViewAllSubjects examList={examList} />)}
         {selectedListView==='Sort By Exam' && (<SortByExams examList={examList} />)}
       </Col>
     </Row>
