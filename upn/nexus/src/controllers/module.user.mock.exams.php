@@ -10,7 +10,7 @@ require_once './../utils/DateTime.php';
 require_once './../utils/Math.php';
 
 /** MANAGE SUBJECTS : Add New Subject Form */
-if($_GET["action"]=='EXAM_SUBJECT_LIST' && $_SERVER['REQUEST_METHOD']=='GET'){
+if($_GET["action"]=='EXAM_SUBJECT_LIST' && $_SERVER['REQUEST_METHOD']=='POST'){
  $htmlData = json_decode( file_get_contents('php://input'), true );	
  $exams = ''; if( array_key_exists("exams", $htmlData) ){ $exams = $htmlData["exams"]; }
  $query = $mockExamModule->query_get_listOfSubjectsByExam($exams);
@@ -31,6 +31,12 @@ else if($_GET["action"]=='ADD_NEW_SUBJECT' && $_SERVER['REQUEST_METHOD']=='POST'
   echo json_encode( $result );
 }
 /** MANAGE SUBJECTS : View Subjects List */
+else if($_GET["action"]=='SUBJECT_LIST' && $_SERVER['REQUEST_METHOD']=='GET'){
+  $query = $mockExamModule->query_get_subjectsList();
+  $result = array();
+  $result["data"] =  json_decode( $database->getJSONData($query) );
+  echo json_encode($result);
+}
 else if($_GET["action"]=='SUBJECT_TOPICS_LIST' && $_SERVER['REQUEST_METHOD']=='GET'){
  // GET Topics and SubTopics List in a Hierarchy
  $htmlData = json_decode( file_get_contents('php://input'), true );	

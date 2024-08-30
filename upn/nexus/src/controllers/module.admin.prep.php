@@ -14,12 +14,6 @@ if($_GET["action"]=='EXAMS_LIST' && $_SERVER['REQUEST_METHOD']=='GET'){
   $result = array();
   $result["data"] =  json_decode( $database->getJSONData($query) );
   echo json_encode($result);
-} 
-else if($_GET["action"]=='SUBJECT_LIST' && $_SERVER['REQUEST_METHOD']=='GET'){
-    $query = $adminPrepModule->query_get_subjectsList();
-    $result = array();
-    $result["data"] =  json_decode( $database->getJSONData($query) );
-    echo json_encode($result);
 }
 else if($_GET["action"]=='TOPICS_LIST' && $_SERVER['REQUEST_METHOD']=='POST'){
   $htmlData = json_decode( file_get_contents('php://input'), true );

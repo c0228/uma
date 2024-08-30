@@ -14,6 +14,9 @@ class MockExamModule {
   return "INSERT INTO app_subjects_list(subject, exam) VALUES ('".$subject."','".$exam."');";
  }
  /** MANAGE SUBJECTS : View Subjects List */
+ function query_get_subjectsList(){
+  return "SELECT * FROM app_subjects_list";
+ }
  function query_get_listOfTopicsBySubject($subject){
   return "SELECT topic_id, topic FROM app_subjects_mtopic WHERE subject='".$subject."';";
  }
