@@ -3,7 +3,8 @@ import { ContainerFluid, Row, Col, UrlParams, Colors, Pill } from 'e-ui-react';
 import Header from '@Templates/Header/index.js';
 import { HeaderMenu } from '@Config/HeaderMenu.js';
 import ManageSubjects from './components/ManageSubjects/index.js';
-import AddUpdateTopics from './components/AddUpdateTopics/index.js';
+// import AddUpdateTopics from './components/AddUpdateTopics/index.js';
+import ManageTopics from './components/ManageTopics/index.js';
 
 const AddUpdateSubTopics = () =>{
  return (<div>AddUpdateSubTopics</div>);
@@ -29,8 +30,8 @@ const ManageBooks = () =>{
  }}
  menulinks={[
      { id:'add-subjects', url:'#', label:'Manage Subjects', content:(<ManageSubjects />) },
-     { id:'add-update-topics', url:'#', label:'Add / Update Topics', content:(<AddUpdateTopics />) },
-     { id:'add-update-subtopics', url:'#', label:'Add / Update SubTopics', content:(<AddUpdateSubTopics />) },
+     { id:'add-update-topics', url:'#', label:'Manage Topics', content:(<ManageTopics />) },
+     { id:'add-update-subtopics', url:'#', label:'Manage SubTopics', content:(<AddUpdateSubTopics />) },
      { id:'hierarchy', url:'#', label:'View Hierarchy', content:(<Hierarchy />) }]} 
  activeId="add-subjects" 
  colorConfig={{
