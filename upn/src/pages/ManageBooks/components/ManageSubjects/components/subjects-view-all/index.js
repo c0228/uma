@@ -45,9 +45,9 @@ const ViewAllSubjects = ({ examList }) =>{
   <table className="table">
   <thead>
       <tr style={{ backgroundColor:'#eee' }}>
-        <th>#</th>
-        <th>Subject</th>
-        <th>Examination</th>
+        <td><b>#</b></td>
+        <td><b>Subject</b></td>
+        <td><b>Examination</b></td>
         <td align="center" style={{ width:'10%'}}><b>Actions</b></td>
       </tr>
     </thead>
