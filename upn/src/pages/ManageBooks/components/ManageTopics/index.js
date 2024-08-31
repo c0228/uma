@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Select, UrlAsyncFetch, NumRange } from "e-ui-react";
+import { Row, Col, Select, Button, UrlAsyncFetch, NumRange } from "e-ui-react";
 import ViewTopics from './components/view-topics/index.js';
 
 const ManageTopics = () =>{
+ const [mode, setMode] = useState('View');
  const [subjectList, setSubjectList] = useState([]);
  const [selectedSubject, setSelectedSubject] = useState('');
  const [selectedNewRows, setSelectedNewRows] = useState();
@@ -47,16 +48,16 @@ const ManageTopics = () =>{
          (<div className="mtop25p" style={{ display:'flex', flexDirection:'row', justifyContent:'flex-end' }}>
             <div>
                 <Select
-                    options={[{id:'Sorting', label:'Sorting', value:'Sorting'},
+                    options={[{id:'View', label:'View', value:'View'},
+                        {id:'Sorting', label:'Sorting', value:'Sorting'},
                         {id:'Update', label:'Update', value:'Update'},
                         {id:'Add New', label:'Add New', value:'Add New'}]}
                     width="110"
+                    value={mode}
                     fontSize="12"
-                    onChange={(event) => {
-                    setSelectedNewRows(event.target.value);
-                    }} />
+                    onChange={(event) =>setMode(event.target.value)} />
             </div>
-            <div style={{ marginLeft:'5px' }}>
+            {mode==='Add New' && (<div style={{ marginLeft:'5px' }}>
                 <Select
                     placeholder="No. of New Topics"
                     options={NumRange(1,10)?.map((r)=>{
@@ -67,14 +68,14 @@ const ManageTopics = () =>{
                     onChange={(event) => {
                     setSelectedNewRows(event.target.value);
                     }} />
-            </div>
+            </div>)}
           </div>)}
        </Col>
   </Row>
   <Row>
     <Col md={12}>
     {selectedSubject?.length>0 && 
-        (<ViewTopics subjectName={selectedSubject} selectedNewRows={selectedNewRows} topicsData={topicsData} />)}
+        (<ViewTopics mode={mode} subjectName={selectedSubject} selectedNewRows={selectedNewRows} topicsData={topicsData} />)}
     </Col>
   </Row>
  </div>);

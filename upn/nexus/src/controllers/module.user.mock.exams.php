@@ -88,7 +88,7 @@ else if($_GET["action"]=='SUBJECT_TOPICS_LIST' && $_SERVER['REQUEST_METHOD']=='G
  }
  echo json_encode($status);
 }
-
+// 2. Add / New Update Topic based on TopicIds
 else if($_GET["action"]=='ADD_SUBJECT_TOPICS' && $_SERVER['REQUEST_METHOD']=='POST'){
 
 }
