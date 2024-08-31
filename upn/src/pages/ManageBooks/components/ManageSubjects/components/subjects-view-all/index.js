@@ -27,7 +27,7 @@ const ViewAllSubjects = ({ examList }) =>{
         <th>#</th>
         <th>Subject</th>
         <th>Examination</th>
-        <th align="center" style={{ width:'10%'}}>Actions</th>
+        <td align="center" style={{ width:'10%'}}><b>Actions</b></td>
       </tr>
     </thead>
     <tbody>
@@ -44,7 +44,9 @@ const ViewAllSubjects = ({ examList }) =>{
               }}>
                 <Icon type="FontAwesome" name="fa-edit" size={18} />
             </span>
-            <Icon type="FontAwesome" name="fa-trash" size={18} />
+            <span style={{ marginLeft:'5px', cursor:'pointer' }}>
+                <Icon type="FontAwesome" name="fa-trash" size={18} />
+            </span>
         </td>
     </tr>);
     })}
