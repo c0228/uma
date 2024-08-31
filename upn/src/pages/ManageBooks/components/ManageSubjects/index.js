@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Button, Row, Col, Select, Card, Form, TextBox, Switch, UrlAsyncFetch, ModalAlert } from "e-ui-react";
-import AddSubject from "./components/add-subject/index.js";
+import AddSubject from "./components/subject-add/index.js";
 import ViewAllSubjects from './components/subjects-view-all/index.js';
 import SortByExams from './components/subjects-sortby-exam/index.js';
 

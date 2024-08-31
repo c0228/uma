@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button, Icon, Card, Select, UrlAsyncFetch, ContainerFluid, Row, Col  } from "e-ui-react";
-import UpdateSubject from './../update-subject/index.js';
+import UpdateSubject from './../subject-update/index.js';
 
 const ViewAllSubjects = ({ examList }) =>{
  const [showUpdateModal, setShowUpdateModal] = useState(false);
