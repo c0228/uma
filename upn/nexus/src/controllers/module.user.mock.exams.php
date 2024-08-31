@@ -50,6 +50,17 @@ else if($_GET["action"]=='SUBJECT_UPDATE' && $_SERVER['REQUEST_METHOD']=='POST')
   $result = ["status" => "$status", "message" => "$message" ];
   echo json_encode( $result );
 }
+/** MANAGE SUBJECTS : Delete Existing Subject */
+else if($_GET["action"]=='SUBJECT_DELETE' && $_SERVER['REQUEST_METHOD']=='POST'){
+  $htmlData = json_decode( file_get_contents('php://input'), true );
+  $subject = ''; if( array_key_exists("subject", $htmlData) ){ $subject = $htmlData["subject"]; }
+  $query = $mockExamModule->query_delete_existingSubject($subject);
+  $status = $database->addupdateData($query);
+  $message = 'Deleted Subject Details Successfully';
+  if($status === 'Error') { $message = 'Query Failed'; }
+  $result = ["status" => "$status", "message" => "$message" ];
+  echo json_encode( $result );
+}
 else if($_GET["action"]=='SUBJECT_TOPICS_LIST' && $_SERVER['REQUEST_METHOD']=='GET'){
  // GET Topics and SubTopics List in a Hierarchy
  $htmlData = json_decode( file_get_contents('php://input'), true );	

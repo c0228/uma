@@ -22,6 +22,9 @@ RewriteRule add/new/subject src/controllers/module.user.mock.exams.php?action=AD
 RewriteRule subjects/list/all src/controllers/module.user.mock.exams.php?action=SUBJECT_LIST [QSA]
 # MANAGE SUBJECTS : Update Existing Subject
 RewriteRule subject/update src/controllers/module.user.mock.exams.php?action=SUBJECT_UPDATE [QSA]
+# MANAGE SUBJECTS : Delete Existing Subject
+RewriteRule subject/delete src/controllers/module.user.mock.exams.php?action=SUBJECT_DELETE [QSA]
+##########################################################################################################
 
 RewriteRule subject/topic/list src/controllers/module.user.mock.exams.php?action=SUBJECT_TOPICS_LIST [QSA]
 

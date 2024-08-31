@@ -30,7 +30,7 @@ const UpdateSubject = ({ data, reset }) =>{
             const exams = form?.['testForm']?.SelectedExams?.value?.map((exam)=>exam.id).join('|');
             const response = await UrlAsyncFetch('http://localhost/projects/uma/upn/nexus/subject/update', 
               'POST', { newSubjectName: subject, oldSubjectName: data?.subject, exams: exams });
-            setShowAlert({ message:response?.message, status:true, type:response?.status?.toLowerCase() });
+            setShowAlert({ message:response?.message, status:true, type:'success' });
             reset();
           } else {
             setShowAlert({ message:'Please Enter Valid Details in the Form', status:true, type:'danger' });

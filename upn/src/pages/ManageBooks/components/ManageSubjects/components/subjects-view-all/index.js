@@ -3,7 +3,8 @@ import { Modal, Button, Icon, Card, Select, UrlAsyncFetch, ContainerFluid, Row, 
 import UpdateSubject from './../update-subject/index.js';
 
 const ViewAllSubjects = ({ examList }) =>{
- const [showModel,setShowModal] = useState(false);
+ const [showUpdateModal, setShowUpdateModal] = useState(false);
+ const [showDeleteModal, setShowDeleteModal] = useState(false);
  const [subjectList, setSubjectList] = useState();
  const [editModalData, setEditModalData] = useState();
  const initialize = async() =>{
@@ -12,13 +13,33 @@ const ViewAllSubjects = ({ examList }) =>{
     setSubjectList(response?.data);
  };
  useEffect(()=>{ initialize(); },[]);
+ const handleUpdateModalClose = () =>{
+  setShowUpdateModal(false);
+  setEditModalData(null);
+ };
+ const handleDeleteModalClose = () =>{
+  setShowDeleteModal(false);
+  setEditModalData(null);
+ };
+ const handleDeleteSubject = async() =>{
+   const response = await UrlAsyncFetch('http://localhost/projects/uma/upn/nexus/subject/delete', 'POST', { 
+    subject: editModalData?.subject });
+   console.log("response ", response);
+   initialize();
+   setShowDeleteModal(false);
+ };
  return (<div>
- <Modal title="Update Existing Subject" show={showModel} 
-    onClose={() => {
-      setShowModal(false);
-      setEditModalData(null);
-    }}>
+  <Modal title="Update Existing Subject" show={showUpdateModal} onClose={handleUpdateModalClose}>
     <UpdateSubject data={editModalData} reset={initialize} />
+  </Modal>
+  <Modal title="Delete Confirmation" show={showDeleteModal} onClose={handleDeleteModalClose}>
+    <div align="center">
+      <div style={{ fontSize:'14px' }}>Are you sure to delete a Subject "{editModalData?.subject}"?</div>
+      <div style={{ marginTop:'5px' }}>
+        <span onClick={handleDeleteSubject}><Button type="danger" label="Yes" size={12} /></span>
+        <span onClick={handleDeleteModalClose}><Button type="success" label="No" size={12} /></span>
+      </div>
+    </div>
   </Modal>
 <div className="table-responsive">
   <table className="table">
@@ -40,11 +61,14 @@ const ViewAllSubjects = ({ examList }) =>{
             <span style={{ marginRight:'5px', cursor:'pointer' }} onClick={() =>{
                 const updatedExamsList = examList.map(exam => ({ ...exam, checked: data?.exam.includes(exam.value) }));
                 setEditModalData({ subject: data?.subject, exams: updatedExamsList });
-                setShowModal(true);
+                setShowUpdateModal(true);
               }}>
                 <Icon type="FontAwesome" name="fa-edit" size={18} />
             </span>
-            <span style={{ marginLeft:'5px', cursor:'pointer' }}>
+            <span style={{ marginLeft:'5px', cursor:'pointer' }} onClick={()=>{
+              setEditModalData({ subject: data?.subject });
+              setShowDeleteModal(true);
+            }}>
                 <Icon type="FontAwesome" name="fa-trash" size={18} />
             </span>
         </td>

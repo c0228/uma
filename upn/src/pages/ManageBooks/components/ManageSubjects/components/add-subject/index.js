@@ -1,7 +1,7 @@
 import React, { useEffect, useState }  from 'react';
 import { ContainerFluid, Alert, Row, Col, Card, Form, TextBox, Switch, UrlAsyncFetch, ModalAlert } from "e-ui-react";
 
-const AddSubject = ({ examList }) =>{
+const AddSubject = ({ examList, reset }) =>{
  const [showAlert, setShowAlert] = useState({ status:false, type:'', message:'' });
  return (<div>
     {showAlert?.status && 
@@ -30,6 +30,7 @@ const AddSubject = ({ examList }) =>{
             console.log("response: ", response);
             setShowAlert({ message:response?.message, status:true, type:response?.status?.toLowerCase() });
             triggerReset();
+            reset();
           } else {
             setShowAlert({ message:'Please Enter Valid Details in the Form', status:true, type:'danger' });
           }
