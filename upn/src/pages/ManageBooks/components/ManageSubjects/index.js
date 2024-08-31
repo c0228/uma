@@ -41,7 +41,11 @@ const ManageSubjects = () =>{
         
       </Col> */}
       <Col md={12}>
-        <Modal title="Add New Subject" show={showModel} onClose={setShowModal} content={<AddSubject examList={examList} />} />
+        <Modal title="Add New Subject" 
+          show={showModel} 
+          onClose={setShowModal}>
+          <AddSubject examList={examList} />
+        </Modal>
         <Header title="List of Subjects" rightItem={<div style={{ display:'flex', flexDirection:'row' }}>
           <Button type="primary" label="Add New Subject" size={11} style={{ marginRight:'15px' }} onClick={()=>setShowModal(true)} />
           <SubjectListSort />

@@ -14,11 +14,17 @@ RewriteRule user/update src/controllers/module.user.account.info.php?action=USER
 RewriteRule user/reset/password/link src/controllers/module.user.account.info.php?action=SEND_RESETPASSWORD_EMAIL [QSA]
 RewriteRule user/prepare/plan src/controllers/module.user.account.info.php?action=USER_PREPARE_PLAN [QSA]
 
-# EXAMS MODULE
+################################# EXAMS MODULE ############################################################
+# MANAGE SUBJECTS : Add New Subject Form 
 RewriteRule exams/subject/list src/controllers/module.user.mock.exams.php?action=EXAM_SUBJECT_LIST [QSA]
-RewriteRule subjects/list/all src/controllers/module.user.mock.exams.php?action=SUBJECT_LIST [QSA]
-RewriteRule subject/topic/list src/controllers/module.user.mock.exams.php?action=SUBJECT_TOPICS_LIST [QSA]
 RewriteRule add/new/subject src/controllers/module.user.mock.exams.php?action=ADD_NEW_SUBJECT [QSA]
+# MANAGE SUBJECTS : View Subjects List
+RewriteRule subjects/list/all src/controllers/module.user.mock.exams.php?action=SUBJECT_LIST [QSA]
+# MANAGE SUBJECTS : Update Existing Subject
+RewriteRule subject/update src/controllers/module.user.mock.exams.php?action=SUBJECT_UPDATE [QSA]
+
+RewriteRule subject/topic/list src/controllers/module.user.mock.exams.php?action=SUBJECT_TOPICS_LIST [QSA]
+
 RewriteRule add/new/topics src/controllers/module.user.mock.exams.php?action=ADD_NEW_TOPICS [QSA]
 RewriteRule add/new/subtopics src/controllers/module.user.mock.exams.php?action=ADD_NEW_SUBTOPICS [QSA]
 

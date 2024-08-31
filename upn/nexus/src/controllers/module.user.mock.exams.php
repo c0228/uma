@@ -37,6 +37,19 @@ else if($_GET["action"]=='SUBJECT_LIST' && $_SERVER['REQUEST_METHOD']=='GET'){
   $result["data"] =  json_decode( $database->getJSONData($query) );
   echo json_encode($result);
 }
+/** MANAGE SUBJECTS : Update Existing Subject */
+else if($_GET["action"]=='SUBJECT_UPDATE' && $_SERVER['REQUEST_METHOD']=='POST'){
+  $htmlData = json_decode( file_get_contents('php://input'), true );	
+  $newSubjectName = ''; if( array_key_exists("newSubjectName", $htmlData) ){ $newSubjectName = $htmlData["newSubjectName"]; }
+  $oldSubjectName = ''; if( array_key_exists("oldSubjectName", $htmlData) ){ $oldSubjectName = $htmlData["oldSubjectName"]; }
+  $exams = ''; if( array_key_exists("exams", $htmlData) ){ $exams = $htmlData["exams"]; }
+  $query = $mockExamModule->query_update_existingSubject($newSubjectName, $oldSubjectName, $exams);
+  $status = $database->addupdateData($query);
+  $message = 'Updated Subject Details Successfully';
+  if($status === 'Error') { $message = 'Query Failed'; }
+  $result = ["status" => "$status", "message" => "$message" ];
+  echo json_encode( $result );
+}
 else if($_GET["action"]=='SUBJECT_TOPICS_LIST' && $_SERVER['REQUEST_METHOD']=='GET'){
  // GET Topics and SubTopics List in a Hierarchy
  $htmlData = json_decode( file_get_contents('php://input'), true );	

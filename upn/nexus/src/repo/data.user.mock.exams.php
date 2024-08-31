@@ -17,6 +17,14 @@ class MockExamModule {
  function query_get_subjectsList(){
   return "SELECT * FROM app_subjects_list";
  }
+ /** MANAGE SUBJECTS : Update Existing Subject */
+ function query_update_existingSubject($newSubjectName, $oldSubjectName, $exam){
+  $sql="BEGIN;";
+  $sql.="UPDATE app_subjects_list SET subject='".$newSubjectName."', exam='".$exam."' WHERE subject='".$oldSubjectName."';";
+  $sql.="UPDATE app_subjects_mtopic SET subject='".$newSubjectName."' WHERE subject='".$oldSubjectName."';";
+  $sql.='COMMIT;';
+  return $sql;
+ }
  function query_get_listOfTopicsBySubject($subject){
   return "SELECT topic_id, topic FROM app_subjects_mtopic WHERE subject='".$subject."';";
  }
