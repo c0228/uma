@@ -1,6 +1,7 @@
 <?php
 class MockExamModule {
- /** MANAGE SUBJECTS : Add New Subject Form */
+ /** MANAGE SUBJECTS **/ 
+ // 1. Add New Subject Form
  function query_get_listOfSubjectsByExam($exams){
   if (empty($exams)) { return ""; }
   $sql="SELECT * FROM app_subjects_list WHERE";
@@ -13,27 +14,33 @@ class MockExamModule {
  function query_add_examSubjects($subject,$exam){
   return "INSERT INTO app_subjects_list(subject, exam) VALUES ('".$subject."','".$exam."');";
  }
- /** MANAGE SUBJECTS : View Subjects List */
+ // 2. View Subjects List 
  function query_get_subjectsList(){
   return "SELECT * FROM app_subjects_list";
  }
- /** MANAGE SUBJECTS : Update Existing Subject */
+ // 3. Update Existing Subject
  function query_update_existingSubject($newSubjectName, $oldSubjectName, $exam){
   $sql="UPDATE app_subjects_list SET subject='".$newSubjectName."', exam='".$exam."' WHERE subject='".$oldSubjectName."';";
   return $sql;
  }
- /** MANAGE SUBJECTS : Delete Existing Subject */
+ // 4. Delete Existing Subject
  function query_delete_existingSubject($subject){
   return "DELETE FROM app_subjects_list WHERE subject='".$subject."';";
  }
-
+ /** MANAGE TOPICS **/ 
+ // 1. List of Topics
  function query_get_listOfTopicsBySubject($subject){
   return "SELECT topic_id, topic FROM app_subjects_mtopic WHERE subject='".$subject."';";
  }
  function query_get_listOfSubTopicsByTopic($topicId){
   return "SELECT stopic_id, subtopic FROM app_subjects_stopic WHERE topic_id='".$topicId."';";
  }
-
+ // 2. Add / New Update Topic based on TopicIds
+ function query_cu_subjectTopics($topic, $subject, $seq){
+  $sql="INSERT INTO app_subjects_mtopic(topic, subject, seq) VALUES ('".$topic."','".$subject."','".$seq."') ";
+  $sql.="ON DUPLICATE KEY UPDATE topic = VALUES(topic), subject = VALUES(subject), seq = VALUES(seq);";
+  return $sql;
+ }
  function query_add_subjectTopics($topic,$subject){
   return "INSERT INTO app_subjects_mtopic(topic, subject) VALUES ('".$topic."','".$subject."');";
  }

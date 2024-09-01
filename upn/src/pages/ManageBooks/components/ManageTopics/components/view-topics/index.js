@@ -34,6 +34,26 @@ const ViewTopics = ({ mode, subjectName, selectedNewRows, topicsData }) =>{
   const diff = CompareJSONArrays(topicsList, topicsData);
   if(diff){
     console.log("handleSave [diff]: ", diff);
+    console.log("topicsList: ", topicsList);
+    
+    /*
+    [
+    {
+        "topic_id": "1",
+        "topic": "Topic1",
+        "subject": "Anthropology",
+        "seq": "1",
+        "subtopics": "2"
+    },
+    {
+        "topic_id": "2",
+        "topic": "Topic2",
+        "subject": "Anthropology",
+        "seq": "2",
+        "subtopics": "2"
+    }
+]
+    */
   }
  };
  return (<div className="mtop15p">

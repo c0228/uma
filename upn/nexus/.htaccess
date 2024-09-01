@@ -30,7 +30,8 @@ RewriteRule subject/delete src/controllers/module.user.mock.exams.php?action=SUB
 # MANAGE TOPICS :
 ## 1. List of Topics
 RewriteRule subject/topic/list src/controllers/module.user.mock.exams.php?action=SUBJECT_TOPICS_LIST [QSA]
-
+## 2. Add / New Update Topic based on TopicIds
+RewriteRule subject/topic/cu src/controllers/module.user.mock.exams.php?action=SUBJECT_TOPICS_CU [QSA]
 #################################################################################################################
 
 

@@ -89,6 +89,15 @@ else if($_GET["action"]=='SUBJECT_TOPICS_LIST' && $_SERVER['REQUEST_METHOD']=='G
  echo json_encode($status);
 }
 // 2. Add / New Update Topic based on TopicIds
+else if($_GET["action"]=='SUBJECT_TOPICS_CU' && $_SERVER['REQUEST_METHOD']=='POST'){
+  $htmlData = json_decode( file_get_contents('php://input'), true );
+  $newTopicData = ''; if( array_key_exists("newTopicData", $htmlData) ){ $newTopicData = $htmlData["newTopicData"]; }
+  print_r($newTopicData);
+  foreach ($data as $row) {
+   // $row['topic'] $row['subject'] $row['seq']
+  }
+  query_cu_subjectTopics($topic, $subject, $seq);
+}
 else if($_GET["action"]=='ADD_SUBJECT_TOPICS' && $_SERVER['REQUEST_METHOD']=='POST'){
 
 }
