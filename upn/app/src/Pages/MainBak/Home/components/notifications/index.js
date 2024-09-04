@@ -71,49 +71,49 @@ const Notifications = (props)=>{
     />
       </View>
       <View style={{ marginBottom: 10 }}>
-        <Button type="primary" label="Test" size={14} />
+        <Button type="primary" size={14}>Test</Button>
       </View>
       <View style={{ marginBottom: 10 }}>
-        <Button type="success" label="Test" size={14} />
+        <Button type="success" size={14}>Test</Button>
       </View>
       <View style={{ marginBottom: 10 }}>
-        <Button type="danger" label="Test" size={14} />
+        <Button type="danger" size={14}>Test</Button>
       </View>
       <View style={{ marginBottom: 10 }}>
-        <Button type="warning" label="Test" size={14} />
+        <Button type="warning" size={14}>Test</Button>
       </View>
       <View style={{ marginBottom: 10 }}>
-        <Button type="info" label="Test" size={14} />
+        <Button type="info" size={14}>Test</Button>
       </View>
       <View style={{ marginBottom: 10 }}>
-        <Button type="dark" label="Test" size={14} />
+        <Button type="dark" size={14}>Test</Button>
       </View>
       <View style={{ marginBottom: 10 }}>
-        <Button type="light" label="Test" size={14} />
+        <Button type="light" size={14}>Test</Button>
       </View>
       <View style={{ marginBottom: 10 }}>
-        <Button type="outline-primary" label="Test" size={14} />
+        <Button type="outline-primary" size={14}>Test</Button>
       </View>
       <View style={{ marginBottom: 10 }}>
-        <Button type="outline-secondary" label="Test" size={14} />
+        <Button type="outline-secondary" size={14}>Test</Button>
       </View>
       <View style={{ marginBottom: 10 }}>
-        <Button type="outline-success" label="Test" size={14} />
+        <Button type="outline-success" size={14}>Test</Button>
       </View>
       <View style={{ marginBottom: 10 }}>
-        <Button type="outline-danger" label="Test" size={14} />
+        <Button type="outline-danger" size={14}>Test</Button>
       </View>
       <View style={{ marginBottom: 10 }}>
-        <Button type="outline-warning" label="Test" size={14} />
+        <Button type="outline-warning" size={14}>Test</Button>
       </View>
       <View style={{ marginBottom: 10 }}>
-        <Button type="outline-info" label="Test" size={14} />
+        <Button type="outline-info" size={14}>Test</Button>
       </View>
       <View style={{ marginBottom: 10 }}>
-        <Button type="outline-dark" label="Test" size={14} />
+        <Button type="outline-dark" size={14}>Test</Button>
       </View>
       <View style={{ marginBottom: 10 }}>
-        <Button type="outline-light" label="Test" size={14} />
+        <Button type="outline-light" size={14}>Test</Button>
       </View>
     </Form>
  </ScrollView>

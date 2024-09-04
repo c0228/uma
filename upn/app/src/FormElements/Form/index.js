@@ -73,17 +73,12 @@ export const Form = React.memo( ({ name, btnSubmit, btnReset, children, onSubmit
     <FormContext.Provider value={{ name, form, setForm, afterSubmit }}>
         {children}
         <View style={{ paddingTop:'15px', justifyContent: btnSubmit?.align }}>
-          <Button type={btnSubmit?.btnType} label={btnSubmit?.label} size={btnSubmit?.size} 
-          onPress={()=>{
-            onSubmission();
-          }}/>
-          {btnReset!==undefined && (<Button type={btnReset?.btnType} 
-           label={btnReset?.label} size={btnReset?.size} onPress={()=>{
+          <Button type={btnSubmit?.btnType} size={btnSubmit?.size} 
+          onPress={()=>{ onSubmission(); }}><b>{btnSubmit?.label}</b></Button>
+          {btnReset!==undefined && (<Button type={btnReset?.btnType} size={btnReset?.size} onPress={()=>{
             triggerReset();
-            if(onReset!==undefined){
-              onReset();
-            }
-            }}  />)}
+            if(onReset!==undefined){ onReset(); }
+            }}><b>{btnReset?.label}</b></Button>)}
         </View>
     </FormContext.Provider>
   );

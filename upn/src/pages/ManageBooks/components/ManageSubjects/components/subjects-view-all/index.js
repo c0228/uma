@@ -36,8 +36,8 @@ const ViewAllSubjects = ({ examList }) =>{
     <div align="center">
       <div style={{ fontSize:'14px' }}>Are you sure to delete a Subject "{editModalData?.subject}"?</div>
       <div style={{ marginTop:'5px' }}>
-        <span onClick={handleDeleteSubject}><Button type="danger" label="Yes" size={12} /></span>
-        <span onClick={handleDeleteModalClose}><Button type="success" label="No" size={12} /></span>
+        <span onClick={handleDeleteSubject}><Button type="danger" size={12}>Yes</Button></span>
+        <span onClick={handleDeleteModalClose}><Button type="success" size={12}>No</Button></span>
       </div>
     </div>
   </Modal>

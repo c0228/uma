@@ -92,8 +92,8 @@ const ViewTopics = ({ mode, subjectName, selectedNewRows, topicsData }) =>{
 </div>
 <div>
     {mode!=='View' && (<div style={{ justifyContent:'center', display:'flex', flexDirection:'row' }}>
-        <span onClick={handleSave}><Button type="success" label="Save" size={11} /></span>
-          <Button type="danger" label="Reset" size={11} />
+        <span onClick={handleSave}><Button type="success" size={11}>Save</Button></span>
+          <Button type="danger" size={11}>Reset</Button>
         </div>)}
 </div>
  </div>);

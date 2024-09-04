@@ -48,7 +48,7 @@ const Introduction = () =>{
  const SplashButton = ()=>{
       return (<View style={styles.splashButtonView}>
       <View style={styles.splashButton}>
-         <Button type="light" label={dialogue?.["d7"]?.[lang]} size={16} onPress={()=>handleIntroduction()} />
+         <Button type="light" size={16} onPress={()=>handleIntroduction()}>{dialogue?.["d7"]?.[lang]}</Button>
       </View>
     </View>);
  };

@@ -18,7 +18,7 @@ const BEHeader = ({ formSize, activeForm, name }) =>{
 <View style={{ flexDirection:'row', paddingLeft:20, paddingRight:20 }}>
     <View style={{ width:'70%', justifyContent:'flex-end' }}><Text style={{ color:'#000' }}>Hello {name},</Text></View>
     <View style={{  width:'30%', alignItems:'flex-end' }}>
-        <Button type="outline-danger" label="Logout" size={12} onPress={()=>setSignout(true)} />
+        <Button type="outline-danger" size={12} onPress={()=>setSignout(true)}>Logout</Button>
     </View>
     {signout && (<LogoutButton />)}
 </View>

@@ -121,7 +121,7 @@ return (<div>
       </Col>
       <Col md={2}>
         <div align="center">
-        <Button type="danger" label={<Icon type="FontAwesome" name="fa-trash-o" size={16} />} size={11} />
+        <Button type="danger" size={11}><Icon type="FontAwesome" name="fa-trash-o" size={16} /></Button>
         </div>
       </Col>
     </Row>

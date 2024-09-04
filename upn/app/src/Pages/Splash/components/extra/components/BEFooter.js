@@ -7,13 +7,13 @@ const BEFooter = ({ label, previousForm, nextForm }) =>{
  return (<View style={{  paddingLeft: 20, paddingBottom: 10, paddingRight:20, paddingTop:10 }}>
     <View style={{ flexDirection:'row' }}>
         <View style={{ width:'30%'}}>
-           {label?.previous && (<Button type="outline-danger" label={label?.previous} size={14} onPress={()=>previousForm()} />)}
+           {label?.previous && (<Button type="outline-danger" size={14} onPress={()=>previousForm()}>{label?.previous}</Button>)}
         </View>
         <View style={{ width:'40%'}}>
 
         </View>
         <View style={{ width:'30%'}}>
-            <Button type="danger" label={label?.next} size={14} onPress={()=>nextForm()} />
+            <Button type="danger" size={14} onPress={()=>nextForm()}>{label?.next}</Button>
         </View>
       </View>
     </View>);

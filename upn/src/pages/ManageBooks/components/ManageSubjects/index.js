@@ -47,7 +47,9 @@ const ManageSubjects = () =>{
           <AddSubject examList={examList} reset={initialize} />
         </Modal>
         <Header title="List of Subjects" rightItem={<div style={{ display:'flex', flexDirection:'row' }}>
-          <Button type="primary" label={<b>Add New Subject</b>} size={11} style={{ marginRight:'15px' }} onClick={()=>setShowModal(true)} />
+          <Button type="primary" size={11} style={{ marginRight:'15px' }} onClick={()=>setShowModal(true)}>
+          <b>Add New Subject</b>
+          </Button>
           <SubjectListSort />
         </div>} />
         {selectedListView==='View All' && (<ViewAllSubjects examList={examList} />)}

@@ -119,10 +119,10 @@ return (<div
       <Col md={2}>
         <div className="topic-action">
           <div className="topic-action-edit">
-            <Button type="success" label={<Icon type="FontAwesome" name="fa-edit" size={16} />} size={11} />
+            <Button type="success" size={11}><Icon type="FontAwesome" name="fa-edit" size={16} /></Button>
           </div>
           <div className="topic-action-delete">
-            <Button type="danger" label={<Icon type="FontAwesome" name="fa-trash-o" size={16} />} size={11} />
+            <Button type="danger" size={11}><Icon type="FontAwesome" name="fa-trash-o" size={16} /></Button>
           </div>
         </div>
       </Col>
