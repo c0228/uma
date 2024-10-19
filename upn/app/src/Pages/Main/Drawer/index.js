@@ -84,7 +84,7 @@ const DrawerNavigation = ({ screens }) =>{
 
 const styles = StyleSheet.create({
  customHeader: { flexDirection: 'row', paddingLeft: 15, paddingRight:15, paddingTop:12, paddingBottom:8 },
- hamburgerIcon: { marginRight: 15, color:'#000' },
+ hamburgerIcon: { marginRight: 15, color:'#fff' },
  headerTitle: { fontSize: 18, fontWeight: 'bold' },
  header: { padding: 20 },
  headerText: { fontSize: 18, fontWeight: 'bold' },

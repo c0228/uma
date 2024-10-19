@@ -208,7 +208,7 @@ const Explore = () =>{
 };
 
 const styles = StyleSheet.create({
-  scrollViewPage:{  marginBottom:6 },
+  scrollViewPage:{  marginTop:8, marginLeft:5, marginBottom:6 },
   row:{ flexDirection:'row' },
   padRight3:{ paddingRight:3 },
   padLeft5:{ paddingLeft:5 },
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
   subjectTitle:{ fontSize:14, color:'#333', fontWeight:'bold', textAlign:'center', flexWrap:'wrap' },
   subjectChapters:{ fontSize:12, color:'#333' },
   subjectGroupView:{ flexDirection:'row', marginTop:5, marginLeft:-5 },
-  exploreTitleView:{ flexDirection:'row', paddingLeft:15, paddingRight:10, paddingTop:15, paddingBottom:10 },
+  exploreTitleView:{ flexDirection:'row', paddingLeft:15, paddingRight:10, paddingTop:10, paddingBottom:10 },
   exploreHeader:{ width:'65%' },
   inviteFriendsView1:{ justifyContent:'center', alignItems:'flex-end', width:'35%', paddingRight:15 },
   inviteFriendsView2:{ flexDirection:'row', borderWidth:1, borderColor:'#df0d55', borderRadius:6, padding:5 },
